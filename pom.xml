@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.walmartlabs.productmatching</groupId>
+  <artifactId>rule-generator</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>EntityMatchingRulesGenerator</name>
+  <description>Generates entity matching rules automatically from the training dataset.</description>
+  
+  <dependencies>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>r05</version>
+    </dependency>
+        
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.1</version>
+    </dependency>
+        
+    <!-- Weka library -->
+	<dependency>
+	    <groupId>nz.ac.waikato.cms.weka</groupId>
+	    <artifactId>weka-stable</artifactId>
+	    <version>3.6.6</version>
+	</dependency>
+        
+    <!-- Stringmetrics library, local jar because not in Maven -->
+    <dependency>
+	    <groupId>uk.ac.shef.wit.simmetrics</groupId>
+	    <artifactId>simmetrics</artifactId>
+	    <version>3.3.0</version>
+	    <scope>system</scope>
+	    <systemPath>${basedir}/lib/simmetrics.jar</systemPath>
+    </dependency>
+        
+  </dependencies>
+    
+</project>
