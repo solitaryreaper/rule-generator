@@ -34,7 +34,7 @@ public class FeatureVector {
 	{
 		StringBuilder fString = new StringBuilder();
 		for(Double val : getFeatureValues()) {
-			if(val == null) {
+			if(val == null || val.equals(Double.NaN)) {
 				fString.append("?");
 			}
 			else {
