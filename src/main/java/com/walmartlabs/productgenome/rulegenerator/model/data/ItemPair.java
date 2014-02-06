@@ -48,14 +48,12 @@ public class ItemPair {
 	
 	public String getItemAValByAttr(String attrName)
 	{
-		String attrVal = null;
-		return attrVal;
+		return itemA.getValuesForAttr(attrName);
 	}
 	
 	public String getItemBValByAttr(String attrName)
 	{
-		String attrVal = null;
-		return attrVal;
+		return itemB.getValuesForAttr(attrName);
 	}
 	
 }

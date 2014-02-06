@@ -8,6 +8,7 @@ import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 
 /**
@@ -55,7 +56,7 @@ public class DecisionTreeLearner implements Learner {
 		}
 		
 		// Extract each root-leaf path as rules from the decision tree ..
-		List<Rule> rules = null;
+		List<Rule> rules = Lists.newArrayList();
 		return rules;
 	}
 

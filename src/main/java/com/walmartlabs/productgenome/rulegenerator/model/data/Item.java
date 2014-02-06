@@ -17,6 +17,31 @@ public class Item {
 		this.id = id;
 		this.attrMap = attrMap;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Map<String, String> getAttrMap() {
+		return attrMap;
+	}
+
+	public void setAttrMap(Map<String, String> attrMap) {
+		this.attrMap = attrMap;
+	}
 	
+	public String getValuesForAttr(String attrName)
+	{
+		String value = null;
+		if(attrMap.containsKey(attrName)) {
+			value = attrMap.get(attrName);
+		}
+		
+		return value;
+	}
 	
 }
