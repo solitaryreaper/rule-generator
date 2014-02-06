@@ -81,6 +81,7 @@ public class SimilarityUtils {
 		}
 		if(null != metric)
 			res = metric.getSimilarity(s1, s2);
+		
 		return res;
 	}
 

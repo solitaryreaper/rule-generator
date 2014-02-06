@@ -1,7 +1,9 @@
 package com.walmartlabs.productgenome.rulegenerator.model.data;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
+import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 
 public class FeatureVector {
@@ -32,13 +34,14 @@ public class FeatureVector {
 	
 	public String getFeatureString()
 	{
+		DecimalFormat df = Constants.FORMATTER;
 		StringBuilder fString = new StringBuilder();
 		for(Double val : getFeatureValues()) {
 			if(val == null || val.equals(Double.NaN)) {
 				fString.append("?");
 			}
 			else {
-				fString.append(val.toString());				
+				fString.append(df.format(val));				
 			}
 			fString.append(",");
 		}

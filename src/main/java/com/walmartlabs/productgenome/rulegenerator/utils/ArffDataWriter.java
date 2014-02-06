@@ -3,11 +3,13 @@ package com.walmartlabs.productgenome.rulegenerator.utils;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Feature;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureVector;
+import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 
 /**
  * Writes the feature-based itempair data in ARFF format, so that it can be
@@ -20,8 +22,8 @@ public class ArffDataWriter {
 
 	public static String loadDataInArffFormat(FeatureDataset dataset) throws IOException
 	{
-		// TODO : This should have a randomly generated name.
-		String tmpFileLoc = Constants.TMP_FILE_PATH_PREFIX + dataset.getName() + ".arff";
+		int randSeed = getRandomNum(1, 10000);
+		String tmpFileLoc = Constants.TMP_FILE_PATH_PREFIX + dataset.getName() + "_" + randSeed + ".arff";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(tmpFileLoc));
 		
 		// 1) Write the relation name
@@ -34,12 +36,16 @@ public class ArffDataWriter {
 		// 2) Write the attributes
 		for(Feature f : dataset.getFeatures()) {
 			StringBuilder fStr = new StringBuilder();
-			fStr.append("@ATTRIBUTE ").append(f.getName()).append(" real");
+			fStr.append("@ATTRIBUTE ").append(f.getName()).append(" NUMERIC ");
 			bw.write(fStr.toString());bw.newLine();
 		}
-		bw.newLine();
 		
-		// 3) Write the actual data
+		// 3) Write the class attribute
+		StringBuilder classes = new StringBuilder();
+		classes.append("@ATTRIBUTE").append(" class { match, mismatch }");
+		bw.write(classes.toString());bw.newLine();bw.newLine();
+
+		// 4) Write the actual data
 		bw.write("@DATA");bw.newLine();
 		for(FeatureVector v : dataset.getFeatureVectors()) {
 			bw.write(v.getFeatureString());bw.newLine();
@@ -48,5 +54,17 @@ public class ArffDataWriter {
 		bw.close();
 		
 		return tmpFileLoc;
+	}
+	
+	private static int getRandomNum(int min, int max)
+	{
+	    // Usually this can be a field rather than a method variable
+	    Random rand = new Random();
+
+	    // nextInt is normally exclusive of the top value,
+	    // so add 1 to make it inclusive
+	    int randomNum = rand.nextInt((max - min) + 1) + min;
+
+	    return randomNum;		
 	}
 }
