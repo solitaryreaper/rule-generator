@@ -46,5 +46,6 @@ public class RestaurantDataParserTest {
 		assertNotNull(itemPairs);
 		
 		LOG.info("Found " + itemPairs.size() + " itempairs for restuarant dataset.");
+		LOG.info("First itempair : " + itemPairs.get(0).toString());
 	}
 }

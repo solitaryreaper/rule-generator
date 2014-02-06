@@ -29,7 +29,7 @@ public class FeatureGenerationService {
 	 * @param rawDataset
 	 * @return
 	 */
-	public FeatureDataset generateFeatures(Dataset rawDataset)
+	public static FeatureDataset generateFeatures(Dataset rawDataset)
 	{
 		String name = rawDataset.getName();
 		Map<String, List<Simmetrics>> attrSimmetrics = 

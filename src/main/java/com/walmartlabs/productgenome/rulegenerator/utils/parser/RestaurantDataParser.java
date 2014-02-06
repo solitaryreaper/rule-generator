@@ -119,6 +119,9 @@ public class RestaurantDataParser implements DataParser {
  						
  						sourceAttrValMap = Maps.newHashMap();
  						targetAttrValMap = Maps.newHashMap();
+ 						
+ 						sourceAttrValMap.put("ID", sourceId);
+ 						targetAttrValMap.put("ID", targetId); 						
  					}
  					// Now fetch all the attributes populated for the item
  					else {

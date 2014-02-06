@@ -1,8 +1,0 @@
-@RELATION Test
-
-@ATTRIBUTE name_jaccard real
-@ATTRIBUTE age_exact real
-
-@DATA
-0.95,1.0,match
-1.0,0.0,mismatch
