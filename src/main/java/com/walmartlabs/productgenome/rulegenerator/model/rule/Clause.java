@@ -28,4 +28,40 @@ public class Clause {
 	private String featureName;
 	private LogicalOperator logOp;
 	private double threshold;
+	
+	public Clause(String featureName, LogicalOperator logOp, double threshold) {
+		super();
+		this.featureName = featureName;
+		this.logOp = logOp;
+		this.threshold = threshold;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Clause [featureName=").append(featureName)
+				.append(", logOp=").append(logOp).append(", threshold=")
+				.append(threshold).append("]");
+		return builder.toString();
+	}
+
+	public String getFeatureName() {
+		return featureName;
+	}
+	public void setFeatureName(String featureName) {
+		this.featureName = featureName;
+	}
+	public LogicalOperator getLogOp() {
+		return logOp;
+	}
+	public void setLogOp(LogicalOperator logOp) {
+		this.logOp = logOp;
+	}
+	public double getThreshold() {
+		return threshold;
+	}
+	public void setThreshold(double threshold) {
+		this.threshold = threshold;
+	}
+	
 }
