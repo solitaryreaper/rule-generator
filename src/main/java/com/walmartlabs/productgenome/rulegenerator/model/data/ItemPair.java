@@ -7,8 +7,28 @@ package com.walmartlabs.productgenome.rulegenerator.model.data;
  */
 public class ItemPair {
 	public static enum MatchStatus {
-		MATCH,
-		MISMATCH
+		MATCH("match"),
+		MISMATCH("mismatch");
+		
+		private String label;
+		
+		private MatchStatus(String label)
+		{
+			this.label = label;
+		}
+		
+		public static MatchStatus getMatchStatus(String label)
+		{
+			MatchStatus status = null;
+			for(MatchStatus currStatus : MatchStatus.values()) {
+				if(currStatus.label.toLowerCase().equals(label.toLowerCase())) {
+					status = currStatus;
+					break;
+				}
+			}
+			
+			return status;
+		}
 	}
 	
 	private Item itemA;

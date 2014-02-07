@@ -37,9 +37,9 @@ public class DecisionTreeLearnerTest {
 		
 		String trainDataPath = Constants.DATA_FILE_PATH_PREFIX + "heart-train.arff";
 		List<Rule> rules = learner.learnRules(trainDataPath, false);
-		//assertNotNull(rules);
-		//assertFalse(rules.isEmpty());
+		assertNotNull(rules);
+		assertFalse(rules.isEmpty());
 		
-		//LOG.info("Generated rules : " + rules.toString());
+		LOG.info("Generated rules : " + rules.toString());
 	}
 }

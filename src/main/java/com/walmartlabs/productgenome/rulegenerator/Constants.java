@@ -16,4 +16,7 @@ public class Constants {
 	 * Format similarity values to 3 decimal places
 	 */
 	public static DecimalFormat FORMATTER = new DecimalFormat("#.###");
+	
+	public static final int WEKA_DATA_SEED = 99;
+	public static final int NUM_CV_FOLDS = 10;
 }

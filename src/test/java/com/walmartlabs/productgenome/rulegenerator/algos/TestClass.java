@@ -1,25 +1,26 @@
 package com.walmartlabs.productgenome.rulegenerator.algos;
 
 import java.text.DecimalFormat;
+import java.util.List;
+
+import com.walmartlabs.productgenome.rulegenerator.Constants;
+
+import weka.classifiers.trees.J48;
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
 
 public class TestClass {
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
 	{
-		String str = "|   |   name_smith_waterman <= 0.88: mismatch (20.0)";
-		String relop = ">";
-		if(str.contains("<=")) {
-			relop = "<=";
-		}
-		System.out.println("Relop : " + relop);
+		DataSource trainDataSource = new DataSource(Constants.DATA_FILE_PATH_PREFIX + "heart-train.arff");
+		Instances data = trainDataSource.getDataSet();
+		if (data.classIndex() == -1)
+			data.setClassIndex(data.numAttributes() - 1);
 		
-		String[] temp = str.split(relop);
-		String featureName = temp[0].replaceAll("\\|", "").replaceAll(" ", "").trim();
-		System.out.println("Feature name : " + featureName);
-		
-		System.out.println("String : " + temp[1]);
-		System.out.println("Index " + temp[1].indexOf(":"));
-		String value = temp[1].substring(0, temp[1].indexOf(':') - 1).replaceAll(" ", "").trim();
-		System.out.println("Value : " + value);
+		J48 dtree = new J48();
+		dtree.buildClassifier(data);
+		List<String> rules = dtree.getDecisionTreeRules();
+		System.out.println("Rules : " + rules);
 	}
 }

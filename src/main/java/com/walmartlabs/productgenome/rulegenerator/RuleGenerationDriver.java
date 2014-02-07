@@ -2,13 +2,22 @@ package com.walmartlabs.productgenome.rulegenerator;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import java.util.logging.Logger;
 
-import junit.framework.TestResult;
+import weka.classifiers.Classifier;
+import weka.classifiers.Evaluation;
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionTreeLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
+import com.walmartlabs.productgenome.rulegenerator.model.RuleModel;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
@@ -66,12 +75,10 @@ public class RuleGenerationDriver {
 	private static List<Rule> generateMatchingRules(Dataset dataset)
 	{
 		// Step2 : Generate feature dataset from the raw dataset
-		LOG.info("Generating feature vectors for dataset : " + dataset.getName());
 		FeatureDataset featureDataset = FeatureGenerationService.generateFeatures(dataset);
 		LOG.info("Generated feature vectors for dataset : " + dataset.getName());
 		
 		// Step3 : Stage the feature dataset in arff format
-		LOG.info("Loading in-memory feature vectors into arff file ..");
 		String arffFileLoc = null;
 		try {
 			arffFileLoc = ArffDataWriter.loadDataInArffFormat(featureDataset);
@@ -80,12 +87,56 @@ public class RuleGenerationDriver {
 		}
 		LOG.info("Loaded the in-memory feature vectors into arff file : " + arffFileLoc);
 		
-		// Step4 : Launch the decision tree learning
-		LOG.info("Generated decision tree learner ..");
-		Learner learner = new DecisionTreeLearner();
-		List<Rule> rules = learner.learnRules(arffFileLoc, false);
-		LOG.info("Found " + rules.size() + " rules using decision tree learner ..");
+		// Step4 : Load the feature training data in weka format
+		Instances data = null;
+		try {
+			DataSource trainDataSource = new DataSource(arffFileLoc);			
+			data = trainDataSource.getDataSet();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (data.classIndex() == -1)
+			data.setClassIndex(data.numAttributes() - 1);
+		LOG.info("Loaded the feature training data in WEKA format ..");
 		
-		return rules;
+		// Step5 : Split into train and test data set
+		Set<Rule> allRules = Sets.newHashSet();
+		double avgAccuracy = 0.0;
+		int totalFolds = Constants.NUM_CV_FOLDS;
+		for(int i=0; i < totalFolds; i++) {
+			Random rand = new Random(Constants.WEKA_DATA_SEED);
+			Instances randData = new Instances(data);
+			randData.randomize(rand);
+			randData.stratify(totalFolds);
+			Instances train = randData.trainCV(totalFolds, i);
+			Instances test = randData.testCV(totalFolds, i);
+			
+			// Step6 : Launch the decision tree learning
+			Learner learner = new DecisionTreeLearner();
+			RuleModel model = learner.learnRules(train);
+			
+			Classifier classifier = model.getClassifier();
+			try {
+				Evaluation eval = new Evaluation(train);
+				eval.evaluateModel(classifier, test);
+				avgAccuracy += eval.pctCorrect();
+				
+				LOG.info("Run " + i + " summary : " + eval.toSummaryString());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			List<Rule> rules = model.getRules();
+			allRules.addAll(rules);
+		}
+
+		avgAccuracy = avgAccuracy/totalFolds;
+		LOG.info("Average accuracy across " + totalFolds + " folds is : " + Constants.FORMATTER.format(avgAccuracy) + " % ");
+		for(Rule rule : allRules) {
+			LOG.info(rule.toString());
+		}
+		return Lists.newArrayList(allRules);
 	}
 }

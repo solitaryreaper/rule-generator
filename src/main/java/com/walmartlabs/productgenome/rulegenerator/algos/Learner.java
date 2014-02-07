@@ -1,8 +1,8 @@
 package com.walmartlabs.productgenome.rulegenerator.algos;
 
-import java.util.List;
+import weka.core.Instances;
 
-import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
+import com.walmartlabs.productgenome.rulegenerator.model.RuleModel;
 
 /**
  * Models a learning algorithm that can be used to generate a representative model using
@@ -18,10 +18,8 @@ public interface Learner {
 	/**
 	 * Learns the appropriate matching rules from the training data set.
 	 * 
-	 * @param trainDataPath			- Path to training dataset. This file should be in the ARFF
-	 * 								  format.
-	 * @param isCrossValidationReqd	- Should learning be done via cross-validation ?
-	 * @return
+	 * @param data		- Training dataset
+	 * @return	A learned classifier model along with the rules
 	 */
-	public List<Rule> learnRules(String trainDataPath, boolean isCrossValidationReqd);
+	public RuleModel learnRules(Instances trainData);
 }

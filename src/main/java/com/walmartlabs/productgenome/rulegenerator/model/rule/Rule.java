@@ -2,6 +2,7 @@ package com.walmartlabs.productgenome.rulegenerator.model.rule;
 
 import java.util.List;
 
+import com.google.common.base.Objects;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 
 /**
@@ -25,11 +26,41 @@ public class Rule {
 		this.label = label;
 	}
 
+	public Rule(List<Clause> clauses, MatchStatus label) {
+		super();
+		this.name = "NA";
+		this.clauses = clauses;
+		this.label = label;
+	}
+	
+	public int hashCode()
+	{
+		return Objects.hashCode(this.name, this.clauses, this.label);
+	}
+	
+	public boolean equals(Object obj)
+	{
+	    if (obj == null) return false;
+	    if (getClass() != obj.getClass()) return false;
+	    final Rule that = (Rule) obj;
+	    return 	Objects.equal(this.name, that.name) && 
+	    		Objects.equal(this.clauses, that.clauses) &&
+	    		Objects.equal(this.label, that.label);		
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Rule [name=").append(name).append(", clauses=")
-				.append(clauses).append(", label=").append(label).append("]");
+		builder.append(" IF ");
+		
+		StringBuilder clauseBuilder = new StringBuilder();
+		for(Clause clause : clauses) {
+			clauseBuilder.append(clause.toString()).append(" AND ");
+		}
+		String clauseString = clauseBuilder.substring(0, clauseBuilder.lastIndexOf("AND") - 1).trim();
+		builder.append(clauseString);
+		
+		builder.append(" THEN ").append(label.toString().toUpperCase()).append(" ;");
 		return builder.toString();
 	}
 

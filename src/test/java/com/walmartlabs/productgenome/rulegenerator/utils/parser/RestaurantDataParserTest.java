@@ -30,6 +30,7 @@ public class RestaurantDataParserTest {
 	{
 		
 	}
+	
 	@Test
 	public void testParseData()
 	{
