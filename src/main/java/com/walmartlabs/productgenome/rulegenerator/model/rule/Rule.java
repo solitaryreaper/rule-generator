@@ -85,5 +85,8 @@ public class Rule {
 		this.label = label;
 	}
 	
-	
+	public boolean isMatchingRule()
+	{
+		return getLabel().equals(MatchStatus.MATCH);
+	}
 }
