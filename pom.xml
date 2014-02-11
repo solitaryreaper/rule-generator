@@ -51,6 +51,15 @@
 	    <systemPath>${basedir}/lib/simmetrics.jar</systemPath>
     </dependency>
         
+    <!-- Secondstring library, local jar because not in Maven -->
+    <dependency>
+	    <groupId>com.wcohen.ss</groupId>
+	    <artifactId>secondstring</artifactId>
+	    <version>2012.06.20</version>
+	    <scope>system</scope>
+	    <systemPath>${basedir}/lib/secondstring.jar</systemPath>
+    </dependency>
+            
   </dependencies>
     
 </project>

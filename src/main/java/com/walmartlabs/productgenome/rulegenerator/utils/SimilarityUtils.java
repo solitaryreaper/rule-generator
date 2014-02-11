@@ -2,6 +2,7 @@ package com.walmartlabs.productgenome.rulegenerator.utils;
 
 import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.CosineSimilarity;
+import uk.ac.shef.wit.simmetrics.similaritymetrics.EuclideanDistance;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.JaccardSimilarity;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.Jaro;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.JaroWinkler;
@@ -50,6 +51,9 @@ public class SimilarityUtils {
 			break;
 		case SMITH_WATERMAN_GOTOH_WINDOWED_AFFINE:
 			metric = new SmithWatermanGotohWindowedAffine();
+			break;
+		case EUCLIDEAN:
+			metric = new EuclideanDistance();
 			break;
 		case NUM_SCORE:
 			try{

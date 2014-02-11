@@ -19,4 +19,10 @@ public class Constants {
 	
 	public static final int WEKA_DATA_SEED = 99;
 	public static final int NUM_CV_FOLDS = 10;
+	
+	/**
+	 * Number of top N string metrics to retain for every attribute.
+	 */
+	public static final int NUM_METRICS_PER_ATTRIBUTE = 3;
+	
 }

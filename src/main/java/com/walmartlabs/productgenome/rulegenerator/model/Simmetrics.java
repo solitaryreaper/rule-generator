@@ -19,6 +19,8 @@ public enum Simmetrics {
 	NUM_SCORE("num"), 
 	SMITH_WATERMAN_GOTOH_WINDOWED_AFFINE("smith_waterman");
 	
+	// TODO : Add support for hybrid metrics like generalized jaccard, soft tfidf
+	
 	private String metricAbbrv;
 	
 	private Simmetrics(String abbrv)
@@ -36,6 +38,12 @@ public enum Simmetrics {
 			}
 		}
 		
+		return metricAbbrv;
+	}
+	
+	@Override
+	public String toString()
+	{
 		return metricAbbrv;
 	}
 }

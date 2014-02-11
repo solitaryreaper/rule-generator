@@ -38,8 +38,7 @@ public class DecisionTreeLearner implements Learner {
 		List<String> textRules = dtree.getDecisionTreeRules();
 		List<Rule> rules = RuleParser.parseRules(textRules);
 		
-		RuleModel model = new RuleModel(dtree, rules);
-		return model;
+		return new RuleModel(dtree, rules);
 	}
 
 }
