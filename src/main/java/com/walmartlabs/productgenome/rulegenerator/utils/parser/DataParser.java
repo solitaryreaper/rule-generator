@@ -14,4 +14,13 @@ public interface DataParser {
 
 	public Dataset parseData(File matchFile, File mismatchFile, String datasetName);
 	
+	/**
+	 * 
+	 * @param srcFile	- Items from the source
+	 * @param tgtFile	- Items from the target
+	 * @param goldFile	- List of matching items from both the sources.
+	 * @return
+	 */
+	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile);
+	
 }
