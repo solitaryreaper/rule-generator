@@ -64,7 +64,7 @@ public class Clause {
 	
 	public int hashcode()
 	{
-		return Objects.hashCode(featureName, logOp, threshold);
+		return Objects.hashCode(this.featureName, this.logOp, this.threshold);
 	}
 	
 	public boolean equals(Object obj)

@@ -23,6 +23,6 @@ public class Constants {
 	/**
 	 * Number of top N string metrics to retain for every attribute.
 	 */
-	public static final int NUM_METRICS_PER_ATTRIBUTE = 3;
+	public static final int NUM_METRICS_PER_ATTRIBUTE = 4;
 	
 }

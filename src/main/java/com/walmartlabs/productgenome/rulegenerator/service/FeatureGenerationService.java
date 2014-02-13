@@ -11,7 +11,6 @@ import com.walmartlabs.productgenome.rulegenerator.model.data.Feature;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureVector;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
-import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 import com.walmartlabs.productgenome.rulegenerator.utils.SimilarityUtils;
 
 /**
@@ -45,10 +44,6 @@ public class FeatureGenerationService {
 		for(ItemPair itemPair : itemPairs) {
 			FeatureVector fVector = getFeatureVector(itemPair, features);
 			featureVectors.add(fVector);
-			
-			// Temp
-			System.out.println("# Vector : " + fVector.getFeatureString() + " for item : " + 
-					itemPair.getItemAValByAttr("name") + ", " + itemPair.getItemBValByAttr("name"));
 		}
 
 		return new FeatureDataset(name, features, featureVectors);

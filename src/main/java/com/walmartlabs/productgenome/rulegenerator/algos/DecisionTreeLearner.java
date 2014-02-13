@@ -29,6 +29,7 @@ public class DecisionTreeLearner implements Learner {
 	{
 		J48 dtree = new J48();
 		try {
+			dtree.setUnpruned(true);
 			dtree.buildClassifier(trainData);
 		} catch (Exception e) {
 			LOG.severe("Failed to generate J48 decision tree model. Reason : " + e.getStackTrace());

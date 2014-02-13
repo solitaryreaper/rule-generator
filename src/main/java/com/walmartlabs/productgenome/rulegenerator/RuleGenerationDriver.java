@@ -46,7 +46,8 @@ public class RuleGenerationDriver {
 		String mismatchFilePath = System.getProperty("user.dir") + "/src/main/resources/data/restaurant/res_mismatch.txt";
 		String datasetName = "Restaurant";
 		
-		Dataset dataset = parseDataset(matchFilePath, mismatchFilePath, datasetName);
+		DataParser parser = new RestaurantDataParser();
+		Dataset dataset = parseDataset(parser, matchFilePath, mismatchFilePath, datasetName);
 		DatasetEvaluationSummary evalSummary = generateMatchingRules(dataset);
 		LOG.info("Decision Tree Learning results on restuarant dataset :");
 		LOG.info(evalSummary.toString());
@@ -55,11 +56,11 @@ public class RuleGenerationDriver {
 	/**
 	 * Parse the raw dataset to generate in-memory item pairs.
 	 */
-	private static Dataset parseDataset(String matchFilePath, String mismatchFilePath, String datasetName)
+	private static Dataset parseDataset(DataParser parser, String matchFilePath, 
+			String mismatchFilePath, String datasetName)
 	{
 		File matchFile = new File(matchFilePath);
 		File mismatchFile = new File(mismatchFilePath);
-		DataParser parser = new RestaurantDataParser();
 		Dataset restaurantData = parser.parseData(matchFile, mismatchFile, datasetName);
 		
 		LOG.info("Generated in-memory itempairs for dataset : " + datasetName);

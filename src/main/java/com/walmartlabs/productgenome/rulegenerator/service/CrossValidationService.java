@@ -3,21 +3,17 @@ package com.walmartlabs.productgenome.rulegenerator.service;
 import java.util.List;
 import java.util.Random;
 
-import weka.classifiers.Classifier;
-import weka.classifiers.Evaluation;
 import weka.core.Instances;
 
 import com.walmartlabs.productgenome.rulegenerator.Constants;
-import com.walmartlabs.productgenome.rulegenerator.algos.DecisionTreeLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
-import com.walmartlabs.productgenome.rulegenerator.model.RuleModel;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 
 public class CrossValidationService {
 
 	/**
-	 * Runs cross-validation across the labelled dataset, collects rules, tests it on the
+	 * Runs cross-validation across the labeled dataset, collects rules, tests it on the
 	 * test dataset and then returns the summary results for the run.
 	 * @param dataset
 	 * @return
