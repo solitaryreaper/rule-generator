@@ -2,24 +2,17 @@ package com.walmartlabs.productgenome.rulegenerator;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
 import java.util.logging.Logger;
 
-import weka.classifiers.Classifier;
-import weka.classifiers.Evaluation;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionTreeLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
-import com.walmartlabs.productgenome.rulegenerator.model.RuleModel;
+import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
-import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
+import com.walmartlabs.productgenome.rulegenerator.service.CrossValidationService;
 import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationService;
 import com.walmartlabs.productgenome.rulegenerator.utils.ArffDataWriter;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
@@ -54,7 +47,9 @@ public class RuleGenerationDriver {
 		String datasetName = "Restaurant";
 		
 		Dataset dataset = parseDataset(matchFilePath, mismatchFilePath, datasetName);
-		List<Rule> rules = generateMatchingRules(dataset);
+		DatasetEvaluationSummary evalSummary = generateMatchingRules(dataset);
+		LOG.info("Decision Tree Learning results on restuarant dataset :");
+		LOG.info(evalSummary.toString());
 	}
 	
 	/**
@@ -71,7 +66,7 @@ public class RuleGenerationDriver {
 		return restaurantData;
 	}
 	
-	private static List<Rule> generateMatchingRules(Dataset dataset)
+	private static DatasetEvaluationSummary generateMatchingRules(Dataset dataset)
 	{
 		// Step2 : Generate feature dataset from the raw dataset
 		FeatureDataset featureDataset = FeatureGenerationService.generateFeatures(dataset);
@@ -92,50 +87,14 @@ public class RuleGenerationDriver {
 			DataSource trainDataSource = new DataSource(arffFileLoc);			
 			data = trainDataSource.getDataSet();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (data.classIndex() == -1)
 			data.setClassIndex(data.numAttributes() - 1);
 		LOG.info("Loaded the feature training data in WEKA format ..");
 		
-		// Step5 : Split into train and test data set
-		Set<Rule> allRules = Sets.newHashSet();
-		double avgAccuracy = 0.0;
-		int totalFolds = Constants.NUM_CV_FOLDS;
-		for(int i=0; i < totalFolds; i++) {
-			Random rand = new Random(Constants.WEKA_DATA_SEED);
-			Instances randData = new Instances(data);
-			randData.randomize(rand);
-			randData.stratify(totalFolds);
-			Instances train = randData.trainCV(totalFolds, i);
-			Instances test = randData.testCV(totalFolds, i);
-			
-			// Step6 : Launch the decision tree learning
-			Learner learner = new DecisionTreeLearner();
-			RuleModel model = learner.learnRules(train);
-			
-			Classifier classifier = model.getClassifier();
-			try {
-				Evaluation eval = new Evaluation(train);
-				eval.evaluateModel(classifier, test);
-				avgAccuracy += eval.pctCorrect();
-				
-				LOG.info("Run " + i + " summary : " + eval.toSummaryString());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			List<Rule> rules = model.getRules();
-			allRules.addAll(rules);
-		}
-
-		avgAccuracy = avgAccuracy/totalFolds;
-		LOG.info("Average accuracy across " + totalFolds + " folds is : " + Constants.FORMATTER.format(avgAccuracy) + " % ");
-		for(Rule rule : allRules) {
-			LOG.info(rule.toString());
-		}
-		return Lists.newArrayList(allRules);
+		// Step5 : Generate the rules and test their accuracy
+		Learner learner = new DecisionTreeLearner();
+		return CrossValidationService.generateMatchingRules(learner, data);
 	}
 }

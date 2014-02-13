@@ -28,7 +28,6 @@ public class Rule {
 
 	public Rule(List<Clause> clauses, MatchStatus label) {
 		super();
-		this.name = "NA";
 		this.clauses = clauses;
 		this.label = label;
 	}
@@ -65,7 +64,13 @@ public class Rule {
 	}
 
 	public String getName() {
-		return name;
+		StringBuilder name = new StringBuilder();
+		for(Clause c : getClauses()) {
+			name.append(c.getFeatureName()).append("_");
+		}
+		name.append(getLabel().name().toLowerCase());
+		
+		return name.toString();
 	}
 	
 	

@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import weka.classifiers.trees.J48;
 import weka.core.Instances;
 
-import com.walmartlabs.productgenome.rulegenerator.model.RuleModel;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.RuleParser;
 
@@ -26,7 +25,7 @@ public class DecisionTreeLearner implements Learner {
 
 	private static final Logger LOG = Logger.getLogger(DecisionTreeLearner.class.getName());
 	
-	public RuleModel learnRules(Instances trainData) 
+	public List<Rule> learnRules(Instances trainData) 
 	{
 		J48 dtree = new J48();
 		try {
@@ -36,9 +35,7 @@ public class DecisionTreeLearner implements Learner {
 		}
 		
 		List<String> textRules = dtree.getDecisionTreeRules();
-		List<Rule> rules = RuleParser.parseRules(textRules);
-		
-		return new RuleModel(dtree, rules);
+		return RuleParser.parseRules(textRules);
 	}
 
 }

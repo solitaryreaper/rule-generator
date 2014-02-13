@@ -2,6 +2,7 @@ package com.walmartlabs.productgenome.rulegenerator.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
@@ -10,6 +11,7 @@ import com.walmartlabs.productgenome.rulegenerator.model.data.Feature;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureVector;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
+import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 import com.walmartlabs.productgenome.rulegenerator.utils.SimilarityUtils;
 
 /**
@@ -20,6 +22,8 @@ import com.walmartlabs.productgenome.rulegenerator.utils.SimilarityUtils;
  */
 public class FeatureGenerationService {
 
+	private static Logger LOG = Logger.getLogger(FeatureGenerationService.class.getName());
+	
 	/**
 	 * Generates the new feature based dataset using the raw dataset.
 	 * 
@@ -41,6 +45,10 @@ public class FeatureGenerationService {
 		for(ItemPair itemPair : itemPairs) {
 			FeatureVector fVector = getFeatureVector(itemPair, features);
 			featureVectors.add(fVector);
+			
+			// Temp
+			System.out.println("# Vector : " + fVector.getFeatureString() + " for item : " + 
+					itemPair.getItemAValByAttr("name") + ", " + itemPair.getItemBValByAttr("name"));
 		}
 
 		return new FeatureDataset(name, features, featureVectors);
