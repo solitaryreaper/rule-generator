@@ -21,14 +21,42 @@ public class TestClass {
 		Clause a = new Clause("abc", LogicalOperator.EQUALS, 0.837);
 		Clause b = new Clause("abc", LogicalOperator.EQUALS, 0.837);
 		
+		Clause c = new Clause("def", LogicalOperator.EQUALS, 0.837);
+		Clause d = new Clause("def", LogicalOperator.EQUALS, 0.837);
+		
+		List<Clause> ac = Lists.newArrayList(a, c);
+		List<Clause> bc = Lists.newArrayList(b, d);
+		
 		Rule one = new Rule(Lists.newArrayList(a), MatchStatus.MATCH);
 		Rule two = new Rule(Lists.newArrayList(b), MatchStatus.MATCH);
+		
+		System.out.println(one.hashCode());
+		System.out.println(two.hashCode());
+		
+		System.out.println(ac.hashCode());
+		System.out.println(bc.hashCode());
+		if(ac.equals(bc)) {
+			System.out.println("Equals works for same lists ..");
+		}
+		
+		System.out.println(one.getName().hashCode());
+		System.out.println(two.getName().hashCode());
+		
+		System.out.println(one.getLabel().hashCode());
+		System.out.println(two.getLabel().hashCode());
 		
 		if(one.equals(two)) {
 			System.out.println("Yes ..");
 		}
 		else {
 			System.out.println("No ..");
+		}
+		
+		if(ac.equals(bc)) {
+			System.out.println("same hashcode for lists ..");
+		}
+		else {
+			System.out.println("diff hashcode for lists ..");
 		}
 	}
 }

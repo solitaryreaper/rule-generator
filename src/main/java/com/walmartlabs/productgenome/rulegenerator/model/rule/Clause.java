@@ -62,7 +62,7 @@ public class Clause {
 		this.threshold = threshold;
 	}
 	
-	public int hashcode()
+	public int hashCode()
 	{
 		return Objects.hashCode(this.featureName, this.logOp, this.threshold);
 	}

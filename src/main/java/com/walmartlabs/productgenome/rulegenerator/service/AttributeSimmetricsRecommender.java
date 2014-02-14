@@ -103,7 +103,12 @@ public class AttributeSimmetricsRecommender {
 			++matchedItemPairs;
 			String valA = pair.getItemAValByAttr(attrName);
 			String valB = pair.getItemBValByAttr(attrName);
-			totalScore += SimilarityUtils.getSimilarity(metric, valA, valB);
+			double score = SimilarityUtils.getSimilarity(metric, valA, valB);
+			
+			// Only add valid scores ..
+			if(!Double.isNaN(score)) {
+				totalScore += score;
+			}
 		}
 		
 		return totalScore/(double)matchedItemPairs;

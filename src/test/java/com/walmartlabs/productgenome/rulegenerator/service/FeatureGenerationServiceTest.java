@@ -11,9 +11,12 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureVector;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.RestaurantDataParser;
 
 public class FeatureGenerationServiceTest {
@@ -34,7 +37,6 @@ public class FeatureGenerationServiceTest {
 		
 	}
 	
-	@Test
 	public void testGenerateFeatures()
 	{
 		String matchFilePath = System.getProperty("user.dir") + "/src/main/resources/data/restaurant/res_match.txt";
@@ -52,5 +54,23 @@ public class FeatureGenerationServiceTest {
 		assertNotNull(fVectors);
 		assertTrue(fVectors.size() > 0);
 		LOG.info("Generated feature dataset with " + fDataset.getFeatures().size() + " features ..");
+	}
+	
+	@Test
+	public void testGenerateFeaturesCSVData()
+	{
+		LOG.info("Testing Abt-Buy dataset ..");
+		File srcFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Abt.csv");
+		File tgtFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Buy.csv");
+		File goldFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/abt_buy_perfectMapping.csv");
+		String datasetName = "Abt-Buy";
+		
+		DataParser parser = new CSVDataParser();
+		Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile);
+		LOG.info("Parsed CSV file data");
+		
+		FeatureDataset fDataset = FeatureGenerationService.generateFeatures(dataset);
+		assertNotNull(fDataset);
+		
 	}
 }

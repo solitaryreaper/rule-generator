@@ -15,6 +15,7 @@ import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.service.CrossValidationService;
 import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationService;
 import com.walmartlabs.productgenome.rulegenerator.utils.ArffDataWriter;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.RestaurantDataParser;
 
@@ -36,6 +37,7 @@ public class RuleGenerationDriver {
 			
 	public static void main(String[] args) {
 		testRestaurantDataset();
+		//testAbtBuyDataset();
 		
 	}
 
@@ -50,7 +52,23 @@ public class RuleGenerationDriver {
 		Dataset dataset = parseDataset(parser, matchFilePath, mismatchFilePath, datasetName);
 		DatasetEvaluationSummary evalSummary = generateMatchingRules(dataset);
 		LOG.info("Decision Tree Learning results on restuarant dataset :");
-		LOG.info(evalSummary.toString());
+		//LOG.info(evalSummary.toString());
+	}
+	
+	private static void testAbtBuyDataset()
+	{
+		LOG.info("Testing Abt-Buy dataset ..");
+		File srcFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Abt.csv");
+		File tgtFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Buy.csv");
+		File goldFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/abt_buy_perfectMapping.csv");
+		String datasetName = "Abt-Buy";
+		
+		DataParser parser = new CSVDataParser();
+		Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile);
+		LOG.info("Parsed CSV file data");
+		DatasetEvaluationSummary evalSummary = generateMatchingRules(dataset);
+		LOG.info("Decision Tree Learning results on restuarant dataset :");
+		LOG.info(evalSummary.toString());		
 	}
 	
 	/**
@@ -96,6 +114,6 @@ public class RuleGenerationDriver {
 		
 		// Step5 : Generate the rules and test their accuracy
 		Learner learner = new DecisionTreeLearner();
-		return CrossValidationService.generateMatchingRules(learner, data);
+		return CrossValidationService.getRulesViaNFoldCrossValidation(learner, data, Constants.NUM_CV_FOLDS);
 	}
 }
