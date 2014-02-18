@@ -1,18 +1,18 @@
 package com.walmartlabs.productgenome.rulegenerator.service;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import weka.core.Instances;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+import com.google.common.collect.Maps;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
+import com.walmartlabs.productgenome.rulegenerator.model.analysis.RuleEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 
 public class CrossValidationService {
@@ -52,8 +52,7 @@ public class CrossValidationService {
 	 */
 	public static DatasetEvaluationSummary getRulesViaNFoldCrossValidation(Learner learner, Instances data, int totalFolds)
 	{
-		Set<Rule> allRules = Sets.newHashSet();
-		int totalRules = 0;
+		List<DatasetEvaluationSummary> foldSummaryList = Lists.newArrayList();
 		for(int foldId=0; foldId < totalFolds; foldId++) {
 			Random rand = new Random(Constants.WEKA_DATA_SEED);
 			Instances randData = new Instances(data);
@@ -64,22 +63,52 @@ public class CrossValidationService {
 
 			List<Rule> rules = learner.learnRules(train);
 			DatasetEvaluationSummary foldEvalSummary = RuleEvaluationService.evaluatePositiveRules(rules, test);
-			LOG.info("\nFold : " + foldId + ", Results : " + foldEvalSummary.toString());
-			totalRules += foldEvalSummary.getRules().size();
-			allRules.addAll(foldEvalSummary.getRules());
+			foldSummaryList.add(foldEvalSummary);
 		}
 		
-		LOG.info("Total rules : " + totalRules);
-		LOG.info("Unique rules : " + allRules.size());
-		List<Rule> rules = Lists.newArrayList(allRules);
-		
-		for(Rule outerRule : rules) {
-			LOG.info("Rule : " + outerRule.toString() + ", hashcode : " + outerRule.hashCode() + ", " + outerRule.getName().hashCode() + 
-					", " + outerRule.getClauses().hashCode() + ", " + outerRule.getLabel().hashCode());
+		LOG.info("Generating average evaluation summary across N-folds ..");
+		return getNFoldAvgEvalSummary(foldSummaryList);
+	}
+	
+	/**
+	 * Accumulates the results across all the runs and then generates average statistics out of them.
+	 * 
+	 * @param foldSummaryList
+	 * @return
+	 */
+	private static DatasetEvaluationSummary getNFoldAvgEvalSummary(List<DatasetEvaluationSummary> foldSummaryList)
+	{
+		DatasetEvaluationSummary nfoldEvalSummary = new DatasetEvaluationSummary();
+		Map<Rule, RuleEvaluationSummary> uniqueRuleStatsMap = Maps.newHashMap();
+		for(DatasetEvaluationSummary evalSummary : foldSummaryList) {
+			nfoldEvalSummary.setTotalInstances(nfoldEvalSummary.getTotalInstances() + evalSummary.getTotalInstances());
+			nfoldEvalSummary.setTruePositives(nfoldEvalSummary.getTruePositives() + evalSummary.getTruePositives());
+			nfoldEvalSummary.setPredictedPositives(nfoldEvalSummary.getPredictedPositives() + evalSummary.getPredictedPositives());
+			nfoldEvalSummary.setCorrectPredictions(nfoldEvalSummary.getCorrectPredictions() + evalSummary.getCorrectPredictions());
+			
+			List<RuleEvaluationSummary> ruleEvalSummaryList = evalSummary.getRuleSummary();
+			for(RuleEvaluationSummary ruleEvalSummary : ruleEvalSummaryList) {
+				Rule rule = ruleEvalSummary.getRule();
+				RuleEvaluationSummary currRuleEvalSummary = null;
+				if(uniqueRuleStatsMap.containsKey(rule)) {
+					currRuleEvalSummary = uniqueRuleStatsMap.get(rule);
+				}
+				else {
+					currRuleEvalSummary = new RuleEvaluationSummary(rule);
+					currRuleEvalSummary.setNumOccurrenceAcrossNFolds(0);
+				}
+				
+				currRuleEvalSummary.setTotalPositives(currRuleEvalSummary.getTotalPositives() + ruleEvalSummary.getTotalPositives());
+				currRuleEvalSummary.setPositivePredictions(currRuleEvalSummary.getPositivePredictions() + ruleEvalSummary.getPositivePredictions());
+				currRuleEvalSummary.setCorrectPredictions(currRuleEvalSummary.getCorrectPredictions() + ruleEvalSummary.getCorrectPredictions());
+				currRuleEvalSummary.setNumOccurrenceAcrossNFolds(currRuleEvalSummary.getNumOccurrenceAcrossNFolds() + 1);
+				
+				uniqueRuleStatsMap.put(rule, currRuleEvalSummary);
+			}
 		}
 		
-
-		DatasetEvaluationSummary avgEvalSummary = null;
-		return avgEvalSummary;
+		List<RuleEvaluationSummary> ruleSummaryList = Lists.newArrayList(uniqueRuleStatsMap.values());
+		nfoldEvalSummary.setRuleSummary(ruleSummaryList);
+		return nfoldEvalSummary;
 	}
 }

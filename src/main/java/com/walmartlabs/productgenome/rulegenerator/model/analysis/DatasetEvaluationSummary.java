@@ -7,13 +7,19 @@ import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 
+// TODO : Add a ranking function for all the rules. Also, a mechanism to compress similar rules.
 public class DatasetEvaluationSummary {
-	private int totalInstances;
-	private int truePositives; // Total number of matched itempairs in dataset
-	private int predictedPositives;	// Total number of itempairs predicted as matched
-	private int correctPositivePredictions;	// Total number of itempairs predicted as matched and are actually matched
+	private int totalInstances = 0;
+	private int truePositives = 0; // Total number of matched itempairs in dataset
+	private int predictedPositives = 0;	// Total number of itempairs predicted as matched
+	private int correctPositivePredictions = 0;	// Total number of itempairs predicted as matched and are actually matched
 	
 	private List<RuleEvaluationSummary> ruleSummary;
+	
+	public DatasetEvaluationSummary()
+	{
+		
+	}
 	
 	public DatasetEvaluationSummary(int totalInstances, int truePositives,
 			int predictedPositives, int correctPositivePredictions, List<RuleEvaluationSummary> ruleSummary) {
@@ -39,9 +45,8 @@ public class DatasetEvaluationSummary {
 		
 		builder.append("\n<--------------- RULES ------------------->\n");
 		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
-			builder.append(ruleSummary.getRule().toString()).append("\n");
-			builder.append(ruleSummary.toSummaryString()).append("\n");
-			builder.append("\n\n");
+			builder.append(ruleSummary.explainRule());
+			builder.append("\n");
 		}
 		
 		return builder.toString();

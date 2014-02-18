@@ -12,6 +12,14 @@ public class RuleEvaluationSummary {
 	private int correctPositivePredictions;
 	private int totalPositives;
 	
+	// Count of how many times this rule occurs across N fold cross-validation. Default value is 1 for one-fold.
+	private int numOccurrenceAcrossNFolds = 1;
+	
+	public RuleEvaluationSummary(Rule rule)
+	{
+		this.rule = rule;
+	}
+	
 	public RuleEvaluationSummary(Rule rule, int predictedPositives,
 			int correctPositivePredictions, int totalPositives) {
 		super();
@@ -26,10 +34,24 @@ public class RuleEvaluationSummary {
 		DecimalFormat df = Constants.FORMATTER;
 		StringBuilder builder = new StringBuilder();
 		builder.append("Precision(%) : ").append(df.format(getPrecision())).append("\t");
-		builder.append("Coverage(%) : ").append(df.format(getRecall()));
+		builder.append("Coverage(%) : ").append(df.format(getCoverage())).append("\t");
+		builder.append("Fold frequency(%) : ").append(df.format(getFoldFrequency()));
 		
 		return builder.toString();
-	}	
+	}
+	
+	public String explainRule()
+	{
+		DecimalFormat df = Constants.FORMATTER;
+		StringBuilder builder = new StringBuilder();
+		builder.append("RULE : ").append(getRule().toString()).append("\n");
+		builder.append(df.format(getPrecision())).append("% of POSITIVE predictions by this rule are correct.").append("\n");
+		builder.append(df.format(getCoverage())).append("% positive examples are correctly covered by this rule.").append("\n");
+		builder.append(df.format(getFoldFrequency())).append("% cross-validation folds generate this POSITIVE rule.").append("\n");
+		
+		return builder.toString();
+	}
+	
 	public Rule getRule() {
 		return rule;
 	}
@@ -60,8 +82,21 @@ public class RuleEvaluationSummary {
 		return (correctPositivePredictions/(double)predictedPositives)*100;		
 	}
 	
-	public double getRecall()
+	public double getCoverage()
 	{
 		return (correctPositivePredictions/(double)totalPositives)*100;
+	}
+	
+	public double getFoldFrequency()
+	{
+		return (getNumOccurrenceAcrossNFolds()/(double)Constants.NUM_CV_FOLDS)*100;
+	}
+
+	public int getNumOccurrenceAcrossNFolds() {
+		return numOccurrenceAcrossNFolds;
+	}
+
+	public void setNumOccurrenceAcrossNFolds(int numOccurrenceAcrossNFolds) {
+		this.numOccurrenceAcrossNFolds = numOccurrenceAcrossNFolds;
 	}
 }

@@ -52,7 +52,7 @@ public class RuleGenerationDriver {
 		Dataset dataset = parseDataset(parser, matchFilePath, mismatchFilePath, datasetName);
 		DatasetEvaluationSummary evalSummary = generateMatchingRules(dataset);
 		LOG.info("Decision Tree Learning results on restuarant dataset :");
-		//LOG.info(evalSummary.toString());
+		LOG.info(evalSummary.toString());
 	}
 	
 	private static void testAbtBuyDataset()
