@@ -25,4 +25,6 @@ public class Constants {
 	 */
 	public static final int NUM_METRICS_PER_ATTRIBUTE = 4;
 	
+	public static final String DEFAULT_TOKENIZER = " ";
+	
 }
