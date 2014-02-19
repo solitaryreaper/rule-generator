@@ -19,9 +19,9 @@ public class RuleParser {
 
 	private static Logger LOG = Logger.getLogger(RuleParser.class.getName());
 	
-	private static final String RULE_BEGIN_IDENTIFIER = "IF";
-	private static final String CLAUSES_END_IDENTIFIER = "THEN";
-	private static final String INTER_CLAUSE_SEPARATOR = "AND";
+	private static final String RULE_BEGIN_IDENTIFIER = "if";
+	private static final String CLAUSES_END_IDENTIFIER = "then";
+	private static final String INTER_CLAUSE_SEPARATOR = "and";
 	private static final String INTRA_CLAUSE_SEPARATOR = " ";
 	
 	/**
@@ -34,7 +34,10 @@ public class RuleParser {
 	{
 		List<Rule> rules = Lists.newArrayList();
 		for(String rule : textRules) {
-			rules.add(parseRule(rule));
+			Rule ruleObj = parseRule(rule);
+			if(ruleObj != null) {
+				rules.add(ruleObj);
+			}
 		}
 		
 		return rules;
@@ -42,8 +45,13 @@ public class RuleParser {
 	
 	private static Rule parseRule(String rule)
 	{
+		rule = rule.toLowerCase();
 		int clausesBeginIndex = rule.indexOf(RULE_BEGIN_IDENTIFIER) + RULE_BEGIN_IDENTIFIER.length() + 1;
 		int clausedEndIndex = rule.indexOf(CLAUSES_END_IDENTIFIER) - 1;
+		if(clausesBeginIndex >= clausedEndIndex) {
+			LOG.warning("No clause present for rule : " + rule);
+			return null;
+		}
 		
 		String allClausesString = rule.substring(clausesBeginIndex, clausedEndIndex).trim();
 		
