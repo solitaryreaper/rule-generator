@@ -117,7 +117,6 @@ public class RuleEvaluationService {
 				++correctPositivePredictions;
 			}
 			
-			
 			// Report false positives
 			if(isMatch && !isTruePositive) {
 				LOG.warning("False positive for instance : " + instance.toString());

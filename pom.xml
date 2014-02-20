@@ -43,7 +43,7 @@
     <dependency>
 	    <groupId>nz.ac.waikato.cms.weka</groupId>
 	    <artifactId>weka-customized</artifactId>
-	    <version>3.6.6</version>
+	    <version>3.7.10</version>
 	    <scope>system</scope>
 	    <systemPath>${basedir}/lib/weka.jar</systemPath>
     </dependency>

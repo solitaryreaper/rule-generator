@@ -26,7 +26,7 @@ public class LearnerTest {
 		data = getDataset();
 	}
 	
-	
+	@Test
 	public void testDecisionTreeLearner()
 	{
 		LOG.info("Testing decision tree learning algorithm ..");

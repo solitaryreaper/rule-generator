@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
+import com.walmartlabs.productgenome.rulegenerator.algos.DecisionListLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionTreeLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
@@ -35,13 +36,26 @@ public class RuleGenerationDriver {
 
 	private static Logger LOG = Logger.getLogger(RuleGenerationDriver.class.getName());
 			
+	/**
+	 * List of available learners to test
+	 * @author excelsior
+	 *
+	 */
+	public enum RuleLearner
+	{
+		J48,
+		PART
+	}
+	
 	public static void main(String[] args) {
-		testRestaurantDataset();
-		//testAbtBuyDataset();
-		
+		for(RuleLearner learner : RuleLearner.values()) {
+			LOG.info("Testing for " + learner.toString() + " learning algorithm ..");
+			testRestaurantDataset(learner);
+			//testAbtBuyDataset(learner);
+		}
 	}
 
-	private static void testRestaurantDataset()
+	private static void testRestaurantDataset(RuleLearner learner)
 	{
 		LOG.info("Testing auto-rule learning on restaurant dataset ..");
 		String matchFilePath = System.getProperty("user.dir") + "/src/main/resources/data/restaurant/res_match.txt";
@@ -50,12 +64,12 @@ public class RuleGenerationDriver {
 		
 		DataParser parser = new RestaurantDataParser();
 		Dataset dataset = parseDataset(parser, matchFilePath, mismatchFilePath, datasetName);
-		DatasetEvaluationSummary evalSummary = generateMatchingRules(dataset);
+		DatasetEvaluationSummary evalSummary = generateMatchingRules(dataset, learner);
 		LOG.info("Decision Tree Learning results on restuarant dataset :");
 		LOG.info(evalSummary.toString());
 	}
 	
-	private static void testAbtBuyDataset()
+	private static void testAbtBuyDataset(RuleLearner learner)
 	{
 		LOG.info("Testing Abt-Buy dataset ..");
 		File srcFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Abt.csv");
@@ -66,7 +80,7 @@ public class RuleGenerationDriver {
 		DataParser parser = new CSVDataParser();
 		Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile);
 		LOG.info("Parsed CSV file data");
-		DatasetEvaluationSummary evalSummary = generateMatchingRules(dataset);
+		DatasetEvaluationSummary evalSummary = generateMatchingRules(dataset, learner);
 		LOG.info("Decision Tree Learning results on restuarant dataset :");
 		LOG.info(evalSummary.toString());		
 	}
@@ -85,7 +99,7 @@ public class RuleGenerationDriver {
 		return restaurantData;
 	}
 	
-	private static DatasetEvaluationSummary generateMatchingRules(Dataset dataset)
+	private static DatasetEvaluationSummary generateMatchingRules(Dataset dataset, RuleLearner ruleLearner)
 	{
 		// Step2 : Generate feature dataset from the raw dataset
 		FeatureDataset featureDataset = FeatureGenerationService.generateFeatures(dataset);
@@ -113,7 +127,15 @@ public class RuleGenerationDriver {
 		LOG.info("Loaded the feature training data in WEKA format ..");
 		
 		// Step5 : Generate the rules and test their accuracy
-		Learner learner = new DecisionTreeLearner();
+		Learner learner = null;
+		if(ruleLearner.equals(RuleLearner.J48)) {
+			learner = new DecisionTreeLearner();
+		}
+		else if(ruleLearner.equals(RuleLearner.PART)) {
+			learner = new DecisionListLearner();
+		}
+		
+		//return CrossValidationService.generateMatchingRules(learner, data);
 		return CrossValidationService.getRulesViaNFoldCrossValidation(learner, data, Constants.NUM_CV_FOLDS);
 	}
 }

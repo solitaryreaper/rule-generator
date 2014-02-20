@@ -76,4 +76,12 @@ public class ItemPair {
 		return itemB.getValuesForAttr(attrName);
 	}
 	
+	/**
+	 * Hack to identify this itempair after it is converted into a feature vector
+	 */
+	public String getItempPairIdentifier()
+	{
+		return itemA.getId() + "#" + itemB.getId();
+	}
+	
 }

@@ -22,6 +22,7 @@ public class DecisionListLearner implements Learner{
 			LOG.severe("Failed to generate J48 decision tree model. Reason : " + e.getStackTrace());
 		}
 		
+		LOG.info("Decision rules : " + dlist.toString());
 		List<String> textRules = dlist.getDecisionListRules();
 		return RuleParser.parseRules(textRules);
 	}

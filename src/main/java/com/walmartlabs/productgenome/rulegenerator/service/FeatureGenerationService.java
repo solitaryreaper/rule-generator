@@ -1,10 +1,14 @@
 package com.walmartlabs.productgenome.rulegenerator.service;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 import com.google.common.collect.Lists;
+import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Feature;
@@ -34,18 +38,49 @@ public class FeatureGenerationService {
 	 */
 	public static FeatureDataset generateFeatures(Dataset rawDataset)
 	{
-		String name = rawDataset.getName();
-		Map<String, List<Simmetrics>> attrSimmetrics = 
-				AttributeSimmetricsRecommender.getSimmetricRecommendations(rawDataset);
+		String mapFileLoc = Constants.DATA_FILE_PATH_PREFIX + "_map_" + rawDataset.getName() + ".txt";
+		File mapFile = new File(mapFileLoc);
+		boolean isMapFileToBeGenerated = true;
+		BufferedWriter bw = null;
+		
+		String name = null;
+		List<Feature> features = null;
+		List<FeatureVector> featureVectors = null;
+		try {
+			if(mapFile.exists()) {
+				isMapFileToBeGenerated = false;
+			}
+			else {
+				LOG.info("Generating new map file " + mapFileLoc);
+				bw = new BufferedWriter(new FileWriter(mapFileLoc));
+			}
+			
+			name = rawDataset.getName();
+			Map<String, List<Simmetrics>> attrSimmetrics = 
+					AttributeSimmetricsRecommender.getSimmetricRecommendations(rawDataset);
 
-		List<Feature> features = getAllFeatures(attrSimmetrics);
-		List<ItemPair> itemPairs = rawDataset.getItemPairs();
-		List<FeatureVector> featureVectors = Lists.newArrayList();		
-		for(ItemPair itemPair : itemPairs) {
-			FeatureVector fVector = getFeatureVector(itemPair, features);
-			featureVectors.add(fVector);
+			features = getAllFeatures(attrSimmetrics);
+			List<ItemPair> itemPairs = rawDataset.getItemPairs();
+			featureVectors = Lists.newArrayList();		
+			for(ItemPair itemPair : itemPairs) {
+				FeatureVector fVector = getFeatureVector(itemPair, features);
+				featureVectors.add(fVector);
+				if(isMapFileToBeGenerated) {
+					bw.write(itemPair.getItempPairIdentifier() + " ==> " + fVector.getFeatureString());
+					bw.newLine();
+				}
+			}
+
+			if(isMapFileToBeGenerated) {
+				bw.close();
+				LOG.info("Map file " + mapFileLoc + " has been successfully generated ..");
+			}
+			
 		}
-
+		catch(Exception e) {
+			
+		}
+		
 		return new FeatureDataset(name, features, featureVectors);
 	}
 	
@@ -93,4 +128,5 @@ public class FeatureGenerationService {
 		
 		return new FeatureVector(featureValues, itemPair.getMatchStatus());
 	}
+	
 }

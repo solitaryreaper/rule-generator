@@ -9,7 +9,6 @@ import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Feature;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureVector;
-import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 
 /**
  * Writes the feature-based itempair data in ARFF format, so that it can be
