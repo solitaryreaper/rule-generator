@@ -36,16 +36,17 @@ public class DatasetEvaluationSummary {
 		DecimalFormat df = Constants.FORMATTER;
 		
 		StringBuilder builder = new StringBuilder();
+		builder.append("\n\n");
 		builder.append("Total instances : ").append(totalInstances).append("\n");
 		builder.append("True positives : ").append(truePositives).append("\n");
 		builder.append("Predicted positives : ").append(predictedPositives).append("\n");
 		builder.append("Correct predictions : ").append(correctPositivePredictions).append("\n");
-		builder.append("Precision(%) : ").append(df.format(getPrecision())).append("\n");
-		builder.append("Recall(%) : ").append(df.format(getRecall())).append("\n");
+		builder.append("Average Precision(%) : ").append(df.format(getPrecision())).append("\n");
+		builder.append("Average Recall(%) : ").append(df.format(getRecall())).append("\n");
 		
-		builder.append("\n<--------------- RULES ------------------->\n");
+		builder.append("\n<--------------- RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
 		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
-			builder.append(ruleSummary.explainRule());
+			builder.append(ruleSummary.showRuleStats());
 			builder.append("\n");
 		}
 		

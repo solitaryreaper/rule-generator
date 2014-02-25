@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import weka.core.Instances;
@@ -26,7 +27,7 @@ public class LearnerTest {
 		data = getDataset();
 	}
 	
-	@Test
+	@Ignore
 	public void testDecisionTreeLearner()
 	{
 		LOG.info("Testing decision tree learning algorithm ..");
@@ -35,13 +36,22 @@ public class LearnerTest {
 		assertNotNull(rules);		
 	}
 	
-	@Test
+	@Ignore
 	public void testDecisionListLearner()
 	{
 		LOG.info("Testing decision lists learning algorithm ..");
 		learner = new DecisionListLearner();
 		List<Rule> rules = learner.learnRules(data);
 		assertNotNull(rules);
+	}
+	
+	@Test
+	public void testRandomForest()
+	{
+		LOG.info("Testing random forests learning algorithm ..");
+		learner = new RandomForestLearner();
+		List<Rule> rules = learner.learnRules(data);
+		//assertNotNull(rules);		
 	}
 	
 	private static Instances getDataset()
