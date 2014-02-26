@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.common.base.Objects;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
+import com.walmartlabs.productgenome.rulegenerator.model.rule.Clause.LogicalOperator;
 
 /**
  * Represents a model class for a matching rule.
@@ -93,5 +94,22 @@ public class Rule {
 	public boolean isMatchingRule()
 	{
 		return getLabel().equals(MatchStatus.MATCH);
+	}
+	
+	// Hack : The idea is that matching rules should generally test for the similarity to be greater
+	// than a threshold. Comparing less than seems risky as it can lead to false positives if accompanying
+	// predicates are not good enough.
+	public boolean hasLessThanClause()
+	{
+		boolean hasLessThanOperator = false;
+		for(Clause clause : clauses) {
+			LogicalOperator logop = clause.getLogOp();
+			if(logop.equals(LogicalOperator.LESS_THAN) || logop.equals(LogicalOperator.LESS_THAN_EQUALS)) {
+				hasLessThanOperator = true;
+				break;
+			}
+		}
+		
+		return hasLessThanOperator;
 	}
 }

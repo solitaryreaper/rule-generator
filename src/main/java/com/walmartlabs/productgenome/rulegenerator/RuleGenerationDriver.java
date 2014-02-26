@@ -2,7 +2,6 @@ package com.walmartlabs.productgenome.rulegenerator;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInputStream.GetField;
 import java.util.logging.Logger;
 
 import weka.core.Instances;

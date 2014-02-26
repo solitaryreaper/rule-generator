@@ -1,13 +1,13 @@
 package com.walmartlabs.productgenome.rulegenerator.model.analysis;
 
 import java.text.DecimalFormat;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 
-// TODO : Add a ranking function for all the rules. Also, a mechanism to compress similar rules.
 public class DatasetEvaluationSummary {
 	private int totalInstances = 0;
 	private int truePositives = 0; // Total number of matched itempairs in dataset
@@ -44,8 +44,8 @@ public class DatasetEvaluationSummary {
 		builder.append("Average Precision(%) : ").append(df.format(getPrecision())).append("\n");
 		builder.append("Average Recall(%) : ").append(df.format(getRecall())).append("\n");
 		
-		builder.append("\n<--------------- RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
-		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
+		builder.append("\n<--------------- RANKED RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
+		for(RuleEvaluationSummary ruleSummary : getRankedAndFilteredRules()) {
 			builder.append(ruleSummary.showRuleStats());
 			builder.append("\n");
 		}
@@ -103,7 +103,7 @@ public class DatasetEvaluationSummary {
 		return (correctPositivePredictions/(double)truePositives)*100;		
 	}
 	
-	public List<Rule> getRules()
+	public List<Rule> getAllRules()
 	{
 		List<Rule> rules = Lists.newArrayList();
 		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
@@ -111,5 +111,98 @@ public class DatasetEvaluationSummary {
 		}
 		
 		return rules;
+	}
+	
+	/**
+	 * Returns a ranked list of rules. The ranking is based on the following factors :
+	 * 
+	 * 1) Precision
+	 * 2) Recall/Coverage
+	 * 3) Frequency across folds
+	 * 
+	 * Score = F-score(beta=0.5) + fold frequency
+	 * 
+	 * It also filters all rules which have a precision below the cutoff, since it is the most
+	 * important factor for the rule.
+	 * @return
+	 */
+	public List<RuleEvaluationSummary> getRankedAndFilteredRules()
+	{
+		List<RankedRuleSummary> rankedRules = Lists.newArrayList();
+		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
+			// Filter all rules that don't meet precision cutoff
+			if(Double.compare(ruleSummary.getPrecision(), Constants.RULE_PRECISION_CUTOFF_PERCENT) < 0) {
+				continue;
+			}
+			
+			double score = getRuleScore(ruleSummary);
+			rankedRules.add(new RankedRuleSummary(score, ruleSummary));
+		}
+		
+		Collections.sort(rankedRules);
+		Collections.reverse(rankedRules);
+		
+		List<RuleEvaluationSummary> recommendedRules = Lists.newArrayList();
+		for(RankedRuleSummary rankedRule : rankedRules) {
+			recommendedRules.add(rankedRule.getRuleSummary());
+		}
+		
+		return recommendedRules;
+	}
+	
+	public List<Rule> getRankedRules()
+	{
+		List<Rule> rankedRules = Lists.newArrayList();
+		for(RuleEvaluationSummary ruleSummary : getRankedAndFilteredRules()) {
+			rankedRules.add(ruleSummary.getRule());
+		}
+		
+		return rankedRules;
+	}
+	
+	private double getRuleScore(RuleEvaluationSummary ruleSummary)
+	{
+		double score = 0.0;
+		double betaSquare = Constants.BETA_F_SCORE*Constants.BETA_F_SCORE;
+		double precision = ruleSummary.getPrecision();
+		double recall = ruleSummary.getCoverage();
+		
+		double fscore = ((1 + betaSquare)* precision*recall)/(betaSquare*precision + recall);
+		
+		score = fscore + ruleSummary.getFoldFrequency()/100;
+		return score;
+	}
+	
+	public static class RankedRuleSummary implements Comparable<RankedRuleSummary>
+	{
+		private double score;
+		private RuleEvaluationSummary ruleSummary;
+		
+		public RankedRuleSummary(double score, RuleEvaluationSummary ruleSummary) {
+			super();
+			this.score = score;
+			this.ruleSummary = ruleSummary;
+		}
+
+		public double getScore() {
+			return score;
+		}
+
+		public void setScore(int score) {
+			this.score = score;
+		}
+
+		public RuleEvaluationSummary getRuleSummary() {
+			return ruleSummary;
+		}
+
+		public void setRuleSummary(RuleEvaluationSummary ruleSummary) {
+			this.ruleSummary = ruleSummary;
+		}
+
+		public int compareTo(RankedRuleSummary that) {
+			return Double.compare(this.score, that.score);
+		}
+		
 	}
 }

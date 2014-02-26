@@ -84,8 +84,8 @@ public class RuleEvaluationService {
 			boolean isMatch = false;
 			Rule matchRule = null;
 			for(Rule rule : rules) {
-				// Only evaluate positive rules
-				if(rule.getLabel().equals(MatchStatus.MISMATCH)) {
+				// Only evaluate positive rules that don't have LESS THAN operators.
+				if(!rule.isMatchingRule() || rule.hasLessThanClause()) {
 					continue;
 				}
 				
@@ -114,16 +114,14 @@ public class RuleEvaluationService {
 			// If atleast one rule passes, then predict MATCH for this instance.
 			if(isMatch) {
 				++predictedPositives;
+				if(isTruePositive) {
+					++correctPositivePredictions;
+				}
+				else {
+					LOG.warning("False positive for instance : " + instance.toString() + " for rule : " + matchRule.toString());
+				}
 			}
-			if(isMatch && isTruePositive) {
-				++correctPositivePredictions;
-			}
-			
-			// Report false positives
-			if(isMatch && !isTruePositive) {
-				LOG.warning("False positive for instance : " + instance.toString() + " for rule : " + matchRule.toString());
-			}
-			if(!isMatch && isTruePositive) {
+			else if(!isMatch && isTruePositive) {
 				LOG.warning("False negative for instance : " + instance.toString());
 			}
 		}

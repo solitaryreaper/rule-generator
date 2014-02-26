@@ -8,12 +8,13 @@ import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 public class RuleEvaluationSummary {
 	private Rule rule;
 
-	private int predictedPositives;
-	private int correctPositivePredictions;
-	private int totalPositives;
+	private int predictedPositives = 0;
+	private int correctPositivePredictions = 0;
+	private int totalPositives = 0;
 	
 	// Count of how many times this rule occurs across N fold cross-validation. Default value is 1 for one-fold.
 	private int numOccurrenceAcrossNFolds = 1;
+	private int totalFolds = 1;
 	
 	public RuleEvaluationSummary(Rule rule)
 	{
@@ -59,9 +60,13 @@ public class RuleEvaluationSummary {
 		builder.append("( ")
 			.append(df.format(getPrecision())).append("%, ")
 			.append(df.format(getCoverage())).append("%, ")
-			.append(df.format(getFoldFrequency())).append("% ")
+			.append(df.format(getFoldFrequency())).append("%, ")
+			.append(getPositivePredictions()).append(" , ")
+			.append(getCorrectPredictions()).append(" , ")
+			.append(getTotalPositives()).append(" , ")			
 			.append(" )");
 		builder.append(" : ").append(getRule().toString());
+		
 		
 		return builder.toString();		
 	}
@@ -103,7 +108,7 @@ public class RuleEvaluationSummary {
 	
 	public double getFoldFrequency()
 	{
-		return (getNumOccurrenceAcrossNFolds()/(double)Constants.NUM_CV_FOLDS)*100;
+		return (getNumOccurrenceAcrossNFolds()/(double)getTotalFolds())*100;
 	}
 
 	public int getNumOccurrenceAcrossNFolds() {
@@ -112,5 +117,13 @@ public class RuleEvaluationSummary {
 
 	public void setNumOccurrenceAcrossNFolds(int numOccurrenceAcrossNFolds) {
 		this.numOccurrenceAcrossNFolds = numOccurrenceAcrossNFolds;
+	}
+
+	public int getTotalFolds() {
+		return totalFolds;
+	}
+
+	public void setTotalFolds(int totalFolds) {
+		this.totalFolds = totalFolds;
 	}
 }
