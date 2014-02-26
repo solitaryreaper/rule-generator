@@ -48,11 +48,14 @@ public class RuleGenerationDriver {
 	}
 	
 	public static void main(String[] args) {
+		/*
 		for(RuleLearner learner : RuleLearner.values()) {
 			LOG.info("Testing for " + learner.toString() + " learning algorithm ..");
 			testRestaurantDataset(learner);
 			//testAbtBuyDataset(learner);
 		}
+		*/
+		testRestaurantDataset(RuleLearner.J48);
 	}
 
 	private static void testRestaurantDataset(RuleLearner learner)
