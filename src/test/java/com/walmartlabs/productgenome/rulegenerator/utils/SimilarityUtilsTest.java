@@ -2,11 +2,7 @@ package com.walmartlabs.productgenome.rulegenerator.utils;
 
 import org.junit.Test;
 
-import uk.ac.shef.wit.simmetrics.similaritymetrics.SmithWatermanGotoh;
-
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
-import com.wcohen.ss.Jaccard;
-import com.wcohen.ss.SmithWaterman;
 
 public class SimilarityUtilsTest {
 
@@ -26,5 +22,17 @@ public class SimilarityUtilsTest {
 		String str2 = "stars";
 		double score = SimilarityUtils.getSimilarity(Simmetrics.SMITH_WATERMAN_GOTOH_WINDOWED_AFFINE, str1, str2);
 		System.out.println("Simmetrics SMITH WATERMAN score : " + score);	
+	}
+	
+	@Test
+	public void testFailureCase1()
+	{
+		String str1 = "palace court";
+		String str2 = "cafe roma";
+		double score = SimilarityUtils.getSimilarity(Simmetrics.SMITH_WATERMAN_GOTOH_WINDOWED_AFFINE, str1, str2);
+		System.out.println("Simmetrics SMITH WATERMAN score : " + score + " for strings (" + str1 + "," + str2 + ")");	
+
+		score = SimilarityUtils.getSimilarity(Simmetrics.JARO_WINKLER, str1, str2);
+		System.out.println("Simmetrics JARO WINKLER score : " + score  + " for strings (" + str1 + "," + str2 + ")");	
 	}
 }

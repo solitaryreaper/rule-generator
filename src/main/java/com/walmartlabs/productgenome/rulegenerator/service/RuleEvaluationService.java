@@ -82,6 +82,7 @@ public class RuleEvaluationService {
 			}
 			
 			boolean isMatch = false;
+			Rule matchRule = null;
 			for(Rule rule : rules) {
 				// Only evaluate positive rules
 				if(rule.getLabel().equals(MatchStatus.MISMATCH)) {
@@ -91,6 +92,7 @@ public class RuleEvaluationService {
 				MatchStatus label = applyRuleToInstance(rule, instance, testData);
 				if(label.equals(MatchStatus.MATCH)) {
 					isMatch = true;
+					matchRule = rule;
 					
 					// Update the number of predicted MATCHES by this rule.
 					RuleStats stats = null;
@@ -119,7 +121,10 @@ public class RuleEvaluationService {
 			
 			// Report false positives
 			if(isMatch && !isTruePositive) {
-				LOG.warning("False positive for instance : " + instance.toString());
+				LOG.warning("False positive for instance : " + instance.toString() + " for rule : " + matchRule.toString());
+			}
+			if(!isMatch && isTruePositive) {
+				LOG.warning("False negative for instance : " + instance.toString());
 			}
 		}
 		

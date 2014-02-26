@@ -2,14 +2,17 @@ package com.walmartlabs.productgenome.rulegenerator;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.util.logging.Logger;
 
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
+import com.google.common.base.Strings;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionListLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionTreeLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
+import com.walmartlabs.productgenome.rulegenerator.algos.RandomForestLearner;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
@@ -44,10 +47,12 @@ public class RuleGenerationDriver {
 	public enum RuleLearner
 	{
 		J48,
-		PART
+		PART,
+		RandomForest
 	}
 	
 	public static void main(String[] args) {
+		String arffFileLoc = "/home/excelsior/workspace/rule-generator/src/main/resources/tmp/Restaurant_5913.arff";
 		/*
 		for(RuleLearner learner : RuleLearner.values()) {
 			LOG.info("Testing for " + learner.toString() + " learning algorithm ..");
@@ -55,36 +60,46 @@ public class RuleGenerationDriver {
 			//testAbtBuyDataset(learner);
 		}
 		*/
-		testRestaurantDataset(RuleLearner.J48);
+		//testRestaurantDataset(RuleLearner.J48, arffFileLoc);
+		testRestaurantDataset(RuleLearner.PART, arffFileLoc);
+		//testRestaurantDataset(RuleLearner.RandomForest, arffFileLoc);
 	}
 
-	private static void testRestaurantDataset(RuleLearner learner)
+	private static void testRestaurantDataset(RuleLearner learner, String arffFileLoc)
 	{
 		LOG.info("Testing auto-rule learning on restaurant dataset ..");
-		String matchFilePath = System.getProperty("user.dir") + "/src/main/resources/data/restaurant/res_match.txt";
-		String mismatchFilePath = System.getProperty("user.dir") + "/src/main/resources/data/restaurant/res_mismatch.txt";
-		String datasetName = "Restaurant";
+		if(Strings.isNullOrEmpty(arffFileLoc)) {
+			String matchFilePath = System.getProperty("user.dir") + "/src/main/resources/data/restaurant/res_match.txt";
+			String mismatchFilePath = System.getProperty("user.dir") + "/src/main/resources/data/restaurant/res_mismatch.txt";
+			String datasetName = "Restaurant";
+			
+			DataParser parser = new RestaurantDataParser();
+			Dataset dataset = parseDataset(parser, matchFilePath, mismatchFilePath, datasetName);
+			arffFileLoc = stageDataInArffFormat(dataset);
+		}
 		
-		DataParser parser = new RestaurantDataParser();
-		Dataset dataset = parseDataset(parser, matchFilePath, mismatchFilePath, datasetName);
-		DatasetEvaluationSummary evalSummary = generateMatchingRules(dataset, learner);
-		LOG.info("Decision Tree Learning results on restuarant dataset :");
+		DatasetEvaluationSummary evalSummary = generateMatchingRules(arffFileLoc, learner);
+		LOG.info("Decision Tree Learning results on restaurant dataset :");
 		LOG.info(evalSummary.toString());
 	}
 	
-	private static void testAbtBuyDataset(RuleLearner learner)
+	private static void testAbtBuyDataset(RuleLearner learner, String arffFileLoc)
 	{
 		LOG.info("Testing Abt-Buy dataset ..");
-		File srcFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Abt.csv");
-		File tgtFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Buy.csv");
-		File goldFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/abt_buy_perfectMapping.csv");
-		String datasetName = "Abt-Buy";
+		if(Strings.isNullOrEmpty(arffFileLoc)) {
+			File srcFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Abt.csv");
+			File tgtFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Buy.csv");
+			File goldFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/abt_buy_perfectMapping.csv");
+			String datasetName = "Abt-Buy";
+			
+			DataParser parser = new CSVDataParser();
+			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile);
 		
-		DataParser parser = new CSVDataParser();
-		Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile);
-		LOG.info("Parsed CSV file data");
-		DatasetEvaluationSummary evalSummary = generateMatchingRules(dataset, learner);
-		LOG.info("Decision Tree Learning results on restuarant dataset :");
+			arffFileLoc = stageDataInArffFormat(dataset);
+		}
+		
+		DatasetEvaluationSummary evalSummary = generateMatchingRules(arffFileLoc, learner);
+		LOG.info("Decision Tree Learning results on Abt-Buy dataset :");
 		LOG.info(evalSummary.toString());		
 	}
 	
@@ -102,7 +117,7 @@ public class RuleGenerationDriver {
 		return restaurantData;
 	}
 	
-	private static DatasetEvaluationSummary generateMatchingRules(Dataset dataset, RuleLearner ruleLearner)
+	private static String stageDataInArffFormat(Dataset dataset)
 	{
 		// Step2 : Generate feature dataset from the raw dataset
 		FeatureDataset featureDataset = FeatureGenerationService.generateFeatures(dataset);
@@ -116,7 +131,12 @@ public class RuleGenerationDriver {
 			LOG.severe("Failed to stage feature data in arff file .. " + e.getStackTrace());
 		}
 		LOG.info("Loaded the in-memory feature vectors into arff file : " + arffFileLoc);
-		
+
+		return arffFileLoc;
+	}
+	
+	private static DatasetEvaluationSummary generateMatchingRules(String arffFileLoc, RuleLearner ruleLearner)
+	{
 		// Step4 : Load the feature training data in weka format
 		Instances data = null;
 		try {
@@ -130,6 +150,7 @@ public class RuleGenerationDriver {
 		LOG.info("Loaded the feature training data in WEKA format ..");
 		
 		// Step5 : Generate the rules and test their accuracy
+		int totalFolds = Constants.NUM_CV_FOLDS;
 		Learner learner = null;
 		if(ruleLearner.equals(RuleLearner.J48)) {
 			learner = new DecisionTreeLearner();
@@ -137,8 +158,11 @@ public class RuleGenerationDriver {
 		else if(ruleLearner.equals(RuleLearner.PART)) {
 			learner = new DecisionListLearner();
 		}
+		else if(ruleLearner.equals(RuleLearner.RandomForest)) {
+			learner = new RandomForestLearner();
+			totalFolds = 1;
+		}
 		
-		//return CrossValidationService.generateMatchingRules(learner, data);
-		return CrossValidationService.getRulesViaNFoldCrossValidation(learner, data, Constants.NUM_CV_FOLDS);
+		return CrossValidationService.getRulesViaNFoldCrossValidation(learner, data, totalFolds);
 	}
 }

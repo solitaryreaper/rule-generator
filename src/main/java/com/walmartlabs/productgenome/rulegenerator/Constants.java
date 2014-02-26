@@ -27,4 +27,10 @@ public class Constants {
 	
 	public static final String DEFAULT_TOKENIZER = " ";
 	
+	/**
+	 * Percentage of features in each random tree in the random forest as compared to the original
+	 * dataset.
+	 */
+	public static final int NUM_PERCENT_FEATURES = 50;
+	
 }

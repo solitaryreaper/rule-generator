@@ -52,6 +52,10 @@ public class CrossValidationService {
 	 */
 	public static DatasetEvaluationSummary getRulesViaNFoldCrossValidation(Learner learner, Instances data, int totalFolds)
 	{
+		if(totalFolds == 1) {
+			return generateMatchingRules(learner, data);
+		}
+		
 		List<DatasetEvaluationSummary> foldSummaryList = Lists.newArrayList();
 		for(int foldId=0; foldId < totalFolds; foldId++) {
 			Random rand = new Random(Constants.WEKA_DATA_SEED);

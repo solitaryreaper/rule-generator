@@ -19,10 +19,10 @@ public class DecisionListLearner implements Learner{
 		try {
 			dlist.buildClassifier(trainData);
 		} catch (Exception e) {
-			LOG.severe("Failed to generate J48 decision tree model. Reason : " + e.getStackTrace());
+			LOG.severe("Failed to generate PART decision tree model. Reason : " + e.getStackTrace());
 		}
 		
-		LOG.info("Decision rules : " + dlist.toString());
+		LOG.fine("Decision rules : " + dlist.toString());
 		List<String> textRules = dlist.getDecisionListRules();
 		return RuleParser.parseRules(textRules);
 	}

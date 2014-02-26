@@ -51,7 +51,7 @@ public class LearnerTest {
 		LOG.info("Testing random forests learning algorithm ..");
 		learner = new RandomForestLearner();
 		List<Rule> rules = learner.learnRules(data);
-		//assertNotNull(rules);		
+		assertNotNull(rules);		
 	}
 	
 	private static Instances getDataset()

@@ -25,13 +25,17 @@ public class RandomForestLearner implements Learner{
 		RandomForest randForest = new RandomForest();
 		randForest.setPrintTrees(true);
 		randForest.setNumTrees(Constants.NUM_CV_FOLDS);
+		
+		int numFeatures = (int)(Constants.NUM_PERCENT_FEATURES*trainData.numAttributes())/100;
+		LOG.info("Num features : " + numFeatures);
+		randForest.setNumFeatures(numFeatures);
 		try {
 			randForest.buildClassifier(trainData);
 		} catch (Exception e) {
 			LOG.severe("Failed to generate random forest model. Reason : " + e.getStackTrace());
 		}
 		
-		LOG.info("Random Forest rules : " + randForest.toString());
+		LOG.fine("Random Forest rules : " + randForest.toString());
 		List<String> textRules = randForest.getRandomForestRules();
 		return RuleParser.parseRules(textRules);
 	}
