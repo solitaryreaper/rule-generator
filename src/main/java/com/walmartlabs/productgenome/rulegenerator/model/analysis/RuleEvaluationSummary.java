@@ -52,6 +52,20 @@ public class RuleEvaluationSummary {
 		return builder.toString();
 	}
 	
+	public String showRuleStats()
+	{
+		DecimalFormat df = Constants.FORMATTER;
+		StringBuilder builder = new StringBuilder();
+		builder.append("( ")
+			.append(df.format(getPrecision())).append("%, ")
+			.append(df.format(getCoverage())).append("%, ")
+			.append(df.format(getFoldFrequency())).append("% ")
+			.append(" )");
+		builder.append(" : ").append(getRule().toString());
+		
+		return builder.toString();		
+	}
+	
 	public Rule getRule() {
 		return rule;
 	}
