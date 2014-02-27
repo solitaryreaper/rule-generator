@@ -55,6 +55,8 @@ public class AttributeSimmetricsRecommender {
 	 */
 	private static List<Simmetrics> getTopNSimmetricsForAttribute(String attrName, List<ItemPair> itemPairs)
 	{
+		return getAllSimmetrics();
+		/*
 		AttributeSimmetricsRecommender recommender = new AttributeSimmetricsRecommender();
 		
 		int numMetricsReqd = Constants.NUM_METRICS_PER_ATTRIBUTE;
@@ -83,6 +85,17 @@ public class AttributeSimmetricsRecommender {
 		}
 		
 		return topNMetrics;
+		*/
+	}
+	
+	public static List<Simmetrics> getAllSimmetrics()
+	{
+		List<Simmetrics> metrics = Lists.newArrayList();
+		for(Simmetrics metric : Simmetrics.values()) {
+			metrics.add(metric);
+		}
+		
+		return metrics;
 	}
 	
 	/**

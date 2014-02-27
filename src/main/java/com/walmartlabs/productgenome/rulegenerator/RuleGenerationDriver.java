@@ -66,9 +66,9 @@ public class RuleGenerationDriver {
 		*/
 		//testRestaurantDataset(RuleLearner.J48, arffFileLoc);
 		//testRestaurantDataset(RuleLearner.PART, arffFileLoc);
-		//testRestaurantDataset(RuleLearner.RandomForest, arffFileLoc);
+		testRestaurantDataset(RuleLearner.RandomForest, arffFileLoc);
 		
-		//testAbtBuyDataset(RuleLearner.RandomForest, null);
+		//testAbtBuyDataset(RuleLearner.RandomForest, arffFileLoc);
 	}
 
 	private static void testRestaurantDataset(RuleLearner learner, String arffFileLoc)
@@ -107,7 +107,8 @@ public class RuleGenerationDriver {
 		
 		DatasetEvaluationSummary evalSummary = generateMatchingRules(arffFileLoc, learner);
 		LOG.info("Decision Tree Learning results on Abt-Buy dataset :");
-		LOG.info(evalSummary.toString());		
+		LOG.info(evalSummary.toString());
+		evalSummary.getRankedAndFilteredRules();
 	}
 	
 	/**

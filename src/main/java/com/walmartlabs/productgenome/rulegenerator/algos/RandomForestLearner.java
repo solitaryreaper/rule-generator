@@ -27,7 +27,6 @@ public class RandomForestLearner implements Learner{
 		randForest.setNumTrees(Constants.NUM_CV_FOLDS);
 		
 		int numFeatures = (int)(Constants.NUM_PERCENT_FEATURES*trainData.numAttributes())/100;
-		LOG.info("Num features : " + numFeatures);
 		randForest.setNumFeatures(numFeatures);
 		try {
 			randForest.buildClassifier(trainData);
