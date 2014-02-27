@@ -84,8 +84,8 @@ public class RuleEvaluationService {
 			boolean isMatch = false;
 			Rule matchRule = null;
 			for(Rule rule : rules) {
-				// Only evaluate positive rules that don't have LESS THAN operators.
-				if(!rule.isMatchingRule() || rule.hasLessThanClause()) {
+				// Only evaluate positive rules.
+				if(!rule.isMatchingRule()) {
 					continue;
 				}
 				

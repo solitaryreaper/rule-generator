@@ -3,12 +3,16 @@ package com.walmartlabs.productgenome.rulegenerator.model.analysis;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 
 public class DatasetEvaluationSummary {
+	
+	private static final Logger LOG = Logger.getLogger(DatasetEvaluationSummary.class.getName());
+			
 	private int totalInstances = 0;
 	private int truePositives = 0; // Total number of matched itempairs in dataset
 	private int predictedPositives = 0;	// Total number of itempairs predicted as matched
@@ -44,8 +48,8 @@ public class DatasetEvaluationSummary {
 		builder.append("Average Precision(%) : ").append(df.format(getPrecision())).append("\n");
 		builder.append("Average Recall(%) : ").append(df.format(getRecall())).append("\n");
 		
-		builder.append("\n<--------------- RANKED RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
-		for(RuleEvaluationSummary ruleSummary : getRankedAndFilteredRules()) {
+		builder.append("\n<--------------- RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
+		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
 			builder.append(ruleSummary.showRuleStats());
 			builder.append("\n");
 		}
@@ -146,6 +150,14 @@ public class DatasetEvaluationSummary {
 		for(RankedRuleSummary rankedRule : rankedRules) {
 			recommendedRules.add(rankedRule.getRuleSummary());
 		}
+		
+		StringBuilder rankedRuleStr = new StringBuilder();
+		rankedRuleStr.append("\n<--------------- RANKED RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
+		for(RuleEvaluationSummary ruleSummary : recommendedRules) {
+			rankedRuleStr.append(ruleSummary.showRuleStats());
+			rankedRuleStr.append("\n");
+		}
+		LOG.info(rankedRuleStr.toString());
 		
 		return recommendedRules;
 	}

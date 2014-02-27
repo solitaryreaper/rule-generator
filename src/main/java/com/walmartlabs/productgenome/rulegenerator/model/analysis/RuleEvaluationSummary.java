@@ -61,9 +61,6 @@ public class RuleEvaluationSummary {
 			.append(df.format(getPrecision())).append("%, ")
 			.append(df.format(getCoverage())).append("%, ")
 			.append(df.format(getFoldFrequency())).append("%, ")
-			.append(getPositivePredictions()).append(" , ")
-			.append(getCorrectPredictions()).append(" , ")
-			.append(getTotalPositives()).append(" , ")			
 			.append(" )");
 		builder.append(" : ").append(getRule().toString());
 		

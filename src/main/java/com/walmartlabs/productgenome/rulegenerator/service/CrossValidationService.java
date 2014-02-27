@@ -34,11 +34,11 @@ public class CrossValidationService {
 			Instances randData = new Instances(data);
 			randData.randomize(rand);
 			randData.stratify(Constants.NUM_CV_FOLDS);
-			Instances train = randData.trainCV(Constants.NUM_CV_FOLDS, foldId);
-			Instances test = randData.testCV(Constants.NUM_CV_FOLDS, foldId);
+			Instances trainDataset = randData.trainCV(Constants.NUM_CV_FOLDS, foldId);
+			Instances tuneDataset = randData.testCV(Constants.NUM_CV_FOLDS, foldId);
 
-			List<Rule> rules = learner.learnRules(train);
-			DatasetEvaluationSummary foldEvalSummary = RuleEvaluationService.evaluatePositiveRules(rules, test);
+			List<Rule> rules = learner.learnRules(trainDataset);
+			DatasetEvaluationSummary foldEvalSummary = RuleEvaluationService.evaluatePositiveRules(rules, tuneDataset);
 			foldSummaryList.add(foldEvalSummary);
 		}
 		

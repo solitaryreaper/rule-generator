@@ -2,6 +2,8 @@ package com.walmartlabs.productgenome.rulegenerator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import weka.core.Instances;
@@ -15,8 +17,10 @@ import com.walmartlabs.productgenome.rulegenerator.algos.RandomForestLearner;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
+import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 import com.walmartlabs.productgenome.rulegenerator.service.CrossValidationService;
 import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationService;
+import com.walmartlabs.productgenome.rulegenerator.service.RuleEvaluationService;
 import com.walmartlabs.productgenome.rulegenerator.utils.ArffDataWriter;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
@@ -51,7 +55,8 @@ public class RuleGenerationDriver {
 	}
 	
 	public static void main(String[] args) {
-		String arffFileLoc = "/home/excelsior/workspace/rule-generator/src/main/resources/tmp/Restaurant_5913.arff";
+		//String arffFileLoc = System.getProperty("user.dir") + "/src/main/resources/data/Abt-Buy.arff";
+		String arffFileLoc = null;
 		/*
 		for(RuleLearner learner : RuleLearner.values()) {
 			LOG.info("Testing for " + learner.toString() + " learning algorithm ..");
@@ -60,8 +65,10 @@ public class RuleGenerationDriver {
 		}
 		*/
 		//testRestaurantDataset(RuleLearner.J48, arffFileLoc);
-		testRestaurantDataset(RuleLearner.PART, arffFileLoc);
+		//testRestaurantDataset(RuleLearner.PART, arffFileLoc);
 		//testRestaurantDataset(RuleLearner.RandomForest, arffFileLoc);
+		
+		//testAbtBuyDataset(RuleLearner.RandomForest, null);
 	}
 
 	private static void testRestaurantDataset(RuleLearner learner, String arffFileLoc)
@@ -80,6 +87,7 @@ public class RuleGenerationDriver {
 		DatasetEvaluationSummary evalSummary = generateMatchingRules(arffFileLoc, learner);
 		LOG.info("Decision Tree Learning results on restaurant dataset :");
 		LOG.info(evalSummary.toString());
+		evalSummary.getRankedAndFilteredRules();
 	}
 	
 	private static void testAbtBuyDataset(RuleLearner learner, String arffFileLoc)
@@ -146,6 +154,16 @@ public class RuleGenerationDriver {
 		}
 		if (data.classIndex() == -1)
 			data.setClassIndex(data.numAttributes() - 1);
+		
+		Random rand = new Random(Constants.WEKA_DATA_SEED);
+		Instances randData = new Instances(data);
+		randData.randomize(rand);
+		randData.stratify(Constants.NUM_CV_FOLDS);
+		
+		int randFold = 0 + (int)(Math.random() * ((Constants.NUM_CV_FOLDS - 1) + 1));
+		Instances trainDataset = randData.trainCV(Constants.NUM_CV_FOLDS, randFold);
+		Instances testDataset = randData.testCV(Constants.NUM_CV_FOLDS, randFold);
+		
 		LOG.info("Loaded the feature training data in WEKA format ..");
 		
 		// Step5 : Generate the rules and test their accuracy
@@ -162,6 +180,12 @@ public class RuleGenerationDriver {
 			totalFolds = 1;
 		}
 		
-		return CrossValidationService.getRulesViaNFoldCrossValidation(learner, data, totalFolds);
+		LOG.info("\n\n10-fold CROSS-VALIDATION ..");
+		DatasetEvaluationSummary overallSummary = 
+			CrossValidationService.getRulesViaNFoldCrossValidation(learner, trainDataset, totalFolds);
+		List<Rule> finalRankedRules = overallSummary.getRankedRules();
+		
+		LOG.info("\n\nFINAL RULE EVALUATION RESULTS ..");
+		return RuleEvaluationService.evaluatePositiveRules(finalRankedRules, testDataset);
 	}
 }
