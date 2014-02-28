@@ -17,7 +17,8 @@ public enum Simmetrics {
 	MONGE_ELKAN("mongeelkan"),
 	QGRAM("qg"),
 	NUM_SCORE("num"), 
-	SMITH_WATERMAN_GOTOH_WINDOWED_AFFINE("smith_waterman");
+	SMITH_WATERMAN_GOTOH_WINDOWED_AFFINE("smith_waterman"),
+	SOFT_TFIDF("soft_tfidf");
 	
 	// TODO : Add support for hybrid metrics like generalized jaccard, soft tfidf
 	

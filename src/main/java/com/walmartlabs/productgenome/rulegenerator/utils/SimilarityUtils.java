@@ -12,6 +12,7 @@ import uk.ac.shef.wit.simmetrics.similaritymetrics.QGramsDistance;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.SmithWatermanGotohWindowedAffine;
 
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
+import com.wcohen.ss.SoftTFIDF;
 
 /**
  * Returns the similarity score between two strings employing various matching
@@ -54,6 +55,10 @@ public class SimilarityUtils {
 			break;
 		case EUCLIDEAN:
 			metric = new EuclideanDistance();
+			break;
+		case SOFT_TFIDF:
+			SoftTFIDF tfidf = new SoftTFIDF();
+			res = tfidf.score(s1, s2);
 			break;
 		case NUM_SCORE:
 			try{

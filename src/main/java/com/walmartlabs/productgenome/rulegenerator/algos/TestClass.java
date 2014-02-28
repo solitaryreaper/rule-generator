@@ -1,20 +1,16 @@
 package com.walmartlabs.productgenome.rulegenerator.algos;
 
-import java.util.Scanner;
+import com.wcohen.ss.SoftTFIDF;
 
 public class TestClass {
 
 	public static void main(String[] args)
 	{
-		Scanner sc = new Scanner(System.in);
-		while(true) {
-			if(sc.hasNextInt()) {
-				System.out.println("Int : " + sc.nextInt());
-			}
-			else {
-				System.out.println("Error. Exiting !!");
-				break;
-			}
-		}
+		String str1 = "hello world";
+		String str2 = "hello wor";
+		SoftTFIDF tfidf = new SoftTFIDF();
+		double score = tfidf.score(str1, str2);
+		System.out.println("Simmetrics Soft TFIDF score : " + score);
+		System.out.println(tfidf.explainScore(str1, str2));		
 	}
 }
