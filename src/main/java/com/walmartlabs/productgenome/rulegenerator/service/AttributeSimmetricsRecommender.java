@@ -2,18 +2,20 @@ package com.walmartlabs.productgenome.rulegenerator.service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.Set;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Objects;
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
-import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
-import com.walmartlabs.productgenome.rulegenerator.utils.SimilarityUtils;
 
 /**
  * Recommends the most appropriate similarity metrics to be used for each attribute
@@ -47,7 +49,7 @@ public class AttributeSimmetricsRecommender {
 	}
 	
 	/**
-	 * Returns the top N suitable string similarity metrics suited for this attribute.
+	 * Returns the most suitable string similarity metrics suited for this attribute.
 	 * 
 	 * This can be achieved by looping over all the itempairs with MATCH status, running string metrics
 	 * on the attribute values and retaining the metrics with best overall average values.
@@ -55,37 +57,142 @@ public class AttributeSimmetricsRecommender {
 	 */
 	private static List<Simmetrics> getTopNSimmetricsForAttribute(String attrName, List<ItemPair> itemPairs)
 	{
-		return getAllSimmetrics();
-		/*
-		AttributeSimmetricsRecommender recommender = new AttributeSimmetricsRecommender();
-		
-		int numMetricsReqd = Constants.NUM_METRICS_PER_ATTRIBUTE;
-		PriorityQueue<MetricScore> topNMetricScores = new PriorityQueue<MetricScore>(numMetricsReqd);
-		for(Simmetrics metric : Simmetrics.values()) {
-			double avgScore = getAvgSimScoreForSimmetric(attrName, metric, itemPairs);
-			if(Double.isNaN(avgScore)) {
-				continue;
-			}
+		List<ItemPair> sampleSet = getSampleItemPairs(itemPairs, Constants.SAMPLE_SIZE);
+		AttributeStats attributeStats = getAttributeStats(attrName, sampleSet);
+		return getSimmetricsForAttribute(attributeStats);
+	}
+	
+	private static List<ItemPair> getSampleItemPairs(List<ItemPair> itemPairs, int count)
+	{
+		return itemPairs.subList(0, count);
+	}
+	
+	/**
+	 * Generate statistics about the attribute.
+	 */
+	private static AttributeStats getAttributeStats(String attrName, List<ItemPair> sampleSet)
+	{
+		int totalOccurences = 0;
+		int totalLength = 0;
+		int totalTokens = 0;
+
+		Set<String> sampleValuesForTypeDetermination = Sets.newHashSet();
+		for(ItemPair pair : sampleSet) {
+			String valA = pair.getItemA().getValuesForAttr(attrName);
+			String valB = pair.getItemB().getValuesForAttr(attrName);
 			
-			if(topNMetricScores.size() < numMetricsReqd) {
-				topNMetricScores.add(recommender.new MetricScore(metric, avgScore));
-			}
-			else {
-				MetricScore head = topNMetricScores.peek();
-				if(Double.compare(head.avgScore, avgScore) < 0) {
-					topNMetricScores.remove(head);
-					topNMetricScores.add(recommender.new MetricScore(metric, avgScore));
+			if(!Strings.isNullOrEmpty(valA)) {
+				++totalOccurences;
+				totalLength += valA.length();
+				totalTokens += valA.split(Constants.DEFAULT_TOKENIZER).length;
+				if(sampleValuesForTypeDetermination.size() < 10) {
+					sampleValuesForTypeDetermination.add(valA);
 				}
 			}
+			
+			if(!Strings.isNullOrEmpty(valB)) {
+				++totalOccurences;
+				totalLength += valB.length();
+				totalTokens += valB.split(Constants.DEFAULT_TOKENIZER).length;
+				if(sampleValuesForTypeDetermination.size() < 10) {
+					sampleValuesForTypeDetermination.add(valB);					
+				}
+
+			}
 		}
 		
-		List<Simmetrics> topNMetrics = Lists.newArrayList();
-		for(MetricScore m : topNMetricScores) {
-			topNMetrics.add(m.metric);
+		int stringTypeCnt = 0;
+		DataType type = DataType.STRING;
+		for(String str : sampleValuesForTypeDetermination) {
+			if(!StringUtils.isNumeric(str)) {
+				++stringTypeCnt;
+			}
 		}
 		
-		return topNMetrics;
-		*/
+		if(stringTypeCnt < sampleValuesForTypeDetermination.size()/2) {
+			type = DataType.NUMERIC;
+		}
+		
+		double avgLength = totalLength/(double)totalOccurences;
+		double avgNumTokens = totalTokens/(double)totalOccurences;
+		return new AttributeStats(attrName, type, avgLength, avgNumTokens);
+	}
+	
+	private static List<Simmetrics> getSimmetricsForAttribute(AttributeStats stats)
+	{
+		List<Simmetrics> metrics = getAllSimmetrics();
+		double avgLength = stats.getAvgLength();
+		double avgNumTokens = stats.getAvgNumTokens();
+		
+		// Filter first on the data type of attribute
+		if(stats.getDataType().equals(DataType.NUMERIC)) {
+			metrics.add(Simmetrics.NUM_SCORE);
+			metrics.add(Simmetrics.EXACT_MATCH);
+			
+			return metrics;
+		}
+		
+		metrics.remove(Simmetrics.NUM_SCORE);
+		
+		// JARO is good only for matching short strings ..
+		if(Double.compare(avgLength, 10) > 0) {
+			metrics.remove(Simmetrics.JARO);
+		}
+		
+		// For long multi-word strings, prefer set-based similarity metrics ..
+		if(Double.compare(avgLength, 20) > 0 && Double.compare(avgNumTokens, 2) > 0) {
+			metrics.remove(Simmetrics.JARO_WINKLER);
+			metrics.remove(Simmetrics.LEVENSHTEIN);
+			metrics.remove(Simmetrics.COSINE);
+			metrics.remove(Simmetrics.EUCLIDEAN);
+		}
+		
+		// For single word attributes, set-based similarity metrics can be avoided ..
+		if(Double.compare(avgNumTokens, 1) <= 0) {
+			metrics.remove(Simmetrics.JACCARD);
+			metrics.remove(Simmetrics.SOFT_TFIDF);
+			metrics.remove(Simmetrics.MONGE_ELKAN);
+		}
+		
+		return metrics;
+	}
+	
+	private enum DataType
+	{
+		STRING,
+		NUMERIC
+	}
+	
+	public static class AttributeStats
+	{
+		private String attrName;
+		private DataType dataType;
+		private double avgLength;
+		private double avgNumTokens;
+		
+		public AttributeStats(String attrName, DataType dataType, double avgLength, double avgNumTokens)
+		{
+			this.attrName = attrName;
+			this.dataType = dataType;
+			this.avgLength = avgLength;
+			this.avgNumTokens = avgNumTokens;
+		}
+
+		public String getAttrName() {
+			return attrName;
+		}
+
+		public DataType getDataType() {
+			return dataType;
+		}
+
+		public double getAvgLength() {
+			return avgLength;
+		}
+
+		public double getAvgNumTokens() {
+			return avgNumTokens;
+		}
 	}
 	
 	public static List<Simmetrics> getAllSimmetrics()
@@ -96,35 +203,6 @@ public class AttributeSimmetricsRecommender {
 		}
 		
 		return metrics;
-	}
-	
-	/**
-	 * Returns the average similarity score for a similarity metric across the dataset
-	 * @param attrName
-	 * @param metric
-	 * @return
-	 */
-	private static double getAvgSimScoreForSimmetric(String attrName, Simmetrics metric, List<ItemPair> itemPairs)
-	{
-		double totalScore = 0.0;
-		int matchedItemPairs = 0;
-		for(ItemPair pair : itemPairs) {
-			if(pair.getMatchStatus().equals(MatchStatus.MISMATCH)) {
-				continue;
-			}
-			
-			++matchedItemPairs;
-			String valA = pair.getItemAValByAttr(attrName);
-			String valB = pair.getItemBValByAttr(attrName);
-			double score = SimilarityUtils.getSimilarity(metric, valA, valB);
-			
-			// Only add valid scores ..
-			if(!Double.isNaN(score)) {
-				totalScore += score;
-			}
-		}
-		
-		return totalScore/(double)matchedItemPairs;
 	}
 	
 	public class MetricScore implements Comparable<MetricScore>

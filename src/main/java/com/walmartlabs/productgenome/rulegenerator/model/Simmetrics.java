@@ -20,8 +20,6 @@ public enum Simmetrics {
 	SMITH_WATERMAN_GOTOH_WINDOWED_AFFINE("smith_waterman"),
 	SOFT_TFIDF("soft_tfidf");
 	
-	// TODO : Add support for hybrid metrics like generalized jaccard, soft tfidf
-	
 	private String metricAbbrv;
 	
 	private Simmetrics(String abbrv)

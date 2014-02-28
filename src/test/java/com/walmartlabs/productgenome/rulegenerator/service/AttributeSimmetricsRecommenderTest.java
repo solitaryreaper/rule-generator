@@ -1,7 +1,5 @@
 package com.walmartlabs.productgenome.rulegenerator.service;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +10,6 @@ import org.junit.Test;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
-import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.RestaurantDataParser;
@@ -21,6 +18,7 @@ public class AttributeSimmetricsRecommenderTest {
 
 	private static Logger LOG = Logger.getLogger(AttributeSimmetricsRecommenderTest.class.getName());
 	
+	@Test
 	public void testGetSimmetricsForDataset()
 	{
 		RestaurantDataParser parser = new RestaurantDataParser();
@@ -38,7 +36,6 @@ public class AttributeSimmetricsRecommenderTest {
 		}
 	}
 	
-	@Test
 	public void testGetSimmetricsCSVDataset()
 	{
 		LOG.info("Testing Abt-Buy dataset ..");
