@@ -34,7 +34,7 @@ public class RandomForestLearner implements Learner{
 			LOG.severe("Failed to generate random forest model. Reason : " + e.getStackTrace());
 		}
 		
-		LOG.fine("Random Forest rules : " + randForest.toString());
+		LOG.info("Random Forest rules : " + randForest.toString());
 		List<String> textRules = randForest.getRandomForestRules();
 		return RuleParser.parseRules(textRules);
 	}

@@ -28,7 +28,7 @@ public class ArffDataWriterTest {
 	{
 		List<Feature> features = Lists.newArrayList();
 		features.add(new Feature("name", Simmetrics.JACCARD));
-		features.add(new Feature("age", Simmetrics.EXACT_MATCH));
+		features.add(new Feature("age", Simmetrics.EXACT_MATCH_STRING));
 		
 		List<FeatureVector> fVectors = Lists.newArrayList();
 		fVectors.add(new FeatureVector(Lists.newArrayList(0.95, 1.0), MatchStatus.MATCH));

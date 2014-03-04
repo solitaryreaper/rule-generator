@@ -78,7 +78,7 @@ public class FeatureGenerationService {
 			
 		}
 		catch(Exception e) {
-			
+			LOG.severe("Error while generating feature dataset. Reason : " + e.getStackTrace());
 		}
 		
 		return new FeatureDataset(name, features, featureVectors);

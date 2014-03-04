@@ -150,4 +150,9 @@ public class RestaurantDataParser implements DataParser {
 
 		return new Dataset(datasetName, attributes, itemPairs);
 	}
+
+	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, String blockingAttrName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

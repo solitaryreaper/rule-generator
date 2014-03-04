@@ -9,7 +9,8 @@ package com.walmartlabs.productgenome.rulegenerator.model;
 public enum Simmetrics {
 	COSINE("cosine"),
 	EUCLIDEAN("euclidean"),
-	EXACT_MATCH("exact"),
+	EXACT_MATCH_STRING("exact_string"),
+	EXACT_MATCH_NUMERIC("exact_number"),	
 	JACCARD("jaccard"),
 	JARO("jaro"),
 	JARO_WINKLER("jaro_winkler"),

@@ -9,6 +9,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
+import uk.ac.shef.wit.simmetrics.similaritymetrics.JaccardSimilarity;
+import uk.ac.shef.wit.simmetrics.similaritymetrics.MongeElkan;
+import uk.ac.shef.wit.simmetrics.similaritymetrics.QGramsDistance;
 import au.com.bytecode.opencsv.CSVReader;
 
 import com.google.common.base.Strings;
@@ -31,13 +35,16 @@ public class CSVDataParser implements DataParser {
 	private static String ATTRIBUTES_KEY = "attributes";
 	private static String ITEMS_KEY = "items";
 	
+	private AbstractStringMetric DEFAULT_BLOCKING_METRIC = new QGramsDistance();
+	private double DEFAULT_BLOCKING_THRESHOLD = 0.4;
+	
 	public Dataset parseData(File matchFile, File mismatchFile,
 			String datasetName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Dataset parseData(String datasetName, File sourceFile, File targetFile, File goldFile) 
+	public Dataset parseData(String datasetName, File sourceFile, File targetFile, File goldFile, String blockingAttrName) 
 	{
 		Multimap<String, String> goldMap = getGoldenDataMap(goldFile);
 		
@@ -47,7 +54,10 @@ public class CSVDataParser implements DataParser {
 		
 		List<Item> sourceItems = (List<Item>)sourceResultMap.get(ITEMS_KEY);
 		List<Item> targetItems = (List<Item>)targetResultMap.get(ITEMS_KEY);
-
+		
+		int preBlockingItemPairs = sourceItems.size() * targetItems.size();
+		int postBlockingItemPairs = 0;
+		
 		Set<String> sourceAttributes = Sets.newHashSet((List<String>)sourceResultMap.get(ATTRIBUTES_KEY));
 		Set<String> targetAttributes = Sets.newHashSet((List<String>)targetResultMap.get(ATTRIBUTES_KEY));
 		List<String> attributes = Lists.newArrayList(Sets.intersection(sourceAttributes, targetAttributes));
@@ -60,12 +70,40 @@ public class CSVDataParser implements DataParser {
 				if(goldMap.containsEntry(srcItem.getId(), tgtItem.getId())) {
 					matchStatus = MatchStatus.MATCH;
 				}
+				
+				// Only apply blocking to itempairs not present in golden file ..
+				if(matchStatus.equals(MatchStatus.MISMATCH)) {
+					boolean isWorthMatching = isEligibleForMatching(srcItem, tgtItem, DEFAULT_BLOCKING_METRIC, 
+							blockingAttrName, DEFAULT_BLOCKING_THRESHOLD);
+					if(!isWorthMatching) {
+						continue;
+					}
+				}
+				
 				ItemPair itemPair = new ItemPair(srcItem, tgtItem, matchStatus);
 				itemPairs.add(itemPair);
+				++postBlockingItemPairs;
 			}
 		}
 
+		LOG.info("Stats : Before blocking : " + preBlockingItemPairs + ", After blocking : " + postBlockingItemPairs);
 		return new Dataset(datasetName, attributes, itemPairs);
+	}
+	
+	/**
+	 * Applies basic blocking to ensure that the actual dataset to match is reduced considerably.
+	 */
+	private boolean isEligibleForMatching(Item srcItem, Item tgtItem, AbstractStringMetric metric, 
+			String blockingAttrName, double blockingThreshold)
+	{
+		String valA = srcItem.getValuesForAttr(blockingAttrName);
+		String valB = tgtItem.getValuesForAttr(blockingAttrName);
+		if(Strings.isNullOrEmpty(valA) || Strings.isNullOrEmpty(valB)) {
+			return false;
+		}
+		
+		double score = metric.getSimilarity(valA, valB);
+		return Double.compare(score, blockingThreshold) > 0;
 	}
 	
 	/**

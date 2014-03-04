@@ -120,19 +120,22 @@ public class AttributeSimmetricsRecommender {
 	
 	private static List<Simmetrics> getSimmetricsForAttribute(AttributeStats stats)
 	{
-		List<Simmetrics> metrics = getAllSimmetrics();
-		double avgLength = stats.getAvgLength();
-		double avgNumTokens = stats.getAvgNumTokens();
-		
 		// Filter first on the data type of attribute
 		if(stats.getDataType().equals(DataType.NUMERIC)) {
+			List<Simmetrics> metrics = Lists.newArrayList();
 			metrics.add(Simmetrics.NUM_SCORE);
-			metrics.add(Simmetrics.EXACT_MATCH);
+			metrics.add(Simmetrics.EXACT_MATCH_NUMERIC);
+			metrics.add(Simmetrics.LEVENSHTEIN);
 			
 			return metrics;
 		}
 		
+		double avgLength = stats.getAvgLength();
+		double avgNumTokens = stats.getAvgNumTokens();
+		
+		List<Simmetrics> metrics = getAllSimmetrics();		
 		metrics.remove(Simmetrics.NUM_SCORE);
+		metrics.remove(Simmetrics.EXACT_MATCH_NUMERIC);
 		
 		// JARO is good only for matching short strings ..
 		if(Double.compare(avgLength, 10) > 0) {
@@ -143,7 +146,6 @@ public class AttributeSimmetricsRecommender {
 		if(Double.compare(avgLength, 20) > 0 && Double.compare(avgNumTokens, 2) > 0) {
 			metrics.remove(Simmetrics.JARO_WINKLER);
 			metrics.remove(Simmetrics.LEVENSHTEIN);
-			metrics.remove(Simmetrics.COSINE);
 			metrics.remove(Simmetrics.EUCLIDEAN);
 		}
 		
@@ -202,6 +204,7 @@ public class AttributeSimmetricsRecommender {
 			metrics.add(metric);
 		}
 		
+		metrics.remove(Simmetrics.QGRAM);
 		return metrics;
 	}
 	

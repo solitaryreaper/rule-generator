@@ -66,9 +66,11 @@ public class RuleGenerationDriver {
 		*/
 		//testRestaurantDataset(RuleLearner.J48, arffFileLoc);
 		//testRestaurantDataset(RuleLearner.PART, arffFileLoc);
-		testRestaurantDataset(RuleLearner.RandomForest, arffFileLoc);
+		//testRestaurantDataset(RuleLearner.RandomForest, arffFileLoc);
 		
-		//testAbtBuyDataset(RuleLearner.RandomForest, arffFileLoc);
+		//testAbtBuyDataset(RuleLearner.J48, arffFileLoc);
+		//testAbtBuyDataset(RuleLearner.PART, arffFileLoc);
+		testAbtBuyDataset(RuleLearner.RandomForest, arffFileLoc);
 	}
 
 	private static void testRestaurantDataset(RuleLearner learner, String arffFileLoc)
@@ -100,8 +102,7 @@ public class RuleGenerationDriver {
 			String datasetName = "Abt-Buy";
 			
 			DataParser parser = new CSVDataParser();
-			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile);
-		
+			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, "name");
 			arffFileLoc = stageDataInArffFormat(dataset);
 		}
 		

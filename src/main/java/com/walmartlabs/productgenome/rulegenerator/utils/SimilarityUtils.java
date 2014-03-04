@@ -75,19 +75,31 @@ public class SimilarityUtils {
 					res = 0.0d;
 					break;
 				}
-				res = Math.abs(f1-f2)/min;
+				res = Math.abs(f1-f2)/(f1 + f2 - min);
 			}
 			catch(NumberFormatException nfe){
 				//do nothing
 			}
 			break;
-		case EXACT_MATCH:
+		case EXACT_MATCH_STRING:
 			if(s1.equals(s2))
 				res = 1.0d;
 			else
 				res = 0.0d;
 			break;
+		case EXACT_MATCH_NUMERIC:
+			Double f1 = Double.parseDouble(s1);
+			Double f2 = Double.parseDouble(s2);
+			if(Double.compare(f1, f2) == 0) {
+				res = 1.0d;
+			}
+			else {
+				res = 0.0d;
+			}
+			break;
 		}
+		
+		
 		if(null != metric)
 			res = metric.getSimilarity(s1, s2);
 		

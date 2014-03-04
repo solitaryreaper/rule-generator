@@ -34,7 +34,7 @@ public class DecisionTreeLearner implements Learner {
 			LOG.severe("Failed to generate J48 decision tree model. Reason : " + e.getStackTrace());
 		}
 		
-		LOG.fine("Decision Tree : " + dtree.toString());
+		LOG.info("Decision Tree : " + dtree.toString());
 		List<String> textRules = dtree.getDecisionTreeRules();
 		return RuleParser.parseRules(textRules);
 	}
