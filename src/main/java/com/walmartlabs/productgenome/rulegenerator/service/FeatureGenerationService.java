@@ -69,8 +69,13 @@ public class FeatureGenerationService {
 					bw.write(itemPair.getItempPairIdentifier() + " ==> " + fVector.getFeatureString());
 					bw.newLine();
 				}
+				
 			}
 
+			if(featureVectors.size() % 1000 == 0) {
+				LOG.info("Total feature vectors : " + featureVectors.size());
+			}
+			
 			if(isMapFileToBeGenerated) {
 				bw.close();
 				LOG.info("Map file " + mapFileLoc + " has been successfully generated ..");
@@ -81,6 +86,7 @@ public class FeatureGenerationService {
 			LOG.severe("Error while generating feature dataset. Reason : " + e.getStackTrace());
 		}
 		
+		LOG.info("Returning feature dataset ..");
 		return new FeatureDataset(name, features, featureVectors);
 	}
 	

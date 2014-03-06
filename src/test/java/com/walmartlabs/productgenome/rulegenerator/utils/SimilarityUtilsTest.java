@@ -35,4 +35,19 @@ public class SimilarityUtilsTest {
 		score = SimilarityUtils.getSimilarity(Simmetrics.JARO_WINKLER, str1, str2);
 		System.out.println("Simmetrics JARO WINKLER score : " + score  + " for strings (" + str1 + "," + str2 + ")");	
 	}
+	
+	@Test 
+	public void testNumeric()
+	{
+		String str1 = "1999";
+		String str2 = "1999";
+		
+		double score = SimilarityUtils.getSimilarity(Simmetrics.NUM_SCORE, str1, str2);
+		System.out.println("#Score : " + score);
+		
+		str1 = "1999";
+		str2 = "2000";
+		score = SimilarityUtils.getSimilarity(Simmetrics.NUM_SCORE, str1, str2);
+		System.out.println("#Score : " + score);		
+	}
 }

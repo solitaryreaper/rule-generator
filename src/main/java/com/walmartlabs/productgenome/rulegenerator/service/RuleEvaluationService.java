@@ -10,12 +10,15 @@ import weka.core.Instances;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.RuleEvaluationSummary;
+import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Clause;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Clause.LogicalOperator;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
+import com.walmartlabs.productgenome.rulegenerator.utils.SimilarityUtils;
 import com.walmartlabs.productgenome.rulegenerator.utils.WekaUtils;
 
 /**
@@ -144,12 +147,12 @@ public class RuleEvaluationService {
 	}
 	
 	/**
-	 * Returns the class label for a test instance on application of a rule.
+	 * Returns the class label for a test weka-type instance on application of a rule.
 	 * @param rule
 	 * @param instance
 	 * @return
 	 */
-	private static MatchStatus applyRuleToInstance(Rule rule, Instance instance, Instances data)
+	public static MatchStatus applyRuleToInstance(Rule rule, Instance instance, Instances data)
 	{
 		MatchStatus label = MatchStatus.MATCH;
 		for(Clause clause : rule.getClauses()) {
@@ -164,11 +167,11 @@ public class RuleEvaluationService {
 	}
 	
 	/**
-	 * Checks whether a clause is valid for a test instance.
+	 * Checks whether a clause is valid for a test weka-type instance.
 	 * @param clause
 	 * @param instance
 	 */
-	private static boolean applyClauseToInstance(Clause clause, Instance instance, Instances data)
+	public static boolean applyClauseToInstance(Clause clause, Instance instance, Instances data)
 	{
 		String featureName = clause.getFeatureName();
 		LogicalOperator logOp = clause.getLogOp();
@@ -178,6 +181,45 @@ public class RuleEvaluationService {
 		double featureValueToTest = WekaUtils.getFeatureValue(instance, feature);
 		
 		return checkIfLogicalOperationTrue(featureValueToTest, threshold, logOp);
+	}
+	
+	/**
+	 * Returns the class label for an itempair on application of a rule.
+	 * @param rule
+	 * @param itemPair
+	 * @return
+	 */
+	public static MatchStatus applyRuleToItemPair(Rule rule, ItemPair itemPair, Simmetrics metric)
+	{
+		MatchStatus label = MatchStatus.MATCH;
+		for(Clause clause : rule.getClauses()) {
+			boolean isClauseSuccess = applyClauseToItemPair(clause, itemPair, metric);
+			if(!isClauseSuccess) {
+				label = MatchStatus.MISMATCH;
+				break;
+			}
+		}
+		
+		return label;		
+	}
+	
+	/**
+	 * Checks whether the clause is valid for an itempair.
+	 * @param clause
+	 * @param itemPair
+	 * @return
+	 */
+	public static boolean applyClauseToItemPair(Clause clause, ItemPair itemPair, Simmetrics metric)
+	{
+		String featureName = clause.getFeatureName();
+		LogicalOperator logOp = clause.getLogOp();
+		double threshold = clause.getThreshold();
+		
+		String valA = itemPair.getItemBValByAttr(featureName);
+		String valB = itemPair.getItemAValByAttr(featureName);
+		double scoreToTest = SimilarityUtils.getSimilarity(metric, valA, valB);
+		
+		return checkIfLogicalOperationTrue(scoreToTest, threshold, logOp);		
 	}
 	
 	private static boolean checkIfLogicalOperationTrue(double featureValueToTest, double threshold, LogicalOperator logOp)

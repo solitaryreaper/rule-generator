@@ -9,10 +9,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
-import uk.ac.shef.wit.simmetrics.similaritymetrics.JaccardSimilarity;
-import uk.ac.shef.wit.simmetrics.similaritymetrics.MongeElkan;
-import uk.ac.shef.wit.simmetrics.similaritymetrics.QGramsDistance;
 import au.com.bytecode.opencsv.CSVReader;
 
 import com.google.common.base.Strings;
@@ -21,10 +17,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
+import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Item;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
+import com.walmartlabs.productgenome.rulegenerator.model.rule.BlockingClause;
+import com.walmartlabs.productgenome.rulegenerator.utils.SimilarityUtils;
 
 public class CSVDataParser implements DataParser {
 
@@ -35,22 +34,24 @@ public class CSVDataParser implements DataParser {
 	private static String ATTRIBUTES_KEY = "attributes";
 	private static String ITEMS_KEY = "items";
 	
-	private AbstractStringMetric DEFAULT_BLOCKING_METRIC = new QGramsDistance();
-	private double DEFAULT_BLOCKING_THRESHOLD = 0.4;
-	
-	public Dataset parseData(File matchFile, File mismatchFile,
-			String datasetName) {
+	public Dataset parseData(File matchFile, File mismatchFile, String datasetName) 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Dataset parseData(String datasetName, File sourceFile, File targetFile, File goldFile, String blockingAttrName) 
+	@SuppressWarnings("unchecked")
+	public Dataset parseData(String datasetName, File sourceFile, File targetFile, File goldFile, List<BlockingClause> clauses) 
 	{
 		Multimap<String, String> goldMap = getGoldenDataMap(goldFile);
+		int goldPairs = goldMap.size();
+		int totalMismatchPairsToRetain = 1*goldPairs;
 		
 		Map<String, List<?>> sourceResultMap = getItems(sourceFile);
 		Map<String, List<?>> targetResultMap = getItems(targetFile);
 		
+		LOG.info("Source Items : " + sourceResultMap.get(ITEMS_KEY).size() + ", Target Items : " + 
+				targetResultMap.get(ITEMS_KEY).size() + ", Golden Items : " + goldMap.size());
 		
 		List<Item> sourceItems = (List<Item>)sourceResultMap.get(ITEMS_KEY);
 		List<Item> targetItems = (List<Item>)targetResultMap.get(ITEMS_KEY);
@@ -63,7 +64,13 @@ public class CSVDataParser implements DataParser {
 		List<String> attributes = Lists.newArrayList(Sets.intersection(sourceAttributes, targetAttributes));
 		LOG.info("Common attributes : " + attributes.toString());
 		
+		boolean isBlockingReqd = true;
+		if(clauses == null || clauses.isEmpty()) {
+			isBlockingReqd = false;
+		}
+		
 		List<ItemPair> itemPairs = Lists.newArrayList();
+		int numMismatchPairsAdded = 0;
 		for(Item srcItem : sourceItems) {
 			for(Item tgtItem : targetItems) {
 				MatchStatus matchStatus = MatchStatus.MISMATCH;
@@ -72,17 +79,32 @@ public class CSVDataParser implements DataParser {
 				}
 				
 				// Only apply blocking to itempairs not present in golden file ..
-				if(matchStatus.equals(MatchStatus.MISMATCH)) {
-					boolean isWorthMatching = isEligibleForMatching(srcItem, tgtItem, DEFAULT_BLOCKING_METRIC, 
-							blockingAttrName, DEFAULT_BLOCKING_THRESHOLD);
-					if(!isWorthMatching) {
-						continue;
+				if(isBlockingReqd) {
+					if(matchStatus.equals(MatchStatus.MISMATCH)) {
+						/*
+						boolean isEligibleForMatching = isEligibleForMatching(srcItem, tgtItem, clauses);
+						if(!isEligibleForMatching) {
+							continue;
+						}
+						*/
+						boolean retainForMatching = shouldRetainForMatching(numMismatchPairsAdded, totalMismatchPairsToRetain);
+						if(!retainForMatching) {
+							continue;
+						}
+						else {
+							++numMismatchPairsAdded;
+						}
 					}
 				}
 				
 				ItemPair itemPair = new ItemPair(srcItem, tgtItem, matchStatus);
 				itemPairs.add(itemPair);
 				++postBlockingItemPairs;
+				
+				if(postBlockingItemPairs % 1000 == 0) {
+					LOG.info("Added total itempairs " + postBlockingItemPairs + ", num mismatch added " + 
+							numMismatchPairsAdded + " , total mismatch wanted " + totalMismatchPairsToRetain);
+				}
 			}
 		}
 
@@ -91,19 +113,49 @@ public class CSVDataParser implements DataParser {
 	}
 	
 	/**
-	 * Applies basic blocking to ensure that the actual dataset to match is reduced considerably.
+	 * Hack : randomly sample a fixed number of mismatch item pairs.
+	 * 
+	 * @param numMismatchPairsAdded
+	 * @param totalMismatchPairsToAdd
+	 * @return
 	 */
-	private boolean isEligibleForMatching(Item srcItem, Item tgtItem, AbstractStringMetric metric, 
-			String blockingAttrName, double blockingThreshold)
+	private boolean shouldRetainForMatching(int numMismatchPairsAdded, int totalMismatchPairsToAdd)
 	{
-		String valA = srcItem.getValuesForAttr(blockingAttrName);
-		String valB = tgtItem.getValuesForAttr(blockingAttrName);
-		if(Strings.isNullOrEmpty(valA) || Strings.isNullOrEmpty(valB)) {
+		// Don't add any more mismatched pairs to training dataset.
+		if(numMismatchPairsAdded >= totalMismatchPairsToAdd) {
 			return false;
 		}
 		
-		double score = metric.getSimilarity(valA, valB);
-		return Double.compare(score, blockingThreshold) > 0;
+		boolean shouldBeRetained = true;
+		int min = 1;
+		int max = 10;;
+		int randNum = min + (int)(Math.random() * ((max - min) + 1));
+		if(randNum > 50) {
+			shouldBeRetained = false;
+		}
+		
+		return shouldBeRetained;
+	}
+	
+	/**
+	 * Applies basic blocking to ensure that the actual dataset to match is reduced considerably.
+	 */
+	private boolean isEligibleForMatching(Item srcItem, Item tgtItem, List<BlockingClause> blockingClauses)
+	{
+		boolean isEligibleForMatching = true;
+
+		for(BlockingClause clause : blockingClauses) {
+			String attrName = clause.getAttributeName();
+			String val1 = srcItem.getValuesForAttr(attrName);
+			String val2 = tgtItem.getValuesForAttr(attrName);
+			double score = SimilarityUtils.getSimilarity(clause.getMetricToApply(), val1, val2);
+			if(Double.compare(score, clause.getThreshold()) <= 0) {
+				isEligibleForMatching = false;
+				break;
+			}
+		}
+		
+		return isEligibleForMatching;
 	}
 	
 	/**
@@ -146,8 +198,9 @@ public class CSVDataParser implements DataParser {
 		List<Item> items = Lists.newArrayList();
 		CSVReader reader = null;
 		List<String> attributes = Lists.newArrayList();
+		String[] currLineTokens = null;
 		try {
- 			String[] currLineTokens;
+ 			currLineTokens = null;
  			reader = new CSVReader(new FileReader(dataFile));
  			boolean isHeaderRead = false;
 			while ((currLineTokens = reader.readNext()) != null) {
@@ -161,7 +214,9 @@ public class CSVDataParser implements DataParser {
 				
 				try {
 					Map<String, String> itemAttrMap = Maps.newHashMap();
-					for(int i=0; i < currLineTokens.length; i++) {
+					
+					// Skip the ID value at beginning
+					for(int i=1; i < currLineTokens.length; i++) {
 						// No need to put garbage values in map.
 						if(Strings.isNullOrEmpty(currLineTokens[i])) {
 							continue;
@@ -181,6 +236,9 @@ public class CSVDataParser implements DataParser {
 		catch(IOException e) {
 			e.printStackTrace();
 		}	
+		
+		// Don't include ID as an attribute while generating feature vector ..
+		attributes.remove(Constants.ID_ATTRIBUTE);
 		
 		Map<String, List<?>> resultMap = Maps.newHashMap();
 		resultMap.put(ATTRIBUTES_KEY, attributes);

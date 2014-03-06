@@ -47,6 +47,7 @@ public class DatasetEvaluationSummary {
 		builder.append("Correct predictions : ").append(correctPositivePredictions).append("\n");
 		builder.append("Average Precision(%) : ").append(df.format(getPrecision())).append("\n");
 		builder.append("Average Recall(%) : ").append(df.format(getRecall())).append("\n");
+		builder.append("Average F-Score(%) : ").append(df.format(getFScore())).append("\n");		
 		
 		builder.append("\n<--------------- RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
 		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
@@ -105,6 +106,11 @@ public class DatasetEvaluationSummary {
 	public double getRecall()
 	{
 		return (correctPositivePredictions/(double)truePositives)*100;		
+	}
+	
+	public double getFScore()
+	{
+		return 2*getPrecision()*getRecall()/(getPrecision() + getRecall());
 	}
 	
 	public List<Rule> getAllRules()

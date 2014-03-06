@@ -8,7 +8,7 @@ import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.Levenshtein;
 
 /**
- * Implements the extended jaccard similarity metric.
+ * Implements the extended jaccard similarity metric. Use this specifically for set-valued attributes.
  * 
  * Instead of assuming that similar tokens in two strings would be exactly similar, tokens are
  * considered similar if their similarity value based on some edit-distance metric is greater than
@@ -54,13 +54,14 @@ public class ExtendedJaccard {
 	 */
 	public double getSimilarity(String str1, String str2)
 	{
-		String[] tokensA = str1.trim().split(Constants.DEFAULT_TOKENIZER);
-		String[] tokensB = str2.trim().split(Constants.DEFAULT_TOKENIZER);
+		String[] tokensA = str1.trim().split(Constants.DEFAULT_SET_VALUE_ATTRIBIUTE_TOKENIZER);
+		String[] tokensB = str2.trim().split(Constants.DEFAULT_SET_VALUE_ATTRIBIUTE_TOKENIZER);
 		
 		int numTokensA = tokensA.length;
 		int numTokensB = tokensB.length;
 		
 		int simTokens = 0;
+		double simScore = 0.0;
 
 		for(int i=0; i < tokensA.length; i++) {
 			double maxScore = Double.MIN_VALUE;
@@ -76,10 +77,11 @@ public class ExtendedJaccard {
 			// Two tokens are similar if their string similarity score is greater than the threshold.
 			if(Double.compare(maxScore, threshold) > 0) {
 				++simTokens;
+				simScore += maxScore;
 			}
 		}
 		
-		return simTokens/(double)(numTokensA + numTokensB - simTokens);
+		return simScore/(double)(numTokensA + numTokensB - simTokens);
 	}
 	
 }

@@ -1,8 +1,10 @@
 package com.walmartlabs.productgenome.rulegenerator.utils.parser;
 
 import java.io.File;
+import java.util.List;
 
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.rule.BlockingClause;
 
 /**
  * Parses the raw dataset to generate item pairs to match.
@@ -21,6 +23,6 @@ public interface DataParser {
 	 * @param goldFile	- List of matching items from both the sources.
 	 * @return
 	 */
-	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, String blockingAttrName);
+	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, List<BlockingClause> blockingClauses);
 	
 }

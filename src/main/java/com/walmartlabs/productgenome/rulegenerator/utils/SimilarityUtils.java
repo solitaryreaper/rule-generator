@@ -3,7 +3,6 @@ package com.walmartlabs.productgenome.rulegenerator.utils;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.CosineSimilarity;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.EuclideanDistance;
-import uk.ac.shef.wit.simmetrics.similaritymetrics.JaccardSimilarity;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.Jaro;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.JaroWinkler;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.Levenshtein;
@@ -12,6 +11,7 @@ import uk.ac.shef.wit.simmetrics.similaritymetrics.QGramsDistance;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.SmithWatermanGotohWindowedAffine;
 
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
+import com.wcohen.ss.Jaccard;
 import com.wcohen.ss.SoftTFIDF;
 
 /**
@@ -26,14 +26,16 @@ public class SimilarityUtils {
 	public static Double getSimilarity(Simmetrics s,String s1,String s2){
 		if(null == s1 || null == s2 || s1.isEmpty() || s2.isEmpty())
 			return Double.NaN;
+
 		AbstractStringMetric metric = null;
-		double res = Double.NaN;
+		Double res = Double.NaN;
 		switch(s){
 		case COSINE:
 			metric = new CosineSimilarity();
 			break;
 		case JACCARD:
-			metric = new JaccardSimilarity();
+			Jaccard jaccard = new Jaccard();
+			res = jaccard.score(s1, s2);
 			break;
 		case JARO:
 			metric = new Jaro();
@@ -99,9 +101,9 @@ public class SimilarityUtils {
 			break;
 		}
 		
-		
-		if(null != metric)
-			res = metric.getSimilarity(s1, s2);
+		if(null != metric) {
+			res = (double) metric.getSimilarity(s1, s2);			
+		}
 		
 		return res;
 	}

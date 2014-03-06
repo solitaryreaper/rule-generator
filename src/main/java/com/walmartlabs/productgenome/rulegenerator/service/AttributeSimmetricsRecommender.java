@@ -204,7 +204,9 @@ public class AttributeSimmetricsRecommender {
 			metrics.add(metric);
 		}
 		
+		// TODO : Hack 3-QGRAM giving bad results. Need to fix this !!
 		metrics.remove(Simmetrics.QGRAM);
+		//metrics.remove(Simmetrics.COSINE);
 		return metrics;
 	}
 	

@@ -42,6 +42,16 @@ public class ItemPair {
 		this.matchStatus = matchStatus;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ItemPair [itemA=").append(itemA).append(", itemB=")
+				.append(itemB).append(", matchStatus=").append(matchStatus)
+				.append("]");
+		return builder.toString();
+	}
+
+
 	public Item getItemA() {
 		return itemA;
 	}

@@ -6,17 +6,22 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang3.time.StopWatch;
+
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionListLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionTreeLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
 import com.walmartlabs.productgenome.rulegenerator.algos.RandomForestLearner;
+import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
+import com.walmartlabs.productgenome.rulegenerator.model.rule.BlockingClause;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 import com.walmartlabs.productgenome.rulegenerator.service.CrossValidationService;
 import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationService;
@@ -56,6 +61,7 @@ public class RuleGenerationDriver {
 	
 	public static void main(String[] args) {
 		//String arffFileLoc = System.getProperty("user.dir") + "/src/main/resources/data/Abt-Buy.arff";
+		//String arffFileLoc = "/afs/cs.wisc.edu/u/s/k/skprasad/RA/rule-generator/src/main/resources/tmp/DBLP-Scholar_9909.arff";
 		String arffFileLoc = null;
 		/*
 		for(RuleLearner learner : RuleLearner.values()) {
@@ -70,7 +76,11 @@ public class RuleGenerationDriver {
 		
 		//testAbtBuyDataset(RuleLearner.J48, arffFileLoc);
 		//testAbtBuyDataset(RuleLearner.PART, arffFileLoc);
-		testAbtBuyDataset(RuleLearner.RandomForest, arffFileLoc);
+		//testAbtBuyDataset(RuleLearner.RandomForest, arffFileLoc);
+		
+		//testDBLPScholarDataset(RuleLearner.J48, arffFileLoc);
+		//testDBLPScholarDataset(RuleLearner.PART, arffFileLoc);
+		testDBLPScholarDataset(RuleLearner.RandomForest, arffFileLoc);
 	}
 
 	private static void testRestaurantDataset(RuleLearner learner, String arffFileLoc)
@@ -101,8 +111,11 @@ public class RuleGenerationDriver {
 			File goldFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/abt_buy_perfectMapping.csv");
 			String datasetName = "Abt-Buy";
 			
+			List<BlockingClause> clauses = Lists.newArrayList();
+			clauses.add(new BlockingClause("name", Simmetrics.QGRAM, 0.4));
+			
 			DataParser parser = new CSVDataParser();
-			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, "name");
+			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, clauses);
 			arffFileLoc = stageDataInArffFormat(dataset);
 		}
 		
@@ -110,6 +123,46 @@ public class RuleGenerationDriver {
 		LOG.info("Decision Tree Learning results on Abt-Buy dataset :");
 		LOG.info(evalSummary.toString());
 		evalSummary.getRankedAndFilteredRules();
+	}
+	
+	private static void testDBLPScholarDataset(RuleLearner learner, String arffFileLoc)
+	{
+		LOG.info("Testing DBLP-Scholar dataset ..");
+		
+		StopWatch timer = new StopWatch();
+		
+		String datasetName = "DBLP-Scholar";
+		if(Strings.isNullOrEmpty(arffFileLoc)) {
+			File srcFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP1_cleaned.csv");
+			File tgtFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/Scholar_cleaned.csv");
+			File goldFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP-Scholar_perfectMapping.csv");
+			
+			List<BlockingClause> clauses = Lists.newArrayList();
+			clauses.add(new BlockingClause("year", Simmetrics.LEVENSHTEIN, 0.9));
+			clauses.add(new BlockingClause("title", Simmetrics.JACCARD, 0.5));
+
+			timer.start();
+			DataParser parser = new CSVDataParser();
+			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, clauses);
+			timer.stop();
+			LOG.info("Time taken for parsing CSV input file : " + timer.toString());
+			
+			timer.reset();
+			timer.start();
+			arffFileLoc = stageDataInArffFormat(dataset);
+			timer.stop();
+			LOG.info("Time taken for staging as ARFF file : " + timer.toString());
+		}
+		
+		timer.reset();
+		timer.start();
+		DatasetEvaluationSummary evalSummary = generateMatchingRules(arffFileLoc, learner);
+		timer.stop();
+		LOG.info("Time taken for generating matching rules : " + timer.toString());
+		
+		LOG.info("Decision Tree Learning results on " + datasetName + " dataset :");
+		LOG.info(evalSummary.toString());
+		evalSummary.getRankedAndFilteredRules();		
 	}
 	
 	/**

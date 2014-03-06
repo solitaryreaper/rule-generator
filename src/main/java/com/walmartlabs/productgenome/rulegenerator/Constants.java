@@ -12,6 +12,8 @@ public class Constants {
 	
 	public static final String MISSING_VALUE = "NA";
 	
+	public static final String ID_ATTRIBUTE = "id";
+	
 	/**
 	 * Format similarity values to 3 decimal places
 	 */
@@ -26,6 +28,7 @@ public class Constants {
 	public static final int NUM_METRICS_PER_ATTRIBUTE = 4;
 	
 	public static final String DEFAULT_TOKENIZER = " ";
+	public static final String DEFAULT_SET_VALUE_ATTRIBIUTE_TOKENIZER = "\001";
 	
 	/**
 	 * Percentage of features in each random tree in the random forest as compared to the original
