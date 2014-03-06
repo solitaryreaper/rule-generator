@@ -3,10 +3,15 @@ package com.walmartlabs.productgenome.rulegenerator.algos;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+
 import uk.ac.shef.wit.simmetrics.tokenisers.TokeniserWhitespace;
 import uk.ac.shef.wit.simmetrics.wordhandlers.DummyStopTermHandler;
 import uk.ac.shef.wit.simmetrics.wordhandlers.InterfaceTermHandler;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.utils.SimilarityUtils;
 
@@ -17,21 +22,37 @@ public class TestClass {
 	
 	public static void main(String[] args) throws InterruptedException
 	{
-		String test1 = "Technical report, UniversitÃ  di Roma tre, 1997. Talk at the ";
-		String test2 = "Technical report, Universit di Roma tre, 1997. Talk at the ";
+//		String test1 = "Technical report, UniversitÃ  di Roma tre, 1997. Talk at the ";
+//		String test2 = "Technical report, Universit di Roma tre, 1997. Talk at the ";
+//		
+//		System.out.println("Starting test ..");
+//
+//		/**
+//		double score = SimilarityUtils.getSimilarity(Simmetrics.COSINE, test, t2);
+//		System.out.println("Score : " + score);		
+//		System.out.println(score);
+//		**/
+//		
+//		System.out.println("before ..");
+//		List<String> tokenizer = tokenizeToArrayList(test1);
+//		System.out.println(tokenizer.toString());
 		
-		System.out.println("Starting test ..");
-
-		/**
-		double score = SimilarityUtils.getSimilarity(Simmetrics.COSINE, test, t2);
-		System.out.println("Score : " + score);		
-		System.out.println(score);
-		**/
+//		String test = "1234";
+//		boolean isDouble = NumberUtils.isNumber(test);
+//		System.out.println(isDouble);
 		
-		System.out.println("before ..");
-		List<String> tokenizer = tokenizeToArrayList(test1);
-		System.out.println(tokenizer.toString());
+		Multimap<String, String> testMap = ArrayListMultimap.create();
+		testMap.put("abc", "one");
+		testMap.put("two", "three");
+		testMap.put("abc", "str");
 		
+		System.out.println(testMap.toString());
+		if(testMap.containsEntry("abc", "onee")) {
+			System.out.println("hello world ..");
+		}
+		else {
+			System.out.println("bye world ..");
+		}
 	}
 	
 	  public static final ArrayList<String> tokenizeToArrayList(final String input) {

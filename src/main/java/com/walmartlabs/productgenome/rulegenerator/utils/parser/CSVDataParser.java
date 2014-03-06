@@ -41,11 +41,11 @@ public class CSVDataParser implements DataParser {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Dataset parseData(String datasetName, File sourceFile, File targetFile, File goldFile, List<BlockingClause> clauses) 
+	public Dataset parseData(String datasetName, File sourceFile, File targetFile, File goldFile) 
 	{
 		Multimap<String, String> goldMap = getGoldenDataMap(goldFile);
 		int goldPairs = goldMap.size();
-		int totalMismatchPairsToRetain = 1*goldPairs;
+		int totalMismatchPairsToRetain = 2*goldPairs;
 		
 		Map<String, List<?>> sourceResultMap = getItems(sourceFile);
 		Map<String, List<?>> targetResultMap = getItems(targetFile);
@@ -65,45 +65,38 @@ public class CSVDataParser implements DataParser {
 		LOG.info("Common attributes : " + attributes.toString());
 		
 		boolean isBlockingReqd = true;
-		if(clauses == null || clauses.isEmpty()) {
-			isBlockingReqd = false;
-		}
 		
 		List<ItemPair> itemPairs = Lists.newArrayList();
 		int numMismatchPairsAdded = 0;
+		int numMatchPairsAdded = 0;
 		for(Item srcItem : sourceItems) {
 			for(Item tgtItem : targetItems) {
 				MatchStatus matchStatus = MatchStatus.MISMATCH;
-				if(goldMap.containsEntry(srcItem.getId(), tgtItem.getId())) {
+				
+				if(goldMap.containsEntry(srcItem.getId().trim(), tgtItem.getId().trim())) {
 					matchStatus = MatchStatus.MATCH;
+					++numMatchPairsAdded;
+					itemPairs.add(new ItemPair(srcItem, tgtItem, matchStatus));
+					continue;
 				}
 				
 				// Only apply blocking to itempairs not present in golden file ..
-				if(isBlockingReqd) {
-					if(matchStatus.equals(MatchStatus.MISMATCH)) {
-						/*
-						boolean isEligibleForMatching = isEligibleForMatching(srcItem, tgtItem, clauses);
-						if(!isEligibleForMatching) {
-							continue;
-						}
-						*/
-						boolean retainForMatching = shouldRetainForMatching(numMismatchPairsAdded, totalMismatchPairsToRetain);
-						if(!retainForMatching) {
-							continue;
-						}
-						else {
-							++numMismatchPairsAdded;
-						}
+				if(isBlockingReqd && matchStatus.equals(MatchStatus.MISMATCH)) {
+					boolean retainForMatching = shouldRetainForMatching(numMismatchPairsAdded, totalMismatchPairsToRetain);
+					if(!retainForMatching) {
+						continue;
+					}
+					else {
+						++numMismatchPairsAdded;
 					}
 				}
 				
-				ItemPair itemPair = new ItemPair(srcItem, tgtItem, matchStatus);
-				itemPairs.add(itemPair);
+				itemPairs.add(new ItemPair(srcItem, tgtItem, matchStatus));
 				++postBlockingItemPairs;
 				
 				if(postBlockingItemPairs % 1000 == 0) {
 					LOG.info("Added total itempairs " + postBlockingItemPairs + ", num mismatch added " + 
-							numMismatchPairsAdded + " , total mismatch wanted " + totalMismatchPairsToRetain);
+							numMismatchPairsAdded + " , num match added " + numMatchPairsAdded);
 				}
 			}
 		}

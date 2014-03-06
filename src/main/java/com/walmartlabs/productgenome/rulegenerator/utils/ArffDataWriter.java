@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
+import com.google.common.base.Strings;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Feature;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
@@ -47,6 +48,9 @@ public class ArffDataWriter {
 		// 4) Write the actual data
 		bw.write("@DATA");bw.newLine();
 		for(FeatureVector v : dataset.getFeatureVectors()) {
+			if(Strings.isNullOrEmpty(v.getFeatureString().trim())) {
+				continue;
+			}
 			bw.write(v.getFeatureString());bw.newLine();
 		}
 		

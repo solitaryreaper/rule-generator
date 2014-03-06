@@ -1,5 +1,7 @@
 package com.walmartlabs.productgenome.rulegenerator.utils;
 
+import java.util.logging.Logger;
+
 import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.CosineSimilarity;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.EuclideanDistance;
@@ -23,6 +25,8 @@ import com.wcohen.ss.SoftTFIDF;
  */
 public class SimilarityUtils {
 
+	private static Logger LOG = Logger.getLogger(SimilarityUtils.class.getName());
+	
 	public static Double getSimilarity(Simmetrics s,String s1,String s2){
 		if(null == s1 || null == s2 || s1.isEmpty() || s2.isEmpty())
 			return Double.NaN;
@@ -67,20 +71,30 @@ public class SimilarityUtils {
 				Double f1 = Double.parseDouble(s1);
 				Double f2 = Double.parseDouble(s2);
 				Double min = 0.0d;
-				if(f1 == 0.0d && f2 != 0.0d)
+				if(Double.compare(f1, 0.0d) == 0 && Double.compare(f2, 0.0d) != 0) {
 					min = f2;
-				else if(f1 != 0.0d && f2 == 0.0d)
+				}
+				else if(Double.compare(f1, 0.0d) != 0 && Double.compare(f2, 0.0d) == 0) {
 					min = f1;
-				else if(f1 != 0.0d && f2 != 0.0d)
+				}
+				else if(Double.compare(f1, 0.0d) != 0 && Double.compare(f2, 0.0d) != 0) {
 					min = Math.min(f1,f2);
+				}
 				else{
 					res = 0.0d;
 					break;
 				}
-				res = Math.abs(f1-f2)/(f1 + f2 - min);
+				
+				if(Double.compare(f1, f2) == 0) {
+					res = 1.0d;
+				}
+				else {
+					res = 1/(Math.abs(f1-f2)/(f1 + f2));					
+				}
 			}
 			catch(NumberFormatException nfe){
-				//do nothing
+				LOG.info("Error parsing " + s1 + ", " + s2 + " as string ..");
+				res = 0.0d;
 			}
 			break;
 		case EXACT_MATCH_STRING:
@@ -90,14 +104,21 @@ public class SimilarityUtils {
 				res = 0.0d;
 			break;
 		case EXACT_MATCH_NUMERIC:
-			Double f1 = Double.parseDouble(s1);
-			Double f2 = Double.parseDouble(s2);
-			if(Double.compare(f1, f2) == 0) {
-				res = 1.0d;
+			try {
+				Double f1 = Double.parseDouble(s1);
+				Double f2 = Double.parseDouble(s2);
+				if(Double.compare(f1, f2) == 0) {
+					res = 1.0d;
+				}
+				else {
+					res = 0.0d;
+				}				
 			}
-			else {
-				res = 0.0d;
+			catch(Exception e) {
+				LOG.info("Error parsing " + s1 + ", " + s2 + " as string ..");
+				res = 0.0d;				
 			}
+
 			break;
 		}
 		

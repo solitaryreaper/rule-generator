@@ -23,6 +23,6 @@ public interface DataParser {
 	 * @param goldFile	- List of matching items from both the sources.
 	 * @return
 	 */
-	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, List<BlockingClause> blockingClauses);
+	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile);
 	
 }

@@ -12,16 +12,13 @@ import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
 import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionListLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionTreeLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
 import com.walmartlabs.productgenome.rulegenerator.algos.RandomForestLearner;
-import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
-import com.walmartlabs.productgenome.rulegenerator.model.rule.BlockingClause;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 import com.walmartlabs.productgenome.rulegenerator.service.CrossValidationService;
 import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationService;
@@ -80,7 +77,9 @@ public class RuleGenerationDriver {
 		
 		//testDBLPScholarDataset(RuleLearner.J48, arffFileLoc);
 		//testDBLPScholarDataset(RuleLearner.PART, arffFileLoc);
-		testDBLPScholarDataset(RuleLearner.RandomForest, arffFileLoc);
+		//testDBLPScholarDataset(RuleLearner.RandomForest, arffFileLoc);
+		
+		testAmazonGoogleProductsDataset(RuleLearner.RandomForest, arffFileLoc);
 	}
 
 	private static void testRestaurantDataset(RuleLearner learner, String arffFileLoc)
@@ -104,46 +103,45 @@ public class RuleGenerationDriver {
 	
 	private static void testAbtBuyDataset(RuleLearner learner, String arffFileLoc)
 	{
-		LOG.info("Testing Abt-Buy dataset ..");
-		if(Strings.isNullOrEmpty(arffFileLoc)) {
-			File srcFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Abt.csv");
-			File tgtFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Buy.csv");
-			File goldFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/abt_buy_perfectMapping.csv");
-			String datasetName = "Abt-Buy";
-			
-			List<BlockingClause> clauses = Lists.newArrayList();
-			clauses.add(new BlockingClause("name", Simmetrics.QGRAM, 0.4));
-			
-			DataParser parser = new CSVDataParser();
-			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, clauses);
-			arffFileLoc = stageDataInArffFormat(dataset);
-		}
+		String srcFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Abt.csv";
+		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Buy.csv";
+		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/abt_buy_perfectMapping.csv";
 		
-		DatasetEvaluationSummary evalSummary = generateMatchingRules(arffFileLoc, learner);
-		LOG.info("Decision Tree Learning results on Abt-Buy dataset :");
-		LOG.info(evalSummary.toString());
-		evalSummary.getRankedAndFilteredRules();
+		testDataset("Abt-Buy", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);
 	}
 	
 	private static void testDBLPScholarDataset(RuleLearner learner, String arffFileLoc)
 	{
-		LOG.info("Testing DBLP-Scholar dataset ..");
+		String srcFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP1_cleaned.csv";
+		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP1_cleaned.csv";
+		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP1_cleaned.csv";
+		
+		testDataset("DBLP-Scholar", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);
+	}
+	
+	private static void testAmazonGoogleProductsDataset(RuleLearner learner, String arffFileLoc)
+	{
+		String srcFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/Amazon-GoogleProducts/Amazon_cleaned.csv";
+		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/Amazon-GoogleProducts/GoogleProducts_cleaned.csv";
+		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/Amazon-GoogleProducts/Amzon_GoogleProducts_perfectMapping.csv";
+		
+		testDataset("Amazon-Google-Products", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);
+	}
+	
+	private static void testDataset(String datasetName, RuleLearner learner, String arffFileLoc, String srcFilePath, 
+			String tgtFilePath, String goldFilePath)
+	{
+		LOG.info("Testing " + datasetName + " dataset ..");
 		
 		StopWatch timer = new StopWatch();
-		
-		String datasetName = "DBLP-Scholar";
 		if(Strings.isNullOrEmpty(arffFileLoc)) {
-			File srcFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP1_cleaned.csv");
-			File tgtFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/Scholar_cleaned.csv");
-			File goldFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP-Scholar_perfectMapping.csv");
+			File srcFile = new File(srcFilePath);
+			File tgtFile = new File(tgtFilePath);
+			File goldFile = new File(goldFilePath);
 			
-			List<BlockingClause> clauses = Lists.newArrayList();
-			clauses.add(new BlockingClause("year", Simmetrics.LEVENSHTEIN, 0.9));
-			clauses.add(new BlockingClause("title", Simmetrics.JACCARD, 0.5));
-
 			timer.start();
 			DataParser parser = new CSVDataParser();
-			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, clauses);
+			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile);
 			timer.stop();
 			LOG.info("Time taken for parsing CSV input file : " + timer.toString());
 			
@@ -162,14 +160,13 @@ public class RuleGenerationDriver {
 		
 		LOG.info("Decision Tree Learning results on " + datasetName + " dataset :");
 		LOG.info(evalSummary.toString());
-		evalSummary.getRankedAndFilteredRules();		
+		evalSummary.getRankedAndFilteredRules();			
 	}
 	
 	/**
 	 * Parse the raw dataset to generate in-memory item pairs.
 	 */
-	private static Dataset parseDataset(DataParser parser, String matchFilePath, 
-			String mismatchFilePath, String datasetName)
+	private static Dataset parseDataset(DataParser parser, String matchFilePath, String mismatchFilePath, String datasetName)
 	{
 		File matchFile = new File(matchFilePath);
 		File mismatchFile = new File(mismatchFilePath);

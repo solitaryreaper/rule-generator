@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
@@ -97,14 +97,13 @@ public class AttributeSimmetricsRecommender {
 				if(sampleValuesForTypeDetermination.size() < 10) {
 					sampleValuesForTypeDetermination.add(valB);					
 				}
-
 			}
 		}
 		
 		int stringTypeCnt = 0;
 		DataType type = DataType.STRING;
 		for(String str : sampleValuesForTypeDetermination) {
-			if(!StringUtils.isNumeric(str)) {
+			if(!NumberUtils.isNumber(str)) {
 				++stringTypeCnt;
 			}
 		}
