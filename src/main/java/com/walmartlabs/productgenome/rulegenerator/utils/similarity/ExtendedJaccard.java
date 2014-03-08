@@ -20,17 +20,19 @@ public class ExtendedJaccard {
 
 	private Logger LOG = Logger.getLogger(ExtendedJaccard.class.getName());
 	
-	private AbstractStringMetric simmetric = new Levenshtein();
+	private AbstractStringMetric metric = null;
+	private AbstractStringMetric DEFAULT_METRIC = new Levenshtein();
+	
 	private double threshold = 0.75;
 	
 	public ExtendedJaccard()
 	{
-		
+		this.metric = DEFAULT_METRIC;
 	}
 	
 	public ExtendedJaccard(AbstractStringMetric metric)
 	{
-		this.simmetric = metric;
+		this.metric = metric;
 	}
 	
 	public ExtendedJaccard(double threshold)
@@ -40,7 +42,7 @@ public class ExtendedJaccard {
 	
 	public ExtendedJaccard(AbstractStringMetric metric, double threshold)
 	{
-		this.simmetric = metric;
+		this.metric = metric;
 		this.threshold = threshold;
 	}	
 	
@@ -68,7 +70,7 @@ public class ExtendedJaccard {
 			String outer = tokensA[i].toLowerCase().trim();
 			for(int j=0; j < tokensB.length; j++) {
 				String inner = tokensB[j].toLowerCase().trim();
-				double score = simmetric.getSimilarity(outer, inner);
+				double score = metric.getSimilarity(outer, inner);
 				if(Double.compare(score, maxScore) > 0) {
 					maxScore = score;
 				}

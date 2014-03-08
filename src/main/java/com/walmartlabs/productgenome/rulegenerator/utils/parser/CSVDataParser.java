@@ -45,7 +45,7 @@ public class CSVDataParser implements DataParser {
 	{
 		Multimap<String, String> goldMap = getGoldenDataMap(goldFile);
 		int goldPairs = goldMap.size();
-		int totalMismatchPairsToRetain = 2*goldPairs;
+		int totalMismatchPairsToRetain = 2*goldPairs < 3000 ? 3000 : 2*goldPairs;
 		
 		Map<String, List<?>> sourceResultMap = getItems(sourceFile);
 		Map<String, List<?>> targetResultMap = getItems(targetFile);
@@ -64,7 +64,8 @@ public class CSVDataParser implements DataParser {
 		List<String> attributes = Lists.newArrayList(Sets.intersection(sourceAttributes, targetAttributes));
 		LOG.info("Common attributes : " + attributes.toString());
 		
-		boolean isBlockingReqd = true;
+		// If cartesian product is small, no need for blocking. match the whole set ..
+		boolean isBlockingReqd = preBlockingItemPairs > 10000 ? true : false;
 		
 		List<ItemPair> itemPairs = Lists.newArrayList();
 		int numMismatchPairsAdded = 0;
@@ -73,10 +74,13 @@ public class CSVDataParser implements DataParser {
 			for(Item tgtItem : targetItems) {
 				MatchStatus matchStatus = MatchStatus.MISMATCH;
 				
+				// Always add the golden pair to the final dataset to be evaluated ..
 				if(goldMap.containsEntry(srcItem.getId().trim(), tgtItem.getId().trim())) {
 					matchStatus = MatchStatus.MATCH;
 					++numMatchPairsAdded;
+					
 					itemPairs.add(new ItemPair(srcItem, tgtItem, matchStatus));
+					++postBlockingItemPairs;
 					continue;
 				}
 				
@@ -93,14 +97,15 @@ public class CSVDataParser implements DataParser {
 				
 				itemPairs.add(new ItemPair(srcItem, tgtItem, matchStatus));
 				++postBlockingItemPairs;
-				
-				if(postBlockingItemPairs % 1000 == 0) {
-					LOG.info("Added total itempairs " + postBlockingItemPairs + ", num mismatch added " + 
-							numMismatchPairsAdded + " , num match added " + numMatchPairsAdded);
-				}
 			}
 		}
+		
+		if(numMatchPairsAdded == 0) {
+			LOG.severe("No itempairs could be added from the golden dataset. Please fix this issue first !!");
+			System.exit(1);
+		}
 
+		LOG.info("Match pairs added : " + numMatchPairsAdded + ", Mismatch pairs added : " + numMismatchPairsAdded);
 		LOG.info("Stats : Before blocking : " + preBlockingItemPairs + ", After blocking : " + postBlockingItemPairs);
 		return new Dataset(datasetName, attributes, itemPairs);
 	}

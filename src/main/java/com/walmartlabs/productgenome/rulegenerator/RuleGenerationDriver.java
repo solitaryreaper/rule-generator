@@ -79,7 +79,11 @@ public class RuleGenerationDriver {
 		//testDBLPScholarDataset(RuleLearner.PART, arffFileLoc);
 		//testDBLPScholarDataset(RuleLearner.RandomForest, arffFileLoc);
 		
-		testAmazonGoogleProductsDataset(RuleLearner.RandomForest, arffFileLoc);
+		//testAmazonGoogleProductsDataset(RuleLearner.RandomForest, arffFileLoc);
+		
+		//testDBLPACMDataset(RuleLearner.RandomForest, arffFileLoc);
+		
+		testWalmartBooksDataset(RuleLearner.RandomForest, arffFileLoc);
 	}
 
 	private static void testRestaurantDataset(RuleLearner learner, String arffFileLoc)
@@ -126,6 +130,24 @@ public class RuleGenerationDriver {
 		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/Amazon-GoogleProducts/Amzon_GoogleProducts_perfectMapping.csv";
 		
 		testDataset("Amazon-Google-Products", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);
+	}
+	
+	private static void testDBLPACMDataset(RuleLearner learner, String arffFileLoc)
+	{
+		String srcFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-ACM/DBLP_cleaned.csv";
+		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-ACM/ACM_cleaned.csv";
+		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-ACM/gold.csv";
+		
+		testDataset("DBLP-ACM", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);
+	}
+	
+	private static void testWalmartBooksDataset(RuleLearner learner, String arffFileLoc)
+	{
+		String srcFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/walmart-books/bowker_refined.csv";
+		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/walmart-books/walmart_refined.csv";
+		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/walmart-books/gold.csv";
+		
+		testDataset("Walmart-Books", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);		
 	}
 	
 	private static void testDataset(String datasetName, RuleLearner learner, String arffFileLoc, String srcFilePath, 

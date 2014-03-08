@@ -1,6 +1,7 @@
 package com.walmartlabs.productgenome.rulegenerator.algos;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,18 +42,23 @@ public class TestClass {
 //		boolean isDouble = NumberUtils.isNumber(test);
 //		System.out.println(isDouble);
 		
-		Multimap<String, String> testMap = ArrayListMultimap.create();
-		testMap.put("abc", "one");
-		testMap.put("two", "three");
-		testMap.put("abc", "str");
+//		Multimap<String, String> testMap = ArrayListMultimap.create();
+//		testMap.put("abc", "one");
+//		testMap.put("two", "three");
+//		testMap.put("abc", "str");
+//		
+//		System.out.println(testMap.toString());
+//		if(testMap.containsEntry("abc", "onee")) {
+//			System.out.println("hello world ..");
+//		}
+//		else {
+//			System.out.println("bye world ..");
+//		}
 		
-		System.out.println(testMap.toString());
-		if(testMap.containsEntry("abc", "onee")) {
-			System.out.println("hello world ..");
-		}
-		else {
-			System.out.println("bye world ..");
-		}
+		String test = "hello|#world";
+		String[] tokens = test.split("\\|#");
+		System.out.println(Arrays.toString(tokens));
+		
 	}
 	
 	  public static final ArrayList<String> tokenizeToArrayList(final String input) {
