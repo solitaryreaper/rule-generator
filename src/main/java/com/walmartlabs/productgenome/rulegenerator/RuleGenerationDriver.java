@@ -12,6 +12,8 @@ import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionListLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionTreeLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
@@ -27,6 +29,7 @@ import com.walmartlabs.productgenome.rulegenerator.utils.ArffDataWriter;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.RestaurantDataParser;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.WalmartDataParser;
 
 /**
  * The main driver class for the auto-rule generation engine. It has the following functions :
@@ -83,7 +86,9 @@ public class RuleGenerationDriver {
 		
 		//testDBLPACMDataset(RuleLearner.RandomForest, arffFileLoc);
 		
-		testWalmartBooksDataset(RuleLearner.RandomForest, arffFileLoc);
+		//testWalmartBooksDataset(RuleLearner.RandomForest, arffFileLoc);
+		
+		testWalmartCNETDotcomDataset(RuleLearner.RandomForest, arffFileLoc);
 	}
 
 	private static void testRestaurantDataset(RuleLearner learner, String arffFileLoc)
@@ -117,8 +122,8 @@ public class RuleGenerationDriver {
 	private static void testDBLPScholarDataset(RuleLearner learner, String arffFileLoc)
 	{
 		String srcFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP1_cleaned.csv";
-		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP1_cleaned.csv";
-		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP1_cleaned.csv";
+		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/Scholar_cleaned.csv";
+		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP-Scholar_perfectMapping.csv";
 		
 		testDataset("DBLP-Scholar", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);
 	}
@@ -150,6 +155,35 @@ public class RuleGenerationDriver {
 		testDataset("Walmart-Books", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);		
 	}
 	
+	private static void testWalmartCNETDotcomDataset(RuleLearner learner, String arffFileLoc)
+	{
+		String matchFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/CNET_WALMART_DOTCOM_MATCHED.txt";
+		String mismatchFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/CNET_WALMART_DOTCOM_MISMATCHED.txt";
+		
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		schemaMap.put("pd_title", "pd_title");
+		schemaMap.put("req_brand_name", "req_brand_name");
+		schemaMap.put("req_category", "req_category");
+		schemaMap.put("req_color", "req_color");
+		schemaMap.put("req_manufacturer", "req_manufacturer");
+		schemaMap.put("req_part_number", "req_part_number");
+		schemaMap.put("req_upc_10", "req_upc_10");
+		schemaMap.put("req_upc_11", "req_upc_11");
+		schemaMap.put("req_upc_12", "req_upc_12");
+		schemaMap.put("req_upc_13", "req_upc_13");
+		schemaMap.put("req_upc_14", "req_upc_14");
+		testWalmartDataset("CNET-Dotcom", learner, arffFileLoc, matchFilePath, mismatchFilePath, schemaMap);
+	}
+	
+	/**
+	 * Test any CSV entity matching dataset ..
+	 * @param datasetName
+	 * @param learner
+	 * @param arffFileLoc
+	 * @param srcFilePath
+	 * @param tgtFilePath
+	 * @param goldFilePath
+	 */
 	private static void testDataset(String datasetName, RuleLearner learner, String arffFileLoc, String srcFilePath, 
 			String tgtFilePath, String goldFilePath)
 	{
@@ -163,9 +197,52 @@ public class RuleGenerationDriver {
 			
 			timer.start();
 			DataParser parser = new CSVDataParser();
-			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile);
+			BiMap<String, String> schemaMap = HashBiMap.create();
+			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, schemaMap);
 			timer.stop();
 			LOG.info("Time taken for parsing CSV input file : " + timer.toString());
+			
+			timer.reset();
+			timer.start();
+			arffFileLoc = stageDataInArffFormat(dataset);
+			timer.stop();
+			LOG.info("Time taken for staging as ARFF file : " + timer.toString());
+		}
+		
+		timer.reset();
+		timer.start();
+		DatasetEvaluationSummary evalSummary = generateMatchingRules(arffFileLoc, learner);
+		timer.stop();
+		LOG.info("Time taken for generating matching rules : " + timer.toString());
+		
+		LOG.info("Decision Tree Learning results on " + datasetName + " dataset :");
+		LOG.info(evalSummary.toString());
+		evalSummary.getRankedAndFilteredRules();			
+	}
+	
+	/**
+	 * Test any walmart specific entity matching dataset ..
+	 * @param datasetName
+	 * @param learner
+	 * @param arffFileLoc
+	 * @param matchFilePath
+	 * @param mismatchFilePath
+	 */
+	private static void testWalmartDataset(String datasetName, RuleLearner learner, String arffFileLoc, 
+			String matchFilePath, String mismatchFilePath, BiMap<String, String> schemaMap)
+	{
+		LOG.info("Testing " + datasetName + " dataset ..");
+		
+		StopWatch timer = new StopWatch();
+		if(Strings.isNullOrEmpty(arffFileLoc)) {
+			File matchFile = new File(matchFilePath);
+			File mismatchFile = new File(mismatchFilePath);
+			
+			timer.start();
+			DataParser parser = new WalmartDataParser();
+			Dataset dataset = parser.parseData(datasetName, matchFile, mismatchFile, schemaMap);
+			timer.stop();
+			LOG.info("Time taken for parsing Walmart dataset : " + timer.toString());
 			
 			timer.reset();
 			timer.start();
@@ -192,7 +269,8 @@ public class RuleGenerationDriver {
 	{
 		File matchFile = new File(matchFilePath);
 		File mismatchFile = new File(mismatchFilePath);
-		Dataset restaurantData = parser.parseData(matchFile, mismatchFile, datasetName);
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		Dataset restaurantData = parser.parseData(datasetName, matchFile, mismatchFile, schemaMap);
 		
 		LOG.info("Generated in-memory itempairs for dataset : " + datasetName);
 		return restaurantData;

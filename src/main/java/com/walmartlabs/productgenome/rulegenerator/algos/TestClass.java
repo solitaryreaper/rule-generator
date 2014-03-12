@@ -12,6 +12,8 @@ import uk.ac.shef.wit.simmetrics.wordhandlers.DummyStopTermHandler;
 import uk.ac.shef.wit.simmetrics.wordhandlers.InterfaceTermHandler;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Multimap;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.utils.SimilarityUtils;
@@ -23,41 +25,13 @@ public class TestClass {
 	
 	public static void main(String[] args) throws InterruptedException
 	{
-//		String test1 = "Technical report, UniversitÃ  di Roma tre, 1997. Talk at the ";
-//		String test2 = "Technical report, Universit di Roma tre, 1997. Talk at the ";
-//		
-//		System.out.println("Starting test ..");
-//
-//		/**
-//		double score = SimilarityUtils.getSimilarity(Simmetrics.COSINE, test, t2);
-//		System.out.println("Score : " + score);		
-//		System.out.println(score);
-//		**/
-//		
-//		System.out.println("before ..");
-//		List<String> tokenizer = tokenizeToArrayList(test1);
-//		System.out.println(tokenizer.toString());
-		
-//		String test = "1234";
-//		boolean isDouble = NumberUtils.isNumber(test);
-//		System.out.println(isDouble);
-		
-//		Multimap<String, String> testMap = ArrayListMultimap.create();
-//		testMap.put("abc", "one");
-//		testMap.put("two", "three");
-//		testMap.put("abc", "str");
-//		
-//		System.out.println(testMap.toString());
-//		if(testMap.containsEntry("abc", "onee")) {
-//			System.out.println("hello world ..");
-//		}
-//		else {
-//			System.out.println("bye world ..");
-//		}
-		
-		String test = "hello|#world";
-		String[] tokens = test.split("\\|#");
-		System.out.println(Arrays.toString(tokens));
+		String test = "00027242551923";
+		if(NumberUtils.isNumber(test)) {
+			System.out.println("Is number ..");
+		}
+		else {
+			System.out.println("Not a number ..");
+		}
 		
 	}
 	

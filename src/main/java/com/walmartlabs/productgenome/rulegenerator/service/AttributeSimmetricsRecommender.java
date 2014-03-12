@@ -64,7 +64,7 @@ public class AttributeSimmetricsRecommender {
 	
 	private static List<ItemPair> getSampleItemPairs(List<ItemPair> itemPairs, int count)
 	{
-		return itemPairs.subList(0, count);
+		return (itemPairs.size() > count) ? itemPairs.subList(0, count) : itemPairs;
 	}
 	
 	/**
@@ -170,6 +170,7 @@ public class AttributeSimmetricsRecommender {
 		private DataType dataType;
 		private double avgLength;
 		private double avgNumTokens;
+		private double avgNumValues;
 		
 		public AttributeStats(String attrName, DataType dataType, double avgLength, double avgNumTokens)
 		{
@@ -177,6 +178,7 @@ public class AttributeSimmetricsRecommender {
 			this.dataType = dataType;
 			this.avgLength = avgLength;
 			this.avgNumTokens = avgNumTokens;
+			this.avgNumValues = avgNumValues;
 		}
 
 		public String getAttrName() {
@@ -193,6 +195,24 @@ public class AttributeSimmetricsRecommender {
 
 		public double getAvgNumTokens() {
 			return avgNumTokens;
+		}
+
+		public double getAvgNumValues() {
+			return avgNumValues;
+		}
+
+		public void setAvgNumValues(double avgNumValues) {
+			this.avgNumValues = avgNumValues;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("AttributeStats [attrName=").append(attrName)
+					.append(", dataType=").append(dataType)
+					.append(", avgLength=").append(avgLength)
+					.append(", avgNumValues=").append(avgNumValues).append("]");
+			return builder.toString();
 		}
 	}
 	

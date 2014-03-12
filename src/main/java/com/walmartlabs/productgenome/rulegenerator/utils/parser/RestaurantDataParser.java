@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import com.google.common.collect.BiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
@@ -17,7 +18,7 @@ import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 
 /**
- * Data parser for the restuarant dataset.
+ * Data parser for the restaurant dataset.
  * @author excelsior
  *
  */
@@ -35,7 +36,7 @@ public class RestaurantDataParser implements DataParser {
 	/**
 	 * {@inheritDoc}
 	 */
-	public Dataset parseData(File matchFile, File mismatchFile, String datasetName) 
+	public Dataset parseData(String datasetName, File matchFile, File mismatchFile, BiMap<String, String> schemaMap) 
 	{
 		Dataset matchSet = parseFile(matchFile, MatchStatus.MATCH);
 		Dataset mismatchSet = parseFile(mismatchFile, MatchStatus.MISMATCH);
@@ -151,7 +152,7 @@ public class RestaurantDataParser implements DataParser {
 		return new Dataset(datasetName, attributes, itemPairs);
 	}
 
-	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, String blockingAttrName) {
+	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, BiMap<String, String> schemaMap) {
 		// TODO Auto-generated method stub
 		return null;
 	}

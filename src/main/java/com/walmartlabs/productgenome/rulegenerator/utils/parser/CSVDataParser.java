@@ -13,17 +13,15 @@ import au.com.bytecode.opencsv.CSVReader;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.BiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Item;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
-import com.walmartlabs.productgenome.rulegenerator.model.rule.BlockingClause;
-import com.walmartlabs.productgenome.rulegenerator.utils.SimilarityUtils;
 
 public class CSVDataParser implements DataParser {
 
@@ -31,37 +29,25 @@ public class CSVDataParser implements DataParser {
 	
 	private static int ID_ATTR_INDEX = 0;
 	
-	private static String ATTRIBUTES_KEY = "attributes";
-	private static String ITEMS_KEY = "items";
-	
-	public Dataset parseData(File matchFile, File mismatchFile, String datasetName) 
+	public Dataset parseData(File matchFile, File mismatchFile, String datasetName, BiMap<String, String> schemaMap) 
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	public Dataset parseData(String datasetName, File sourceFile, File targetFile, File goldFile) 
+	public Dataset parseData(String datasetName, File sourceFile, File targetFile, File goldFile, BiMap<String, String> schemaMap) 
 	{
 		Multimap<String, String> goldMap = getGoldenDataMap(goldFile);
 		int goldPairs = goldMap.size();
 		int totalMismatchPairsToRetain = 2*goldPairs < 3000 ? 3000 : 2*goldPairs;
 		
-		Map<String, List<?>> sourceResultMap = getItems(sourceFile);
-		Map<String, List<?>> targetResultMap = getItems(targetFile);
-		
-		LOG.info("Source Items : " + sourceResultMap.get(ITEMS_KEY).size() + ", Target Items : " + 
-				targetResultMap.get(ITEMS_KEY).size() + ", Golden Items : " + goldMap.size());
-		
-		List<Item> sourceItems = (List<Item>)sourceResultMap.get(ITEMS_KEY);
-		List<Item> targetItems = (List<Item>)targetResultMap.get(ITEMS_KEY);
+		List<Item> sourceItems = getItems(sourceFile, schemaMap);
+		List<Item> targetItems = getItems(targetFile, schemaMap);
 		
 		int preBlockingItemPairs = sourceItems.size() * targetItems.size();
 		int postBlockingItemPairs = 0;
-		
-		Set<String> sourceAttributes = Sets.newHashSet((List<String>)sourceResultMap.get(ATTRIBUTES_KEY));
-		Set<String> targetAttributes = Sets.newHashSet((List<String>)targetResultMap.get(ATTRIBUTES_KEY));
-		List<String> attributes = Lists.newArrayList(Sets.intersection(sourceAttributes, targetAttributes));
+
+		List<String> attributes = Lists.newArrayList(schemaMap.keySet());
 		LOG.info("Common attributes : " + attributes.toString());
 		
 		// If cartesian product is small, no need for blocking. match the whole set ..
@@ -136,27 +122,6 @@ public class CSVDataParser implements DataParser {
 	}
 	
 	/**
-	 * Applies basic blocking to ensure that the actual dataset to match is reduced considerably.
-	 */
-	private boolean isEligibleForMatching(Item srcItem, Item tgtItem, List<BlockingClause> blockingClauses)
-	{
-		boolean isEligibleForMatching = true;
-
-		for(BlockingClause clause : blockingClauses) {
-			String attrName = clause.getAttributeName();
-			String val1 = srcItem.getValuesForAttr(attrName);
-			String val2 = tgtItem.getValuesForAttr(attrName);
-			double score = SimilarityUtils.getSimilarity(clause.getMetricToApply(), val1, val2);
-			if(Double.compare(score, clause.getThreshold()) <= 0) {
-				isEligibleForMatching = false;
-				break;
-			}
-		}
-		
-		return isEligibleForMatching;
-	}
-	
-	/**
 	 * Fetch the golden data map. Golden data is the set of itempairs that do actually match.
 	 * @param goldFile
 	 * @return
@@ -191,12 +156,14 @@ public class CSVDataParser implements DataParser {
 	 * @param dataFile
 	 * @return
 	 */
-	private Map<String, List<?>> getItems(File dataFile)
+	private List<Item> getItems(File dataFile, BiMap<String, String> schemaMap)
 	{
 		List<Item> items = Lists.newArrayList();
 		CSVReader reader = null;
 		List<String> attributes = Lists.newArrayList();
 		String[] currLineTokens = null;
+		Set<String> attributesToIgnore = Sets.newHashSet();
+		
 		try {
  			currLineTokens = null;
  			reader = new CSVReader(new FileReader(dataFile));
@@ -205,7 +172,19 @@ public class CSVDataParser implements DataParser {
 				if(!isHeaderRead) {
 					isHeaderRead = true;
 					for(String header : currLineTokens) {
-						attributes.add(header.trim());
+						header = header.trim();
+						
+						// normalize the attribute names in source and target items, to use the same attribute name
+						if(schemaMap.containsKey(header)) {
+							attributes.add(header);
+						}
+						else if(schemaMap.containsValue(header)) {
+							attributes.add(schemaMap.inverse().get(header));
+						}
+						else {
+							attributes.add(header);
+							attributesToIgnore.add(header);
+						}
 					}
 					continue;
 				}
@@ -215,10 +194,11 @@ public class CSVDataParser implements DataParser {
 					
 					// Skip the ID value at beginning
 					for(int i=1; i < currLineTokens.length; i++) {
-						// No need to put garbage values in map.
-						if(Strings.isNullOrEmpty(currLineTokens[i])) {
+						// No need to put garbage values or unimportant attributes in map.
+						if(Strings.isNullOrEmpty(currLineTokens[i]) || attributesToIgnore.contains(attributes.get(i))) {
 							continue;
 						}
+
 						itemAttrMap.put(attributes.get(i), currLineTokens[i]);
 					}
 					String id = currLineTokens[ID_ATTR_INDEX].trim();
@@ -235,14 +215,9 @@ public class CSVDataParser implements DataParser {
 			e.printStackTrace();
 		}	
 		
-		// Don't include ID as an attribute while generating feature vector ..
-		attributes.remove(Constants.ID_ATTRIBUTE);
+		attributes.remove(ID_ATTR_INDEX);
 		
-		Map<String, List<?>> resultMap = Maps.newHashMap();
-		resultMap.put(ATTRIBUTES_KEY, attributes);
-		resultMap.put(ITEMS_KEY, items);
-		
-		return resultMap;
+		return items;
 	}
 
 }
