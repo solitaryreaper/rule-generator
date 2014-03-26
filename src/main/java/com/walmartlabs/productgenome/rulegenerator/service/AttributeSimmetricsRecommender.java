@@ -15,6 +15,7 @@ import com.google.common.collect.Sets;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 
 /**
@@ -38,13 +39,13 @@ public class AttributeSimmetricsRecommender {
 	 * 
 	 * @return
 	 */
-	public static Map<String, List<Simmetrics>> getSimmetricRecommendations(Dataset rawDataset)
+	public static Map<String, List<Simmetrics>> getSimmetricRecommendations(Dataset rawDataset, DatasetNormalizerMeta normalizerMeta)
 	{
 		Map<String, List<Simmetrics>> recommendations = Maps.newHashMap();
 		List<String> attributes = rawDataset.getAttributes();
 		List<ItemPair> data = rawDataset.getItemPairs();
 		for(String attr : attributes) {
-			recommendations.put(attr, getTopNSimmetricsForAttribute(attr, data));
+			recommendations.put(attr, getTopNSimmetricsForAttribute(attr, data, normalizerMeta));
 		}
 		
 		return recommendations;
@@ -57,10 +58,10 @@ public class AttributeSimmetricsRecommender {
 	 * on the attribute values and retaining the metrics with best overall average values.
 	 * @return
 	 */
-	private static List<Simmetrics> getTopNSimmetricsForAttribute(String attrName, List<ItemPair> itemPairs)
+	private static List<Simmetrics> getTopNSimmetricsForAttribute(String attrName, List<ItemPair> itemPairs, DatasetNormalizerMeta normalizerMeta)
 	{
 		List<ItemPair> sampleSet = getSampleItemPairs(itemPairs, Constants.SAMPLE_SIZE);
-		AttributeStats attributeStats = getAttributeStats(attrName, sampleSet);
+		AttributeStats attributeStats = getAttributeStats(attrName, sampleSet, normalizerMeta);
 		System.out.println(attributeStats.toString());
 		return getSimmetricsForAttribute(attributeStats);
 	}
@@ -73,13 +74,16 @@ public class AttributeSimmetricsRecommender {
 	/**
 	 * Generate statistics about the attribute.
 	 */
-	private static AttributeStats getAttributeStats(String attrName, List<ItemPair> sampleSet)
+	private static AttributeStats getAttributeStats(String attrName, List<ItemPair> sampleSet, DatasetNormalizerMeta normalizerMeta)
 	{
 		int totalOccurences = 0;
 		int totalValues = 0;
 		int totalLength = 0;
 		int totalTokens = 0;
 
+		String valueDelimiter = normalizerMeta.getValueDelimiterForAttribute(attrName);
+		String tokenDelimiter = normalizerMeta.getTokenDelimiterForAttribute(attrName);
+		
 		Set<String> sampleValuesForTypeDetermination = Sets.newHashSet();
 		for(ItemPair pair : sampleSet) {
 			String valueStrA = pair.getItemA().getValuesForAttr(attrName);
@@ -89,11 +93,11 @@ public class AttributeSimmetricsRecommender {
 			String[] valuesB = null;
 			if(!Strings.isNullOrEmpty(valueStrA)) {
 				++totalOccurences;
-				valuesA = valueStrA.split(",");
+				valuesA = getSplitValuesByDelimiter(valueStrA, valueDelimiter);
 			}
 			if(!Strings.isNullOrEmpty(valueStrB)) {
 				++totalOccurences;
-				valuesB = valueStrB.split(",");
+				valuesB = getSplitValuesByDelimiter(valueStrB, valueDelimiter);
 			}
 			
 			if(!(valuesA == null || valuesA.length == 0)) {
@@ -101,7 +105,7 @@ public class AttributeSimmetricsRecommender {
 					if(!Strings.isNullOrEmpty(valA)) {
 						++totalValues;
 						totalLength += valA.length();
-						totalTokens += valA.split(Constants.DEFAULT_TOKENIZER).length;
+						totalTokens += valA.split(tokenDelimiter).length;
 						if(sampleValuesForTypeDetermination.size() < 10) {
 							sampleValuesForTypeDetermination.add(valA);
 						}
@@ -114,14 +118,13 @@ public class AttributeSimmetricsRecommender {
 					if(!Strings.isNullOrEmpty(valB)) {
 						++totalValues;
 						totalLength += valB.length();
-						totalTokens += valB.split(Constants.DEFAULT_TOKENIZER).length;
+						totalTokens += valB.split(tokenDelimiter).length;
 						if(sampleValuesForTypeDetermination.size() < 10) {
 							sampleValuesForTypeDetermination.add(valB);					
 						}
 					}				
 				}				
 			}
-
 		}
 		
 		int stringTypeCnt = 0;
@@ -141,6 +144,20 @@ public class AttributeSimmetricsRecommender {
 		double avgNumValues = totalValues/(double)totalOccurences;
 		
 		return new AttributeStats(attrName, type, avgLength, avgNumTokens, avgNumValues);
+	}
+	
+	private static String[] getSplitValuesByDelimiter(String value, String delimiter)
+	{
+		String[] values = null;
+		if(delimiter != null) {
+			values = value.split(delimiter);
+		}
+		else {
+			values = new String[1];
+			values[0] = value;
+		}
+		
+		return values;
 	}
 	
 	private static List<Simmetrics> getSimmetricsForAttribute(AttributeStats stats)
