@@ -19,7 +19,8 @@ public enum Simmetrics {
 	QGRAM("qg"),
 	NUM_SCORE("num"), 
 	SMITH_WATERMAN_GOTOH_WINDOWED_AFFINE("smith_waterman"),
-	SOFT_TFIDF("soft_tfidf");
+	SOFT_TFIDF("soft_tfidf"),
+	EXTENDED_JACCARD("ext_jaccard");
 	
 	private String metricAbbrv;
 	

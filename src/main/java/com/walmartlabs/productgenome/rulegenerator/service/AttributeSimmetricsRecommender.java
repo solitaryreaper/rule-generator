@@ -30,6 +30,8 @@ public class AttributeSimmetricsRecommender {
 
 	private static Logger LOG = Logger.getLogger(AttributeSimmetricsRecommender.class.getName());
 	
+	private static double AVG_NUM_VALUES_THRESHOLD = 1.2;
+	
 	/**
 	 * For every attribute in the dataset, recommend the most relevant similarity
 	 * metrics.
@@ -59,6 +61,7 @@ public class AttributeSimmetricsRecommender {
 	{
 		List<ItemPair> sampleSet = getSampleItemPairs(itemPairs, Constants.SAMPLE_SIZE);
 		AttributeStats attributeStats = getAttributeStats(attrName, sampleSet);
+		System.out.println(attributeStats.toString());
 		return getSimmetricsForAttribute(attributeStats);
 	}
 	
@@ -73,31 +76,52 @@ public class AttributeSimmetricsRecommender {
 	private static AttributeStats getAttributeStats(String attrName, List<ItemPair> sampleSet)
 	{
 		int totalOccurences = 0;
+		int totalValues = 0;
 		int totalLength = 0;
 		int totalTokens = 0;
 
 		Set<String> sampleValuesForTypeDetermination = Sets.newHashSet();
 		for(ItemPair pair : sampleSet) {
-			String valA = pair.getItemA().getValuesForAttr(attrName);
-			String valB = pair.getItemB().getValuesForAttr(attrName);
+			String valueStrA = pair.getItemA().getValuesForAttr(attrName);
+			String valueStrB = pair.getItemB().getValuesForAttr(attrName);
 			
-			if(!Strings.isNullOrEmpty(valA)) {
+			String[] valuesA = null;
+			String[] valuesB = null;
+			if(!Strings.isNullOrEmpty(valueStrA)) {
 				++totalOccurences;
-				totalLength += valA.length();
-				totalTokens += valA.split(Constants.DEFAULT_TOKENIZER).length;
-				if(sampleValuesForTypeDetermination.size() < 10) {
-					sampleValuesForTypeDetermination.add(valA);
-				}
+				valuesA = valueStrA.split(",");
+			}
+			if(!Strings.isNullOrEmpty(valueStrB)) {
+				++totalOccurences;
+				valuesB = valueStrB.split(",");
 			}
 			
-			if(!Strings.isNullOrEmpty(valB)) {
-				++totalOccurences;
-				totalLength += valB.length();
-				totalTokens += valB.split(Constants.DEFAULT_TOKENIZER).length;
-				if(sampleValuesForTypeDetermination.size() < 10) {
-					sampleValuesForTypeDetermination.add(valB);					
-				}
+			if(!(valuesA == null || valuesA.length == 0)) {
+				for(String valA : valuesA) {
+					if(!Strings.isNullOrEmpty(valA)) {
+						++totalValues;
+						totalLength += valA.length();
+						totalTokens += valA.split(Constants.DEFAULT_TOKENIZER).length;
+						if(sampleValuesForTypeDetermination.size() < 10) {
+							sampleValuesForTypeDetermination.add(valA);
+						}
+					}				
+				}				
 			}
+
+			if(!(valuesB == null || valuesB.length == 0)) {
+				for(String valB : valuesB) {
+					if(!Strings.isNullOrEmpty(valB)) {
+						++totalValues;
+						totalLength += valB.length();
+						totalTokens += valB.split(Constants.DEFAULT_TOKENIZER).length;
+						if(sampleValuesForTypeDetermination.size() < 10) {
+							sampleValuesForTypeDetermination.add(valB);					
+						}
+					}				
+				}				
+			}
+
 		}
 		
 		int stringTypeCnt = 0;
@@ -114,11 +138,15 @@ public class AttributeSimmetricsRecommender {
 		
 		double avgLength = totalLength/(double)totalOccurences;
 		double avgNumTokens = totalTokens/(double)totalOccurences;
-		return new AttributeStats(attrName, type, avgLength, avgNumTokens);
+		double avgNumValues = totalValues/(double)totalOccurences;
+		
+		return new AttributeStats(attrName, type, avgLength, avgNumTokens, avgNumValues);
 	}
 	
 	private static List<Simmetrics> getSimmetricsForAttribute(AttributeStats stats)
 	{
+		double avgNumValues = stats.getAvgNumValues();
+		
 		// Filter first on the data type of attribute
 		if(stats.getDataType().equals(DataType.NUMERIC)) {
 			List<Simmetrics> metrics = Lists.newArrayList();
@@ -126,15 +154,24 @@ public class AttributeSimmetricsRecommender {
 			metrics.add(Simmetrics.EXACT_MATCH_NUMERIC);
 			metrics.add(Simmetrics.LEVENSHTEIN);
 			
+			if(Double.compare(avgNumValues, AVG_NUM_VALUES_THRESHOLD) > 0) {
+				metrics.add(Simmetrics.EXTENDED_JACCARD);
+			}
+			
 			return metrics;
 		}
 		
 		double avgLength = stats.getAvgLength();
 		double avgNumTokens = stats.getAvgNumTokens();
+
 		
 		List<Simmetrics> metrics = getAllSimmetrics();		
 		metrics.remove(Simmetrics.NUM_SCORE);
 		metrics.remove(Simmetrics.EXACT_MATCH_NUMERIC);
+		
+		if(Double.compare(avgNumValues, AVG_NUM_VALUES_THRESHOLD) <= 0) {
+			metrics.remove(Simmetrics.EXTENDED_JACCARD);
+		}
 		
 		// JARO is good only for matching short strings ..
 		if(Double.compare(avgLength, 10) > 0) {
@@ -172,7 +209,7 @@ public class AttributeSimmetricsRecommender {
 		private double avgNumTokens;
 		private double avgNumValues;
 		
-		public AttributeStats(String attrName, DataType dataType, double avgLength, double avgNumTokens)
+		public AttributeStats(String attrName, DataType dataType, double avgLength, double avgNumTokens, double avgNumValues)
 		{
 			this.attrName = attrName;
 			this.dataType = dataType;
@@ -211,6 +248,7 @@ public class AttributeSimmetricsRecommender {
 			builder.append("AttributeStats [attrName=").append(attrName)
 					.append(", dataType=").append(dataType)
 					.append(", avgLength=").append(avgLength)
+					.append(", avgNumTokens=").append(avgNumTokens)
 					.append(", avgNumValues=").append(avgNumValues).append("]");
 			return builder.toString();
 		}
