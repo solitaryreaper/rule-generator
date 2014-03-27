@@ -13,6 +13,7 @@ import uk.ac.shef.wit.simmetrics.similaritymetrics.QGramsDistance;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.SmithWatermanGotohWindowedAffine;
 
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
+import com.walmartlabs.productgenome.rulegenerator.utils.similarity.ExtendedJaccard;
 import com.wcohen.ss.Jaccard;
 import com.wcohen.ss.SoftTFIDF;
 
@@ -40,6 +41,10 @@ public class SimilarityUtils {
 		case JACCARD:
 			Jaccard jaccard = new Jaccard();
 			res = jaccard.score(s1, s2);
+			break;
+		case EXTENDED_JACCARD:
+			ExtendedJaccard extJaccard = new ExtendedJaccard();
+			res = extJaccard.getSimilarity(s1, s2);
 			break;
 		case JARO:
 			metric = new Jaro();

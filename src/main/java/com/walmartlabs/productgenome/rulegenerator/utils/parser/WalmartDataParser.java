@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Item;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
@@ -33,8 +34,6 @@ public class WalmartDataParser implements DataParser {
 	
 	public static final String COMMA						= ",";
 	public static final String COLUMN_DELIMITER				= "\\|#";
-	public static final String VALUE_DELIMITER				= ",";
-	public static final String SEPARATOR_DELIMITER			= ";#";
 	
 	public static final String ID 							= "ID";
 	public static final String SOURCE 						= "Source";
@@ -42,10 +41,11 @@ public class WalmartDataParser implements DataParser {
 	public static final String PD_TITLE 					= "pd_title";
 	public static final String NULL_STRING					= "null";
 	
-	public Dataset parseData(String datasetName, File matchFile, File mismatchFile, BiMap<String, String> schemaMap) {
+	public Dataset parseData(String datasetName, File matchFile, File mismatchFile, DatasetNormalizerMeta normalizerMeta) {
+		BiMap<String, String> schemaMap = normalizerMeta.getSchemaMap();
 		Dataset matchSet = parseFile(datasetName, matchFile, MatchStatus.MATCH, schemaMap);
 		Dataset mismatchSet = parseFile(datasetName, mismatchFile, MatchStatus.MISMATCH, schemaMap);
-		
+
 		List<ItemPair> allItemPairs = Lists.newArrayList();
 		allItemPairs.addAll(matchSet.getItemPairs());
 		allItemPairs.addAll(mismatchSet.getItemPairs());
@@ -227,19 +227,24 @@ public class WalmartDataParser implements DataParser {
 		
 		if(!(Strings.isNullOrEmpty(sourceAttrValue) || sourceAttrValue.toLowerCase().equals("null"))) {
 			Map<String, String> sourceAttrMap = Maps.newHashMap();
-			sourceAttrMap.put(attrName, attrTokens[1].trim());
+			sourceAttrMap.put(attrName, trimSpecialCharacters(attrTokens[1]));
 			commonAttrMap.put(SOURCE_ITEM_ATTR, sourceAttrMap);
 		}
 		if(!(Strings.isNullOrEmpty(targetAttrValue) || targetAttrValue.toLowerCase().equals("null"))) {
 			Map<String, String> targetAttrMap = Maps.newHashMap();
-			targetAttrMap.put(attrName, attrTokens[2].trim());
+			targetAttrMap.put(attrName, trimSpecialCharacters(attrTokens[2]));
 			commonAttrMap.put(TARGET_ITEM_ATTR, targetAttrMap);
 		}
 		
 		return commonAttrMap;
 	}
 	
-	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, BiMap<String, String> schemaMap) 
+	private static String trimSpecialCharacters(String value)
+	{
+		return value.replace("[", "").replace("]", "").trim();
+	}
+	
+	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, DatasetNormalizerMeta normalizerMeta) 
 	{
 		// TODO Auto-generated method stub
 		return null;

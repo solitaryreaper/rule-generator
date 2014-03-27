@@ -1,10 +1,9 @@
 package com.walmartlabs.productgenome.rulegenerator.model.data;
 
-import java.util.Map;
+import java.util.List;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Maps;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 
 /**
@@ -14,19 +13,28 @@ import com.walmartlabs.productgenome.rulegenerator.Constants;
  */
 public class DatasetNormalizerMeta {
 
+	private String columnDelimiter = Constants.DEFAULT_COLUMN_DELIMITER;
+	private String setValueDelimiter = Constants.DEFAULT_SET_VALUE_ATTRIBIUTE_DELIMITER;
+	private String tokenDelimiter = Constants.DEFAULT_TOKENIZATION_DELIMITER;
+	
+	private List<String> setValuedAttributes = null;
+	
 	// Mapping of the schema elements across the data sources. Only the attributes specified here
 	// would be considered for the dataset. Choose the first source's attribute name for schema
-	// normalization
-	private BiMap<String, String> schemaMap = HashBiMap.create();
+	// normalization.
+	private BiMap<String, String> schemaMap = null;
 	
-	// Mapping of which attribute is multi-valued and it's value delimiter. If nothing is specified,
-	// it is assumed that attributes are not multi-valued.
-	private Map<String, String> multiValueAttrDelimiterMap = Maps.newHashMap();
+	public DatasetNormalizerMeta()
+	{
+		
+	}
 	
-	// Mapping of what tokenization delimiter is to be used for attribute value. If nothing is 
-	// specified, default tokenizer is used.
-	private Map<String, String> valueTokenizationDelimiterMap = Maps.newHashMap();
-
+	public DatasetNormalizerMeta(BiMap<String, String> schemaMap, List<String> setValuedAttributes)
+	{
+		this.schemaMap = schemaMap;
+		this.setValuedAttributes = setValuedAttributes;
+	}
+	
 	public BiMap<String, String> getSchemaMap() {
 		return schemaMap;
 	}
@@ -35,69 +43,41 @@ public class DatasetNormalizerMeta {
 		this.schemaMap = schemaMap;
 	}
 
-	public Map<String, String> getMultiValueAttrDelimiterMap() {
-		return multiValueAttrDelimiterMap;
-	}
-	
-	public void setMultiValueAttrDelimiterMap(
-			Map<String, String> multiValueAttrDelimiterMap) {
-		this.multiValueAttrDelimiterMap = multiValueAttrDelimiterMap;
+	public String getColumnDelimiter() {
+		return columnDelimiter;
 	}
 
-	public Map<String, String> getValueTokenizationDelimiterMap() {
-		return valueTokenizationDelimiterMap;
+	public void setColumnDelimiter(String columnDelimiter) {
+		this.columnDelimiter = columnDelimiter;
 	}
-	
-	public void setValueTokenizationDelimiterMap(
-			Map<String, String> valueTokenizationDelimiterMap) {
-		this.valueTokenizationDelimiterMap = valueTokenizationDelimiterMap;
+
+	public String getSetValueDelimiter() {
+		return setValueDelimiter;
 	}
-	
-	public String getValueDelimiterForAttribute(String attrName)
-	{
-		String valueDelimiter = null;
-		Map<String, String> setValueDelimiterMap = getMultiValueAttrDelimiterMap();
-		if(setValueDelimiterMap.containsKey(attrName)) {
-			valueDelimiter = setValueDelimiterMap.get(attrName);
-		}
-		else {
-			BiMap<String, String> schemaMap = getSchemaMap();
-			if(schemaMap.containsKey(attrName)) {
-				if(setValueDelimiterMap.containsKey(schemaMap.get(attrName))) {
-					valueDelimiter = setValueDelimiterMap.get(schemaMap.get(attrName));
-				}
-			}
-			else if(schemaMap.containsValue(attrName)) {
-				if(setValueDelimiterMap.containsKey(schemaMap.inverse().get(attrName))) {
-					valueDelimiter = setValueDelimiterMap.get(schemaMap.inverse().get(attrName));
-				}				
-			}
-		}		
-		return valueDelimiter;
+
+	public void setSetValueDelimiter(String setValueDelimiter) {
+		this.setValueDelimiter = setValueDelimiter;
 	}
-	
-	public String getTokenDelimiterForAttribute(String attrName)
-	{
-		String tokenDelimiter = Constants.DEFAULT_TOKENIZER;
-		Map<String, String> tokenDelimiterMap = getValueTokenizationDelimiterMap();
-		if(tokenDelimiterMap.containsKey(attrName)) {
-			tokenDelimiter = tokenDelimiterMap.get(attrName);
-		}
-		else {
-			BiMap<String, String> schemaMap = getSchemaMap();
-			if(schemaMap.containsKey(attrName)) {
-				if(tokenDelimiterMap.containsKey(schemaMap.get(attrName))) {
-					tokenDelimiter = tokenDelimiterMap.get(schemaMap.get(attrName));
-				}
-			}
-			else if(schemaMap.containsValue(attrName)) {
-				if(tokenDelimiterMap.containsKey(schemaMap.inverse().get(attrName))) {
-					tokenDelimiter = tokenDelimiterMap.get(schemaMap.inverse().get(attrName));
-				}				
-			}
-		}
-		
+
+	public String getTokenDelimiter() {
 		return tokenDelimiter;
+	}
+
+	public void setTokenDelimiter(String tokenDelimiter) {
+		this.tokenDelimiter = tokenDelimiter;
+	}
+
+	public List<String> getSetValuedAttributes() {
+		return setValuedAttributes;
+	}
+
+	public void setSetValuedAttributes(List<String> setValuedAttributes) {
+		this.setValuedAttributes = setValuedAttributes;
+	}
+	
+	public boolean isSetValuedAttribute(String attrName)
+	{
+		return getSetValuedAttributes().contains(attrName);
 	}
 }
 

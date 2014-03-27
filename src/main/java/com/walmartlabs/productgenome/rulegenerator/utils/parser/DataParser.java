@@ -4,6 +4,7 @@ import java.io.File;
 
 import com.google.common.collect.BiMap;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 
 /**
  * Parses the raw dataset to generate item pairs to match.
@@ -13,7 +14,7 @@ import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
  */
 public interface DataParser {
 
-	public Dataset parseData(String datasetName, File matchFile, File mismatchFile, BiMap<String, String> schemaMap);
+	public Dataset parseData(String datasetName, File matchFile, File mismatchFile, DatasetNormalizerMeta normalizerMeta);
 	
 	/**
 	 * 
@@ -22,6 +23,6 @@ public interface DataParser {
 	 * @param goldFile	- List of matching items from both the sources.
 	 * @return
 	 */
-	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, BiMap<String, String> schemaMap);
+	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, DatasetNormalizerMeta normalizerMeta);
 	
 }

@@ -13,6 +13,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Item;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
@@ -36,8 +37,9 @@ public class RestaurantDataParser implements DataParser {
 	/**
 	 * {@inheritDoc}
 	 */
-	public Dataset parseData(String datasetName, File matchFile, File mismatchFile, BiMap<String, String> schemaMap) 
+	public Dataset parseData(String datasetName, File matchFile, File mismatchFile, DatasetNormalizerMeta normalizerMeta) 
 	{
+		BiMap<String, String> schemaMap = normalizerMeta.getSchemaMap();
 		Dataset matchSet = parseFile(matchFile, MatchStatus.MATCH);
 		Dataset mismatchSet = parseFile(mismatchFile, MatchStatus.MISMATCH);
 		
@@ -152,7 +154,7 @@ public class RestaurantDataParser implements DataParser {
 		return new Dataset(datasetName, attributes, itemPairs);
 	}
 
-	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, BiMap<String, String> schemaMap) {
+	public Dataset parseData(String datasetName, File srcFile, File tgtFile, File goldFile, DatasetNormalizerMeta normalizerMeta) {
 		// TODO Auto-generated method stub
 		return null;
 	}

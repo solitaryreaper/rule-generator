@@ -14,12 +14,14 @@ import weka.core.converters.ConverterUtils.DataSource;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionListLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.DecisionTreeLearner;
 import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
 import com.walmartlabs.productgenome.rulegenerator.algos.RandomForestLearner;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 import com.walmartlabs.productgenome.rulegenerator.service.CrossValidationService;
@@ -101,7 +103,7 @@ public class RuleGenerationDriver {
 			
 			DataParser parser = new RestaurantDataParser();
 			Dataset dataset = parseDataset(parser, matchFilePath, mismatchFilePath, datasetName);
-			arffFileLoc = stageDataInArffFormat(dataset);
+			arffFileLoc = stageDataInArffFormat(dataset, null);
 		}
 		
 		DatasetEvaluationSummary evalSummary = generateMatchingRules(arffFileLoc, learner);
@@ -172,7 +174,12 @@ public class RuleGenerationDriver {
 		schemaMap.put("req_upc_12", "req_upc_12");
 		schemaMap.put("req_upc_13", "req_upc_13");
 		schemaMap.put("req_upc_14", "req_upc_14");
-		testWalmartDataset("CNET-Dotcom", learner, arffFileLoc, matchFilePath, mismatchFilePath, schemaMap);
+		
+		List<String> setValuedAttrs = 
+			Lists.newArrayList("req_upc_10", "req_upc_11", "req_upc_12", "req_upc_13", "req_upc_14", "req_category");
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap, setValuedAttrs);		
+		testWalmartDataset("CNET-Dotcom", learner, arffFileLoc, matchFilePath, mismatchFilePath, normalizerMeta);
 	}
 	
 	/**
@@ -198,13 +205,15 @@ public class RuleGenerationDriver {
 			timer.start();
 			DataParser parser = new CSVDataParser();
 			BiMap<String, String> schemaMap = HashBiMap.create();
-			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, schemaMap);
+			DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap, null);
+
+			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, normalizerMeta);
 			timer.stop();
 			LOG.info("Time taken for parsing CSV input file : " + timer.toString());
 			
 			timer.reset();
 			timer.start();
-			arffFileLoc = stageDataInArffFormat(dataset);
+			arffFileLoc = stageDataInArffFormat(dataset, normalizerMeta);
 			timer.stop();
 			LOG.info("Time taken for staging as ARFF file : " + timer.toString());
 		}
@@ -229,7 +238,7 @@ public class RuleGenerationDriver {
 	 * @param mismatchFilePath
 	 */
 	private static void testWalmartDataset(String datasetName, RuleLearner learner, String arffFileLoc, 
-			String matchFilePath, String mismatchFilePath, BiMap<String, String> schemaMap)
+			String matchFilePath, String mismatchFilePath, DatasetNormalizerMeta normalizerMeta)
 	{
 		LOG.info("Testing " + datasetName + " dataset ..");
 		
@@ -240,13 +249,13 @@ public class RuleGenerationDriver {
 			
 			timer.start();
 			DataParser parser = new WalmartDataParser();
-			Dataset dataset = parser.parseData(datasetName, matchFile, mismatchFile, schemaMap);
+			Dataset dataset = parser.parseData(datasetName, matchFile, mismatchFile, normalizerMeta);
 			timer.stop();
 			LOG.info("Time taken for parsing Walmart dataset : " + timer.toString());
 			
 			timer.reset();
 			timer.start();
-			arffFileLoc = stageDataInArffFormat(dataset);
+			arffFileLoc = stageDataInArffFormat(dataset, normalizerMeta);
 			timer.stop();
 			LOG.info("Time taken for staging as ARFF file : " + timer.toString());
 		}
@@ -270,16 +279,17 @@ public class RuleGenerationDriver {
 		File matchFile = new File(matchFilePath);
 		File mismatchFile = new File(mismatchFilePath);
 		BiMap<String, String> schemaMap = HashBiMap.create();
-		Dataset restaurantData = parser.parseData(datasetName, matchFile, mismatchFile, schemaMap);
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap, null);
+		Dataset restaurantData = parser.parseData(datasetName, matchFile, mismatchFile, normalizerMeta);
 		
 		LOG.info("Generated in-memory itempairs for dataset : " + datasetName);
 		return restaurantData;
 	}
 	
-	private static String stageDataInArffFormat(Dataset dataset)
+	private static String stageDataInArffFormat(Dataset dataset, DatasetNormalizerMeta normalizerMeta)
 	{
 		// Step2 : Generate feature dataset from the raw dataset
-		FeatureDataset featureDataset = FeatureGenerationService.generateFeatures(dataset);
+		FeatureDataset featureDataset = FeatureGenerationService.generateFeatures(dataset, normalizerMeta);
 		LOG.info("Generated feature vectors for dataset : " + dataset.getName());
 		
 		// Step3 : Stage the feature dataset in arff format

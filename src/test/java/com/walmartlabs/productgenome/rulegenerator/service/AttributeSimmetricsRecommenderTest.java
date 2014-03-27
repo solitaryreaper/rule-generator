@@ -10,9 +10,11 @@ import org.junit.Test;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.RestaurantDataParser;
@@ -34,7 +36,7 @@ public class AttributeSimmetricsRecommenderTest {
 		File mismatchFile = new File(mismatchFilePath);
 		Dataset restuarantData = parser.parseData("Restaurant", matchFile, mismatchFile, null);
 		
-		Map<String, List<Simmetrics>> recommendations = AttributeSimmetricsRecommender.getSimmetricRecommendations(restuarantData);
+		Map<String, List<Simmetrics>> recommendations = AttributeSimmetricsRecommender.getSimmetricRecommendations(restuarantData, null);
 		for(Map.Entry<String, List<Simmetrics>> entry : recommendations.entrySet()) {
 			LOG.info("Attribute : " + entry.getKey() + ", Metrics : " + entry.getValue().toString());
 		}
@@ -53,7 +55,7 @@ public class AttributeSimmetricsRecommenderTest {
 		Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, null);
 		LOG.info("Parsed CSV file data");
 		
-		Map<String, List<Simmetrics>> recommendations = AttributeSimmetricsRecommender.getSimmetricRecommendations(dataset);
+		Map<String, List<Simmetrics>> recommendations = AttributeSimmetricsRecommender.getSimmetricRecommendations(dataset, null);
 		for(Map.Entry<String, List<Simmetrics>> entry : recommendations.entrySet()) {
 			LOG.info("Attribute : " + entry.getKey() + ", Metrics : " + entry.getValue().toString());
 		}
@@ -79,12 +81,18 @@ public class AttributeSimmetricsRecommenderTest {
 		schemaMap.put("req_upc_11", "req_upc_11");
 		schemaMap.put("req_upc_12", "req_upc_12");
 		schemaMap.put("req_upc_13", "req_upc_13");
-		schemaMap.put("req_upc_14", "req_upc_14");		
+		schemaMap.put("req_upc_14", "req_upc_14");
+		
+		List<String> setValuedAttrs = Lists.newArrayList("req_upc_10", "req_upc_11", "req_upc_12", "req_upc_13", "req_upc_14", "req_category");
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap, setValuedAttrs);
+		
 		File matchFile = new File(matchFilePath);
 		File mismatchFile = new File(mismatchFilePath);
-		Dataset walmartData = parser.parseData("CNET-Dotcom", matchFile, mismatchFile, schemaMap);
+		Dataset walmartData = parser.parseData("CNET-Dotcom", matchFile, mismatchFile, normalizerMeta);
 		
-		Map<String, List<Simmetrics>> recommendations = AttributeSimmetricsRecommender.getSimmetricRecommendations(walmartData);
+		Map<String, List<Simmetrics>> recommendations = 
+				AttributeSimmetricsRecommender.getSimmetricRecommendations(walmartData, normalizerMeta);
 		for(Map.Entry<String, List<Simmetrics>> entry : recommendations.entrySet()) {
 			LOG.info("Attribute : " + entry.getKey() + ", Metrics : " + entry.getValue().toString());
 		}		

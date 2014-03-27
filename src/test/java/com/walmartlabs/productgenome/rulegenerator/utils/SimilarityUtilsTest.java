@@ -50,4 +50,14 @@ public class SimilarityUtilsTest {
 		score = SimilarityUtils.getSimilarity(Simmetrics.NUM_SCORE, str1, str2);
 		System.out.println("#Score : " + score);		
 	}
+	
+	@Test
+	public void testExtendedJaccard()
+	{
+		String str1 = "00027242551923, 00002724255192";
+		String str2 = "00027242551923";
+		
+		double score = SimilarityUtils.getSimilarity(Simmetrics.EXTENDED_JACCARD, str1, str2);
+		System.out.println("#Extended Jaccard Score : " + score);	
+	}
 }

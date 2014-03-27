@@ -19,6 +19,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Item;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
@@ -29,14 +30,16 @@ public class CSVDataParser implements DataParser {
 	
 	private static int ID_ATTR_INDEX = 0;
 	
-	public Dataset parseData(File matchFile, File mismatchFile, String datasetName, BiMap<String, String> schemaMap) 
+	public Dataset parseData(String datasetName, File matchFile, File mismatchFile, DatasetNormalizerMeta normalizerMeta) 
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Dataset parseData(String datasetName, File sourceFile, File targetFile, File goldFile, BiMap<String, String> schemaMap) 
+	public Dataset parseData(String datasetName, File sourceFile, File targetFile, File goldFile, DatasetNormalizerMeta normalizerMeta) 
 	{
+		BiMap<String, String> schemaMap = normalizerMeta.getSchemaMap();
+		
 		Multimap<String, String> goldMap = getGoldenDataMap(goldFile);
 		int goldPairs = goldMap.size();
 		int totalMismatchPairsToRetain = 2*goldPairs < 3000 ? 3000 : 2*goldPairs;

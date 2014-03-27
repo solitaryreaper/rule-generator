@@ -27,8 +27,9 @@ public class Constants {
 	 */
 	public static final int NUM_METRICS_PER_ATTRIBUTE = 4;
 	
-	public static final String DEFAULT_TOKENIZER = " ";
-	public static final String DEFAULT_SET_VALUE_ATTRIBIUTE_TOKENIZER = ",";
+	public static final String DEFAULT_TOKENIZATION_DELIMITER = " ";
+	public static final String DEFAULT_SET_VALUE_ATTRIBIUTE_DELIMITER = ",";
+	public static final String DEFAULT_COLUMN_DELIMITER = "\\|#";
 	
 	/**
 	 * Percentage of features in each random tree in the random forest as compared to the original

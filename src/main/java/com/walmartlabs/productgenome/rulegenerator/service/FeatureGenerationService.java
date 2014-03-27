@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Feature;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureVector;
@@ -36,7 +37,7 @@ public class FeatureGenerationService {
 	 * @param rawDataset
 	 * @return
 	 */
-	public static FeatureDataset generateFeatures(Dataset rawDataset)
+	public static FeatureDataset generateFeatures(Dataset rawDataset, DatasetNormalizerMeta normalizerMeta)
 	{
 		String mapFileLoc = Constants.DATA_FILE_PATH_PREFIX + "_map_" + rawDataset.getName() + ".txt";
 		File mapFile = new File(mapFileLoc);
@@ -57,7 +58,7 @@ public class FeatureGenerationService {
 			
 			name = rawDataset.getName();
 			Map<String, List<Simmetrics>> attrSimmetrics = 
-					AttributeSimmetricsRecommender.getSimmetricRecommendations(rawDataset);
+					AttributeSimmetricsRecommender.getSimmetricRecommendations(rawDataset, normalizerMeta);
 
 			features = getAllFeatures(attrSimmetrics);
 			List<ItemPair> itemPairs = rawDataset.getItemPairs();

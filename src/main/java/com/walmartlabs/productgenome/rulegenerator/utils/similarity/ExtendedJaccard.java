@@ -1,11 +1,9 @@
 package com.walmartlabs.productgenome.rulegenerator.utils.similarity;
 
-import java.util.logging.Logger;
-
-import com.walmartlabs.productgenome.rulegenerator.Constants;
-
 import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.Levenshtein;
+
+import com.walmartlabs.productgenome.rulegenerator.Constants;
 
 /**
  * Implements the extended jaccard similarity metric. Use this specifically for set-valued attributes.
@@ -18,10 +16,12 @@ import uk.ac.shef.wit.simmetrics.similaritymetrics.Levenshtein;
  */
 public class ExtendedJaccard {
 
-	private Logger LOG = Logger.getLogger(ExtendedJaccard.class.getName());
+	private String DUMMY_STRING = "dummy123999#";
 	
 	private AbstractStringMetric metric = null;
 	private AbstractStringMetric DEFAULT_METRIC = new Levenshtein();
+	
+	private String setValueDelimiter = Constants.DEFAULT_SET_VALUE_ATTRIBIUTE_DELIMITER;
 	
 	private double threshold = 0.75;
 	
@@ -46,6 +46,14 @@ public class ExtendedJaccard {
 		this.threshold = threshold;
 	}	
 	
+	public String getSetValueDelimiter() {
+		return setValueDelimiter;
+	}
+
+	public void setSetValueDelimiter(String setValueDelimiter) {
+		setValueDelimiter = setValueDelimiter;
+	}
+
 	/**
 	 * TODO :
 	 * 1) Add maximum weighted bipartite matching logic.
@@ -56,8 +64,8 @@ public class ExtendedJaccard {
 	 */
 	public double getSimilarity(String str1, String str2)
 	{
-		String[] tokensA = str1.trim().split(Constants.DEFAULT_SET_VALUE_ATTRIBIUTE_TOKENIZER);
-		String[] tokensB = str2.trim().split(Constants.DEFAULT_SET_VALUE_ATTRIBIUTE_TOKENIZER);
+		String[] tokensA = str1.trim().split(setValueDelimiter);
+		String[] tokensB = str2.trim().split(setValueDelimiter);
 		
 		int numTokensA = tokensA.length;
 		int numTokensB = tokensB.length;
@@ -67,12 +75,14 @@ public class ExtendedJaccard {
 
 		for(int i=0; i < tokensA.length; i++) {
 			double maxScore = Double.MIN_VALUE;
+			int maxIndex = -1;
 			String outer = tokensA[i].toLowerCase().trim();
 			for(int j=0; j < tokensB.length; j++) {
 				String inner = tokensB[j].toLowerCase().trim();
 				double score = metric.getSimilarity(outer, inner);
 				if(Double.compare(score, maxScore) > 0) {
 					maxScore = score;
+					maxIndex = j;
 				}
 			}
 			
@@ -80,6 +90,8 @@ public class ExtendedJaccard {
 			if(Double.compare(maxScore, threshold) > 0) {
 				++simTokens;
 				simScore += maxScore;
+				// Hack to ensure that the same token is not again used for comparison
+				tokensB[maxIndex] = DUMMY_STRING;
 			}
 		}
 		
