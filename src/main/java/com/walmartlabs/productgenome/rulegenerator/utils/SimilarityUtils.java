@@ -75,17 +75,7 @@ public class SimilarityUtils {
 			try{
 				Double f1 = Double.parseDouble(s1);
 				Double f2 = Double.parseDouble(s2);
-				Double min = 0.0d;
-				if(Double.compare(f1, 0.0d) == 0 && Double.compare(f2, 0.0d) != 0) {
-					min = f2;
-				}
-				else if(Double.compare(f1, 0.0d) != 0 && Double.compare(f2, 0.0d) == 0) {
-					min = f1;
-				}
-				else if(Double.compare(f1, 0.0d) != 0 && Double.compare(f2, 0.0d) != 0) {
-					min = Math.min(f1,f2);
-				}
-				else{
+				if(Double.compare(f1, 0.0d) == 0 && Double.compare(f2, 0.0d) == 0) {
 					res = 0.0d;
 					break;
 				}
@@ -94,7 +84,9 @@ public class SimilarityUtils {
 					res = 1.0d;
 				}
 				else {
-					res = 1/(Math.abs(f1-f2)/(f1 + f2));					
+					double diff = Math.abs(f1-f2);
+					double sum = f1 + f2;
+					res = 1/(diff/sum);					
 				}
 			}
 			catch(NumberFormatException nfe){

@@ -39,16 +39,11 @@ public class SimilarityUtilsTest {
 	@Test 
 	public void testNumeric()
 	{
-		String str1 = "1999";
-		String str2 = "1999";
+		String str1 = "9780932529558";
+		String str2 = "9780849346330";
 		
 		double score = SimilarityUtils.getSimilarity(Simmetrics.NUM_SCORE, str1, str2);
-		System.out.println("#Score : " + score);
-		
-		str1 = "1999";
-		str2 = "2000";
-		score = SimilarityUtils.getSimilarity(Simmetrics.NUM_SCORE, str1, str2);
-		System.out.println("#Score : " + score);		
+		System.out.println("#Numeric Similarity Score : " + score);
 	}
 	
 	@Test

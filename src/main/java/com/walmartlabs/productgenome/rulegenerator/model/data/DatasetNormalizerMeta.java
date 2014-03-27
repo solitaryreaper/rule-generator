@@ -3,7 +3,6 @@ package com.walmartlabs.productgenome.rulegenerator.model.data;
 import java.util.List;
 
 import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 
 /**
@@ -24,9 +23,9 @@ public class DatasetNormalizerMeta {
 	// normalization.
 	private BiMap<String, String> schemaMap = null;
 	
-	public DatasetNormalizerMeta()
+	public DatasetNormalizerMeta(BiMap<String, String> schemaMap)
 	{
-		
+		this.schemaMap = schemaMap;
 	}
 	
 	public DatasetNormalizerMeta(BiMap<String, String> schemaMap, List<String> setValuedAttributes)
@@ -77,7 +76,34 @@ public class DatasetNormalizerMeta {
 	
 	public boolean isSetValuedAttribute(String attrName)
 	{
-		return getSetValuedAttributes().contains(attrName);
+		List<String> setValuedAttrs = getSetValuedAttributes();
+		if(setValuedAttrs == null || setValuedAttrs.isEmpty()) {
+			return false;
+		}
+		
+		boolean isSetValuedAttr = false;
+		if(setValuedAttrs.contains(attrName)) {
+			isSetValuedAttr = true;
+		}
+		/**
+		 * Flexibility to specify either source or target attribute schema name. For example,
+		 * req_upc_14 <--> upc_14.
+		 * 
+		 * This should work both if upc_14 or req_upc_14 is specified as a set valued attribute.
+		 */
+		else {
+			BiMap<String, String> schemaMap = getSchemaMap();
+			if(schemaMap.containsKey(attrName)) {
+				isSetValuedAttr = setValuedAttrs.contains(schemaMap.get(attrName));
+			}
+			else if(schemaMap.containsValue(attrName)) {
+				isSetValuedAttr = setValuedAttrs.contains(schemaMap.inverse().get(attrName));
+			}
+				
+		}
+		
+		return isSetValuedAttr;
+
 	}
 }
 

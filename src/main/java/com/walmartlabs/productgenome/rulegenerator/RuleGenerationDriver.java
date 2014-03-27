@@ -86,11 +86,11 @@ public class RuleGenerationDriver {
 		
 		//testAmazonGoogleProductsDataset(RuleLearner.RandomForest, arffFileLoc);
 		
-		//testDBLPACMDataset(RuleLearner.RandomForest, arffFileLoc);
+		testDBLPACMDataset(RuleLearner.RandomForest, arffFileLoc);
 		
 		//testWalmartBooksDataset(RuleLearner.RandomForest, arffFileLoc);
 		
-		testWalmartCNETDotcomDataset(RuleLearner.RandomForest, arffFileLoc);
+		//testWalmartCNETDotcomDataset(RuleLearner.RandomForest, arffFileLoc);
 	}
 
 	private static void testRestaurantDataset(RuleLearner learner, String arffFileLoc)
@@ -118,7 +118,14 @@ public class RuleGenerationDriver {
 		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/Buy.csv";
 		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/abt_buy_perfectMapping.csv";
 		
-		testDataset("Abt-Buy", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		schemaMap.put("name", "name");
+		schemaMap.put("description", "description");
+		schemaMap.put("price", "price");
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
+		
+		testDataset("Abt-Buy", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath, normalizerMeta);
 	}
 	
 	private static void testDBLPScholarDataset(RuleLearner learner, String arffFileLoc)
@@ -127,7 +134,15 @@ public class RuleGenerationDriver {
 		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/Scholar_cleaned.csv";
 		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-Scholar/DBLP-Scholar_perfectMapping.csv";
 		
-		testDataset("DBLP-Scholar", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		schemaMap.put("title", "title");
+		schemaMap.put("authors", "authors");
+		schemaMap.put("venue", "venue");
+		schemaMap.put("year", "year");		
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
+		
+		testDataset("DBLP-Scholar", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath, normalizerMeta);
 	}
 	
 	private static void testAmazonGoogleProductsDataset(RuleLearner learner, String arffFileLoc)
@@ -136,7 +151,15 @@ public class RuleGenerationDriver {
 		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/Amazon-GoogleProducts/GoogleProducts_cleaned.csv";
 		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/Amazon-GoogleProducts/Amzon_GoogleProducts_perfectMapping.csv";
 		
-		testDataset("Amazon-Google-Products", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		schemaMap.put("title", "title");
+		schemaMap.put("description", "description");
+		schemaMap.put("manufacturer", "manufacturer");
+		schemaMap.put("price", "price");			
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
+		
+		testDataset("Amazon-Google-Products", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath, normalizerMeta);
 	}
 	
 	private static void testDBLPACMDataset(RuleLearner learner, String arffFileLoc)
@@ -145,7 +168,15 @@ public class RuleGenerationDriver {
 		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-ACM/ACM_cleaned.csv";
 		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-ACM/gold.csv";
 		
-		testDataset("DBLP-ACM", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		schemaMap.put("title", "title");
+		schemaMap.put("authors", "authors");
+		schemaMap.put("venue", "venue");
+		schemaMap.put("year", "year");		
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
+		
+		testDataset("DBLP-ACM", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath, normalizerMeta);
 	}
 	
 	private static void testWalmartBooksDataset(RuleLearner learner, String arffFileLoc)
@@ -154,7 +185,27 @@ public class RuleGenerationDriver {
 		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/walmart-books/walmart_refined.csv";
 		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/walmart-books/gold.csv";
 		
-		testDataset("Walmart-Books", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath);		
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		schemaMap.put("title", "title");
+		schemaMap.put("author", "author");
+		schemaMap.put("numAuthors", "numAuthors");
+		schemaMap.put("binding", "binding");
+		schemaMap.put("publisher", "publisher");
+		schemaMap.put("isbn", "isbn");
+		schemaMap.put("pubYear", "pubYear");
+		schemaMap.put("pubMonth", "pubMonth");
+		schemaMap.put("pubDay", "pubDay");
+		schemaMap.put("editionNum", "editionNum");
+		schemaMap.put("pages", "pages");
+		schemaMap.put("volume", "volume");
+		schemaMap.put("lang", "lang");
+		schemaMap.put("editionDescr", "editionDescr");
+		schemaMap.put("series", "series");
+		schemaMap.put("upc", "upc");		
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
+
+		testDataset("Walmart-Books", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath, normalizerMeta);		
 	}
 	
 	private static void testWalmartCNETDotcomDataset(RuleLearner learner, String arffFileLoc)
@@ -192,7 +243,7 @@ public class RuleGenerationDriver {
 	 * @param goldFilePath
 	 */
 	private static void testDataset(String datasetName, RuleLearner learner, String arffFileLoc, String srcFilePath, 
-			String tgtFilePath, String goldFilePath)
+			String tgtFilePath, String goldFilePath,DatasetNormalizerMeta normalizerMeta)
 	{
 		LOG.info("Testing " + datasetName + " dataset ..");
 		
@@ -204,10 +255,8 @@ public class RuleGenerationDriver {
 			
 			timer.start();
 			DataParser parser = new CSVDataParser();
-			BiMap<String, String> schemaMap = HashBiMap.create();
-			DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap, null);
-
 			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, normalizerMeta);
+			
 			timer.stop();
 			LOG.info("Time taken for parsing CSV input file : " + timer.toString());
 			
