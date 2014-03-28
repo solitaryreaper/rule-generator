@@ -61,7 +61,7 @@ public class WalmartDataParser implements DataParser {
 	 * @param itemPairDataFile	A file object representing the file containg itempairs.
 	 * @return	List of itempair objects.
 	 */
-	private Dataset parseFile(String datasetName, File itemPairDataFile, MatchStatus matchStatus, BiMap<String, String> schemaMap)
+	public Dataset parseFile(String datasetName, File itemPairDataFile, MatchStatus matchStatus, BiMap<String, String> schemaMap)
 	{
 		String firstItemID = null;
 		Map<String, String> sourceItemAttributes = Maps.newHashMap();

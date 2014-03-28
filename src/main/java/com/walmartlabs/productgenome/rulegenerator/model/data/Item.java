@@ -2,6 +2,8 @@ package com.walmartlabs.productgenome.rulegenerator.model.data;
 
 import java.util.Map;
 
+import com.google.common.base.Objects;
+
 /**
  * Models a single item like a product etc.
  * 
@@ -18,6 +20,14 @@ public class Item {
 		this.attrMap = attrMap;
 	}
 
+	public boolean equals(Object obj)
+	{
+	    if (obj == null) return false;
+	    if (getClass() != obj.getClass()) return false;
+	    final Item that = (Item) obj;
+	    return 	Objects.equal(this.id, that.id);		
+	}
+	
 	public String getId() {
 		return id;
 	}

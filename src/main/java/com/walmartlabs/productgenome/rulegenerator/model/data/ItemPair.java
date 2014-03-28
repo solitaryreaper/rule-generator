@@ -1,5 +1,7 @@
 package com.walmartlabs.productgenome.rulegenerator.model.data;
 
+import com.google.common.base.Objects;
+
 /**
  * Models a pair of items that have to be matched with each other.
  * @author excelsior
@@ -42,6 +44,15 @@ public class ItemPair {
 		this.matchStatus = matchStatus;
 	}
 
+	public boolean equals(Object obj)
+	{
+	    if (obj == null) return false;
+	    if (getClass() != obj.getClass()) return false;
+	    final ItemPair that = (ItemPair) obj;
+	    return 	Objects.equal(this.itemA, that.itemA) &&
+	            Objects.equal(this.itemB, that.itemB);		
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

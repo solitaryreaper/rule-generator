@@ -86,11 +86,11 @@ public class RuleGenerationDriver {
 		
 		//testAmazonGoogleProductsDataset(RuleLearner.RandomForest, arffFileLoc);
 		
-		testDBLPACMDataset(RuleLearner.RandomForest, arffFileLoc);
+		//testDBLPACMDataset(RuleLearner.RandomForest, arffFileLoc);
 		
 		//testWalmartBooksDataset(RuleLearner.RandomForest, arffFileLoc);
 		
-		//testWalmartCNETDotcomDataset(RuleLearner.RandomForest, arffFileLoc);
+		testWalmartCNETDotcomDataset(RuleLearner.RandomForest, arffFileLoc);
 	}
 
 	private static void testRestaurantDataset(RuleLearner learner, String arffFileLoc)
@@ -210,8 +210,8 @@ public class RuleGenerationDriver {
 	
 	private static void testWalmartCNETDotcomDataset(RuleLearner learner, String arffFileLoc)
 	{
-		String matchFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/CNET_WALMART_DOTCOM_MATCHED.txt";
-		String mismatchFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/CNET_WALMART_DOTCOM_MISMATCHED.txt";
+		String matchFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/CNET_DOTCOM_MATCHED_CLEANED.txt";
+		String mismatchFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/CNET_DOTCOM_MISMATCHED_CLEANED.txt";
 		
 		BiMap<String, String> schemaMap = HashBiMap.create();
 		schemaMap.put("pd_title", "pd_title");

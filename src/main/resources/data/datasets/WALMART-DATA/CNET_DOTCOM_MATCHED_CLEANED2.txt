@@ -2,7 +2,7 @@ ID|#1242642|#S0026553|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Sony 32 MB Memory Stick|#Sony - Flash memory card - 32 MB - MS - for Sony DSR-PD100, PD150, ICD-MS515; Handycam CCD-TRV25; Mavica-MVC-CD1000, FD200, FD92, FD97|#
 pd_title|#[Sony 32 MB Memory Stick]|#[Sony - Flash memory card - 32 MB - MS - for Sony DSR-PD100, PD150, ICD-MS515; Handycam CCD-TRV25; Mavica-MVC-CD1000, FD200, FD92, FD97]|#
-req_brand_name|#[Sony]|#[Sony]|#
+req_brand_name|#null|#[Sony]|#
 req_manufacturer|#[Sony]|#[Sony]|#
 req_description|#[<UL><LI>32 MB storage capacity<LI>Ultra-small, thin design<LI>Erasure-prevention switch<LI>10-pin connector for high reliability</UL>, Smaller than you'd expect and bigger than you'd imagine, the Memory Stick will store digital information just like any other memory card. Use it with Sony and other compatible brands of digital cameras, camcorders and MP3 players.<p> <FONT COLOR="003399"> <b>This item is currently available online only.</b> </FONT> <p>]|#[Sony - flash memory card - 32 MB - MS]|#
 req_category|#[Other Memory Cards, USB & Flash Drives, UNASSIGNED/UNASSIGNED SHELF, Electronics]|#[Flash memory card]|#
@@ -26,8 +26,8 @@ ID|#27675517|#S0077167|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Oki 320/321 and 184T Printhead|#OKI - Printhead - 1 - 200 million characters - for Microline 184 Turbo, 186, 321, 321 Elite|#
 pd_title|#[Oki 320/321 and 184T Printhead]|#[OKI - Printhead - 1 - 200 million characters - for Microline 184 Turbo, 186, 321, 321 Elite]|#
-req_brand_name|#[OKI]|#[OKI]|#
-req_manufacturer|#[OKI]|#[OKI]|#
+req_brand_name|#null|#[OKI]|#
+req_manufacturer|#null|#[OKI]|#
 req_description|#null|#[OKI - printhead]|#
 req_category|#null|#[Printing consumables]|#
 req_upc|#null|#[0765787186223]|#
@@ -42,7 +42,7 @@ ID|#931958|#S0113404|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Mustek Plug-N-Scan 1200 UB Scanner|#Mustek Plug-n-Scan - Flatbed scanner - A4 - 600 dpi x 1200 dpi - USB|#
 pd_title|#[Mustek Plug-N-Scan 1200 UB Scanner]|#[Mustek Plug-n-Scan - Flatbed scanner - A4 - 600 dpi x 1200 dpi - USB]|#
-req_brand_name|#[Mustek]|#[Mustek]|#
+req_brand_name|#null|#[Mustek]|#
 req_manufacturer|#[Mustek]|#[Mustek]|#
 req_description|#[<UL><LI>Model No. 1200UB<LI>600 x 1200 dpi high-resolution<LI>48-bit color<LI>Slim styling<LI>Easy USB installation<LI>No power adapter needed</UL>, This USB scanner's slim styling and powerful capabilities make it the perfect accessory for your on-the-go scanning needs.]|#[Mustek Plug-n-Scan - flatbed scanner]|#
 req_category|#[UNASSIGNED/UNASSIGNED SHELF, Electronics]|#[Flatbed scanner - desktop]|#
@@ -69,7 +69,7 @@ ID|#28687137|#S0366962|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Cortelco ITT-2500-27MC-ASH 250044-VBA-27Mc Offshore W/ Mw|#Cortelco 2500 - Corded phone - single-line operation - light ash|#
 pd_title|#[Cortelco ITT-2500-27MC-ASH 250044-VBA-27Mc Offshore W/ Mw]|#[Cortelco 2500 - Corded phone - single-line operation - light ash]|#
-req_brand_name|#[Cortelco]|#[Cortelco]|#
+req_brand_name|#null|#[Cortelco]|#
 req_manufacturer|#[Cortelco]|#[Cortelco]|#
 req_description|#[- Cortelco corded phone<br />- Hearing aid compatible<br />- Message waiting capability<br />- Ringer control<br />- 9 Foot cord included<br />- Ash colored<br /><br />ITT250027MCASH]|#[Cortelco 2500 - corded phone]|#
 req_category|#[Electronics/Office/Office Technology/Phones & Accessories/All Phones, Electronics, Corded Phones]|#[Corded phone]|#
@@ -90,7 +90,7 @@ ID|#S0424798|#1192160|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#HP - Handheld cover - beige - for Jornada 540, 545, 548|#French Beige Cover for Jornada 548 and 525 Pocket PC|#
 pd_title|#[HP - Handheld cover - beige - for Jornada 540, 545, 548]|#[French Beige Cover for Jornada 548 and 525 Pocket PC]|#
-req_brand_name|#[HP]|#[HP]|#
+req_brand_name|#[HP]|#null|#
 req_manufacturer|#[Hewlett-Packard]|#[Hewlett Packard]|#
 req_description|#[HP handheld cover]|#[<font color=CC0000><B>Clearance!  Was $15.00</B></font><BR>Customize your Jornada with this removable french beige-colored metal cover.<p> <FONT COLOR="003399"> <b>This item is currently available online only.</b> </FONT> <p>, <BR><UL><LI>Includes a stylus pen<LI>Fits Jornada 520, 525, 540, 545, 547 and 548</UL>]|#
 req_category|#[Handheld cover, Handheld accessories]|#[UNASSIGNED/UNASSIGNED SHELF, Electronics]|#
@@ -115,7 +115,7 @@ ID|#24230268|#S0451138|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Tripp Lite N001-050-BK Snagless CAT-5/5E Patch Cables, 50', Black|#Tripp Lite - Patch cable - RJ-45 (M) - RJ-45 (M) - 50 ft - UTP - CAT 5e - snagless, booted - black|#
 pd_title|#[Tripp Lite N001-050-BK Snagless CAT-5/5E Patch Cables, 50', Black]|#[Tripp Lite - Patch cable - RJ-45 (M) - RJ-45 (M) - 50 ft - UTP - CAT 5e - snagless, booted - black]|#
-req_manufacturer|#[Tripp Lite]|#[Tripp Lite]|#
+req_manufacturer|#null|#[Tripp Lite]|#
 req_description|#null|#[Snagless, booted, Tripp Lite patch cable - 50 ft - black]|#
 req_category|#null|#[Patch cable - CAT 5e]|#
 req_upc|#null|#[0037332042743]|#
@@ -132,7 +132,7 @@ ID|#S0470597|#1953191|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#JVC XL-MC334BK - CD changer - black|#JVC 200-Disc CD Changer, XL-MC334BK|#
 pd_title|#[JVC XL-MC334BK - CD changer - black]|#[JVC 200-Disc CD Changer, XL-MC334BK]|#
-req_brand_name|#[JVC]|#[JVC]|#
+req_brand_name|#[JVC]|#null|#
 req_manufacturer|#[JVC]|#[JVC]|#
 req_description|#[JVC XL-MC334BK - CD changer]|#[This rotary-style changer connects to your stereo system to provide hours or even days of continuous music. Your discs can be organized into 27 different categories so they're easy to select., <ul><Li>Electric door with disc eject<li>Up to 25 discs can be changed while one plays<li>Continuous and random play options<li>Title memory of up to 32 characters per disc<li>Up to 32 tracks or discs can be programmed<li>Search by title, performer or category<li>8x oversampling for detailed sound <li>CD text capability<li>Optical digital output<li>Remote control<li>19"D x 17-3/16"W x 7-7/8"H</ul>]|#
 req_category|#[CD changer]|#[UNASSIGNED/UNASSIGNED SHELF, Electronics]|#
@@ -209,7 +209,7 @@ ID|#1242632|#S0763331|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Sony CD Sports Walkman With AM/FM D-FS18|#Sony D FS18 - CD player - black, silver, yellow|#
 pd_title|#[Sony CD Sports Walkman With AM/FM D-FS18]|#[Sony D FS18 - CD player - black, silver, yellow]|#
-req_brand_name|#[Sony]|#[Sony]|#
+req_brand_name|#null|#[Sony]|#
 req_manufacturer|#[Sony]|#[Sony]|#
 req_description|#[Designed for outdoor activities, this rugged, water-resistant model features Sony's G-Protection circuitry for skip-free performance., <br><ul<li>Digital AM/FM stereo tuner with 30 station presets<li>Plays CD-R/RW discs<li>Up to 64 CD tracks can be programmed<li>Comfortable stereo headphones<li>Sports hand strap supplied<li>Built-in battery recharging capability<li>Plays up to 35 hours on 2 AA batteries</ul>]|#[Sony D FS18 - CD player - CD]|#
 req_category|#[UNASSIGNED/UNASSIGNED SHELF, Electronics]|#[CD player]|#
@@ -237,8 +237,8 @@ ID|#S10052228|#19498335|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Dell M110 - DLP projector - 300 lumens - 1280 x 800 - widescreen - HD 720p|#Dell M110 DLP Projector|#
 pd_title|#[Dell M110 - DLP projector - 300 lumens - 1280 x 800 - widescreen - HD 720p]|#[Dell M110 DLP Projector]|#
-req_brand_name|#[Dell]|#[Dell]|#
-req_manufacturer|#[Dell]|#[Dell]|#
+req_brand_name|#[Dell]|#null|#
+req_manufacturer|#[Dell]|#null|#
 req_description|#[Dell M110 DLP projector]|#null|#
 req_category|#[DLP projector - High Definition 720p]|#[Home Theater Projectors, Projectors]|#
 req_upc|#[0884116063049]|#null|#
@@ -261,7 +261,7 @@ ID|#S10057846|#16672136|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Action Sport Drives ...Lost SurfDrive Black Sheep Bomber - USB flash drive - 4 GB - Hi-Speed USB|#Lost 4GB Black Sheep Bomber SurfDrive USB Flash Drive|#
 pd_title|#[Action Sport Drives ...Lost SurfDrive Black Sheep Bomber - USB flash drive - 4 GB - Hi-Speed USB]|#[Lost 4GB Black Sheep Bomber SurfDrive USB Flash Drive]|#
-req_brand_name|#[Action]|#[Action]|#
+req_brand_name|#[Action]|#null|#
 req_manufacturer|#[EP Memory]|#[ACP-EP Memory]|#
 req_description|#[Action Sport Drives ...Lost SurfDrive Black Sheep Bomber - USB flash drive - 4 GB]|#[Action Sport Drives have teamed up with the best surfboard companies in the industry to create the first and only authentic USB Flash Drive short surfboard. We've combined this innovative design with the graphics from actual Lost surfboards., <p><b>Lost 4GB Black Sheep Bomber SurfDrive USB Flash Drive:</b><ul><li>Capacity: 4GB<li>Neck strap attachment<li>USB 2.0 interface<li>Plug and play<li>LED indicator<li>Lost graphics with rubberized texture</ul>]|#
 req_category|#[USB flash drive]|#[Electronics/Computers/Computer Accessories/USB Flash Drives, USB Flash Drives, Electronics]|#
@@ -311,7 +311,7 @@ ID|#26819535|#S10126055|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Corsair Vengeance 16GB DDR3 SDRAM Memory Module|#Corsair Vengeance - Memory - 16 GB : 2 x 8 GB - DIMM 240-pin - DDR3 - 1600 MHz / PC3-12800 - CL10 - 1.5 V - unbuffered - non-ECC|#
 pd_title|#[Corsair Vengeance 16GB DDR3 SDRAM Memory Module]|#[Corsair Vengeance - Memory - 16 GB : 2 x 8 GB - DIMM 240-pin - DDR3 - 1600 MHz / PC3-12800 - CL10 - 1.5 V - unbuffered - non-ECC]|#
-req_manufacturer|#[Corsair]|#[Corsair]|#
+req_manufacturer|#null|#[Corsair]|#
 req_description|#null|#[Corsair Vengeance memory - 16 GB : 2 x 8 GB - DIMM 240-pin - DDR3, Intel Extreme Memory Profiles (XMP), dual channel, Vengeance heatspreader , unbuffered]|#
 req_upc|#null|#[0843591012904]|#
 normalized_upc_1|#null|#[00843591012904]|#
@@ -325,7 +325,7 @@ ID|#S10201032|#19581008|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#HP Pavilion dv7-6c63nr - Core i5 2450M / 2.5 GHz - Windows 7 Home Premium 64-bit - 4 GB RAM - 640 GB HDD - DVD SuperMulti - 17.3" HD+ BrightView wide 1600 x 900 / HD+ - Intel HD Graphics 3000 - steel gray, brushed aluminum|#HP Steel Gray 17.3" Pavilion DV7-6C63NR Laptop PC with Intel Core i5-2450M Processor and Windows 7 Home Premium with Windows 8 Pro Upgrade Option|#
 pd_title|#[HP Pavilion dv7-6c63nr - Core i5 2450M / 2.5 GHz - Windows 7 Home Premium 64-bit - 4 GB RAM - 640 GB HDD - DVD SuperMulti - 17.3" HD+ BrightView wide 1600 x 900 / HD+ - Intel HD Graphics 3000 - steel gray, brushed aluminum]|#[HP Steel Gray 17.3" Pavilion DV7-6C63NR Laptop PC with Intel Core i5-2450M Processor and Windows 7 Home Premium with Windows 8 Pro Upgrade Option]|#
-req_brand_name|#[HP]|#[HP]|#
+req_brand_name|#[HP]|#null|#
 req_manufacturer|#[Hewlett-Packard]|#[HP]|#
 req_description|#[Security lock slot (cable lock sold separately), power-on password, HP 3D DriveGuard, HP CoolSense, HP Pavilion dv7-6c63nr - 17.3" - Core i5 2450M - Windows 7 Home Premium 64-bit - 4 GB RAM - 640 GB HDD]|#[Hear that? It's the sound of the ultimate in entertainment. With Beats Audio, a built-in subwoofer and quad speakers, the HP Pavilion dv7 delivers surprisingly immersive sound. You get a gorgeous 17.3" diagonal HD display for watching videos, a built-in HP TrueVision HD webcam for keeping in touch and a fingerprint reader for extra security. All in a brushed aluminum design that stays cool to keep you comfortable., <p><b>Special Offer: Buy this Windows 7 PC and get Windows 8 Pro for $14.99.  We've got you covered. Click <a href="http://www.walmart.com/Windows8" target="_blank">HERE</a> to learn more about Microsoft Windows 8 Pro & the upgrade program.</b><p><p><br><b>HP 17.3" Pavilion DV7-6C63NR Laptop PC:</b><br><br><b>Key Features and Benefits:</b><ul><li>Intel Core i5-2450M processor<br>2.50GHz<br><br><li>4GB DDR3 SDRAM system memory (expandable to 16GB)<br>Gives you the power to handle most power-hungry applications and tons of multimedia work<br><br><li>640GB SATA hard drive<br>Store 426,000 photos, 182,000 songs or 336 hours of HD video and more<br><br><li>SuperMulti DVD Burner<br>Watch movies, and read and write CDs and DVDs in multiple formats<br><br><li>10/100/1000 Gigabit Ethernet, 802.11b/g/n Wireless LAN<br>Connect to a broadband modem with wired Ethernet or wirelessly connect to a Wi-Fi signal or hotspot with the 802.11b/g/n connection built into your PC<br><br><li>17.3" HD+ BrightView LED-backlit display<br>Intel HD Graphics 3000</ul><br><br><b>Additional Features:</b><ul><li>HP TrueVision HD webcam<li>2-in-1 memory card reader<li>2 x USB 3.0 ports, 2 x USB 2.0 ports, 2 x headphone-out, 1 x microphone-in, 1 x RJ-45 Ethernet port, 1 x VGA port, 1 x HDMI port<li>9-cell lithium-ion battery, up to 10 hours battery life</ul><br><br><b>Software:</b><ul><li>Genuine Microsoft Windows 7 Home Premium 64-Bit Edition (To learn more about the features of Windows 7, click <b><a href="http://www.walmart.com/catalog/catalog.gsp?cat=559890">here</a></b>)<li>Microsoft Office Starter 2010: Includes reduced functionality versions of Microsoft Word and Excel,  with advertising.  PowerPoint and Outlook are NOT included.  Purchase Office 2010 today and get the most out of your new PC.  (To learn more about the features of Office 2010, click <b><a href="http://www.walmart.com/cp/microsoft-office-2010/1064728" target="_blank">here</a></b>)<li>Norton Internet Security 2012 (60-day)<li>CyberLink YouCam DE<li>HP Recovery Manager</ul><br><br><b>Support and Warranty:</b><ul><li>1-year limited hardware warranty<li>Restore discs are not included (unless specified by supplier). We recommend you use the installed software to create your own restore and backup DVD the first week you use the computer.</ul><br><br><b>What's In The Box:</b><ul><li>Power cord<li>9-cell lithium-ion battery<li>Quick Start Guide</ul><br><br><b><I>To see the manufacturer's specifications for this product, click <a href="http://i.walmart.com/i/rb/0088611264416.pdf" target="_blank">here</a>.<br><br>To see a list of our PC Accessories, click <a href=http://www.walmart.com/cp/accessories-peripherals/132959 target="_blank">here</a>.<br><br>Trade in your used computer and electronics for more cash to spend at Walmart. Good for your wallet and the environment - click <a href="http://gazelle.com/register_click?campaign=electronics_trade_in&media_type=text&network=walmart&destination_url=http%3A%2F%2Fwalmart.gazelle.com&placement=product_computers&creative=learn_more" target="_blank">here</a>.</I></b><br><br><b>ENERGY STAR<sup>&reg;</sup></b><br>Products that are ENERGY STAR-qualified prevent greenhouse gas emissions by meeting strict energy efficiency guidelines set by the U.S. Environmental Protection Agency and the U.S. Department of Energy. The ENERGY STAR name and marks are registered marks owned by the U.S. government, as part of their energy efficiency and environmental activities.]|#
 req_category|#null|#[Electronics/Computers/Laptop Computers, Laptops, Electronics]|#
@@ -379,7 +379,7 @@ ID|#20606569|#S10253372|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Motorola HZ720 ELITE Bluetooth Headset|#Motorola ELITE FLIP - Headset - in-ear - over-the-ear mount - wireless - Bluetooth 3.0 EDR - for Motorola DROID 4|#
 pd_title|#[Motorola HZ720 ELITE Bluetooth Headset]|#[Motorola ELITE FLIP - Headset - in-ear - over-the-ear mount - wireless - Bluetooth 3.0 EDR - for Motorola DROID 4]|#
-req_brand_name|#[Motorola ]|#[Motorola ]|#
+req_brand_name|#null|#[Motorola ]|#
 req_manufacturer|#[Motorola]|#[Motorola]|#
 req_description|#[<p>The Motorola HZ720 ELITE Bluetooth Headset provides the ultimate audio quality in a Bluetooth headset so you can stay connected anywhere and everywhere. True wideband audio and CrystalTalk dual-microphone noise cancellation means this Motorola Bluetooth Headset provides superior sound quality. This Motorola ELITE Bluetooth Headset leverages Near Field Communications technology so you get the clearest call possible. The Motorola Bluetooth Headset also features My MotoSpeak for hands-free texting. Get the Motorola HZ720 ELITE Bluetooth Headset for optimal performance and advanced headset sound technology.</p>, <br><b>Motorola HZ720 ELITE Bluetooth Headset:</b><ul><li>True wideband audio<li>CrystalTalk dual-microphone noise cancellation<li>Near Field Communications technology<li>My MotoSpeak for hands-free texting</ul>]|#[Motorola ELITE FLIP - headset]|#
 req_category|#[Cell Phones/Accessories/Bluetooth, Bluetooth Headsets, Electronics]|#[Headset - Bluetooth 3.0 EDR, Headset - wireless - Bluetooth 3.0 EDR]|#
@@ -407,8 +407,8 @@ ID|#22237689|#S10285924|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#SanDisk SDCFX-064G-A61 64GB Extreme CF Card|#SanDisk Extreme - Flash memory card - 64 GB - 400x - CompactFlash|#
 pd_title|#[SanDisk SDCFX-064G-A61 64GB Extreme CF Card]|#[SanDisk Extreme - Flash memory card - 64 GB - 400x - CompactFlash]|#
-req_brand_name|#[SanDisk]|#[SanDisk]|#
-req_manufacturer|#[SanDisk]|#[SanDisk]|#
+req_brand_name|#null|#[SanDisk]|#
+req_manufacturer|#null|#[SanDisk]|#
 req_description|#null|#[SanDisk Extreme - flash memory card - 64 GB - CompactFlash]|#
 req_category|#[Memory Cards]|#[Flash memory card]|#
 req_upc|#null|#[0619659057961]|#
@@ -424,7 +424,7 @@ ID|#S10306707|#27344444|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#HP EliteBook Mobile Workstation 8560w - Core i7 2670QM / 2.2 GHz - Windows 7 Pro 64-bit - 8 GB RAM - 500 GB HDD - DVD SuperMulti DL - 15.6" Full HD UWVA anti-glare DreamColor wide 1920 x 1080 / Full HD - AMD FirePro M5950|#HP Commercial Specialty B2A80UT#ABA 8560w i7-2670QM 15.6 500G 8G|#
 pd_title|#[HP EliteBook Mobile Workstation 8560w - Core i7 2670QM / 2.2 GHz - Windows 7 Pro 64-bit - 8 GB RAM - 500 GB HDD - DVD SuperMulti DL - 15.6" Full HD UWVA anti-glare DreamColor wide 1920 x 1080 / Full HD - AMD FirePro M5950]|#[HP Commercial Specialty B2A80UT#ABA 8560w i7-2670QM 15.6 500G 8G]|#
-req_brand_name|#[HP]|#[HP]|#
+req_brand_name|#[HP]|#null|#
 req_manufacturer|#[Hewlett-Packard]|#[HP]|#
 req_description|#[HP EliteBook Mobile Workstation 8560w - 15.6" - Core i7 2670QM - Windows 7 Pro 64-bit - 8 GB RAM - 500 GB HDD, Security lock slot (cable lock sold separately), HP ProtectTools Embedded Security, HP Disk Sanitizer, HP 3D DriveGuard, HP DuraFinish, HP DuraKeys, Enhanced Pre-Boot Security, HP SpareKey, One-Step Logon, HP File Sanitizer, HP DuraCase]|#[HP Smartbuy 8560w,Core i7-2670QM CPU,15.6 FHD AG, 1GB, 8GB DDR3 RAM, 500GB HDD, DVD+-RW, 802.11abgn I3, BT, FPR, Win 7 PRO 64 OF10 STR, 3yr Warranty]|#
 req_category|#null|#[Electronics/Computers/Laptop Computers, Laptops, Electronics]|#
@@ -444,7 +444,7 @@ ID|#S10314040|#20627900|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#RCA USBNLTR - Power adapter - for Apple iPad (3rd generation); iPad 1; 2; iPhone 3G, 3GS, 4, 4S; iPod (4G, 5G); iPod classic; iPod mini; iPod nano (1G, 2G, 3G, 4G, 5G, 6G); iPod touch (1G, 2G, 3G, 4G)|#RCA USBNLTR USB Charger with Night Glow|#
 pd_title|#[RCA USBNLTR - Power adapter - for Apple iPad (3rd generation); iPad 1; 2; iPhone 3G, 3GS, 4, 4S; iPod (4G, 5G); iPod classic; iPod mini; iPod nano (1G, 2G, 3G, 4G, 5G, 6G); iPod touch (1G, 2G, 3G, 4G)]|#[RCA USBNLTR USB Charger with Night Glow]|#
-req_brand_name|#[RCA]|#[RCA]|#
+req_brand_name|#[RCA]|#null|#
 req_manufacturer|#[RCA]|#[RCA, Audiovox]|#
 req_description|#[RCA USBNLTR - power adapter]|#null|#
 req_category|#[Power adapter]|#[USB Chargers, Chargers]|#
@@ -461,7 +461,7 @@ ID|#21576592|#S10319843|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#AOC International e960Sda 19 inch 16x10 TFT LCD w spkrs|#AOC Professional e960Sda - LED monitor - 19" - 1440 x 900 - 250 cd/m2 - 1000:1 - 20000000:1 (dynamic) - 5 ms - DVI-D, VGA - speakers|#
 pd_title|#[AOC International e960Sda 19 inch 16x10 TFT LCD w spkrs]|#[AOC Professional e960Sda - LED monitor - 19" - 1440 x 900 - 250 cd/m2 - 1000:1 - 20000000:1 (dynamic) - 5 ms - DVI-D, VGA - speakers]|#
-req_brand_name|#[AOC]|#[AOC]|#
+req_brand_name|#null|#[AOC]|#
 req_manufacturer|#[AOC]|#[AOC]|#
 req_description|#[19'' Wide TFT LCD with LED backlight, 5ms, 20,000:1(DCR), 1440x900, VGA, DVI-D w HDCP, Speakers, Black Cover and Base with Hairline Texture, EPEAT Gold, Energy Star Qualified SKU: DHE960SDA, The AOC 19" LED-LCD Widescreen Monitor (e960Sda Black) is perfect for business and home office users alike. Hidden behind its classically designed case is the latest LED technology. It boasts a high typical contrast, an ultra-fast response time and wide viewing angles for excellent imaging performance. With the i-Care function, the monitor adapts the panel's brightness to the ambient light. This means a more comfortable viewing experience and lowers energy consumption at the same time. The environmentally friendly display comes in an elegant, textured black finish.]|#[AOC Professional e960Sda - LED monitor - 19", HDCP, Eco-Mode, i-Menu, e-Saver technology, Screen+, i-Care, Ionic Breeze, K-lock security slot]|#
 req_category|#[Electronics, Electronics/Computers/Monitors]|#[LED-backlit LCD monitor - 19"]|#
@@ -484,7 +484,7 @@ ID|#S10327140|#21188779|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#COBY MP-823 - Digital player  - flash 4 GB - display: 2"|#COBY MP823-4G 2in Touchscreen Video Mp3 Player 4GB|#
 pd_title|#[COBY MP-823 - Digital player  - flash 4 GB - display: 2"]|#[COBY MP823-4G 2in Touchscreen Video Mp3 Player 4GB]|#
-req_brand_name|#[COBY]|#[COBY]|#
+req_brand_name|#[COBY]|#null|#
 req_manufacturer|#[COBY Electronics]|#[Coby]|#
 req_description|#[COBY MP-823 - digital player]|#null|#
 req_category|#[Digital player, Digital player  flash based]|#null|#
@@ -501,7 +501,7 @@ ID|#20974891|#S10341432|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Yamaha MCR-332 Micro Component System, Black|#Yamaha MCR-332 - Micro system with iPhone / iPod cradle - black|#
 pd_title|#[Yamaha MCR-332 Micro Component System, Black]|#[Yamaha MCR-332 - Micro system with iPhone / iPod cradle - black]|#
-req_brand_name|#[Yamaha]|#[Yamaha]|#
+req_brand_name|#null|#[Yamaha]|#
 req_manufacturer|#[Yamaha]|#[Yamaha]|#
 req_description|#[<b>Yamaha MCR-332 Micro Component System, Black:</b><br><ul><li>Plays back iPhones and iPods</li><li>Plays back audio CDs, MP3s and WMAs</li><li>USB connection</li><li>3.5mm stereo input</li><li>FM/AM tuner with 60 total presets</li><li>Maximum Output Power: 40W</li><li>Yamaha Mini-System color: Black</li></ul>, The Yamaha Micro Component System (model MCR-332) adds 40 watts of speaker power to the audio from your iPhone, iPod or iPad. It can play these or other devices via a USB connection and can also play compact discs. You can also listen to FM or AM radio stations with the Yamaha Micro System and save up to 60 of your favorite stations as presets. With this system, you can listen to your favorite music in a variety of forms with power and clarity.]|#[Yamaha MCR-332 - micro system]|#
 req_category|#[Electronics/UNPUBLISHED CATEGORIES/Unpublished Shelves/Archive/Old Stuff/LOADING ZONE: ELECTRONICS/Loading Zone- Electronics, Electronics, Alarm Clocks]|#[Micro system with iPhone / iPod cradle]|#
@@ -530,7 +530,7 @@ ID|#S10347074|#20976020|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Ifrogz Cocoon - Case for cellular phone - polycarbonate - blue, orange - for Apple iPhone 4, 4S|#iFrogz Cocoon Cover Case for iPhone 4/4S, Lime and Black|#
 pd_title|#[Ifrogz Cocoon - Case for cellular phone - polycarbonate - blue, orange - for Apple iPhone 4, 4S]|#[iFrogz Cocoon Cover Case for iPhone 4/4S, Lime and Black]|#
-req_brand_name|#[Ifrogz]|#[Ifrogz]|#
+req_brand_name|#[Ifrogz]|#null|#
 req_manufacturer|#[Zagg]|#[iFrogz]|#
 req_description|#[Ifrogz Cocoon - case for cellular phone]|#null|#
 req_category|#[Case for cellular phone]|#[iPhone Accessories]|#
@@ -551,7 +551,7 @@ ID|#20659784|#S10375781|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Pyle Powered 15" 1000W 2-Way Plastic Molded Speaker System|#PYLE PRO PPHP1585A - Speaker - 500 Watt (total) - 2-way|#
 pd_title|#[Pyle Powered 15" 1000W 2-Way Plastic Molded Speaker System]|#[PYLE PRO PPHP1585A - Speaker - 500 Watt (total) - 2-way]|#
-req_brand_name|#[PYLE]|#[PYLE]|#
+req_brand_name|#null|#[PYLE]|#
 req_manufacturer|#[Pyle]|#[PYLE Audio]|#
 req_description|#[The Pyle Powered 15" 1000W 2-Way Plastic Molded Speaker System is a powered, wide-coverage, two-way loudspeaker that covers the complete audio spectrum, boasting 1000W of full-range, distortion-free power. It pushes everything from pounding bass to a chirpy high-end, all in one amplified cabinet. This speaker comes equipped with two XLR and one 1/4" microphone inputs as well as a standard RCA input to accommodate both voice and any electronic instrument simultaneously, each with its own volume control. It has a 35mm pole mount socket for a multitude of applications. It's ideal for bands and DJs as a main PA or instrument amplification system, so you can rock the audience anywhere, at the club or a party. And you'll always be ready for the next gig as these speakers come with a handle for easy portability. You'll also get crystal-clear acoustics in your home as a monitor., <br><b>Pyle Powered 15" 1000W 2-Way Plastic Molded Speaker System:</b><ul><li>15" woofer<li>3" titanium compression driver<li>XLR microphone input<li>XLR and stereo RCA line input<li>Master volume, bass and treble control<li>Frequency response: 45Hz - 20kHz<li>500W RMS, 1000W peak power<li>Crossover frequency: 3kHz<li>35mm speaker stand mount<li>AC 115V - 230V</ul>]|#[PYLE PRO PPHP1585A - speaker - wired]|#
 req_category|#[Speakers, Toys/ARCHIVE SHELF/CAT/NEW TOYS ITEMS/LOADING ZONE--Toys, Electronics]|#[Speaker - wired]|#
@@ -572,7 +572,7 @@ ID|#20659774|#S10375782|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Pyle Powered 8" 400W 2-Way Plastic Molded Speaker System|#PYLE PRO PPHP885A - Speaker - 200 Watt (total) - 2-way|#
 pd_title|#[Pyle Powered 8" 400W 2-Way Plastic Molded Speaker System]|#[PYLE PRO PPHP885A - Speaker - 200 Watt (total) - 2-way]|#
-req_brand_name|#[PYLE]|#[PYLE]|#
+req_brand_name|#null|#[PYLE]|#
 req_manufacturer|#[Pyle]|#[PYLE Audio]|#
 req_description|#[<br><b>Pyle Powered 8" 400W 2-Way Plastic Molded Speaker System:</b><ul><li>8" woofer<li>1" titanium compression driver<li>XLR microphone input<li>XLR and stereo RCA line input<li>Master and microphone volume control<li>Frequency response: 45Hz - 20kHz<li>200W RMS, 400W peak power<li>Crossover frequency: 3kHz<li>35mm speaker stand mount<li>AC 115V - 230V</ul>, The Pyle Powered 8" 400W 2-Way Plastic Molded Speaker System is a powered, wide-coverage, two-way loudspeaker that covers the complete audio spectrum, boasting 400W of full-range, distortion-free power. It pushes everything from pounding bass to a chirpy high-end, all in one amplified cabinet. This speaker comes equipped with two XLR and one 1/4" microphone inputs as well as a standard RCA input to accommodate both voice and any electronic instrument simultaneously, each with its own volume control. It has a 35mm pole mount socket for a multitude of applications. It's ideal for bands and DJs as a main PA or instrument amplification system, so you can rock the audience anywhere, at the club or a party. And you'll always be ready for the next gig as these speakers come with a handle for easy portability. You'll also get crystal-clear acoustics in your home as a monitor.]|#[PYLE PRO PPHP885A - speaker - wired]|#
 req_category|#[Speakers, UNASSIGNED/UNASSIGNED SHELF, Electronics]|#[Speaker - wired]|#
@@ -614,7 +614,7 @@ ID|#20682201|#S10376587|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Sony Cyber-shot DSC-W690 Red 16MP 10x Ultra Zoom Digital Camera w/ 3" LCD Display, HD Video, Sweep Panorama|#Sony Cyber-shot DSC-W690 - Digital camera - compact - 16.1 Mpix - 10 x optical zoom - red|#
 pd_title|#[Sony Cyber-shot DSC-W690 Red 16MP 10x Ultra Zoom Digital Camera w/ 3" LCD Display, HD Video, Sweep Panorama]|#[Sony Cyber-shot DSC-W690 - Digital camera - compact - 16.1 Mpix - 10 x optical zoom - red]|#
-req_brand_name|#[Sony]|#[Sony]|#
+req_brand_name|#null|#[Sony]|#
 req_manufacturer|#[Sony Electronics]|#[Sony]|#
 req_description|#[Shoot beautiful photos and HD 720p video with the slim Sony Cyber-shot DSC-W690 16MP 10x Ultra Zoom Digital Camera. Get close to your subject with the stabilized 10x optical zoom lens, use its colorful 3" LCD to compose and share images and select the iSCN mode to automatically set the best exposure for tricky scenes., <br><b>Sony Cyber-shot DSC-W690 Ultra Zoom Digital Camera:</b><ul><li>16.1 megapixel resolution with high-quality still images and video recordings<br>Featuring iAuto, Intelligent Auto, Face Detection, 720p HD Movie Recording, Sweep Panorama, Picture Effects, Optical SteadyShot Image Stabilization and Blink Detection<li>Sony G zoom lens with 10x optical zoom<br>Equivalent to a 27.5-275mm lens on an analog camera with Multi-Point AF, Center Weighted AF, Spot AF, Tracking Focus, Face Tracking Focus<li>3.0" Clear Photo LCD display with image editing features<br>Featuring Brightness Control, Grid Display, easy-to-read menu system, color TFT LCD screen, in-camera editing<li>Built-in flash with Red-Eye Reduction, Auto, Flash On, Slow Synchro, Flash Off</ul><br><b>Additional Features:</b><ul><li>1 Memory Stick Duo, Memory Stick PRO Duo, Memory Stick PRO-HG Duo and SD/SDHC/SDXC memory card slot<li>Rechargeable Lithium-Ion battery<li>ISO Modes: Auto, 100, 200, 400, 800, 1600, 3200<li>File Formats Supported: JPEG, VGA<li>3-3/4" x 7/8" x 2-1/4"; 5.0 oz</ul><br><b>Compatibility and Warranty:</b><ul><li>Compatible with PC or Mac<li>1-year limited manufacturer warranty</ul><br><b>What's in the Box:</b><ul><li>Sony Cyber-shot DSC-W690 Ultra Zoom Digital Camera<li>Multi-USB cable<li>Wrist strap<li>Battery<li>AC adapter<li>Instruction Manual</ul>]|#[Sony Cyber-shot DSC-W690 - digital camera]|#
 req_category|#[Electronics, Electronics/Digital Cameras/All Cameras, Digital Cameras]|#[Digital camera - compact]|#
@@ -647,8 +647,8 @@ ID|#S10377952|#19524867|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Macally ANTIMARKPAD2 - Screen protective film - for Apple iPad 2|#Macally ANTIMARKPAD2 ANTIMARKPAD2 Screen Protector for iPad 2|#
 pd_title|#[Macally ANTIMARKPAD2 - Screen protective film - for Apple iPad 2]|#[Macally ANTIMARKPAD2 ANTIMARKPAD2 Screen Protector for iPad 2]|#
-req_brand_name|#[Macally]|#[Macally]|#
-req_manufacturer|#[Macally]|#[Macally]|#
+req_brand_name|#[Macally]|#null|#
+req_manufacturer|#[Macally]|#null|#
 req_description|#[Macally ANTIMARKPAD2 - screen protective film]|#[The Macally Protective Film for iPad 2 provides optimum scratch resistance while protecting your iPad 2 screen from dust and the normal signs of wear and tear. With advanced self-adhering properties, this iPad 2 screen film ensures ultra-easy and bubble-free application. This Anti-Scratch Protective Screen Film gives you a revolutionary self-healing coating that repairs minor scratches to your iPad 2 screen, keeping your iPad looking new. Designed to fit your iPad 2 screen, this Macally Protective Film for iPad 2 allows you to safeguard your screen while still maintaining its functionality., Keep your iPad 2 from getting scratches and marks on it's screen with this bubble-free shielding overlay,  This screen provides optimum scratch resistance and also keeps dust and dirt away,  Designed to fit perfectly with your iPad 2,  SKU: DRBOTT0228]|#
 req_category|#[Screen protective film]|#[Electronics/iPad & eReaders/Apple iPad Accessories/iPad Skins & Screen Protectors, Other Accessories, Electronics]|#
 req_upc|#[0701107490533]|#[0070110749053, 701107490533, 00701107490533]|#
@@ -668,7 +668,7 @@ ID|#20690263|#S10391441|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#HP Hardware CB863A#B1H Officejet 6100 ePrinter H611a|#HP Officejet 6100 ePrinter - Printer - color - ink-jet - Legal, A4 - 600 x 1200 dpi - up to 34 ppm (mono) / up to 31 ppm (color) - capacity: 250 sheets - USB, LAN, Wi-Fi(n)|#
 pd_title|#[HP Hardware CB863A#B1H Officejet 6100 ePrinter H611a]|#[HP Officejet 6100 ePrinter - Printer - color - ink-jet - Legal, A4 - 600 x 1200 dpi - up to 34 ppm (mono) / up to 31 ppm (color) - capacity: 250 sheets - USB, LAN, Wi-Fi(n)]|#
-req_brand_name|#[HP]|#[HP]|#
+req_brand_name|#null|#[HP]|#
 req_manufacturer|#[HP, Hewlett Packard]|#[Hewlett-Packard]|#
 req_description|#[Print professional-quality color affordably page after page, using four individual inks. Stay productive on the go with HP ePrint and easily share resources with wireless and wired networking. Rely on HP to help you conserve resources., HP Officejet 6100 ePrinter H611a US/Canada - English, French and Spanish SKU: DHHPOJ6100]|#[HP Officejet 6100 ePrinter - printer - color - ink-jet]|#
 req_category|#[Electronics, Electronics/Computers/Printers, Scanners & Supplies/Printers]|#null|#
@@ -696,7 +696,7 @@ ID|#20627841|#S10413567|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Samsung IT S24B350HL 23.6 1920 x 1080 Black|#Samsung S24B350HL - LED monitor - 23.6" - 1920 x 1080 - 250 cd/m2 - 1000:1 - 2 ms - HDMI, VGA - transparent red|#
 pd_title|#[Samsung IT S24B350HL 23.6 1920 x 1080 Black]|#[Samsung S24B350HL - LED monitor - 23.6" - 1920 x 1080 - 250 cd/m2 - 1000:1 - 2 ms - HDMI, VGA - transparent red]|#
-req_brand_name|#[Samsung]|#[Samsung]|#
+req_brand_name|#null|#[Samsung]|#
 req_manufacturer|#[Samsung]|#[Samsung]|#
 req_description|#null|#[Sync on Green, power off timer, MagicTune, MagicColor, MagicAngle, MagicBright 3, Mega Dynamic Contrast Ratio, Eco Saving, Security lock slot (cable lock sold separately), Samsung S24B350HL - LED monitor - 23.6"]|#
 req_category|#null|#[LED-backlit LCD monitor - 23.6"]|#
@@ -718,7 +718,7 @@ ID|#S10431455|#20746133|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Incipio Smart Feather Ultralight Hard Shell Case - Hard case for web tablet - polycarbonate - translucent mercury - for Apple iPad (3rd generation)|#Incipio Smart Feather Back Cover for new iPad3 and iPad with Retina Display|#
 pd_title|#[Incipio Smart Feather Ultralight Hard Shell Case - Hard case for web tablet - polycarbonate - translucent mercury - for Apple iPad (3rd generation)]|#[Incipio Smart Feather Back Cover for new iPad3 and iPad with Retina Display]|#
-req_brand_name|#[Incipio]|#[Incipio]|#
+req_brand_name|#[Incipio]|#null|#
 req_manufacturer|#[Incipio Technologies]|#[Nestle, INCIPIO]|#
 req_description|#[Incipio Smart Feather Ultralight Hard Shell Case - hard case for web tablet]|#null|#
 req_category|#[Hard case for web tablet]|#[Tablet Cases & Bags, Wheeled Laptop Cases]|#
@@ -738,7 +738,7 @@ ID|#S10431474|#20746138|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Incipio Lexington Hard Shell Folio - Case for web tablet - animal-free vegetarian leather - blue, dark gray - for Apple iPad (3rd generation)|#Incipio Lexington for new iPad (iPad 3 & iPad w/ Retina Display)|#
 pd_title|#[Incipio Lexington Hard Shell Folio - Case for web tablet - animal-free vegetarian leather - blue, dark gray - for Apple iPad (3rd generation)]|#[Incipio Lexington for new iPad (iPad 3 & iPad w/ Retina Display)]|#
-req_brand_name|#[Incipio]|#[Incipio]|#
+req_brand_name|#[Incipio]|#null|#
 req_manufacturer|#[Incipio Technologies]|#[Nestle, INCIPIO]|#
 req_description|#[Incipio Lexington Hard Shell Folio - case for web tablet]|#null|#
 req_category|#[Case for web tablet]|#null|#
@@ -758,8 +758,8 @@ ID|#S10440395|#20659832|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#HP Pavilion HPE h9-1130 - Phoenix - MT - 1 x FX 8120 / 3.1 GHz - RAM 8 GB - HDD 1 x 2 TB - DVD SuperMulti / Blu-ray - Radeon HD 7670 - Gigabit LAN - WLAN : 802.11b/g/n, Bluetooth 3.0 - Windows 7 Home Premium 64-bit - Monitor : none.|#HP Pavilion HPE h9-1130 Phoenix Desktop PC with AMD FX-8120 Processor, 8GB Memory, 2TB Hard Drive and Windows 7 Home Premium|#
 pd_title|#[HP Pavilion HPE h9-1130 - Phoenix - MT - 1 x FX 8120 / 3.1 GHz - RAM 8 GB - HDD 1 x 2 TB - DVD SuperMulti / Blu-ray - Radeon HD 7670 - Gigabit LAN - WLAN : 802.11b/g/n, Bluetooth 3.0 - Windows 7 Home Premium 64-bit - Monitor : none.]|#[HP Pavilion HPE h9-1130 Phoenix Desktop PC with AMD FX-8120 Processor, 8GB Memory, 2TB Hard Drive and Windows 7 Home Premium]|#
-req_brand_name|#[HP]|#[HP]|#
-req_manufacturer|#[Hewlett-Packard]|#[Hewlett-Packard]|#
+req_brand_name|#[HP]|#null|#
+req_manufacturer|#[Hewlett-Packard]|#null|#
 req_description|#[Power Factor Correction (PFC), HP Pavilion HPE h9-1130 - Phoenix - FX 8120 3.1 GHz - Monitor : none.]|#[The expertly engineered HP h9 Phoenix series computers are the most powerful HP desktop PCs yet, offering incredible speed, power and cutting-edge style. A 600-watt power supply feeds the eight-core AMD processor, as well as a discrete Radeon graphics card, but there's still power to spare for future expansion. Exclusive Beats Audio technology, including 7.1-channel surround sound capability, delivers cinema-quality sound from the Phoenix desktop PC. With support for two or even three monitors, this Windows desktop computer lets you take advantage of 8GB of memory, a spacious 2TB hard drive, a Blu-ray disc player and Wi-Fi capability., <br><b>HP Desktop PC, Pavilion HPE h9-1130 Phoenix (Monitor Not Included):</b><br><br><b>Key HP Computer Features and Benefits:</b><ul><li>AMD FX-8120 processor<br>3.10GHz, 8MB L2 Cache + 8MB Shared L3 Cache<br><br><li>8GB DDR3 SDRAM system memory (expandable to 16GB)<br>Gives you the power to handle most power-hungry applications and tons of multimedia work<br><br><li>2TB SATA hard drive<br>Store 1,300,000 photos, 571,000 songs or 1,053 hours of HD video on this HP desktop PC<br><br><li>Blu-ray Disc Player and SuperMulti DVD Burner with LightScribe Technology<br>Watch HD movies, and read and write CDs and DVDs in multiple formats<br><br><li>10/100/1000Mbps Gigabit Ethernet, 802.11b/g/n Wireless LAN<br>Connect to a broadband modem with wired Ethernet or wirelessly connect to a Wi-Fi signal or hotspot with the 802.11b/g/n connection built into your HP Phoenix PC<br><br><li>Radeon HD 7670 Series Graphics<br>With 1GB DDR5 dedicated graphics memory, DVI, HDMI and DisplayPort capabilities and support for Blu-ray and Microsoft DirectX 11</ul><br><b>Additional Features:</b><ul><li>Bluetooth<li>15-in-1 memory card reader<li>2 x USB 3.0 ports, 8 x USB 2.0 ports, 1 x headphone jack, 1 x microphone jack, 1 x RJ-45 Ethernet port, 1 x optical audio out, 1 x microphone/line-in/line-out, 1 x rear speaker out, 1 x side speaker out, 1 x center (subwoofer) jack<li>3 x PCI Express (x1) slots, 1 x PCI Express (x16) slot, 1 x MiniCard, 2 x external 5.25" bays, 3 x internal 3.5" bays</ul><br><b>Software:</b><ul><li>Genuine Microsoft Windows 7 Home Premium 64-Bit Edition (To learn more about the features of Windows 7, click <b><a href="http://www.walmart.com/catalog/catalog.gsp?cat=559890">here</a></b>)<li>Microsoft Works 9<li>Norton Internet Security 2012 (60-day subscrption)<li>Backup and Restore options built into Windows allow you to create safety copies of your most important personal files, so you're always prepared for the worst</ul><br><b>Support and Warranty:</b><ul><li>1-year limited hardware warranty; 1-year software support; 24/7 technical assistance available online or toll-free by phone<li>Restore discs are not included (unless specified by supplier). We recommend you use the installed software to create your own restore and backup DVD the first week you use the computer.</ul><br><b>What's In The Box:</b><ul><li>Power cord<li>HP USB keyboard<li>HP optical mouse<li>Quick Start Guide</ul><br><b><I>To see the manufacturer's specifications for this product, click <a href="http://i.walmart.com/i/rb/0088611235220.pdf" target="_blank">here</a>.<br><br>To see a list of our PC Accessories, click <a href=http://www.walmart.com/cp/accessories-peripherals/132959 target="_blank">here</a>.<br><br>Trade in your used computer and electronics for more cash to spend at Walmart. Good for your wallet and the environment - click <a href="http://gazelle.com/register_click?campaign=electronics_trade_in&media_type=text&network=walmart&destination_url=http%3A%2F%2Fwalmart.gazelle.com&placement=product_computers&creative=learn_more" target="_blank">here</a>.</I></b>]|#
 req_category|#[Personal computer]|#[CPU Processors, Electronics/Other Electronics, Electronics, Desktops]|#
 req_upc|#[0886112352202]|#[886112352202, 0088611235220, 00886112352202]|#
@@ -786,7 +786,7 @@ ID|#26965956|#S10454455|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Seagate Bulk ST500LT012 500GB 5400 RPM Momentus Thin|#Seagate Momentus Thin ST500LT012 - Hard drive - 500 GB - internal - 2.5" - SATA-300 - 5400 rpm - buffer: 16 MB|#
 pd_title|#[Seagate Bulk ST500LT012 500GB 5400 RPM Momentus Thin]|#[Seagate Momentus Thin ST500LT012 - Hard drive - 500 GB - internal - 2.5" - SATA-300 - 5400 rpm - buffer: 16 MB]|#
-req_brand_name|#[Seagate]|#[Seagate]|#
+req_brand_name|#null|#[Seagate]|#
 req_manufacturer|#[SEAGATE TECHNOLOGY INC.]|#[Seagate]|#
 req_description|#[SINGLE BULK PACK  Momentus Thin 5400-RPM, 16MB Cache, 3Gb/s, 500GB Hard Drive, 7mm, 2.5 form factor enables thin chassis design for all segments of laptop computing.]|#[QuietStep, Native Command Queuing (NCQ), Ramp Load, Advanced Format technology, Seagate Momentus Thin ST500LT012 - hard drive - 500 GB - SATA-300]|#
 req_category|#[Electronics/Computers/Computer Components/Hard Drives, Electronics, Internal Hard Drives]|#[Hard drive - internal]|#
@@ -806,7 +806,7 @@ ID|#17811862|#S10456495|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Palo Alto Audio Design USB Computer Speaker, SA110B|#Palo Alto musik - Speakers - For PC - USB - white|#
 pd_title|#[Palo Alto Audio Design USB Computer Speaker, SA110B]|#[Palo Alto musik - Speakers - For PC - USB - white]|#
-req_brand_name|#[Palo Alto]|#[Palo Alto]|#
+req_brand_name|#null|#[Palo Alto]|#
 req_manufacturer|#[PALO ALTO AUDIO DESIGN]|#[Palo Alto Audio Design]|#
 req_description|#[<strong>Palo Alto Audio Design USB Computer Speaker, SA110B:</strong><li>Uses digital audio amplifier circuit</li><li>Full digital amplifier technology</li><li>Signal is kept in the digital domain until driving the speakers</li>Urlhttp://www.amazon.com/Audio-Design-SA110B-Speaker-System/dp/B006C6E7M8http://www.macmall.com/p/Palo-Alto-Audio-Design-Speakers/product~dpno~8360318~pdp.gdigiic, <p>The Palo Alto Audio Design SA110B 2.0 Speaker System uses a digital audio amplifier circuit and utilizes full digital amplifier technology to create its crisp sound quality. This innovative method amplifies a digital audio signal without converting the signal to analog. Furthermore, the audio signal of this USB speaker system is sent from the computer to the speaker through a digital USB connection. As the signal is kept in the digital domain until driving the speakers, sound is not degraded by any analog noise. This combination of a digital connection and digital amplification ensures the digital computer speaker system produces crystal clear sound. </p>]|#[Palo Alto musik - speakers - For PC - wired]|#
 req_category|#[Electronics/Computers/Computer Accessories/Audio & Video Components/Computer Speakers, Speakers, Electronics]|#[Speakers - For PC - wired, Speakers - PC multimedia - wired]|#
@@ -828,8 +828,8 @@ ID|#S10469415|#16655439|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Black & Decker Toast-R-Oven CTO6120B - Electric oven/toaster - 1500 W - black|#Black & Decker 6-Slice Toaster Oven|#
 pd_title|#[Black & Decker Toast-R-Oven CTO6120B - Electric oven/toaster - 1500 W - black]|#[Black & Decker 6-Slice Toaster Oven]|#
-req_brand_name|#[Black & Decker]|#[Black & Decker]|#
-req_manufacturer|#[Black & Decker]|#[Black & Decker]|#
+req_brand_name|#[Black & Decker]|#null|#
+req_manufacturer|#[Black & Decker]|#null|#
 req_description|#[Black & Decker Toast-R-Oven CTO6120B - electric oven/toaster - black]|#null|#
 req_category|#[Electric oven/toaster]|#null|#
 req_upc|#[0050875534971]|#null|#
@@ -847,7 +847,7 @@ ID|#S10469498|#20751052|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#OCZ Vertex 4 Series - Solid state drive - 256 GB - internal - 2.5" - SATA-600|#OCZ Technology VTX4-25SAT3-256G 256GB Vertex 4 SATA3 2.5&quot; SSD|#
 pd_title|#[OCZ Vertex 4 Series - Solid state drive - 256 GB - internal - 2.5" - SATA-600]|#[OCZ Technology VTX4-25SAT3-256G 256GB Vertex 4 SATA3 2.5&quot; SSD]|#
-req_brand_name|#[OCZ]|#[OCZ]|#
+req_brand_name|#[OCZ]|#null|#
 req_manufacturer|#[OCZ Technology]|#[OCZ Technology Group]|#
 req_description|#[Native Command Queuing (NCQ), Background Garbage Collection, TRIM support, Dynamic and Static Wear Leveling, Indilinx Ndurance 2.0 Technology , S.M.A.R.T., 256-bit AES, 128/1K bit BCH ECC, OCZ Vertex 4 Series solid state drive - 256 GB - SATA-600]|#null|#
 req_category|#[Solid state drive - internal]|#[Internal Hard Drives]|#
@@ -868,7 +868,7 @@ ID|#23136293|#S10469935|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#3M NV826904 Natural View Fingerprint Fading Screen Protection Film for iPad 2-iPad - 3rd Gen|#3M Natural View Fingerprint Fading Screen Protector - Screen protective film - transparent - for Apple iPad (3rd generation); iPad 2|#
 pd_title|#[3M NV826904 Natural View Fingerprint Fading Screen Protection Film for iPad 2-iPad - 3rd Gen]|#[3M Natural View Fingerprint Fading Screen Protector - Screen protective film - transparent - for Apple iPad (3rd generation); iPad 2]|#
-req_brand_name|#[3M]|#[3M]|#
+req_brand_name|#null|#[3M]|#
 req_manufacturer|#[3M]|#[3M]|#
 req_description|#null|#[3M Natural View Fingerprint Fading Screen Protector - screen protective film, Anti-fingerprint]|#
 req_category|#[Tablet Skins]|#[Screen protective film]|#
@@ -886,7 +886,7 @@ ID|#S10649392|#20746093|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Macally Slim Folio - Case for web tablet - for Apple iPad (3rd generation)|#Macally SlimCase Slim Folio Case for the new iPad - Black|#
 pd_title|#[Macally Slim Folio - Case for web tablet - for Apple iPad (3rd generation)]|#[Macally SlimCase Slim Folio Case for the new iPad - Black]|#
-req_brand_name|#[Macally]|#[Macally]|#
+req_brand_name|#[Macally]|#null|#
 req_manufacturer|#[Macally]|#[Macally]|#
 req_description|#[Macally Slim Folio - case for web tablet]|#[The slim-fit Macally SlimCase for the new iPad gives your iPad a sleek, business-like look while keeping it safe from scratches and dings. When opened, the Macally Case for iPad doubles as a stand, giving you multiple angles from which to view your iPad. Designed for convenience and functionality, this Slim Folio Case enhances your tablet experience rather than obstructing it, and it looks right at home in even the most upscale office. With handy and convenient features such as multiple-angle stand functionality, this case is simple and effective protection you can enjoy., Slim Folio Case black 3rd Gen iPad]|#
 req_category|#[Case for web tablet]|#[Electronics/iPad & eReaders/Apple iPad Accessories/iPad Cases, Sleeves & Bags, Tablet Cases & Bags, Electronics]|#
@@ -927,7 +927,7 @@ ID|#S10652558|#23143344|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Targus Quash - Notebook sleeve - 15" - gray, black, green|#Targus TSS55415US 15&quot; Quash Sleeve for iPad|#
 pd_title|#[Targus Quash - Notebook sleeve - 15" - gray, black, green]|#[Targus TSS55415US 15&quot; Quash Sleeve for iPad]|#
-req_brand_name|#[Targus]|#[Targus]|#
+req_brand_name|#[Targus]|#null|#
 req_manufacturer|#[Targus]|#[Targus]|#
 req_description|#[Targus Quash notebook sleeve, Scratch-proof, padded, zipper pocket, heat-resistant]|#[The 15 Quash Sleeve is the ideal solution to keeping your laptop safe and protected. Made from a flexible impact resistant fabric, this case will protect your laptop against sun damage, water and heat. This case comes in trendy green, gray and black, this case shows great attention to detail with its intricate design stitching in the accent color on the exterior. When it comes to functionality, this case rises above the competition.]|#
 req_category|#[Carrying cases, Notebook and tablet PC accessories, Notebook sleeve]|#[Tablet Sleeves, Electronics/Computers/Computer Accessories/Cases & Bags, Video Game Accessory]|#
@@ -948,7 +948,7 @@ ID|#S10662924|#20699123|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Cavalry CAUSM2001 - Storage / USB3.0 controller - 2.5" - USB 3.0 - black|#Cavalry CAUSM2001 USB 3.0 USM Upgrade Cable with Case for Seagate FreeAgent GoFlex, 3'|#
 pd_title|#[Cavalry CAUSM2001 - Storage / USB3.0 controller - 2.5" - USB 3.0 - black]|#[Cavalry CAUSM2001 USB 3.0 USM Upgrade Cable with Case for Seagate FreeAgent GoFlex, 3']|#
-req_brand_name|#[Cavalry]|#[Cavalry]|#
+req_brand_name|#[Cavalry]|#null|#
 req_manufacturer|#[Cavalry Storage]|#[Cavalry Storage, Inc]|#
 req_description|#[Cavalry CAUSM2001 - storage / USB3.0 controller - USB 3.0]|#[The Cavalry CAUSM2001 USB 3.0 USM Upgrade Cable with Case for Seagate FreeAgent GoFlex provides up to ten times faster data transfer rates with USB 3.0 technology. If you haven't upgraded yet, it's backwards compatible with USB 2.0 for transferring and access data, music, movies and other large files. Plug and play connectivity and hot swappability make installation and operation easy and convenient., <br><b>Cavalry CAUSM2001 USB 3.0 USM Upgrade Cable with Case for Seagate FreeAgent GoFlex:</b><ul><li>Works with any USB 3.0 port<li>Backwards compatible with USB 2.0<li>Fits 2.5" HDD and SDD<li>Plug and play<li>Supports hot swapping<li>Compatible with Seagate GoFlex Drives<li>Cable length: 3'</ul>]|#
 req_category|#[Storage / USB3.0 controller - external]|#[Electronics, Toys/ARCHIVE SHELF/CAT/NEW TOYS ITEMS/LOADING ZONE--Toys, Computer Drives: Replacement Parts & Accessories]|#
@@ -994,7 +994,7 @@ ID|#14006004|#S10667150|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Gear Head MP2800BLK Height Adjustable Mouse Black|#Gear Head Optical Wireless Nano Mouse MP2800BLK - Mouse - optical - 3 button(s) - wireless - 2.4 GHz - USB wireless receiver|#
 pd_title|#[Gear Head MP2800BLK Height Adjustable Mouse Black]|#[Gear Head Optical Wireless Nano Mouse MP2800BLK - Mouse - optical - 3 button(s) - wireless - 2.4 GHz - USB wireless receiver]|#
-req_brand_name|#[Gear Head]|#[Gear Head]|#
+req_brand_name|#null|#[Gear Head]|#
 req_manufacturer|#[Gear Head]|#[Gear Head]|#
 req_description|#null|#[Gear Head Optical Wireless Nano Mouse MP2800BLK - mouse, Scrolling wheel, height adjustable, Nano wireless receiver]|#
 req_category|#null|#[Mouse]|#
@@ -1010,7 +1010,7 @@ ID|#21011540|#S10668404|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#V7 Ultra Protective Sleeve for 10.1" Tablet PCs, Assorted Colors|#V7 Ultra - Protective sleeve for web tablet - neoprene - black with gray interior - for Apple iPad (3rd generation); iPad 1; 2|#
 pd_title|#[V7 Ultra Protective Sleeve for 10.1" Tablet PCs, Assorted Colors]|#[V7 Ultra - Protective sleeve for web tablet - neoprene - black with gray interior - for Apple iPad (3rd generation); iPad 1; 2]|#
-req_brand_name|#[V7]|#[V7]|#
+req_brand_name|#null|#[V7]|#
 req_manufacturer|#[V7]|#[V7]|#
 req_description|#[The V7 Ultra Protective Sleeve for 10.1" Tablet PCs features durable construction with anti-shock EVA padding to protect from simple slips and drops. It's compact and allows you to safely transport your iPad or tablet PC in any bag or just on its own without adding bulk and weight. The sturdy sleeve has a soft velvety lining to protect the screen from scratches. Extremely lightweight, it uses a form-fitting material that accommodates a tablet with a 10.1" display., <br><b>V7 Ultra Protective Sleeve for 10.1" Tablet PCs:</b><ul><li>Anti-shock EVA padding provides ultra- protection<li>Compact design<li>Soft, velvety lining<li>Color: Assorted Colors</ul>]|#[V7 Ultra - protective sleeve for web tablet]|#
 req_category|#[Tablet Sleeves, Electronics/iPad & eReaders/Tablet Accessories, Electronics]|#[Protective sleeve for web tablet]|#
@@ -1056,7 +1056,7 @@ ID|#23143633|#S10680708|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#QNAP TS-569-PRO-US 5 Bay NAS Tower|#QNAP TS-569 Pro Turbo NAS - NAS - 0 GB - Serial ATA-600 / eSATA - RAID 0, 1, 5, 6, 10, JBOD, 5 hot spare, RAID 6 hot spare, 10 hot spare - Gigabit Ethernet - iSCSI|#
 pd_title|#[QNAP TS-569-PRO-US 5 Bay NAS Tower]|#[QNAP TS-569 Pro Turbo NAS - NAS - 0 GB - Serial ATA-600 / eSATA - RAID 0, 1, 5, 6, 10, JBOD, 5 hot spare, RAID 6 hot spare, 10 hot spare - Gigabit Ethernet - iSCSI]|#
-req_manufacturer|#[QNAP Systems, Inc]|#[QNAP Systems, Inc]|#
+req_manufacturer|#null|#[QNAP Systems, Inc]|#
 req_description|#null|#[Audible alarm, lockable, K-lock security slot, built-in cooling fan, QNAP TS-569 Pro Turbo NAS - NAS server - 0 GB]|#
 req_category|#[Networked Attached Storage (NAS)]|#[NAS server]|#
 req_upc|#null|#[0885022003358]|#
@@ -1071,7 +1071,7 @@ ID|#S10681949|#20627885|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Scosche foliO grip p2 - Case for web tablet - carbon fiber - for Apple iPad (3rd generation); iPad 2|#Scosche foliO Grip P2 for iPad 2, Black|#
 pd_title|#[Scosche foliO grip p2 - Case for web tablet - carbon fiber - for Apple iPad (3rd generation); iPad 2]|#[Scosche foliO Grip P2 for iPad 2, Black]|#
-req_brand_name|#[SCOSCHE]|#[SCOSCHE]|#
+req_brand_name|#[SCOSCHE]|#null|#
 req_manufacturer|#[Scosche Industries]|#[Scosche]|#
 req_description|#[Scosche foliO grip p2 - case for web tablet]|#[<br><b>Scosche foliO Grip P2 for iPad 2:</b><ul><li>Suede interior lining for enhanced protection<li>Folio style protects screen while on the go<li>Integrated kickstand for convenient typing, web-surfing and landscape media viewing<li>Operate apps, games and more while your iPad is securely strapped<li>Convenient typing angle<li>Secure hand strap<li>Transparent card holders<li>Color: Black</ul>, Give your iPad 2 a stylish case with the Scosche foliO Grip Case for iPad 2. This carbon fiber folio case is just what you need to keep your iPad safe from wear and tear. This dual-purpose case not only provides a folio style screen protector for the iPad, it also comes with a hand strap so you can hold the device with just one hand. The strap on the back of the case provides a secure way to attach the iPad to either your right hand or your left hand. This folio case for iPad 2 comes in black for a sleek look, while the interior is lined with suede for even more protection. It also comes with an integrated kickstand to help keep it upright so you can easily surf the web or watch movies or videos no matter where you are. The kickstand also keeps the iPad at just the right angle for easy typing.]|#
 req_category|#[Case for web tablet]|#[Electronics/iPad & eReaders/Apple iPad Accessories/iPad Cases, Sleeves & Bags, Tablet Cases & Bags, Electronics]|#
@@ -1110,7 +1110,7 @@ ID|#17196113|#S10685660|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Vanguard BIIN 14Z Mid-Size SLR Zoom Camera Bag, Orange|#Vanguard BIIN 14Z - Carrying bag for digital photo camera - 600D polyester, 150D polyester - orange|#
 pd_title|#[Vanguard BIIN 14Z Mid-Size SLR Zoom Camera Bag, Orange]|#[Vanguard BIIN 14Z - Carrying bag for digital photo camera - 600D polyester, 150D polyester - orange]|#
-req_brand_name|#[Vanguard]|#[Vanguard]|#
+req_brand_name|#null|#[Vanguard]|#
 req_manufacturer|#[Vanguard]|#[Vanguard]|#
 req_description|#[<strong>Vanguard BIIN 14Z Mid-Size SLR Zoom Camera Bag:</strong><li>Made of durable fabric with a soft interior</li><li>Buckled front and zippered top opening</li><li>Belt loop and adjustable shoulder strap</li><li>Front lens cap pocket and inside zippered pocket</li><li>Holds DSLR with standard lens attached, extra battery, charger and extra memory cards</li><li>Color: Orange</li>, <p>The Vanguard BIIN 14Z Orange Camera Bag packs great gear protection into a compact, easy-to-carry bag. With durable fabric on the outside and a soft interior, you'll be worry free. Other features include a zippered interior pocket, a front pocket for a lens cap, belt loop and adjustable shoulder strap.</p>]|#[Vanguard BIIN 14Z - carrying bag for digital photo camera]|#
 req_category|#[Camera Cases, Electronics/Digital Cameras/Accessories/Bags & Cases, Electronics]|#[Carrying bag for digital photo camera]|#
@@ -1133,7 +1133,7 @@ ID|#S10708695|#20905328|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Acer TravelMate 4750-6607 - Core i3 2350M / 2.3 GHz - Windows 7 Pro (32/64 bits) - 4 GB RAM - 320 GB HDD - DVD SuperMulti - 14" wide 1366 x 768 / HD - Intel HD Graphics 3000|#Acer Black 14" TravelMate TM4750-6607 Laptop PC with Intel Core i3-2350M Processor and Windows 7 Professional with Windows 8 Pro Upgrade Option|#
 pd_title|#[Acer TravelMate 4750-6607 - Core i3 2350M / 2.3 GHz - Windows 7 Pro (32/64 bits) - 4 GB RAM - 320 GB HDD - DVD SuperMulti - 14" wide 1366 x 768 / HD - Intel HD Graphics 3000]|#[Acer Black 14" TravelMate TM4750-6607 Laptop PC with Intel Core i3-2350M Processor and Windows 7 Professional with Windows 8 Pro Upgrade Option]|#
-req_brand_name|#[Acer]|#[Acer]|#
+req_brand_name|#[Acer]|#null|#
 req_manufacturer|#[Acer]|#[Acer Computers]|#
 req_description|#[Security lock slot (cable lock sold separately), administrator password, system password, hard drive password, wake on LAN, Acer TravelMate 4750-6607 - 14" - Core i3 2350M - Windows 7 Pro (32/64 bits) - 4 GB RAM - 320 GB HDD]|#[<p><b>Special Offer: Buy this Windows 7 PC and get Windows 8 Pro for $14.99.  We've got you covered. Click <a href="http://www.walmart.com/Windows8" target="_blank">HERE</a> to learn more about Microsoft Windows 8 Pro & the upgrade program.</b><p><p><br><b>Acer 14" TravelMate TM4750-6607 Laptop PC:</b><br><br><b>Key Features and Benefits:</b><ul><li>Intel Core i3-2350M processor<br>2.30GHz, 3MB Cache<br><br><li>4GB DDR3 SDRAM system memory (expandable to 8GB)<br>Gives you the power to handle most power-hungry applications and tons of multimedia work<br><br><li>320GB SATA hard drive<br>Store 213,000 photos, 91,000 songs or 168 hours of HD video and more<br><br><li>DVD-RAM+/-R/RW drive<br>Watch movies, and read and write CDs and DVDs in multiple formats<br><br><li>10/100/1000 Gigabit Ethernet, 802.11a/b/g/n Wireless LAN<br>Connect to a broadband modem with wired Ethernet or wirelessly connect to a WiFi signal or hotspot with the 802.11a/b/g/n connection built into your PC<br><br><li>14.0" ComfyView LCD display<br>Intel HD 3000 Graphics with DDR3 SDRAM memory</ul><br><b>Additional Features:</b><ul><li>Built-in webcam<li>5-in-1 memory card reader<li>Bluetooth v2.1 technology<li>3 x USB 2.0 ports, 1 x RJ-45 Ethernet port, 1 x VGA port, 1 x HDMI port<li>6-cell lithium-ion battery, up to 4 hours battery life</ul><br><b>Software:</b><ul><li>Genuine Microsoft Windows 7 Professional 64-Bit Edition (To learn more about the features of Windows 7, click <b><a href="http://www.walmart.com/catalog/catalog.gsp?cat=559890">here</a></b>)<li>Microsoft Office Starter 2010: Includes reduced functionality versions of Microsoft Word and Excel,  with advertising.  PowerPoint and Outlook are NOT included.  Purchase Office 2010 today and get the most out of your new PC.  (To learn more about the features of Office 2010, click <b><a href="http://www.walmart.com/cp/microsoft-office-2010/1064728" target="_blank">here</a></b>)<li>Backup and Restore options built into Windows allows you to create safety copies of your most important personal files, so you're always prepared for the worst</ul><br><b>Support and Warranty:</b><ul><li>1-year limited International Travelers warranty<li>Restore discs are not included (unless specified by supplier). We recommend you use the installed software to create your own restore and backup DVD the first week you use the computer.</ul><br><b>What's In The Box:</b><ul><li>Power cord<li>6-cell lithium-ion battery<li>Quick Start Guide</ul><br><b><I>To see the manufacturer's specifications for this product, click <a href="http://i.walmart.com/i/rb/0088654154122.pdf" target="_blank">here</a>.<br><br>To see a list of our PC Accessories, click <a href=http://www.walmart.com/cp/accessories-peripherals/132959 target="_blank">here</a>.<br><br>Trade in your used computer and electronics for more cash to spend at Walmart. Good for your wallet and the environment - click <a href="http://gazelle.com/register_click?campaign=electronics_trade_in&media_type=text&network=walmart&destination_url=http%3A%2F%2Fwalmart.gazelle.com&placement=product_computers&creative=learn_more" target="_blank">here</a>.</I></b>, The Acer 14" TravelMate TM4750-6607 Laptop PC has everything you need to compute on the go. Microsoft Windows 7 Professional lets you complete any task. Connect with family and friends with the built-in webcam.]|#
 req_category|#null|#[Electronics/Computers/Laptop Computers, Laptops, Electronics]|#
@@ -1158,7 +1158,7 @@ ID|#S10762057|#21063794|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Lenovo G570 4334 - Core i5 2450M / 2.5 GHz - Windows 7 Home Premium 64-bit - 4 GB RAM - 500 GB HDD - DVD-Writer - 15.6" VibrantView wide 1366 x 768 / HD - Intel HD Graphics 3000 - black|#Lenovo 15.6" G570 4334EEU Laptop PC with Intel Core i5-2450M Processor and Windows 7 Home Premium with Windows 8 Pro Upgrade Option|#
 pd_title|#[Lenovo G570 4334 - Core i5 2450M / 2.5 GHz - Windows 7 Home Premium 64-bit - 4 GB RAM - 500 GB HDD - DVD-Writer - 15.6" VibrantView wide 1366 x 768 / HD - Intel HD Graphics 3000 - black]|#[Lenovo 15.6" G570 4334EEU Laptop PC with Intel Core i5-2450M Processor and Windows 7 Home Premium with Windows 8 Pro Upgrade Option]|#
-req_brand_name|#[Lenovo]|#[Lenovo]|#
+req_brand_name|#[Lenovo]|#null|#
 req_manufacturer|#[Lenovo]|#[Lenovo IGF Idea]|#
 req_description|#[Lenovo G570 4334 - 15.6" - Core i5 2450M - Windows 7 Home Premium 64-bit - 4 GB RAM - 500 GB HDD, Security lock slot (cable lock sold separately), administrator password, hard drive password, power-on password]|#[The Lenovo 15.6" G570 Laptop PC is an affordable computer that doesn't compromise on the basics. It delivers outstanding performance for everyday tasks, thanks to the second generation Intel Core i5 processor, 4GB of memory and spacious storage for images, music and videos. It also features OneKey Rescue System, a convenient tool which makes data backup and recovery quick and easy. Plus, Lenovo Energy Management helps to protect the long-term life of the battery by preventing unnecessary recharges, and uses advanced energy-saving technology to increase time spent away from the wall outlet.  All in all, the Lenovo G570 is more than the average affordable laptop., <p><b>Special Offer: Buy this Windows 7 PC and get Windows 8 Pro for $14.99.  We've got you covered. Click <a href="http://www.walmart.com/Windows8" target="_blank">HERE</a> to learn more about Microsoft Windows 8 Pro & the upgrade program.</b><p><p><br><b>Lenovo 15.6" G570 4334EEU Laptop PC:</b><br><br><b>Key Features and Benefits:</b><ul><li>Intel Core i5-2450M processor<br>2.50GHz, 3MB L3 Cache<br><br><li>4GB DDR3 SDRAM system memory<br>Gives you the power to handle most power hungry applications and tons of multimedia work<br><br><li>500GB hard drive<br>Store 333,000 photos, 142,000 songs or 263 hours of HD video and more<br><br><li>Tray-in Rambo DVD/CD Combo Burner/Reader Drive<br>Watch movies, and read and write CDs and DVDs in multiple formats<br><br><li>10/100Mbps Ethernet, 802.11b/g/n Wireless LAN<br>Connect to a broadband modem with wired Ethernet or wirelessly connect to a Wi-Fi signal or hotspot with the 802.11b/g/n connection built into your PC<br><br><li>15.6" HD LED-backlit display<br>Intel HD 3000 Graphics</ul><br><b>Additional Features:</b><ul><li>0.3MP webcam with built-in microphone<li>5-in-1 memory card reader<li>4 x USB 2.0 ports, 1 x headphone jack 1 x microphone jack, 1 x RJ-45 Ethernet port, 1 x VGA port<li>6-cell lithium-ion battery,  up to 5 h battery life</ul><br><b>Software:</b><ul><li>Genuine Microsoft Windows 7 Home Premium 64-Bit Edition (To learn more about the features of Windows 7, click <b><a href="http://www.walmart.com/catalog/catalog.gsp?cat=559890">here</a></b>)<li>Microsoft Office Starter 2010: Includes reduced functionality versions of Microsoft Word and Excel,  with advertising.  PowerPoint and Outlook are NOT included.  Purchase Office 2010 today and get the most out of your new PC.  (To learn more about the features of Office 2010, click <b><a href="http://www.walmart.com/cp/microsoft-office-2010/1064728" target="_blank">here</a></b>)<li>McAfee Anti-Virus Plus trial<li>OneKey Rescue System</ul><br><b>Support and Warranty:</b><ul><li>1-year warranty<li>Restore discs are not included (unless specified by supplier). We recommend you use the installed software to create your own restore and backup DVD the first week you use the computer.</ul><br><b>What's In The Box:</b><ul><li>Power cord<li>6-cell lithium-ion battery<li>Quick Start Guide</ul><br><b><I>To see the manufacturer's specifications for this product, click <a href="http://i.walmart.com/i/rb/0088703773674.pdf" target="_blank">here</a>.<br><br>To see a list of our PC Accessories, click <a href=http://www.walmart.com/cp/accessories-peripherals/132959 target="_blank">here</a>.<br><br>Trade in your used computer and electronics for more cash to spend at Walmart. Good for your wallet and the environment - click <a href="http://gazelle.com/register_click?campaign=electronics_trade_in&media_type=text&network=walmart&destination_url=http%3A%2F%2Fwalmart.gazelle.com&placement=product_computers&creative=learn_more" target="_blank">here</a>.</I></b>]|#
 req_category|#null|#[Electronics/Computers/Laptop Computers, Laptops, Electronics]|#
@@ -1181,8 +1181,8 @@ ID|#21141718|#S10791078|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Seagate Retail 1TB Backup Plus External Hard Drive|#Seagate Backup Plus STCA1000100 - Hard drive - 1 TB - external ( desktop ) - USB 3.0|#
 pd_title|#[Seagate Retail 1TB Backup Plus External Hard Drive]|#[Seagate Backup Plus STCA1000100 - Hard drive - 1 TB - external ( desktop ) - USB 3.0]|#
-req_brand_name|#[Seagate]|#[Seagate]|#
-req_manufacturer|#[Seagate]|#[Seagate]|#
+req_brand_name|#null|#[Seagate]|#
+req_manufacturer|#null|#[Seagate]|#
 req_description|#null|#[Built-in capacity meter, automatic backup, Seagate Backup Plus STCA1000100 - hard drive - 1 TB - USB 3.0]|#
 req_category|#[External Hard Drives]|#[Hard drive - external ( desktop )]|#
 req_upc|#null|#[0763649040553]|#
@@ -1199,7 +1199,7 @@ ID|#21009310|#S10796227|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Dell Inspiron 660s i660s-2308BK Desktop PC with Intel Pentium G630 Processor, 4GB Memory, 500GB Hard Drive and Windows 7 Home Premium (Monitor Not Included)|#Dell Inspiron 660s - Slim tower - 1 x P G630 / 2.7 GHz - RAM 4 GB - HDD 1 x 500 GB - DVD-Writer - HD Graphics - Gigabit LAN - WLAN : 802.11b/g/n - Windows 7 Home Premium 64-bit - Monitor : none.|#
 pd_title|#[Dell Inspiron 660s i660s-2308BK Desktop PC with Intel Pentium G630 Processor, 4GB Memory, 500GB Hard Drive and Windows 7 Home Premium (Monitor Not Included)]|#[Dell Inspiron 660s - Slim tower - 1 x P G630 / 2.7 GHz - RAM 4 GB - HDD 1 x 500 GB - DVD-Writer - HD Graphics - Gigabit LAN - WLAN : 802.11b/g/n - Windows 7 Home Premium 64-bit - Monitor : none.]|#
-req_brand_name|#[Dell]|#[Dell]|#
+req_brand_name|#null|#[Dell]|#
 req_manufacturer|#[Dell Computer]|#[Dell]|#
 req_description|#[<br><b>Dell Inspiron 660s i660s-2308BK Desktop PC (Monitor Not Included):</b><br><br><b>Key Features and Benefits:</b><ul><li>Intel Pentium G630 processor<br>2.60GHz, 3MB Cache<br><br><li>4GB DDR3 SDRAM system memory<br>Gives you the power to handle most power-hungry applications and tons of multimedia work<br><br><li>500GB SATA hard drive<br>Store 333,000 photos, 142,000 songs or 263 hours of HD video and more<br><br><li>16x DVD+/-RW drive<br>Watch movies, and read and write CDs and DVDs in multiple formats<br><br><li>Ethernet, 802.11b/g/n Wireless LAN<br>Connect to a broadband modem with wired Ethernet or wirelessly connect to a Wi-Fi signal or hotspot with the 802.11b/g/n connection built into your PC<br><br><li>Intel HD Graphics</ul><br><b>Additional Features:</b><ul><li>8-in-1 memory card reader<li>2 x USB 3.0 ports, 4 x USB 2.0 ports, 1 x RJ-45 Ethernet port, 1 x HDMI port</ul><br><b>Software:</b><ul><li>Genuine Microsoft Windows 7 Home Premium 64-Bit Edition (To learn more about the features of Windows 7, click <b><a href="http://www.walmart.com/catalog/catalog.gsp?cat=559890">here</a></b>)<li>Microsoft Office Starter 2010: Includes reduced functionality versions of Microsoft Word and Excel,  with advertising.  PowerPoint and Outlook are NOT included.  Purchase Office 2010 today and get the most out of your new PC.  (To learn more about the features of Office 2010, click <b><a href="http://www.walmart.com/cp/microsoft-office-2010/1064728" target="_blank">here</a></b>)<li>McAfee Internet Security (30-day trial)<li>Backup and Restore options built into Windows allow you to create safety copies of your most important personal files, so you're always prepared for the worst</ul><br><b>Support and Warranty:</b><ul><li>1-year warranty<li>Restore discs are not included (unless specified by supplier). We recommend you use the installed software to create your own restore and backup DVD the first week you use the computer.</ul><br><b>What's In The Box:</b><ul><li>Power cord<li>Dell USB keyboard<li>Dell USB optical mouse<li>Quick Start Guide</ul><br><b><I>To see the manufacturer's specifications for this product, click <a href="http://i.walmart.com/i/rb/0088411608380.pdf" target="_blank">here</a>.<br><br>To see a list of our PC Accessories, click <a href=http://www.walmart.com/cp/accessories-peripherals/132959 target="_blank">here</a>.<br><br>Trade in your used computer and electronics for more cash to spend at Walmart. Good for your wallet and the environment - click <a href="http://gazelle.com/register_click?campaign=electronics_trade_in&media_type=text&network=walmart&destination_url=http%3A%2F%2Fwalmart.gazelle.com&placement=product_computers&creative=learn_more" target="_blank">here</a>.</I></b>, The space-saving Dell Inspiron 660s Desktop PC helps you quickly connect to your friends, family and multimedia. From term papers to social networking, your priorities are easier to tackle with an Intel processor, Windows 7 operating system and 4GB of memory. With two USB 3.0 and four USB 2.0 ports, an eight-in-one media card reader and HDMI capabilities, connecting to cameras, MP3 players, printers and other peripherals and accessories is quick and easy.]|#[Dell Inspiron 660s - P G630 2.7 GHz - Monitor : none.]|#
 req_category|#[Electronics/Computers/Desktop Computers, Electronics, Desktops]|#[Personal computer]|#
@@ -1226,7 +1226,7 @@ ID|#21054181|#S10805769|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Toshiba Graphite Black Metallic 15.6" Tecra R950-S9520 Laptop PC with Intel Core i5-3320M Processor and Windows 7 Professional with Windows 8 Pro Upgrade Option|#Toshiba Tecra R950-S9520 - Core i5 3320M / 2.6 GHz - Windows 7 Pro (32/64 bits) - 4 GB RAM - 320 GB HDD - DVD SuperMulti - 15.6" wide 1366 x 768 / HD - Intel HD Graphics 4000 - graphite black metallic with line pattern|#
 pd_title|#[Toshiba Graphite Black Metallic 15.6" Tecra R950-S9520 Laptop PC with Intel Core i5-3320M Processor and Windows 7 Professional with Windows 8 Pro Upgrade Option]|#[Toshiba Tecra R950-S9520 - Core i5 3320M / 2.6 GHz - Windows 7 Pro (32/64 bits) - 4 GB RAM - 320 GB HDD - DVD SuperMulti - 15.6" wide 1366 x 768 / HD - Intel HD Graphics 4000 - graphite black metallic with line pattern]|#
-req_brand_name|#[Toshiba]|#[Toshiba]|#
+req_brand_name|#null|#[Toshiba]|#
 req_manufacturer|#[Toshiba]|#[Toshiba]|#
 req_description|#[Unbelievably thin for a 15.6" laptop, the Toshiba Tecra R950 Laptop PC offers the performance necessary for a desktop replacement while staying unexpectedly mobile. It offers an innovative fiberglass-reinforced casing for increased durability and rigidity. Plus, thanks to Toshiba EasyGuard Technology, this PC can also withstand accidental bumps and spills. The vibrant high-definition, LED-backlit, widescreen display brings images and presentations to life with bright and crisp colors. Charge your smartphone, even when your laptop is off, or use it for high-speed data transfer via the built-in USB Sleep and Charge/eSATA combo port. Thanks to USB 3.0 ports, you'll get maximum performance when connecting the latest external devices, with blazing fast transfer speeds. And with the easy-to-use DisplayPort, you can connect to any compatible display and see your productivity grow., <p><b>Special Offer: Buy this Windows 7 PC and get Windows 8 Pro for $14.99.  We've got you covered. Click <a href="http://www.walmart.com/Windows8" target="_blank">HERE</a> to learn more about Microsoft Windows 8 Pro & the upgrade program.</b><p><p><br><b>Toshiba 15.6" Tecra R950-S9520 Laptop PC:</b><br><br><b>Key Features and Benefits:</b><ul><li>Intel Core i5-3320M processor<br>2.60GHz, 3MB Cache<br><br><li>4GB DDR3 SDRAM system memory (expandable to 8GB)<br>Gives you the power to handle most power hungry applications and tons of multimedia work<br><br><li>320GB hard drive<br>Store 213,000 photos, 91,000 songs or 168 hours of HD video and more<br><br><li>SuperMulti DVD Burner<br>Watch movies, and read and write CDs and DVDs in multiple formats<br><br><li>10/100/1000 Ethernet, 802.11a/g/n Wireless LAN<br>Connect to a broadband modem with wired Ethernet or wirelessly connect to a Wi-Fi signal or hotspot with the 802.11a/g/n connection built into your PC<br><br><li>15.6" HD LED-backlit display<br>Mobile Intel HD Graphics with dynamically allocated shared graphics memory</ul><br><b>Additional Features:</b><ul><li>Bluetooth v4.0<li>Webcam with built-in microphone<li>9-in-1 memory card reader<li>2 x USB 3.0 ports, 1 x USB 2.0/eSATA combo port, 1 x USB 2.0 port, 1 x headphone/microphone combo jack, 1 x RJ-45 Ethernet port, 1 x RGB port, 1 x DisplayPort<li>6-cell lithium-ion battery,  up to 8 h 56 min battery life</ul><br><b>Software:</b><ul><li>Genuine Microsoft Windows 7 Professional 64-Bit Edition (To learn more about the features of Windows 7, click <b><a href="http://www.walmart.com/catalog/catalog.gsp?cat=559890">here</a></b>)<li>Microsoft Office Starter 2010: Includes reduced functionality versions of Microsoft Word and Excel,  with advertising.  PowerPoint and Outlook are NOT included.  Purchase Office 2010 today and get the most out of your new PC.  (To learn more about the features of Office 2010, click <b><a href="http://www.walmart.com/cp/microsoft-office-2010/1064728" target="_blank">here</a></b>)<li>Norton Internet Security 2012 (30-day subscription)<li>Toshiba Recovery Media Creator; Toshiba Online Backup (30-day subscription)</ul><br><b>Support and Warranty:</b><ul><li>3-year standard limited warranty<li>Restore discs are not included (unless specified by supplier). We recommend you use the installed software to create your own restore and backup DVD the first week you use the computer.</ul><br><b>What's In The Box:</b><ul><li>Power cord<li>6-cell lithium-ion battery<li>Quick Start Guide</ul><br><b><I>To see the manufacturer's specifications for this product, click <a href="http://i.walmart.com/i/rb/0002226519562.pdf" target="_blank">here</a>.<br><br>To see a list of our PC Accessories, click <a href=http://www.walmart.com/cp/accessories-peripherals/132959 target="_blank">here</a>.<br><br>Trade in your used computer and electronics for more cash to spend at Walmart. Good for your wallet and the environment - click <a href="http://gazelle.com/register_click?campaign=electronics_trade_in&media_type=text&network=walmart&destination_url=http%3A%2F%2Fwalmart.gazelle.com&placement=product_computers&creative=learn_more" target="_blank">here</a>.</I></b><br><br><b>ENERGY STAR<sup>&reg;</sup></b><br>Products that are ENERGY STAR-qualified prevent greenhouse gas emissions by meeting strict energy efficiency guidelines set by the U.S. Environmental Protection Agency and the U.S. Department of Energy. The ENERGY STAR name and marks are registered marks owned by the U.S. government, as part of their energy efficiency and environmental activities.<br><br>Check out the entire selection of <a href="http://www.walmart.com/cp/Laptops/1089430?povid=cat1098564-env472381-moduleIP100312-lLinkIP_20564282_EntireSelectionofLaptops">laptops</a> at Walmart.com. Shop laptops by size, price and type.]|#[Security lock slot (cable lock sold separately), Toshiba EasyGuard, Intel Active Management Technology (iAMT), USB Sleep-and-charge ports, Toshiba Hard Drive Impact Sensor, Toshiba Tecra R950-S9520 - 15.6" - Core i5 3320M - Windows 7 Pro (32/64 bits) - 4 GB RAM - 320 GB HDD]|#
 req_category|#[Electronics/Computers/Laptop Computers, Laptops, Electronics]|#null|#
@@ -1255,7 +1255,7 @@ ID|#S10844996|#23615046|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#AViiQ Portable Quick Stand - Notebook stand - cadet gray|#XFX AVQS12GSGR Portable Quick Stand - Grey|#
 pd_title|#[AViiQ Portable Quick Stand - Notebook stand - cadet gray]|#[XFX AVQS12GSGR Portable Quick Stand - Grey]|#
-req_brand_name|#[AViiQ]|#[AViiQ]|#
+req_brand_name|#[AViiQ]|#null|#
 req_manufacturer|#[XFX]|#[XFX]|#
 req_description|#[AViiQ Portable Quick Stand - notebook stand, Foldable]|#[Portable Quick Stand - Grey.  The AViiQ stand is made from Hylite, a german-made patented composite material made from an aluminum skin bonded to a polypropylene core.  It provides a flexible, lightweight solution that is also extremely durable.  Provides an optimal ergonomic angle that reduces strain on your wrists.  Raising your laptop 2 off your work surface allows for better airflow, enabling the laptop to run cooler and more effeciently.]|#
 req_category|#[Notebook stand, Notebook and tablet PC accessories]|#[Laptop Carts & Stands, General, Home/Furniture/Office Furniture/Desks]|#
@@ -1276,8 +1276,8 @@ ID|#S10862149|#22930067|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Brentwood MC-106 - Chopper - black|#Brentwood Mini Food Chopper Black|#
 pd_title|#[Brentwood MC-106 - Chopper - black]|#[Brentwood Mini Food Chopper Black]|#
-req_brand_name|#[Brentwood]|#[Brentwood]|#
-req_manufacturer|#[Brentwood Appliances]|#[Brentwood Appliances]|#
+req_brand_name|#[Brentwood]|#null|#
+req_manufacturer|#[Brentwood Appliances]|#null|#
 req_description|#[Brentwood MC-106 - chopper - black]|#null|#
 req_category|#[Chopper]|#[Food Processors]|#
 req_upc|#[0181225801068]|#null|#
@@ -1294,7 +1294,7 @@ ID|#S10893878|#21311547|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Centon C 360 - Flash memory card - 64 GB - 400x - CompactFlash|#Centon CF Type 1  64GB 400X Advanced Flash Card|#
 pd_title|#[Centon C 360 - Flash memory card - 64 GB - 400x - CompactFlash]|#[Centon CF Type 1  64GB 400X Advanced Flash Card]|#
-req_brand_name|#[Centon]|#[Centon]|#
+req_brand_name|#[Centon]|#null|#
 req_manufacturer|#[Centon Electronics]|#[Centon Electronics]|#
 req_description|#[Centon C 360 - flash memory card - 64 GB - CompactFlash]|#[The Centon CF 400x 64 GB Flash Card is the ideal storage device for amateur and professional photographers who demand fast and durable memory cards. These Advanced Type 1 Flash Cards are made to endure adverse conditions including high impact, vibration and low or high operating temperatures. With a high data capacity and excellent speed, this 64 GB Compact Flash Card ensures you get plenty of shots and can find the best among them. For simple, effective memory that keeps up with even the most demanding of shoots, Centon CF Type 1 Cards are the natural choice., <br><b>Centon 64GB Advanced Compact Flash Card:</b><br>Technical Information<br><b>Storage Capacity</b><ul><li>64GB</li></ul><b>Memory Card Quantity</b><ul><li>1 x 64GB</li></ul><br>Physical Characteristics<br><b>Form Factor</b><ul><li>Compact Flash (CF)</li></ul><b>Additional Features</b><ul><li>Type 1</li><li>400x speed</li></ul>]|#
 req_category|#[Flash memory card]|#[Memory Cards, Electronics/UNPUBLISHED CATEGORIES/Unpublished Shelves/Archive/Old Stuff/LOADING ZONE: ELECTRONICS/Loading Zone- Electronics, Electronics]|#
@@ -1314,7 +1314,7 @@ ID|#S10927893|#17489721|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#AZIO Levetron KB555U - Keyboard - USB|#AZiO KB555U Backlit Gaming Keyboard with Macro Keys|#
 pd_title|#[AZIO Levetron KB555U - Keyboard - USB]|#[AZiO KB555U Backlit Gaming Keyboard with Macro Keys]|#
-req_brand_name|#[AZIO]|#[AZIO]|#
+req_brand_name|#[AZIO]|#null|#
 req_manufacturer|#[AZIO Corporation]|#[Azio]|#
 req_description|#[AZIO Levetron KB555U - keyboard, Blue backlighting, adjustable brightness]|#[<strong>AZiO KB555U Illuminated Gaming Keyboard with Macro Keys:</strong><li>Adjustable keyboard backlight</li><li>Dedicated audio control keys</li><li>10 x 3 programmable macro keys</li><li>Macro keys can be edited to have up to 500 key sequences</li><li>Manually toggle the keyboard from standard mode to gaming mode</li><li>Keyboard can be auto configured to automatically launch with a specific program to enable a set of keys for up to 3 unique profiles</li><li>Compatible with Windows 7/Vista/XP/2000 (32-bit and 64-bit)</li>, <p>Take full control of the virtual battlefield with the AZiO KB555U Backlit Gaming Keyboard. It features 10 macro keys that can each be programmed with three different functions to operate as hot keys, shortcuts, keyboard characters or even unique keystroke sequences. You can switch from standard keyboard mode to gaming mode with the touch of a button. With adjustable backlights, this gaming keyboard lets you see every key clearly so you can stay in the game. It is compatible with Windows 7, Vista, XP and 2000. </p>]|#
 req_category|#[Keyboard - wired]|#[Electronics/Computers/Computer Accessories/Keyboards, Mice & Joysticks/Keyboards, Electronics, Keyboards]|#
@@ -1334,7 +1334,7 @@ ID|#S10934246|#21281993|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Acer Aspire M3970-UR14P - Micro tower - 1 x Core i5 3450 / 3.1 GHz - RAM 8 GB - HDD 1 x 2 TB - DVD SuperMulti - Radeon HD 7570 - Gigabit LAN - WLAN : 802.11b/g/n - Windows 7 Home Premium 64-bit - Monitor : none.|#Acer Black AM3970-UR14P Desktop PC with Intel Core i5-3450 Processor, 8GB Memory, 2TB Hard Drive and Windows 7 Home Premium|#
 pd_title|#[Acer Aspire M3970-UR14P - Micro tower - 1 x Core i5 3450 / 3.1 GHz - RAM 8 GB - HDD 1 x 2 TB - DVD SuperMulti - Radeon HD 7570 - Gigabit LAN - WLAN : 802.11b/g/n - Windows 7 Home Premium 64-bit - Monitor : none.]|#[Acer Black AM3970-UR14P Desktop PC with Intel Core i5-3450 Processor, 8GB Memory, 2TB Hard Drive and Windows 7 Home Premium]|#
-req_brand_name|#[Acer]|#[Acer]|#
+req_brand_name|#[Acer]|#null|#
 req_manufacturer|#[Acer]|#[Acer Computers]|#
 req_description|#[Acer Aspire M3970-UR14P - Core i5 3450 3.1 GHz - Monitor : none.]|#[<b>Acer AM3970-UR14P Desktop PC:</b><br><br><b>Key Features and Benefits:</b><ul><li>Acer AM3970-UR14P Desktop PC with Intel Core i5-3450 Processor and 8GB Memory<br>3.10GHz, 6MB Total Cache<br><br></li><li>8GB DDR3 SDRAM system memory (expandable to 16GB)<br>Gives you the power to handle most power-hungry applications and tons of multimedia work<br><br></li><li>2TB SATA hard drive<br>Store 1,300,000 photos, 571,000 songs or 1,053 hours of HD video and more<br><br></li><li>DVD-RAM+/-R/RW drive<br>Watch movies, and read and write CDs and DVDs in multiple formats<br><br></li><li>10/100/1000 Gigabit Ethernet, 802.11b/g/n Wireless LAN<br>Connect to a broadband modem with wired Ethernet or wirelessly connect to a WiFi signal or hotspot with the 802.11b/g/n connection built into your 2TB Hard Drive Acer Aspire AM3970 PC in Black PC<br><br></li><li>AMD Radeon HD 7570 Graphics<br>With 1GB dedicated graphics memory</li></ul><br><b>Additional Features of the 2TB Hard Drive Acer Aspire AM3970 PC in Black:</b><ul><li>12 x USB 2.0 ports, 1 x audio line-in, 1 x audio line-out, 1 x RJ-45 Ethernet port, 1 x VGA port, 1 x HDMI port</li><li>1 x PCI Express (x1) slot</li></ul><br><b>Software:</b><ul><li>Genuine Microsoft Windows 7 Home Premium 64-Bit Edition (To learn more about the features of Windows 7, click <b><a href="http://www.walmart.com/catalog/catalog.gsp?cat=559890">here</a></b>)</li><li>Microsoft Office Starter 2010: Includes reduced functionality versions of Microsoft Word and Excel, with advertising. PowerPoint and Outlook are NOT included. Purchase Office 2010 today and get the most out of your new 2TB Hard Drive Acer Aspire AM3970 PC in Black PC. (To learn more about the features of Office 2010, click <b><a href="http://www.walmart.com/cp/microsoft-office-2010/1064728" target="_blank">here</a></b>)</li><li>Backup and Restore options built into Windows allows you to create safety copies of your most important personal files, so you're always prepared for the worst</li></ul><br><b>Support and Warranty:</b><ul><li>1-year limited warranty</li><li>Restore discs are not included (unless specified by supplier). We recommend you use the installed software to create your own restore and backup DVD the first week you use the computer.</li></ul><br><b>What's In The Box:</b><ul><li>Power cord</li><li>Acer USB keyboard</li><li>Acer USB mouse</li><li>Quick Start Guide</li></ul><br><b><i>To see the manufacturer's specifications for this product, click <a href="http://i.walmart.com/i/rb/0088654150578.pdf" target="_blank">here</a>.<br><br>To see a list of our PC Accessories, click <a href="http://www.walmart.com/cp/accessories-peripherals/132959" target="_blank">here</a>.<br><br>Trade in your used computer and electronics for more cash to spend at Walmart. Good for your wallet and the environment - click <a href="http://gazelle.com/register_click?campaign=electronics_trade_in&amp;media_type=text&amp;network=walmart&amp;destination_url=http%3A%2F%2Fwalmart.gazelle.com&amp;placement=product_computers&amp;creative=learn_more" target="_blank">here</a>.</i></b>, The Acer AM3970-UR14P Desktop PC with Intel Core i5-3450 Processor and 8GB Memory has all the basics you need to compute. Microsoft Windows 7 Home Premium lets you complete any task and customize your Windows 7 Home Premium with Windows 8 Pro Upgrade Option Acer Desktop PC.]|#
 req_category|#[Personal computer]|#[Electronics/Computers/Desktop Computers, Electronics, Desktops]|#
@@ -1356,8 +1356,8 @@ ID|#S10955274|#22237719|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#SanDisk Ultra - Flash memory card ( microSDXC to SD adapter included ) - 64 GB - Class 10 - microSDXC UHS-I|#SanDisk SDSDQUI-064G-A46 Ultra microSDXC 64GB Class 10 UHS-1|#
 pd_title|#[SanDisk Ultra - Flash memory card ( microSDXC to SD adapter included ) - 64 GB - Class 10 - microSDXC UHS-I]|#[SanDisk SDSDQUI-064G-A46 Ultra microSDXC 64GB Class 10 UHS-1]|#
-req_brand_name|#[SanDisk]|#[SanDisk]|#
-req_manufacturer|#[SanDisk]|#[SanDisk]|#
+req_brand_name|#[SanDisk]|#null|#
+req_manufacturer|#[SanDisk]|#null|#
 req_description|#[SanDisk Ultra - flash memory card - 64 GB - microSDXC UHS-I]|#[Amplify the performance of your Android and other smartphone or tablet with the SanDisk Ultra microSDXC Memory Card. It's the perfect choice for smartphone enthusiasts and tablet users, giving you faster app loading, smoother Full HD video recording and advanced photo capture. It gives you more space for your favorite mobile media., SanDisk Ultra 64 GB microSD Extended Capacity (microSDXC) - 1 Card - Class 10/UHS-I - 30 MBps Read - 10 MBps Write]|#
 req_category|#[Flash memory card]|#[Memory Cards, Electronics, Electronics/Digital Cameras/Accessories/Memory Cards]|#
 req_upc|#[0619659084844]|#[00619659084844, 0061965908484, 619659084844]|#
@@ -1376,8 +1376,8 @@ ID|#21291708|#S10969935|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Lexmark 14L0086 Ink Cartridge 500 Page Yield Cyan|#Lexmark Cartridge No. 200 - Print cartridge - 1 x cyan - 500 pages - LRP - for OfficeEdge Pro4000, Pro4000c, Pro5500, Pro5500t|#
 pd_title|#[Lexmark 14L0086 Ink Cartridge 500 Page Yield Cyan]|#[Lexmark Cartridge No. 200 - Print cartridge - 1 x cyan - 500 pages - LRP - for OfficeEdge Pro4000, Pro4000c, Pro5500, Pro5500t]|#
-req_brand_name|#[Lexmark]|#[Lexmark]|#
-req_manufacturer|#[Lexmark International]|#[Lexmark International]|#
+req_brand_name|#null|#[Lexmark]|#
+req_manufacturer|#null|#[Lexmark International]|#
 req_description|#null|#[Lexmark Cartridge No. 200 - print cartridge - cyan]|#
 req_category|#[Toners & Cartridges]|#[Printing consumables]|#
 req_upc|#null|#[0734646208178]|#
@@ -1393,7 +1393,7 @@ ID|#24016929|#S10993935|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#LENMAR CLZ442M Extended Battery For Motorola Droid X Cellular Phones|#Lenmar CLZ442M - Cellular phone battery Li-Ion 2650 mAh - for Motorola DROID X|#
 pd_title|#[LENMAR CLZ442M Extended Battery For Motorola Droid X Cellular Phones]|#[Lenmar CLZ442M - Cellular phone battery Li-Ion 2650 mAh - for Motorola DROID X]|#
-req_brand_name|#[Lenmar]|#[Lenmar]|#
+req_brand_name|#null|#[Lenmar]|#
 req_manufacturer|#[Lenmar]|#[Lenmar Enterprises]|#
 req_description|#null|#[Lenmar CLZ442M - cellular phone battery - Li-Ion]|#
 req_category|#[Cordless Phones]|#[Cellular phone battery]|#
@@ -1411,7 +1411,7 @@ ID|#S11011441|#17165365|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#OtterBox Defender Series - Protective cover for web tablet - polycarbonate, silicone skin - black - for Motorola XOOM with Wi-Fi|#OtterBox Defender Series for Motorola Xoom, Black|#
 pd_title|#[OtterBox Defender Series - Protective cover for web tablet - polycarbonate, silicone skin - black - for Motorola XOOM with Wi-Fi]|#[OtterBox Defender Series for Motorola Xoom, Black]|#
-req_brand_name|#[OtterBox]|#[OtterBox]|#
+req_brand_name|#[OtterBox]|#null|#
 req_manufacturer|#[Otter Products]|#[MSW Wireless]|#
 req_description|#[OtterBox Defender Series - protective cover for web tablet]|#[The OtterBox Defender Series for Motorola Xoom has everything you need to feel safe while taking full advantage of your new investment. A high quality polycarbonate shell snaps around your tablet while an impact absorbing silicone skin wraps around the outside of the shell to complete the case. The removable shield includes a pop-up stand that has two angles great for typing or viewing videos. These all add up to rugged protection that keeps your Xoom safe from harm no matter where you use it., <p><b>OtterBox Defender Series for Motorola Xoom:</b><ul><li>Inner polycarbonate shell with foam interior and durable silicone skin<li>Total access to screen and all ports<li>Clip-on touch screen cover with fold-out stand<li>Black lid and clear plastic base<li>Includes self-adhering screen protector<li>Color: Black</ul>]|#
 req_category|#[Protective cover for web tablet]|#[Cases, Cell Phones/Accessories/Cases & Protectors, Electronics]|#
@@ -1433,7 +1433,7 @@ ID|#S11067137|#22029382|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#ASUS X54C RB93 - Core i3 2370M / 2.4 GHz - Windows 7 Home Premium 64-bit - 6 GB RAM - 320 GB HDD - DVD-Writer - 15.6" wide 1366 x 768 / HD - Intel HD Graphics 3000 - black|#Asus Black 15.6" X54C-RB93 Laptop PC with Intel Core i3-2370M Processor and Windows 7 Home Premium|#
 pd_title|#[ASUS X54C RB93 - Core i3 2370M / 2.4 GHz - Windows 7 Home Premium 64-bit - 6 GB RAM - 320 GB HDD - DVD-Writer - 15.6" wide 1366 x 768 / HD - Intel HD Graphics 3000 - black]|#[Asus Black 15.6" X54C-RB93 Laptop PC with Intel Core i3-2370M Processor and Windows 7 Home Premium]|#
-req_brand_name|#[ASUS]|#[ASUS]|#
+req_brand_name|#[ASUS]|#null|#
 req_manufacturer|#[ASUSTeK COMPUTER]|#[Asus]|#
 req_description|#[ASUS X54C RB93 - 15.6" - Core i3 2370M - Windows 7 Home Premium 64-bit - 6 GB RAM - 320 GB HDD, Security lock slot (cable lock sold separately), ASUS IceCool design, ASUS Power4Gear]|#[The Asus 15.6 Inch Laptop PC X54C-RB93 is a versatile laptop with a scratch resistant infusion design so it stays new-looking day after day and includes a host of convenient features that all translate into an incredible value. You'll experience a new level of multitasking performance and battery-extended benefits for longer HD enjoyment., <b>Asus 15.6" X54C-RB93 Laptop PC:</b><br><br><b>Key Features and Benefits:</b><ul><li>Black Intel Core i3 Laptop PC with i3-2370M Processor<br>2.40GHz, 3MB Cache<br><br></li><li>6GB DDR3 SDRAM system memory (expandable to 8GB)<br>Gives you the power to handle most power-hungry applications and tons of multimedia work<br><br></li><li>320GB SATA hard drive<br>Store 213,000 photos, 91,000 songs or 168 hours of HD video and more on the Black Intel Core i3 Laptop PC with i3-2370M Processor<br><br></li><li>DVD+/-RW/CD-RW drive<br>Watch movies, and read and write CDs and DVDs in multiple formats<br><br></li><li>10/100/1000Base-T Ethernet, 802.11b/g/n Wireless LAN<br>Connect to a broadband modem with wired Ethernet or wirelessly connect to a WiFi signal or hotspot with the 802.11b/g/n connection built into your Black Intel Core i3 Laptop PC with i3-2370M Processor<br><br></li><li>15.6" HD display<br>Intel GMA HD Graphics with shared memory</li></ul><br><b>Additional Features on the Windows 7 Laptop Home Premium with Windows 8 Pro Upgrade Option:</b><ul><li>Built-in webcam</li><li>4-in-1 memory card reader</li><li>1 x USB 3.0 port, 1 x USB 2.0 port, 1 x audio-out jack, 1 x audio-in jack, 1 x RJ-45 Ethernet port, 1 x VGA port, 1 x HDMI port</li><li>6-cell lithium-ion battery</li></ul><br><b>Software on the Windows 7 Laptop Home Premium with Windows 8 Pro Upgrade Option:</b><ul><li>Genuine Microsoft Windows 7 Home Premium 64-Bit Edition (To learn more about the features of Windows 7, click <b><a href="http://www.walmart.com/catalog/catalog.gsp?cat=559890">here</a></b>)</li><li>Backup and Restore options built into Windows allows you to create safety copies of your most important personal files, so you're always prepared for the worst</li></ul><br><b>Support and Warranty:</b><ul><li>1-year global warranty</li><li>Restore discs are not included (unless specified by supplier). We recommend you use the installed software to create your own restore and backup DVD the first week you use the computer.</li></ul><br><b>What's In The Box:</b><ul><li>Power cord</li><li>6-cell lithium-ion battery</li><li>Quick Start Guide</li></ul><br><b><i>To see the manufacturer's specifications for this product, click <a href="http://i.walmart.com/i/rb/0088622727746.pdf" target="_blank">here</a>.<br><br>To see a list of our PC Accessories, click <a href="http://www.walmart.com/cp/accessories-peripherals/132959" target="_blank">here</a>.<br><br>Trade in your used computer and electronics for more cash to spend at Walmart. Good for your wallet and the environment - click <a href="http://gazelle.com/register_click?campaign=electronics_trade_in&media_type=text&network=walmart&destination_url=http%3A%2F%2Fwalmart.gazelle.com&placement=product_computers&creative=learn_more" target="_blank">here</a>.</i></b>]|#
 req_category|#null|#[Electronics/Computers/Laptop Computers, Laptops, Electronics]|#
@@ -1460,7 +1460,7 @@ ID|#S11119750|#21777562|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Razer Ouroboros - Mouse - laser - 11 button(s) - wireless - USB - Multi-functional Charging/Receiver Dock|#Razer Ouroboros Ambidextrous Gaming Mouse|#
 pd_title|#[Razer Ouroboros - Mouse - laser - 11 button(s) - wireless - USB - Multi-functional Charging/Receiver Dock]|#[Razer Ouroboros Ambidextrous Gaming Mouse]|#
-req_brand_name|#[Razer]|#[Razer]|#
+req_brand_name|#[Razer]|#null|#
 req_manufacturer|#[Razer USA]|#[RAZER]|#
 req_description|#[Razer Ouroboros mouse, Scrolling wheel, built-in palm rest, Hyperesponse buttons, interchangeable side panels, 4G Dual Sensor System, Gaming-grade Wireless Technology]|#[<br><b>Razer Ouroboros Ambidextrous Gaming Mouse:</b><ul><li>Customizable ergonomics to fit all hand sizes and grip-styles<li>8200dpi 4G Dual Sensor System<li>Gaming-grade wireless technology with dock<li>Razer Synapse 2.0 enabled<li>11 programmable Hyperesponse buttons<li>1000Hz Ultrapolling/1ms response time<li>Up to 50g acceleration</ul>, The Razer Ouroboros Ambidextrous Gaming Mouse features customizable ambidextrous ergonomics with an adjustable arched palm rest and back, as well as two interchangeable side panels. This gaming mouse will perfectly fit every hand curvature and grip-style, ensuring optimum comfort and minimal fatigue during extended play for every gamer.]|#
 req_category|#[Mouse]|#[Mice, Electronics, Toys/ARCHIVE SHELF/CAT/NEW TOYS ITEMS/LOADING ZONE--Toys]|#
@@ -1480,7 +1480,7 @@ ID|#27344499|#S11134229|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Acer America Corp 15.6in 4G 500GB Ci5 2467M W7HP|#Acer Aspire V5-571-6614 - Core i5 2467M / 1.6 GHz - Windows 7 Home Premium 64-bit - 4 GB RAM - 500 GB HDD - DVD SuperMulti - 15.6" CineCrystal wide 1366 x 768 / HD - Intel HD Graphics 3000 - smoky black|#
 pd_title|#[Acer America Corp 15.6in 4G 500GB Ci5 2467M W7HP]|#[Acer Aspire V5-571-6614 - Core i5 2467M / 1.6 GHz - Windows 7 Home Premium 64-bit - 4 GB RAM - 500 GB HDD - DVD SuperMulti - 15.6" CineCrystal wide 1366 x 768 / HD - Intel HD Graphics 3000 - smoky black]|#
-req_brand_name|#[Acer]|#[Acer]|#
+req_brand_name|#null|#[Acer]|#
 req_manufacturer|#[Acer]|#[Acer]|#
 req_description|#[Acer V5-571-6614, 15.6, 4GB ram, 500GB HDD, Core i5-2467M, Windows 7 Home Premium 64bit]|#[Security lock slot (cable lock sold separately), administrator password, system password, hard drive password, wake on LAN, Acer Aspire V5-571-6614 - 15.6" - Core i5 2467M - Windows 7 Home Premium 64-bit - 4 GB RAM - 500 GB HDD]|#
 req_category|#[Electronics/Computers/Laptop Computers, Laptops, Electronics]|#null|#
@@ -1501,7 +1501,7 @@ ID|#21576632|#S11144445|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#M-Edge Accessories PD3-HMP-MF-DGY Hampton iPad3 Grey|#M-edge Hampton - Case for web tablet - leather, microfiber - gray - for Apple iPad (3rd generation); iPad 2|#
 pd_title|#[M-Edge Accessories PD3-HMP-MF-DGY Hampton iPad3 Grey]|#[M-edge Hampton - Case for web tablet - leather, microfiber - gray - for Apple iPad (3rd generation); iPad 2]|#
-req_brand_name|#[M-EDGE]|#[M-EDGE]|#
+req_brand_name|#null|#[M-EDGE]|#
 req_manufacturer|#[M-Edge Accessories]|#[M-edge Accessories]|#
 req_description|#null|#[M-edge Hampton - case for web tablet]|#
 req_category|#null|#[Case for web tablet]|#
@@ -1518,7 +1518,7 @@ ID|#S11199630|#21862679|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#NETGEAR NeoTV MAX NTV300SL - Digital multimedia receiver|#Netgear NeoTV NTV300SL Max Streaming Player|#
 pd_title|#[NETGEAR NeoTV MAX NTV300SL - Digital multimedia receiver]|#[Netgear NeoTV NTV300SL Max Streaming Player]|#
-req_brand_name|#[NETGEAR]|#[NETGEAR]|#
+req_brand_name|#[NETGEAR]|#null|#
 req_manufacturer|#[NETGEAR]|#[NetGear]|#
 req_description|#[NETGEAR NeoTV MAX NTV300SL - digital multimedia receiver]|#[<br><b>Netgear NeoTV Streaming Player, NTV300SL :</b><ul><LI>Netgear Streaming Player enables access to a huge selection of online streaming channels without a computer<LI>Enjoy thousands of streaming movies and TV shows from Netflix, Hulu Plus, VUDU, CinemaNow and more<LI>Use the Netgear player to create your favorite personalized stations on Pandora Internet radio and listen to your favorite tunes<LI>The tiny size of the Netgear Streaming Player offers convenient placement next to your TV without taking much space in your home theatre setup<li>Remote control with QWERTY keyboard<li>2 x CR2032 coin batteries<li>A/V cable/RCA<li>Power adapter<li>Netgear NeoTV Streaming Player comes with a handy Quick start guide</ul>, Turn your TV into a smart TV with the Netgear NeoTV Streaming Player. It lets you stream Netflix, Hulu Plus, VUDU, Pandora and hundreds of other online channels onto your TV &mdash; without a PC. The Netgear Player is packed with everything you need to provide the ultimate home theater entertainment experience. Dynamic features include crystal clear 1080p full HD, a tiny footprint that packs a punch and built-in WiFi from the home networking experts. You'll also enjoy the Netgear NeoTV Streaming Player's incredible 5.1 Dolby Surround Sound for an unforgettable big-screen experience. Best of all, you can easily navigate the Netgear Streaming Player with a QWERTY keyboard remote control.]|#
 req_category|#[Digital multimedia receiver]|#[Electronics/TV & Video/Media Streaming Players, TV Media Player, Electronics]|#
@@ -1563,8 +1563,8 @@ ID|#21899805|#S11211829|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#EVGA NVIDIA GeForce GTX 650 1GB GDDR5 PCI Express 3.0 Superclocked Graphics Card|#eVGA GeForce GTX 650 Superclocked - Graphics card - GF GTX 650 - 1 GB GDDR5 - PCI Express 3.0 x16 - 2 x DVI, Mini-HDMI|#
 pd_title|#[EVGA NVIDIA GeForce GTX 650 1GB GDDR5 PCI Express 3.0 Superclocked Graphics Card]|#[eVGA GeForce GTX 650 Superclocked - Graphics card - GF GTX 650 - 1 GB GDDR5 - PCI Express 3.0 x16 - 2 x DVI, Mini-HDMI]|#
-req_brand_name|#[eVGA]|#[eVGA]|#
-req_manufacturer|#[EVGA Corporation]|#[EVGA Corporation]|#
+req_brand_name|#null|#[eVGA]|#
+req_manufacturer|#null|#[EVGA Corporation]|#
 req_description|#null|#[eVGA GeForce GTX 650 Superclocked graphics card - GF GTX 650 - 1 GB, Nvidia GeForce 3D Vision Ready, Nvidia CUDA technology, Nvidia PureVideo HD technology, Nvidia PhysX-Ready, Nvidia Surround technology, TXAA, FXAA, SMX technology, NVIDIA Adaptive Vertical Sync, Kepler GPU Architecture]|#
 req_category|#null|#[Graphics card]|#
 req_upc|#null|#[0843368021993]|#
@@ -1579,7 +1579,7 @@ ID|#21954431|#S11233003|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Chester Creek Technologies Keys and Case|#CCT ChesterKeys&Case - Keyboard and folio case - Bluetooth|#
 pd_title|#[Chester Creek Technologies Keys and Case]|#[CCT ChesterKeys&Case - Keyboard and folio case - Bluetooth]|#
-req_brand_name|#[CCT]|#[CCT]|#
+req_brand_name|#null|#[CCT]|#
 req_manufacturer|#[Chester Creek]|#[Chester Creek Technologies]|#
 req_description|#[CCT1024<br/>Features:<ul><li>iPad case and keyboard</li><li>ABS plastic keyboard</li><li>Lithium battery lasts for 90 hours of continuous use</li><li>Synthetic leather case</li><li>RoHS and CPSIA compliant</li><li>Font is 40pct larger</li></ul><br/> Includes:<ul><li>USB with cable included</li></ul><br/>     Specifications:<ul><li>Bluetooth v2.0 compatible with iOS 3.2 and up</li></ul><br/>     Warranty:<ul><li>1 Year warranty</li></ul><br/>]|#[CCT ChesterKeys&Case keyboard and folio case]|#
 req_category|#[Electronics/Computers/Computer Accessories/Cables & Connectors, Computer Components: Replacement Parts & Accessories, Electronics]|#[Keyboard and folio case - wireless]|#
@@ -1598,7 +1598,7 @@ ID|#S11295529|#21907347|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Google Nexus 7 - Tablet - Android 4.2 (Jelly Bean) - 32 GB - 7" IPS ( 1280 x 800 ) - front camera - Wi-Fi, Bluetooth, NFC - brown|#Google Nexus 7" Tablet with 32GB Memory|#
 pd_title|#[Google Nexus 7 - Tablet - Android 4.2 (Jelly Bean) - 32 GB - 7" IPS ( 1280 x 800 ) - front camera - Wi-Fi, Bluetooth, NFC - brown]|#[Google Nexus 7" Tablet with 32GB Memory]|#
-req_brand_name|#[Google]|#[Google]|#
+req_brand_name|#[Google]|#null|#
 req_manufacturer|#[ASUSTeK COMPUTER]|#[Asus]|#
 req_description|#[Capacitive touch screen, Google Nexus 7 - tablet - Android 4.2 (Jelly Bean) - 32 GB - 7"]|#[<p><b>Google Nexus 7 Tablet PC with Wi-Fi, 7" Touchscreen & Android 4.1 Operating System (Jelly Bean):</b><br><br><b>Technical Specifications on the Google Nexus 32GB Tablet:</b></p><ul><li>1.2GHz NVIDIA Tegra 3 T30L processor</li><li>1GB system memory and 32GB onboard storage built into the Google Nexus 7 tablet PC</li><li>7" high-definition touchscreen with 1280 x 800 WXGA resolution</li><li>Built-in 802.11b/g/n Wi-Fi and Bluetooth v2.1</li></ul><b>Additional Google Nexus 7 Tablet Asus-1B32 Features:</b><ul><li>Front 1.2MP webcam with microphone</li><li>Micro USB port</li><li>G-sensor, light sensor, eCompass, gyroscope, hall sensor, NFC</li><li>Up to 9.5 hours of run time on a full charge</li><li>Weighs 0.7 lbs; 4.7" x 7.8" x 0.4" dimensions</li></ul><b>Software and Applications on the Google Nexus 32GB Tablet:</b><ul><li>Android 4.1 OS (Jelly Bean)</li><li>Google Search, Google Voice Search, Gmail, Contact Sync, Calendar Sync, Google Talk, Google Maps, Google Street View, News and Weather, YouTube, Movie Studio and Google Play</li></ul><b>What's in the Box:</b><ul><li>Google Nexus 32GB Tablet and AC adapter</li></ul><br><b>What's a Tablet PC?</b><br>Tablet PCs are compact, ultra-portable entertainment devices that let you read email, surf the Internet, read eBooks, view photos, play games, listen to music and watch video files. Most tablets are based on a smaller operating system, which allows you to purchase and download additional applications from supported stores. Tablet PCs do not have a CD/DVD drive and will not run Microsoft Windows or its applications. Tablet PCs function as a secondary device for casual entertainment purposes and are not meant to replace a computer. They are ideal for use around the home and on the go with Wi-Fi or 3G/4G mobile broadband connections (pay as you go, contract may be required for service).<br><br>Check out our entire selection of <a href="http://www.walmart.com/browse/computers/tablet-pcs/3944_3951_1078084/">tablets</a>. Shop tablet PCs by screen size, price and brand on Walmart.com., The Google Nexus 7 Tablet WiFi, ASUS-1B32 is the world's first Android tablet that combines the latest Android 4.1 mobile operating system with a powerful quad-core processor for high-performance computing on the go. An eye-catching 1280 x 800 high-definition display is your touchscreen interface for this Google tablet. The Google Nexus 7 tablet computer's LED-backlit IPS panel is made from scratch-resistant glass to offer crisp images, wide viewing angles and 10-finger multi-touch support. Advanced graphics come to life on the Google Nexus 7 Tablet Asus-1B32 screen thanks to a 12 core GeForce GPU. It helps you take advantage of more than 600,000 apps and games on the Google Nexus 7 Tablet Asus-1B32, as well as the world's largest collection of eBooks, millions of songs, thousands of movies, TV shows and magazines.]|#
 req_category|#[Tablet]|#[Electronics, Tablet PCs, Electronics/Computers/Tablet PCs]|#
@@ -1628,7 +1628,7 @@ ID|#26138820|#S11310485|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#HP Commercial Specialty NVIDIA NVS 510 2GB GFX|#NVIDIA NVS 510 - Graphics card - Quadro NVS 510 - 2 GB GDDR3 - PCIe 2.0 x16 low profile - 4 x Mini DisplayPort - for Workstation Z420, Z620|#
 pd_title|#[HP Commercial Specialty NVIDIA NVS 510 2GB GFX]|#[NVIDIA NVS 510 - Graphics card - Quadro NVS 510 - 2 GB GDDR3 - PCIe 2.0 x16 low profile - 4 x Mini DisplayPort - for Workstation Z420, Z620]|#
-req_brand_name|#[NVIDIA]|#[NVIDIA]|#
+req_brand_name|#null|#[NVIDIA]|#
 req_manufacturer|#[HP]|#[Hewlett-Packard]|#
 req_description|#null|#[NVIDIA NVS 510 graphics card - Quadro NVS 510 - 2 GB, NVIDIA Unified Driver Architecture (UDA), Nvidia nVIEW Multi-Display Technology, NVIDIA Mosaic, Shader Model 5.0, GPU Tessellation]|#
 req_category|#[Graphics Cards]|#[Graphics card - low profile]|#
@@ -1644,7 +1644,7 @@ ID|#22018125|#S11348714|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Acer Glossy Black 15.6" Aspire E1-571-6680 Laptop PC with Intel Core i3-3100M Processor and Windows 8 Operating System|#Acer Aspire E1-571-6680 - Core i3 3110M / 2.4 GHz - Windows 8 64-bit - 4 GB RAM - 500 GB HDD - DVD SuperMulti - 15.6" CineCrystal wide 1366 x 768 / HD - Intel HD Graphics 4000 - glossy black|#
 pd_title|#[Acer Glossy Black 15.6" Aspire E1-571-6680 Laptop PC with Intel Core i3-3100M Processor and Windows 8 Operating System]|#[Acer Aspire E1-571-6680 - Core i3 3110M / 2.4 GHz - Windows 8 64-bit - 4 GB RAM - 500 GB HDD - DVD SuperMulti - 15.6" CineCrystal wide 1366 x 768 / HD - Intel HD Graphics 4000 - glossy black]|#
-req_brand_name|#[Acer]|#[Acer]|#
+req_brand_name|#null|#[Acer]|#
 req_manufacturer|#[Acer America]|#[Acer]|#
 req_description|#[The Acer Intel Core i3 Laptop PC, E1-571-6680 delivers an excellent mobile PC experience for real value. Solid performance, handy multimedia tools and convenient connectivity make daily computing an easy-going pleasure. The practical yet stylish Acer 15.6" Aspire Laptop makes everyday activities like web browsing, communicating, and playing videos effortless., <br><b>Acer 15.6" Aspire E1-571-6680 Laptop PC:</b><br><br><b>Key Features and Benefits:</b><ul><li>Acer Windows 8 Laptop PC (Operating System) in Glossy Black with i3-3100M Processor<br>2.40GHz, 3MB L3 Cache<br><br></li><li>4GB DDR3 SDRAM system memory (expandable to 8GB)<br>Gives you the power to handle most power-hungry applications and tons of multimedia work<br><br></li><li>500GB SATA hard drive<br>Store 333,000 photos, 142,000 songs or 263 hours of HD video and more on the Acer Windows 8 Laptop PC (Operating System) in Glossy Black with i3-3100M Processor<br><br></li><li>8x SuperMulti DVD Burner<br>Watch movies, and read and write CDs and DVDs in multiple formats<br><br></li><li>10/100/1000 Gigabit Ethernet, 802.11b/g/n Wireless LAN<br>Connect to a broadband modem with wired Ethernet or wirelessly connect to a WiFi signal or hotspot with the 802.11b/g/n connection built into your Acer Windows 8 Laptop PC (Operating System) in Glossy Black with i3-3100M Processor<br><br></li><li>15.6" HD widescreen CineCrystal LED-backlit display<br>Intel HD Graphics 4000 with 128MB of dedicated system memory</li></ul><br><b>Additional Features of the Acer 15.6" Aspire Laptop:</b><ul><li>Built-in 1.3 megapixel HD webcam</li><li>5-in-1 memory card reader</li><li>3 x USB 2.0 ports, 1 x headphone/speaker/line-out jack, 1 x microphone-in jack, 1 x RJ-45 Ethernet port, 1 x HDMI port</li><li>6-cell lithium-ion battery, up to 4 hours battery life</li></ul><br><b>Acer 15.6" Aspire Laptop Software:</b><ul><li>Genuine Microsoft Windows 8 Operating System</li><li>Microsoft Office 2010 trial</li><li>McAfee Internet Security Suite trial</li><li>Acer Backup Manager, ePower Management and eRecovery Management</li></ul><br><b>Support and Warranty:</b><ul><li>1-year parts and labor warranty</li><li>Restore discs are not included (unless specified by supplier). We recommend you use the installed software to create your own restore and backup DVD the first week you use the computer.</li></ul><br><b>What's In The Box:</b><ul><li>Power cord</li><li>6-cell lithium-ion battery</li><li>Quick Start Guide</li></ul><br><b><i>To see the manufacturer's specifications for this product, click <a href="http://i.walmart.com/i/rb/0088654179095.pdf" target="_blank">here</a>.<br><br>To see a list of our PC Accessories, click <a href="http://www.walmart.com/cp/accessories-peripherals/132959" target="_blank">here</a>.<br><br>Trade in your used computer and electronics for more cash to spend at Walmart. Good for your wallet and the environment - click <a href="http://gazelle.com/register_click?campaign=electronics_trade_in&media_type=text&network=walmart&destination_url=http%3A%2F%2Fwalmart.gazelle.com&placement=product_computers&creative=learn_more" target="_blank">here</a>.</i></b>]|#[Security lock slot (cable lock sold separately), administrator password, system password, hard drive password, wake on LAN, Acer Aspire E1-571-6680 - 15.6" - Core i3 3110M - Windows 8 64-bit - 4 GB RAM - 500 GB HDD]|#
 req_category|#[Electronics/Computers/Laptop Computers, Laptops, Electronics]|#null|#
@@ -1707,7 +1707,7 @@ ID|#S11377939|#22255997|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#Belkin Striped Cover with Stand - Protective cover for web tablet - red carpet - for Apple iPad mini|#Belkin Striped Cover with Stand for iPad mini|#
 pd_title|#[Belkin Striped Cover with Stand - Protective cover for web tablet - red carpet - for Apple iPad mini]|#[Belkin Striped Cover with Stand for iPad mini]|#
-req_brand_name|#[Belkin]|#[Belkin]|#
+req_brand_name|#[Belkin]|#null|#
 req_manufacturer|#[Belkin International]|#[Belkin Components]|#
 req_description|#[Belkin Striped Cover with Stand - protective cover for web tablet]|#[<br><b>Belkin Striped Cover with Stand for iPad mini:</b><ul><li>Soft liner protects touchscreen and backing<li>Adjustable stand offers multiple viewing and typing angles<li>Magnetized tab closure keeps your iPad mini securely in place<li>Protective corners provide a snug fit<li>Striped exterior offers stylish protection<li>Color: Blacktop</ul>, Add some flair while protecting your iPad mini with the Belkin Striped Cover with Stand. The cover's soft, inner lining protects the iPad mini touchscreen and backing, while a secure magnetic tab closure and protective corners offer a safe and snug fit. The cover is lightweight with a slim profile, so it fits easily into any purse or bag. An adjustable stand lets you choose from multiple viewing and typing angles, ensuring you'll be able to comfortably work, read or watch videos wherever you go.]|#
 req_category|#[Protective cover for web tablet]|#[Electronics/iPad & eReaders/Apple iPad Accessories/iPad Cases, Sleeves & Bags, Electronics, MP3 Cases]|#
@@ -1729,8 +1729,8 @@ ID|#20657450|#S11378479|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Casio FX300ES Plus Standard Scientific Calculator with Natural Textbook Display|#Casio FX-300ES Plus - Scientific calculator - 10 digits + 2 exponents - solar panel, battery|#
 pd_title|#[Casio FX300ES Plus Standard Scientific Calculator with Natural Textbook Display]|#[Casio FX-300ES Plus - Scientific calculator - 10 digits + 2 exponents - solar panel, battery]|#
-req_brand_name|#[Casio]|#[Casio]|#
-req_manufacturer|#[Casio]|#[Casio]|#
+req_brand_name|#null|#[Casio]|#
+req_manufacturer|#null|#[Casio]|#
 req_description|#null|#[Casio FX-300ES Plus - scientific calculator, Auto power off, independent memory, Visually Perfect Algebraic Method (VPAM) input mode, 9 memory registers]|#
 req_category|#[Calculators]|#[Scientific calculator, Scientific calculator - LCD - 10 digits + 2 exponents]|#
 req_upc|#null|#[0079767900779]|#
@@ -1746,7 +1746,7 @@ ID|#S11400386|#23868744|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#NEC NP-M311W - LCD projector - 3100 lumens - 1280 x 800 - widescreen - HD 720p|#NEC Display 3100-Lumen Widescreen Portable Projector|#
 pd_title|#[NEC NP-M311W - LCD projector - 3100 lumens - 1280 x 800 - widescreen - HD 720p]|#[NEC Display 3100-Lumen Widescreen Portable Projector]|#
-req_brand_name|#[NEC]|#[NEC]|#
+req_brand_name|#[NEC]|#null|#
 req_manufacturer|#[NEC]|#[NEC, NEC Display]|#
 req_description|#[NEC NP-M311W LCD projector]|#[Keep your audience engaged during presentations with the 3100-lumen NEC M311W, an easy-to-use and budget-friendly portable projector. This projector is ideal for education and small-to-medium-sized business environments that need essential features, including bright images, automatic technologies and eco-friendly appeal. Wireless Imaging Utility (WIU) enables users to send an image from their iPad directly to the M311W, while Crestron Roomview aids in emergency messaging. The M311W offers lamp life up to 8,000 hours and a high contrast ratio of 3,000:1., NEC DISPLAY SOLUTIONS WXGA, LCD, 3100 LUMEN PROJECTOR, 6, 6LBSWXGA, LCD, 3100 LUMEN PROJECTOR, 6, 6LBS Manufacturer : NEC DISPLAY SOLUTIONS UPC : 805736041071 SKU: SY3412459]|#
 req_category|#[LCD projector - High Definition 720p]|#[Home Theater Projectors, Electronics, Electronics/Audio/Audio Visual Accessories]|#
@@ -1773,8 +1773,8 @@ ID|#22562393|#S11406092|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#WD Retail 3TB My Book Studio USB 3.0 Mac|#WD My Book Studio WDBCPZ0030HAL - Hard drive - 3 TB - external ( desktop ) - USB 3.0|#
 pd_title|#[WD Retail 3TB My Book Studio USB 3.0 Mac]|#[WD My Book Studio WDBCPZ0030HAL - Hard drive - 3 TB - external ( desktop ) - USB 3.0]|#
-req_brand_name|#[WD]|#[WD]|#
-req_manufacturer|#[Western Digital]|#[Western Digital]|#
+req_brand_name|#null|#[WD]|#
+req_manufacturer|#null|#[Western Digital]|#
 req_description|#null|#[WD My Book Studio WDBCPZ0030HAL - hard drive - 3 TB - USB 3.0, Password authentication, built-in status LCD, Apple Time Machine compatible]|#
 req_category|#[External Hard Drives]|#[Hard drive - external ( desktop )]|#
 req_upc|#null|#[0718037802992]|#
@@ -1791,8 +1791,8 @@ ID|#S11406723|#22144376|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#MARWARE Axis - Case for web tablet - genuine leather - red - for Apple iPad mini|#Marware Axis for iPad Mini, Red|#
 pd_title|#[MARWARE Axis - Case for web tablet - genuine leather - red - for Apple iPad mini]|#[Marware Axis for iPad Mini, Red]|#
-req_brand_name|#[MARWARE]|#[MARWARE]|#
-req_manufacturer|#[MarWare]|#[MarWare]|#
+req_brand_name|#[MARWARE]|#null|#
+req_manufacturer|#[MarWare]|#null|#
 req_description|#[MARWARE Axis - case for web tablet]|#null|#
 req_category|#[Case for web tablet]|#[Tablet Cases & Bags]|#
 req_upc|#[0602956011606]|#null|#
@@ -1809,7 +1809,7 @@ ID|#21870591|#S11412378|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Comprehensive Cable Standard Series General Purpose RCA Video Cable, 25'|#Comprehensive Standard - Video cable - 25 AWG - RCA (M) - RCA (M) - 25 ft - shielded - mist black|#
 pd_title|#[Comprehensive Cable Standard Series General Purpose RCA Video Cable, 25']|#[Comprehensive Standard - Video cable - 25 AWG - RCA (M) - RCA (M) - 25 ft - shielded - mist black]|#
-req_manufacturer|#[Comprehensive Cable]|#[Comprehensive Cable]|#
+req_manufacturer|#null|#[Comprehensive Cable]|#
 req_description|#null|#[Comprehensive Standard video cable - 25 ft]|#
 req_upc|#null|#[0808447012330]|#
 normalized_upc_1|#null|#[00808447012330]|#
@@ -1825,7 +1825,7 @@ ID|#22171827|#S11412629|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#iLuv IEP216RED Bubble Gum 3 Stereo Earphones, Red|#iLuv iEP216 Bubble Gum 3 - Headset - in-ear - red|#
 pd_title|#[iLuv IEP216RED Bubble Gum 3 Stereo Earphones, Red]|#[iLuv iEP216 Bubble Gum 3 - Headset - in-ear - red]|#
-req_brand_name|#[iLuv]|#[iLuv]|#
+req_brand_name|#null|#[iLuv]|#
 req_manufacturer|#[JWIN]|#[Jwin]|#
 req_description|#[The iLuv IEP216RED Bubble Gum 3 Stereo Earphones features high performance speakers that provide extended frequency range and lower distortion to bring out the fullness of your music., <br><b>iLuv IEP216RED Bubble Gum 3 Stereo Earphones:</b><ul><li>1-touch button to play music or answer calls<li>Built-in microphone for voice control and recording<li>Colorful, fun design perfectly complements any fashion<li>Tangle-resistant cable for optimal cable management<li>Color: Red</ul>]|#[iLuv iEP216 Bubble Gum 3 - headset]|#
 req_category|#[Headphones, Toys/ARCHIVE SHELF/CAT/NEW TOYS ITEMS/LOADING ZONE--Toys, Electronics]|#[Headset - wired, Headset]|#
@@ -1847,7 +1847,7 @@ ID|#32679489|#S11442951|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Edge Memory 4tb Diskgo External Usb Hard Drive - EDGDG-236229-PE|#EDGE DiskGO - Hard drive - 4 TB - external ( desktop ) - 3.5" - USB 2.0 - black|#
 pd_title|#[Edge Memory 4tb Diskgo External Usb Hard Drive - EDGDG-236229-PE]|#[EDGE DiskGO - Hard drive - 4 TB - external ( desktop ) - 3.5" - USB 2.0 - black]|#
-req_brand_name|#[EDGE]|#[EDGE]|#
+req_brand_name|#null|#[EDGE]|#
 req_manufacturer|#[Edge Memory]|#[EDGE Tech Corporation]|#
 req_description|#[Edge memory 4tb diskgo external usb hard drive4tb diskgo external usb hard drive Manufacturer : Edge Memory UPC : 652977236229 SKU: SY3423274]|#[EDGE DiskGO hard drive - 4 TB - USB 2.0]|#
 req_category|#[Marketplace, General, Electronics/Computers/Computer Components/Hard Drives]|#[Hard drive - external ( desktop )]|#
@@ -1866,7 +1866,7 @@ ID|#23316680|#S11650546|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Verbatim Folio Case for iPad mini|#Verbatim Folio Case - Protective case for web tablet - mint green - for Apple iPad mini|#
 pd_title|#[Verbatim Folio Case for iPad mini]|#[Verbatim Folio Case - Protective case for web tablet - mint green - for Apple iPad mini]|#
-req_brand_name|#[Verbatim]|#[Verbatim]|#
+req_brand_name|#null|#[Verbatim]|#
 req_manufacturer|#[Nestle, VERBATIM]|#[Verbatim]|#
 req_description|#null|#[Verbatim Folio Case - protective case for web tablet]|#
 req_category|#[Wheeled Laptop Cases]|#[Protective case for web tablet]|#
@@ -1885,7 +1885,7 @@ ID|#23565840|#S11659517|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#VIZIO E550I-A0 55" 1080p 120Hz LED (3.78" ultra-slim) Smart HDTV|#VIZIO E-series E550I-A0 - 55" Class ( 54.6" viewable ) LED-backlit LCD TV - Smart TV - 1080p (FullHD)|#
 pd_title|#[VIZIO E550I-A0 55" 1080p 120Hz LED (3.78" ultra-slim) Smart HDTV]|#[VIZIO E-series E550I-A0 - 55" Class ( 54.6" viewable ) LED-backlit LCD TV - Smart TV - 1080p (FullHD)]|#
-req_brand_name|#[VIZIO]|#[VIZIO]|#
+req_brand_name|#null|#[VIZIO]|#
 req_manufacturer|#[Vizio]|#[VIZIO]|#
 req_description|#[<b>VIZIO E550I-A0 55" 1080p 120Hz LED Smart HDTV:</b><br><ul><li>55" LED panel<br>1920 x 1080 Full HD resolution</li><li>Wide 178-degree vertical and 178-degree horizontal angles<br>See a clear picture from anywhere in the room with this 3.78" ultra-slim VIZIO 1080p LED HDTV</li><li>Built-in digital tuner<br>Watch digital broadcasts, including HDTV programs where available on the 120Hz LED VIZIO Smart HDTV</li><li>HDMI Inputs: 4<br>Enjoy a superior HD experience with HDMI, the one cable audio/video solution</li><li>54.6" screen measured diagonally from corner to corner</li><li>The 3.78" ultra-slim VIZIO 1080p LED HDTV is wall mountable<br>VESA standard 400mm x 400mm</li><li>VIZIO Internet Apps<br>Instantly enjoy online movies, TV shows, music, apps and more on this 120Hz LED VIZIO Smart HDTV</li></ul><br><b>ENERGY STAR<sup>&reg;</sup></b><br>Products that are ENERGY STAR-qualified prevent greenhouse gas emissions by meeting strict energy efficiency guidelines set by the U.S. Environmental Protection Agency and the U.S. Department of Energy. The ENERGY STAR name and marks are registered marks owned by the U.S. government, as part of their energy efficiency and environmental activities.<BR><BR>TV stand sold separately. See all <b><a href="http://www.walmart.com/cp/133114" target="_blank"> TV stands.</a></b></ul> &#10;<br><br>TV mount sold separately. See all <b> <a href="http://www.walmart.com/cp/581514">TV mounts.</a></b>, The VIZIO 55" LED HDTV, E550I-A0 is shattering the mold in a way only VIZIO can, with high-quality design and picture at the best value. Enjoy crystal-clear action and eye-popping images in 1080p Full HD and at a 120Hz refresh rate. A stunningly slim outer frame lets you enjoy TV with a narrower border around the picture for a more immersive experience.<br><br><b>Note:</b> You must have a source of HD programming in order to take full advantage of the VIZIO 55" LED HDTV, E550I-A0. Contact your local cable or satellite TV provider for details on how to upgrade.]|#[VIZIO E-series E550I-A0 - 55" Class ( 54.6" viewable ) LED-backlit LCD TV]|#
 req_category|#[Electronics/TV & Video/TVs, TVs, Electronics]|#[LED-backlit LCD TV - Smart TV]|#
@@ -1945,7 +1945,7 @@ ID|#26922104|#S11692782|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Samsung 5000 Series UN32F5000AFXZA 32" 1080p 60Hz LED (1.9" ultra-slim) HDTV|#Samsung UN32F5000 - 32" Class ( 31.5" viewable ) 5000 Series LED-backlit LCD TV - 1080p (FullHD) - high glossy black with rose black logo|#
 pd_title|#[Samsung 5000 Series UN32F5000AFXZA 32" 1080p 60Hz LED (1.9" ultra-slim) HDTV]|#[Samsung UN32F5000 - 32" Class ( 31.5" viewable ) 5000 Series LED-backlit LCD TV - 1080p (FullHD) - high glossy black with rose black logo]|#
-req_brand_name|#[Samsung]|#[Samsung]|#
+req_brand_name|#null|#[Samsung]|#
 req_manufacturer|#[Samsung]|#[Samsung]|#
 req_description|#[<br><b>Samsung 5000 Series 32" 1080p LED HDTV:</b><ul><li>32" LED panel<br>With a 1920 x 1080 Full HD resolution<li>True 16:9 aspect ratio<br>View your movies as the director intended<li>Built-in digital tuner<br>Watch digital broadcasts, including HDTV programs where available<li>HDMI Inputs: 2<br>Enjoy a superior HD experience with HDMI, the one cable audio/video solution<li>31.5" screen measured diagonally from corner to corner<li>Wall mountable<br>VESA standard 200mm x 200mm<li>DTS Studio Sound<br>For rich, immersive sound</ul><br><b>ENERGY STAR<sup>&reg;</sup></b><br>Products that are ENERGY STAR-qualified prevent greenhouse gas emissions by meeting strict energy efficiency guidelines set by the U.S. Environmental Protection Agency and the U.S. Department of Energy. The ENERGY STAR name and marks are registered marks owned by the U.S. government, as part of their energy efficiency and environmental activities.<BR><BR>TV stand sold separately. See all <b><a href="http://www.walmart.com/cp/133114" target="_blank"> TV stands.</a></b></ul> &#10;<br><br>TV mount sold separately. See all <b> <a href="http://www.walmart.com/cp/581514">TV mounts.</a></b>, Samsung 1080p Full HD displays picture quality that's crisp, clear and breathtakingly life-like.<br><br><b>Note:</b> You must have a source of HD programming in order to take full advantage of the Samsung HDTV. Contact your local cable or satellite TV provider for details on how to upgrade.]|#[Samsung UN32F5000 - 32" Class ( 31.5" viewable ) LED-backlit LCD TV]|#
 req_category|#[Electronics/TV & Video/TVs, TVs, Electronics]|#[LED-backlit LCD TV]|#
@@ -1985,7 +1985,7 @@ ID|#1841397|#S1171937|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Energizer P-5256 Sealed Lead Acid Cordless Phone Battery|#Energizer P 5256 - Phone battery lead acid  500 mAh|#
 pd_title|#[Energizer P-5256 Sealed Lead Acid Cordless Phone Battery]|#[Energizer P 5256 - Phone battery lead acid  500 mAh]|#
-req_brand_name|#[Energizer]|#[Energizer]|#
+req_brand_name|#null|#[Energizer]|#
 req_manufacturer|#[Energizer]|#[Energizer]|#
 req_description|#[Energizer P-5256 Sealed Lead Acid Cordless Phone Battery, 4v / 500 mAh SLA Cordless Phone Battery for Sony, Uniden phones<P>This is an aftermarket part that is authorized to meet or exceed the performance of the manufacturer's original part.]|#[Energizer P 5256 - phone battery - lead acid]|#
 req_category|#[Batteries, UNASSIGNED/UNASSIGNED SHELF]|#[Phone battery]|#
@@ -2005,7 +2005,7 @@ ID|#S11732942|#26464261|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#NETGEAR ReadyNAS 314 RN31442E - NAS - 8 TB - Serial ATA-300 - HD 2 TB x 4 - RAID 0, 1, 5, 10 - Gigabit Ethernet - iSCSI|#NETGEAR ReadyNAS 314 4x2TB Enterprise|#
 pd_title|#[NETGEAR ReadyNAS 314 RN31442E - NAS - 8 TB - Serial ATA-300 - HD 2 TB x 4 - RAID 0, 1, 5, 10 - Gigabit Ethernet - iSCSI]|#[NETGEAR ReadyNAS 314 4x2TB Enterprise]|#
-req_manufacturer|#[NETGEAR]|#[NETGEAR]|#
+req_manufacturer|#[NETGEAR]|#null|#
 req_description|#[X-RAID2 technology, NETGEAR ReadyNAS 314 RN31442E - NAS server - 8 TB]|#null|#
 req_category|#[NAS server]|#[Networked Attached Storage (NAS)]|#
 req_upc|#[0606449093773]|#null|#
@@ -2020,7 +2020,7 @@ ID|#23764085|#S11788314|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#DREAMGEAR, LLC ISOUND-4725 KEYBOARD PORTFOLIO FOR IPAD 2 and 3 -TABLET-E-READER ACCESSORIES|#dreamGEAR iSound Keyboard Portfolio - Case for web tablet - genuine leather - black - for Apple iPad (3rd generation); iPad 2; iPad with Retina display (4th generation)|#
 pd_title|#[DREAMGEAR, LLC ISOUND-4725 KEYBOARD PORTFOLIO FOR IPAD 2 and 3 -TABLET-E-READER ACCESSORIES]|#[dreamGEAR iSound Keyboard Portfolio - Case for web tablet - genuine leather - black - for Apple iPad (3rd generation); iPad 2; iPad with Retina display (4th generation)]|#
-req_brand_name|#[dreamGEAR]|#[dreamGEAR]|#
+req_brand_name|#null|#[dreamGEAR]|#
 req_manufacturer|#[Dreamgear]|#[dreamGEAR]|#
 req_description|#[The dreamGEAR Apple iPad Retina Display/iPad 2/iPad 3 Genuine Leather Portfolio protects your iPad on-the-go., <br><b>dreamGEAR iSound-4725 Apple iPad with Retina Display/iPad 2/iPad 3 Genuine Leather Keyboard Portfolio:</b><ul><li>100 percent genuine leather<li>Front of the case folds back to form a stand, enabling the perfect angle for watching videos, typing or surfing the Web<li>Premium-grade leather padding on the interior<li>Exterior protects iPad from dirt, dust and scratches<li>Features a pocket for the Wireless Apple Keyboard and a separate pocket for charging/sync cables</ul>]|#[dreamGEAR iSound Keyboard Portfolio - case for web tablet]|#
 req_category|#[Electronics/iPad & eReaders/Apple iPad Accessories/iPad Cases, Sleeves & Bags, Tablet Cases & Bags, Electronics]|#[Case for web tablet]|#
@@ -2042,7 +2042,7 @@ ID|#23807939|#S11801204|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#COBY Mid7046-4 7" Tablet PC Featuring Android 4.0 (Ice Cream Sandwich) Operating System, Black|#COBY Kyros Internet Tablet MID7046 - Tablet - Android 4.0 - 4 GB - 7" TFT ( 800 x 480 ) - front camera - microSD slot - Wi-Fi|#
 pd_title|#[COBY Mid7046-4 7" Tablet PC Featuring Android 4.0 (Ice Cream Sandwich) Operating System, Black]|#[COBY Kyros Internet Tablet MID7046 - Tablet - Android 4.0 - 4 GB - 7" TFT ( 800 x 480 ) - front camera - microSD slot - Wi-Fi]|#
-req_brand_name|#[COBY]|#[COBY]|#
+req_brand_name|#null|#[COBY]|#
 req_manufacturer|#[Coby]|#[COBY Electronics]|#
 req_description|#null|#[Resistive touch screen, COBY Kyros Internet Tablet MID7046 - tablet - Android 4.0 - 4 GB - 7"]|#
 req_category|#null|#[Tablet]|#
@@ -2065,7 +2065,7 @@ ID|#23808056|#S11805371|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#dreamGEAR iSound Gosonic Rechargeable Portable Speaker, White or Black|#dreamGEAR i.Sound GoSonic - Speaker - For Portable use - 5 Watt - black|#
 pd_title|#[dreamGEAR iSound Gosonic Rechargeable Portable Speaker, White or Black]|#[dreamGEAR i.Sound GoSonic - Speaker - For Portable use - 5 Watt - black]|#
-req_brand_name|#[dreamGEAR]|#[dreamGEAR]|#
+req_brand_name|#null|#[dreamGEAR]|#
 req_manufacturer|#[Dreamgear]|#[dreamGEAR]|#
 req_description|#[<br><b>dreamGEAR iSound Gosonic Rechargeable Portable Speaker:</b><ul><li>Compact size<li>Usable indoors and out<li>3.5mm audio jack for connecting to audio devices<li>Built-in rechargeable battery<li>Lasts 2.5 hours at normal usage levels<li>2 x 2.5W speakers<li>Includes USB charging cable<li>Color: White</ul>, The dreamGEAR iSound Gosonic Rechargeable Portable Speaker is usable indoors and out.]|#[dreamGEAR i.Sound GoSonic - speaker - For Portable use - wired]|#
 req_category|#[Electronics/iPods & MP3 Players/MP3 Accessories/Docking Stations, Speakers, Electronics]|#[Speaker - For Portable use - wired, Speaker - portable - wired]|#
@@ -2087,7 +2087,7 @@ ID|#24727211|#S11920536|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Lenmar Replacement Battery for Nikon EN-EL15|#Lenmar DLZ310N - Camera battery Li-Ion 1750 mAh - for Nikon D600, D7000, D7100|#
 pd_title|#[Lenmar Replacement Battery for Nikon EN-EL15]|#[Lenmar DLZ310N - Camera battery Li-Ion 1750 mAh - for Nikon D600, D7000, D7100]|#
-req_brand_name|#[Lenmar]|#[Lenmar]|#
+req_brand_name|#null|#[Lenmar]|#
 req_manufacturer|#[Lenmar]|#[Lenmar Enterprises]|#
 req_description|#null|#[Lenmar DLZ310N - camera battery - Li-Ion]|#
 req_category|#[Camera Batteries]|#[Camera battery]|#
@@ -2105,7 +2105,7 @@ ID|#27152169|#S11964208|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#MSI Systems 17.3in Gaming Notebook Windows 8|#MSI GE70 2OE 017US - Core i7 4700MQ / 3.2 GHz - Windows 8 - 12 GB RAM - 750 GB HDD - Blu-ray - 17.3" Anti-Reflective wide 1920 x 1080 / Full HD - NVIDIA GeForce GTX 765M / Intel HD Graphics 4600 - black, red|#
 pd_title|#[MSI Systems 17.3in Gaming Notebook Windows 8]|#[MSI GE70 2OE 017US - Core i7 4700MQ / 3.2 GHz - Windows 8 - 12 GB RAM - 750 GB HDD - Blu-ray - 17.3" Anti-Reflective wide 1920 x 1080 / Full HD - NVIDIA GeForce GTX 765M / Intel HD Graphics 4600 - black, red]|#
-req_brand_name|#[MSI]|#[MSI]|#
+req_brand_name|#null|#[MSI]|#
 req_manufacturer|#[MSI]|#[MSI]|#
 req_description|#[MSI 17.3 Full HD Non Reflection, Intel Core i7-4700MQ, HM87 Chipset, NVIDIA Geforce GTX765M, 2G GDDR5, 12GB (8G+4G) DDR3 1600MHz, 750GB (7200RPM)HDD, BD Reader, Killer Gaming Network, AW-NB114H Combo (b/g/n)+BT4.0, SD (XC/HC) Card Reader, D-Sub (VGA Out), HDMI 1.4, USB 3.0 x 2 USB 2.0 x 2, Steel Series Blue Backlite102Keys, Headset AMP + Gold Flash jacks, Speakers x 4 (2W), 720p HD Webcam. ***Windows 8 Installed***]|#[MSI GE70 2OE 017US - 17.3" - Core i7 4700MQ - Windows 8 - 12 GB RAM - 750 GB HDD, Cooler Boost technology, SteelSeries gaming keyboard]|#
 req_category|#[Electronics/Computers/Laptop Computers, Laptops, Electronics]|#null|#
@@ -2129,7 +2129,7 @@ ID|#25863492|#S12009761|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Acer America Corp 14in i5 3230 4G 500GB W7Pro|#Acer TravelMate P643-M-6894 - Core i5 3230M / 2.6 GHz - Windows 7 Pro 64-bit / 8 Pro 64-bit - 4 GB RAM - 500 GB HDD - DVD SuperMulti - 14" wide 1366 x 768 / HD - Intel HD Graphics 4000|#
 pd_title|#[Acer America Corp 14in i5 3230 4G 500GB W7Pro]|#[Acer TravelMate P643-M-6894 - Core i5 3230M / 2.6 GHz - Windows 7 Pro 64-bit / 8 Pro 64-bit - 4 GB RAM - 500 GB HDD - DVD SuperMulti - 14" wide 1366 x 768 / HD - Intel HD Graphics 4000]|#
-req_brand_name|#[Acer]|#[Acer]|#
+req_brand_name|#null|#[Acer]|#
 req_manufacturer|#[Acer]|#[Acer]|#
 req_description|#null|#[Security lock slot (cable lock sold separately), Disk Anti-Shock Protection System (DASP), Acer TravelMate P643-M-6894 - 14" - Core i5 3230M - Windows 7 Pro 64-bit / 8 Pro 64-bit - 4 GB RAM - 500 GB HDD]|#
 req_upc|#null|#[0887899057397]|#
@@ -2147,8 +2147,8 @@ ID|#S12036577|#26545611|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#eVGA SuperNOVA 1000 G2 - Power supply ( internal ) - ATX - 80 PLUS Gold - AC 100-240 V - 1000 Watt|#EVGA 120-G2-1000-XR 1000w Supernova Gold Psu|#
 pd_title|#[eVGA SuperNOVA 1000 G2 - Power supply ( internal ) - ATX - 80 PLUS Gold - AC 100-240 V - 1000 Watt]|#[EVGA 120-G2-1000-XR 1000w Supernova Gold Psu]|#
-req_brand_name|#[eVGA]|#[eVGA]|#
-req_manufacturer|#[EVGA Corporation]|#[EVGA Corporation]|#
+req_brand_name|#[eVGA]|#null|#
+req_manufacturer|#[EVGA Corporation]|#null|#
 req_description|#[eVGA SuperNOVA 1000 G2 - power supply - 1000 Watt, Overheat protection, overcurrent protection, overvoltage protection, overpower protection, SLI ready, undervoltage protection, cable management, short-circuit protection, single 12V rail]|#null|#
 req_category|#[Power supply - internal]|#null|#
 req_upc|#[0843368023515]|#null|#

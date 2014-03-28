@@ -21,7 +21,7 @@ public class RuleParser {
 	
 	private static final String RULE_BEGIN_IDENTIFIER = "if";
 	private static final String CLAUSES_END_IDENTIFIER = "then";
-	private static final String INTER_CLAUSE_SEPARATOR = "and";
+	private static final String INTER_CLAUSE_SEPARATOR = " and ";
 	private static final String INTRA_CLAUSE_SEPARATOR = " ";
 	
 	/**

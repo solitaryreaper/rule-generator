@@ -27,7 +27,7 @@ Source|#WALMART_DOTCOM|#CNET|#
 Title|#Oki 320/321 and 184T Printhead|#OKI - Printhead - 1 - 200 million characters - for Microline 184 Turbo, 186, 321, 321 Elite|#
 pd_title|#[Oki 320/321 and 184T Printhead]|#[OKI - Printhead - 1 - 200 million characters - for Microline 184 Turbo, 186, 321, 321 Elite]|#
 req_brand_name|#[OKI]|#[OKI]|#
-req_manufacturer|#[OKI]|#[OKI]|#
+req_manufacturer|#null|#[OKI]|#
 req_description|#null|#[OKI - printhead]|#
 req_category|#null|#[Printing consumables]|#
 req_upc|#null|#[0765787186223]|#
@@ -115,7 +115,7 @@ ID|#24230268|#S0451138|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Tripp Lite N001-050-BK Snagless CAT-5/5E Patch Cables, 50', Black|#Tripp Lite - Patch cable - RJ-45 (M) - RJ-45 (M) - 50 ft - UTP - CAT 5e - snagless, booted - black|#
 pd_title|#[Tripp Lite N001-050-BK Snagless CAT-5/5E Patch Cables, 50', Black]|#[Tripp Lite - Patch cable - RJ-45 (M) - RJ-45 (M) - 50 ft - UTP - CAT 5e - snagless, booted - black]|#
-req_manufacturer|#[Tripp Lite]|#[Tripp Lite]|#
+req_manufacturer|#null|#[Tripp Lite]|#
 req_description|#null|#[Snagless, booted, Tripp Lite patch cable - 50 ft - black]|#
 req_category|#null|#[Patch cable - CAT 5e]|#
 req_upc|#null|#[0037332042743]|#
@@ -238,7 +238,7 @@ Source|#CNET|#WALMART_DOTCOM|#
 Title|#Dell M110 - DLP projector - 300 lumens - 1280 x 800 - widescreen - HD 720p|#Dell M110 DLP Projector|#
 pd_title|#[Dell M110 - DLP projector - 300 lumens - 1280 x 800 - widescreen - HD 720p]|#[Dell M110 DLP Projector]|#
 req_brand_name|#[Dell]|#[Dell]|#
-req_manufacturer|#[Dell]|#[Dell]|#
+req_manufacturer|#[Dell]|#null|#
 req_description|#[Dell M110 DLP projector]|#null|#
 req_category|#[DLP projector - High Definition 720p]|#[Home Theater Projectors, Projectors]|#
 req_upc|#[0884116063049]|#null|#
@@ -311,7 +311,7 @@ ID|#26819535|#S10126055|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Corsair Vengeance 16GB DDR3 SDRAM Memory Module|#Corsair Vengeance - Memory - 16 GB : 2 x 8 GB - DIMM 240-pin - DDR3 - 1600 MHz / PC3-12800 - CL10 - 1.5 V - unbuffered - non-ECC|#
 pd_title|#[Corsair Vengeance 16GB DDR3 SDRAM Memory Module]|#[Corsair Vengeance - Memory - 16 GB : 2 x 8 GB - DIMM 240-pin - DDR3 - 1600 MHz / PC3-12800 - CL10 - 1.5 V - unbuffered - non-ECC]|#
-req_manufacturer|#[Corsair]|#[Corsair]|#
+req_manufacturer|#null|#[Corsair]|#
 req_description|#null|#[Corsair Vengeance memory - 16 GB : 2 x 8 GB - DIMM 240-pin - DDR3, Intel Extreme Memory Profiles (XMP), dual channel, Vengeance heatspreader , unbuffered]|#
 req_upc|#null|#[0843591012904]|#
 normalized_upc_1|#null|#[00843591012904]|#
@@ -408,7 +408,7 @@ Source|#WALMART_DOTCOM|#CNET|#
 Title|#SanDisk SDCFX-064G-A61 64GB Extreme CF Card|#SanDisk Extreme - Flash memory card - 64 GB - 400x - CompactFlash|#
 pd_title|#[SanDisk SDCFX-064G-A61 64GB Extreme CF Card]|#[SanDisk Extreme - Flash memory card - 64 GB - 400x - CompactFlash]|#
 req_brand_name|#[SanDisk]|#[SanDisk]|#
-req_manufacturer|#[SanDisk]|#[SanDisk]|#
+req_manufacturer|#null|#[SanDisk]|#
 req_description|#null|#[SanDisk Extreme - flash memory card - 64 GB - CompactFlash]|#
 req_category|#[Memory Cards]|#[Flash memory card]|#
 req_upc|#null|#[0619659057961]|#
@@ -648,7 +648,7 @@ Source|#CNET|#WALMART_DOTCOM|#
 Title|#Macally ANTIMARKPAD2 - Screen protective film - for Apple iPad 2|#Macally ANTIMARKPAD2 ANTIMARKPAD2 Screen Protector for iPad 2|#
 pd_title|#[Macally ANTIMARKPAD2 - Screen protective film - for Apple iPad 2]|#[Macally ANTIMARKPAD2 ANTIMARKPAD2 Screen Protector for iPad 2]|#
 req_brand_name|#[Macally]|#[Macally]|#
-req_manufacturer|#[Macally]|#[Macally]|#
+req_manufacturer|#[Macally]|#null|#
 req_description|#[Macally ANTIMARKPAD2 - screen protective film]|#[The Macally Protective Film for iPad 2 provides optimum scratch resistance while protecting your iPad 2 screen from dust and the normal signs of wear and tear. With advanced self-adhering properties, this iPad 2 screen film ensures ultra-easy and bubble-free application. This Anti-Scratch Protective Screen Film gives you a revolutionary self-healing coating that repairs minor scratches to your iPad 2 screen, keeping your iPad looking new. Designed to fit your iPad 2 screen, this Macally Protective Film for iPad 2 allows you to safeguard your screen while still maintaining its functionality., Keep your iPad 2 from getting scratches and marks on it's screen with this bubble-free shielding overlay,  This screen provides optimum scratch resistance and also keeps dust and dirt away,  Designed to fit perfectly with your iPad 2,  SKU: DRBOTT0228]|#
 req_category|#[Screen protective film]|#[Electronics/iPad & eReaders/Apple iPad Accessories/iPad Skins & Screen Protectors, Other Accessories, Electronics]|#
 req_upc|#[0701107490533]|#[0070110749053, 701107490533, 00701107490533]|#
@@ -759,7 +759,7 @@ Source|#CNET|#WALMART_DOTCOM|#
 Title|#HP Pavilion HPE h9-1130 - Phoenix - MT - 1 x FX 8120 / 3.1 GHz - RAM 8 GB - HDD 1 x 2 TB - DVD SuperMulti / Blu-ray - Radeon HD 7670 - Gigabit LAN - WLAN : 802.11b/g/n, Bluetooth 3.0 - Windows 7 Home Premium 64-bit - Monitor : none.|#HP Pavilion HPE h9-1130 Phoenix Desktop PC with AMD FX-8120 Processor, 8GB Memory, 2TB Hard Drive and Windows 7 Home Premium|#
 pd_title|#[HP Pavilion HPE h9-1130 - Phoenix - MT - 1 x FX 8120 / 3.1 GHz - RAM 8 GB - HDD 1 x 2 TB - DVD SuperMulti / Blu-ray - Radeon HD 7670 - Gigabit LAN - WLAN : 802.11b/g/n, Bluetooth 3.0 - Windows 7 Home Premium 64-bit - Monitor : none.]|#[HP Pavilion HPE h9-1130 Phoenix Desktop PC with AMD FX-8120 Processor, 8GB Memory, 2TB Hard Drive and Windows 7 Home Premium]|#
 req_brand_name|#[HP]|#[HP]|#
-req_manufacturer|#[Hewlett-Packard]|#[Hewlett-Packard]|#
+req_manufacturer|#[Hewlett-Packard]|#null|#
 req_description|#[Power Factor Correction (PFC), HP Pavilion HPE h9-1130 - Phoenix - FX 8120 3.1 GHz - Monitor : none.]|#[The expertly engineered HP h9 Phoenix series computers are the most powerful HP desktop PCs yet, offering incredible speed, power and cutting-edge style. A 600-watt power supply feeds the eight-core AMD processor, as well as a discrete Radeon graphics card, but there's still power to spare for future expansion. Exclusive Beats Audio technology, including 7.1-channel surround sound capability, delivers cinema-quality sound from the Phoenix desktop PC. With support for two or even three monitors, this Windows desktop computer lets you take advantage of 8GB of memory, a spacious 2TB hard drive, a Blu-ray disc player and Wi-Fi capability., <br><b>HP Desktop PC, Pavilion HPE h9-1130 Phoenix (Monitor Not Included):</b><br><br><b>Key HP Computer Features and Benefits:</b><ul><li>AMD FX-8120 processor<br>3.10GHz, 8MB L2 Cache + 8MB Shared L3 Cache<br><br><li>8GB DDR3 SDRAM system memory (expandable to 16GB)<br>Gives you the power to handle most power-hungry applications and tons of multimedia work<br><br><li>2TB SATA hard drive<br>Store 1,300,000 photos, 571,000 songs or 1,053 hours of HD video on this HP desktop PC<br><br><li>Blu-ray Disc Player and SuperMulti DVD Burner with LightScribe Technology<br>Watch HD movies, and read and write CDs and DVDs in multiple formats<br><br><li>10/100/1000Mbps Gigabit Ethernet, 802.11b/g/n Wireless LAN<br>Connect to a broadband modem with wired Ethernet or wirelessly connect to a Wi-Fi signal or hotspot with the 802.11b/g/n connection built into your HP Phoenix PC<br><br><li>Radeon HD 7670 Series Graphics<br>With 1GB DDR5 dedicated graphics memory, DVI, HDMI and DisplayPort capabilities and support for Blu-ray and Microsoft DirectX 11</ul><br><b>Additional Features:</b><ul><li>Bluetooth<li>15-in-1 memory card reader<li>2 x USB 3.0 ports, 8 x USB 2.0 ports, 1 x headphone jack, 1 x microphone jack, 1 x RJ-45 Ethernet port, 1 x optical audio out, 1 x microphone/line-in/line-out, 1 x rear speaker out, 1 x side speaker out, 1 x center (subwoofer) jack<li>3 x PCI Express (x1) slots, 1 x PCI Express (x16) slot, 1 x MiniCard, 2 x external 5.25" bays, 3 x internal 3.5" bays</ul><br><b>Software:</b><ul><li>Genuine Microsoft Windows 7 Home Premium 64-Bit Edition (To learn more about the features of Windows 7, click <b><a href="http://www.walmart.com/catalog/catalog.gsp?cat=559890">here</a></b>)<li>Microsoft Works 9<li>Norton Internet Security 2012 (60-day subscrption)<li>Backup and Restore options built into Windows allow you to create safety copies of your most important personal files, so you're always prepared for the worst</ul><br><b>Support and Warranty:</b><ul><li>1-year limited hardware warranty; 1-year software support; 24/7 technical assistance available online or toll-free by phone<li>Restore discs are not included (unless specified by supplier). We recommend you use the installed software to create your own restore and backup DVD the first week you use the computer.</ul><br><b>What's In The Box:</b><ul><li>Power cord<li>HP USB keyboard<li>HP optical mouse<li>Quick Start Guide</ul><br><b><I>To see the manufacturer's specifications for this product, click <a href="http://i.walmart.com/i/rb/0088611235220.pdf" target="_blank">here</a>.<br><br>To see a list of our PC Accessories, click <a href=http://www.walmart.com/cp/accessories-peripherals/132959 target="_blank">here</a>.<br><br>Trade in your used computer and electronics for more cash to spend at Walmart. Good for your wallet and the environment - click <a href="http://gazelle.com/register_click?campaign=electronics_trade_in&media_type=text&network=walmart&destination_url=http%3A%2F%2Fwalmart.gazelle.com&placement=product_computers&creative=learn_more" target="_blank">here</a>.</I></b>]|#
 req_category|#[Personal computer]|#[CPU Processors, Electronics/Other Electronics, Electronics, Desktops]|#
 req_upc|#[0886112352202]|#[886112352202, 0088611235220, 00886112352202]|#
@@ -829,7 +829,7 @@ Source|#CNET|#WALMART_DOTCOM|#
 Title|#Black & Decker Toast-R-Oven CTO6120B - Electric oven/toaster - 1500 W - black|#Black & Decker 6-Slice Toaster Oven|#
 pd_title|#[Black & Decker Toast-R-Oven CTO6120B - Electric oven/toaster - 1500 W - black]|#[Black & Decker 6-Slice Toaster Oven]|#
 req_brand_name|#[Black & Decker]|#[Black & Decker]|#
-req_manufacturer|#[Black & Decker]|#[Black & Decker]|#
+req_manufacturer|#[Black & Decker]|#null|#
 req_description|#[Black & Decker Toast-R-Oven CTO6120B - electric oven/toaster - black]|#null|#
 req_category|#[Electric oven/toaster]|#null|#
 req_upc|#[0050875534971]|#null|#
@@ -1056,7 +1056,7 @@ ID|#23143633|#S10680708|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#QNAP TS-569-PRO-US 5 Bay NAS Tower|#QNAP TS-569 Pro Turbo NAS - NAS - 0 GB - Serial ATA-600 / eSATA - RAID 0, 1, 5, 6, 10, JBOD, 5 hot spare, RAID 6 hot spare, 10 hot spare - Gigabit Ethernet - iSCSI|#
 pd_title|#[QNAP TS-569-PRO-US 5 Bay NAS Tower]|#[QNAP TS-569 Pro Turbo NAS - NAS - 0 GB - Serial ATA-600 / eSATA - RAID 0, 1, 5, 6, 10, JBOD, 5 hot spare, RAID 6 hot spare, 10 hot spare - Gigabit Ethernet - iSCSI]|#
-req_manufacturer|#[QNAP Systems, Inc]|#[QNAP Systems, Inc]|#
+req_manufacturer|#null|#[QNAP Systems, Inc]|#
 req_description|#null|#[Audible alarm, lockable, K-lock security slot, built-in cooling fan, QNAP TS-569 Pro Turbo NAS - NAS server - 0 GB]|#
 req_category|#[Networked Attached Storage (NAS)]|#[NAS server]|#
 req_upc|#null|#[0885022003358]|#
@@ -1182,7 +1182,7 @@ Source|#WALMART_DOTCOM|#CNET|#
 Title|#Seagate Retail 1TB Backup Plus External Hard Drive|#Seagate Backup Plus STCA1000100 - Hard drive - 1 TB - external ( desktop ) - USB 3.0|#
 pd_title|#[Seagate Retail 1TB Backup Plus External Hard Drive]|#[Seagate Backup Plus STCA1000100 - Hard drive - 1 TB - external ( desktop ) - USB 3.0]|#
 req_brand_name|#[Seagate]|#[Seagate]|#
-req_manufacturer|#[Seagate]|#[Seagate]|#
+req_manufacturer|#null|#[Seagate]|#
 req_description|#null|#[Built-in capacity meter, automatic backup, Seagate Backup Plus STCA1000100 - hard drive - 1 TB - USB 3.0]|#
 req_category|#[External Hard Drives]|#[Hard drive - external ( desktop )]|#
 req_upc|#null|#[0763649040553]|#
@@ -1277,7 +1277,7 @@ Source|#CNET|#WALMART_DOTCOM|#
 Title|#Brentwood MC-106 - Chopper - black|#Brentwood Mini Food Chopper Black|#
 pd_title|#[Brentwood MC-106 - Chopper - black]|#[Brentwood Mini Food Chopper Black]|#
 req_brand_name|#[Brentwood]|#[Brentwood]|#
-req_manufacturer|#[Brentwood Appliances]|#[Brentwood Appliances]|#
+req_manufacturer|#[Brentwood Appliances]|#null|#
 req_description|#[Brentwood MC-106 - chopper - black]|#null|#
 req_category|#[Chopper]|#[Food Processors]|#
 req_upc|#[0181225801068]|#null|#
@@ -1357,7 +1357,7 @@ Source|#CNET|#WALMART_DOTCOM|#
 Title|#SanDisk Ultra - Flash memory card ( microSDXC to SD adapter included ) - 64 GB - Class 10 - microSDXC UHS-I|#SanDisk SDSDQUI-064G-A46 Ultra microSDXC 64GB Class 10 UHS-1|#
 pd_title|#[SanDisk Ultra - Flash memory card ( microSDXC to SD adapter included ) - 64 GB - Class 10 - microSDXC UHS-I]|#[SanDisk SDSDQUI-064G-A46 Ultra microSDXC 64GB Class 10 UHS-1]|#
 req_brand_name|#[SanDisk]|#[SanDisk]|#
-req_manufacturer|#[SanDisk]|#[SanDisk]|#
+req_manufacturer|#[SanDisk]|#null|#
 req_description|#[SanDisk Ultra - flash memory card - 64 GB - microSDXC UHS-I]|#[Amplify the performance of your Android and other smartphone or tablet with the SanDisk Ultra microSDXC Memory Card. It's the perfect choice for smartphone enthusiasts and tablet users, giving you faster app loading, smoother Full HD video recording and advanced photo capture. It gives you more space for your favorite mobile media., SanDisk Ultra 64 GB microSD Extended Capacity (microSDXC) - 1 Card - Class 10/UHS-I - 30 MBps Read - 10 MBps Write]|#
 req_category|#[Flash memory card]|#[Memory Cards, Electronics, Electronics/Digital Cameras/Accessories/Memory Cards]|#
 req_upc|#[0619659084844]|#[00619659084844, 0061965908484, 619659084844]|#
@@ -1377,7 +1377,7 @@ Source|#WALMART_DOTCOM|#CNET|#
 Title|#Lexmark 14L0086 Ink Cartridge 500 Page Yield Cyan|#Lexmark Cartridge No. 200 - Print cartridge - 1 x cyan - 500 pages - LRP - for OfficeEdge Pro4000, Pro4000c, Pro5500, Pro5500t|#
 pd_title|#[Lexmark 14L0086 Ink Cartridge 500 Page Yield Cyan]|#[Lexmark Cartridge No. 200 - Print cartridge - 1 x cyan - 500 pages - LRP - for OfficeEdge Pro4000, Pro4000c, Pro5500, Pro5500t]|#
 req_brand_name|#[Lexmark]|#[Lexmark]|#
-req_manufacturer|#[Lexmark International]|#[Lexmark International]|#
+req_manufacturer|#null|#[Lexmark International]|#
 req_description|#null|#[Lexmark Cartridge No. 200 - print cartridge - cyan]|#
 req_category|#[Toners & Cartridges]|#[Printing consumables]|#
 req_upc|#null|#[0734646208178]|#
@@ -1564,7 +1564,7 @@ Source|#WALMART_DOTCOM|#CNET|#
 Title|#EVGA NVIDIA GeForce GTX 650 1GB GDDR5 PCI Express 3.0 Superclocked Graphics Card|#eVGA GeForce GTX 650 Superclocked - Graphics card - GF GTX 650 - 1 GB GDDR5 - PCI Express 3.0 x16 - 2 x DVI, Mini-HDMI|#
 pd_title|#[EVGA NVIDIA GeForce GTX 650 1GB GDDR5 PCI Express 3.0 Superclocked Graphics Card]|#[eVGA GeForce GTX 650 Superclocked - Graphics card - GF GTX 650 - 1 GB GDDR5 - PCI Express 3.0 x16 - 2 x DVI, Mini-HDMI]|#
 req_brand_name|#[eVGA]|#[eVGA]|#
-req_manufacturer|#[EVGA Corporation]|#[EVGA Corporation]|#
+req_manufacturer|#null|#[EVGA Corporation]|#
 req_description|#null|#[eVGA GeForce GTX 650 Superclocked graphics card - GF GTX 650 - 1 GB, Nvidia GeForce 3D Vision Ready, Nvidia CUDA technology, Nvidia PureVideo HD technology, Nvidia PhysX-Ready, Nvidia Surround technology, TXAA, FXAA, SMX technology, NVIDIA Adaptive Vertical Sync, Kepler GPU Architecture]|#
 req_category|#null|#[Graphics card]|#
 req_upc|#null|#[0843368021993]|#
@@ -1730,7 +1730,7 @@ Source|#WALMART_DOTCOM|#CNET|#
 Title|#Casio FX300ES Plus Standard Scientific Calculator with Natural Textbook Display|#Casio FX-300ES Plus - Scientific calculator - 10 digits + 2 exponents - solar panel, battery|#
 pd_title|#[Casio FX300ES Plus Standard Scientific Calculator with Natural Textbook Display]|#[Casio FX-300ES Plus - Scientific calculator - 10 digits + 2 exponents - solar panel, battery]|#
 req_brand_name|#[Casio]|#[Casio]|#
-req_manufacturer|#[Casio]|#[Casio]|#
+req_manufacturer|#null|#[Casio]|#
 req_description|#null|#[Casio FX-300ES Plus - scientific calculator, Auto power off, independent memory, Visually Perfect Algebraic Method (VPAM) input mode, 9 memory registers]|#
 req_category|#[Calculators]|#[Scientific calculator, Scientific calculator - LCD - 10 digits + 2 exponents]|#
 req_upc|#null|#[0079767900779]|#
@@ -1774,7 +1774,7 @@ Source|#WALMART_DOTCOM|#CNET|#
 Title|#WD Retail 3TB My Book Studio USB 3.0 Mac|#WD My Book Studio WDBCPZ0030HAL - Hard drive - 3 TB - external ( desktop ) - USB 3.0|#
 pd_title|#[WD Retail 3TB My Book Studio USB 3.0 Mac]|#[WD My Book Studio WDBCPZ0030HAL - Hard drive - 3 TB - external ( desktop ) - USB 3.0]|#
 req_brand_name|#[WD]|#[WD]|#
-req_manufacturer|#[Western Digital]|#[Western Digital]|#
+req_manufacturer|#null|#[Western Digital]|#
 req_description|#null|#[WD My Book Studio WDBCPZ0030HAL - hard drive - 3 TB - USB 3.0, Password authentication, built-in status LCD, Apple Time Machine compatible]|#
 req_category|#[External Hard Drives]|#[Hard drive - external ( desktop )]|#
 req_upc|#null|#[0718037802992]|#
@@ -1792,7 +1792,7 @@ Source|#CNET|#WALMART_DOTCOM|#
 Title|#MARWARE Axis - Case for web tablet - genuine leather - red - for Apple iPad mini|#Marware Axis for iPad Mini, Red|#
 pd_title|#[MARWARE Axis - Case for web tablet - genuine leather - red - for Apple iPad mini]|#[Marware Axis for iPad Mini, Red]|#
 req_brand_name|#[MARWARE]|#[MARWARE]|#
-req_manufacturer|#[MarWare]|#[MarWare]|#
+req_manufacturer|#[MarWare]|#null|#
 req_description|#[MARWARE Axis - case for web tablet]|#null|#
 req_category|#[Case for web tablet]|#[Tablet Cases & Bags]|#
 req_upc|#[0602956011606]|#null|#
@@ -1809,7 +1809,7 @@ ID|#21870591|#S11412378|#
 Source|#WALMART_DOTCOM|#CNET|#
 Title|#Comprehensive Cable Standard Series General Purpose RCA Video Cable, 25'|#Comprehensive Standard - Video cable - 25 AWG - RCA (M) - RCA (M) - 25 ft - shielded - mist black|#
 pd_title|#[Comprehensive Cable Standard Series General Purpose RCA Video Cable, 25']|#[Comprehensive Standard - Video cable - 25 AWG - RCA (M) - RCA (M) - 25 ft - shielded - mist black]|#
-req_manufacturer|#[Comprehensive Cable]|#[Comprehensive Cable]|#
+req_manufacturer|#null|#[Comprehensive Cable]|#
 req_description|#null|#[Comprehensive Standard video cable - 25 ft]|#
 req_upc|#null|#[0808447012330]|#
 normalized_upc_1|#null|#[00808447012330]|#
@@ -2005,7 +2005,7 @@ ID|#S11732942|#26464261|#
 Source|#CNET|#WALMART_DOTCOM|#
 Title|#NETGEAR ReadyNAS 314 RN31442E - NAS - 8 TB - Serial ATA-300 - HD 2 TB x 4 - RAID 0, 1, 5, 10 - Gigabit Ethernet - iSCSI|#NETGEAR ReadyNAS 314 4x2TB Enterprise|#
 pd_title|#[NETGEAR ReadyNAS 314 RN31442E - NAS - 8 TB - Serial ATA-300 - HD 2 TB x 4 - RAID 0, 1, 5, 10 - Gigabit Ethernet - iSCSI]|#[NETGEAR ReadyNAS 314 4x2TB Enterprise]|#
-req_manufacturer|#[NETGEAR]|#[NETGEAR]|#
+req_manufacturer|#[NETGEAR]|#null|#
 req_description|#[X-RAID2 technology, NETGEAR ReadyNAS 314 RN31442E - NAS server - 8 TB]|#null|#
 req_category|#[NAS server]|#[Networked Attached Storage (NAS)]|#
 req_upc|#[0606449093773]|#null|#
@@ -2148,7 +2148,7 @@ Source|#CNET|#WALMART_DOTCOM|#
 Title|#eVGA SuperNOVA 1000 G2 - Power supply ( internal ) - ATX - 80 PLUS Gold - AC 100-240 V - 1000 Watt|#EVGA 120-G2-1000-XR 1000w Supernova Gold Psu|#
 pd_title|#[eVGA SuperNOVA 1000 G2 - Power supply ( internal ) - ATX - 80 PLUS Gold - AC 100-240 V - 1000 Watt]|#[EVGA 120-G2-1000-XR 1000w Supernova Gold Psu]|#
 req_brand_name|#[eVGA]|#[eVGA]|#
-req_manufacturer|#[EVGA Corporation]|#[EVGA Corporation]|#
+req_manufacturer|#[EVGA Corporation]|#null|#
 req_description|#[eVGA SuperNOVA 1000 G2 - power supply - 1000 Watt, Overheat protection, overcurrent protection, overvoltage protection, overpower protection, SLI ready, undervoltage protection, cable management, short-circuit protection, single 12V rail]|#null|#
 req_category|#[Power supply - internal]|#null|#
 req_upc|#[0843368023515]|#null|#
