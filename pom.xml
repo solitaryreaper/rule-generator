@@ -37,8 +37,6 @@
 			<groupId>nz.ac.waikato.cms.weka</groupId>
 			<artifactId>weka-customized</artifactId>
 			<version>3.7.10</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/weka.jar</systemPath>
 		</dependency>
 
 		<!-- Stringmetrics library, local jar because not in Maven -->
@@ -46,8 +44,6 @@
 			<groupId>uk.ac.shef.wit.simmetrics</groupId>
 			<artifactId>simmetrics</artifactId>
 			<version>3.3.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/simmetrics.jar</systemPath>
 		</dependency>
 
 		<!-- Secondstring library, local jar because not in Maven -->
@@ -55,8 +51,6 @@
 			<groupId>com.wcohen.ss</groupId>
 			<artifactId>secondstring</artifactId>
 			<version>2012.06.20</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/secondstring.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -77,8 +71,11 @@
 
 		<!-- Include all dependent jars in the final jar -->
 		<plugins>
+		
 			<plugin>
+			
 				<artifactId>maven-assembly-plugin</artifactId>
+				
 				<configuration>
 					<archive>
 						<manifest>
@@ -97,26 +94,11 @@
 						<goals>
 							<goal>single</goal>
 						</goals>
-						
-	                <configuration>
-	                    <classifier>client</classifier>
-	                    <excludes>
-	                        <exclude>${basedir}/src/test/**</exclude>
-							<exclude>**/*.txt</exclude>
-							<exclude>**/*.csv</exclude>
-							<exclude>**/*.arff</exclude>		
-							<exclude>**/*.zip</exclude>		
-							<exclude>**/*.tar.gz</exclude>	
-	                    </excludes>
-	                    
-	                    <include>
-							<include>${basedir}/lib/**</include>	                    	
-	                    </include>
-	                </configuration>
-	                
 					</execution>
 				</executions>
+				
 			</plugin>
+						
 		</plugins>
 	</build>
 </project>
