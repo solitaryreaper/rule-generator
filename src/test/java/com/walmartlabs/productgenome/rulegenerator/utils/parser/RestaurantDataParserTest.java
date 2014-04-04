@@ -10,7 +10,10 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 
 public class RestaurantDataParserTest {
@@ -39,7 +42,11 @@ public class RestaurantDataParserTest {
 		
 		File matchFile = new File(matchFilePath);
 		File mismatchFile = new File(mismatchFilePath);
-		Dataset restuarantData = parser.parseData(matchFile, mismatchFile, "Restaurant");
+		
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap, null);
+		
+		Dataset restuarantData = parser.parseData("Restaurant", matchFile, mismatchFile, normalizerMeta);
 		
 		assertNotNull(restuarantData);
 		

@@ -11,8 +11,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureVector;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
@@ -37,6 +40,7 @@ public class FeatureGenerationServiceTest {
 		
 	}
 	
+	@Test
 	public void testGenerateFeatures()
 	{
 		String matchFilePath = System.getProperty("user.dir") + "/src/main/resources/data/restaurant/res_match.txt";
@@ -44,10 +48,13 @@ public class FeatureGenerationServiceTest {
 		
 		File matchFile = new File(matchFilePath);
 		File mismatchFile = new File(mismatchFilePath);
-		Dataset restuarantData = parser.parseData(matchFile, mismatchFile, "Restaurant");
+		
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap, null);
+		Dataset restuarantData = parser.parseData("Restaurant", matchFile, mismatchFile, normalizerMeta);
 		LOG.info("Generated dataset with " + restuarantData.getItemPairs().size() + " itempairs ..");
 		
-		FeatureDataset fDataset = FeatureGenerationService.generateFeatures(restuarantData);
+		FeatureDataset fDataset = FeatureGenerationService.generateFeatures(restuarantData, normalizerMeta);
 		assertNotNull(fDataset);
 		
 		List<FeatureVector> fVectors = fDataset.getFeatureVectors();
@@ -65,11 +72,18 @@ public class FeatureGenerationServiceTest {
 		File goldFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/abt_buy_perfectMapping.csv");
 		String datasetName = "Abt-Buy";
 		
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		schemaMap.put("name", "name");
+		schemaMap.put("description", "description");
+		schemaMap.put("price", "price");
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
+		
 		DataParser parser = new CSVDataParser();
-		Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile);
+		Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, normalizerMeta);
 		LOG.info("Parsed CSV file data");
 		
-		FeatureDataset fDataset = FeatureGenerationService.generateFeatures(dataset);
+		FeatureDataset fDataset = FeatureGenerationService.generateFeatures(dataset, normalizerMeta);
 		assertNotNull(fDataset);
 		
 	}

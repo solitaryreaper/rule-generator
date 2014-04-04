@@ -15,6 +15,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 
 public class CSVDataParserTest {
@@ -45,7 +46,10 @@ public class CSVDataParserTest {
 		schemaMap.put("name", "name");
 		schemaMap.put("description", "description");
 		schemaMap.put("price", "price");
-		Dataset abtBuyData = parser.parseData("Abt-Buy", srcFile, tgtFile, goldFile, schemaMap);
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
+		
+		Dataset abtBuyData = parser.parseData("Abt-Buy", srcFile, tgtFile, goldFile, normalizerMeta);
 		assertNotNull(abtBuyData);
 		
 		List<ItemPair> itemPairs = abtBuyData.getItemPairs();
@@ -64,7 +68,10 @@ public class CSVDataParserTest {
 		schemaMap.put("authors", "authors");
 		schemaMap.put("venue", "venue");
 		schemaMap.put("year", "year");		
-		Dataset abtBuyData = parser.parseData("DBLP-Scholar", srcFile, tgtFile, goldFile, schemaMap);
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
+		
+		Dataset abtBuyData = parser.parseData("DBLP-Scholar", srcFile, tgtFile, goldFile, normalizerMeta);
 		assertNotNull(abtBuyData);
 		
 		List<ItemPair> itemPairs = abtBuyData.getItemPairs();
