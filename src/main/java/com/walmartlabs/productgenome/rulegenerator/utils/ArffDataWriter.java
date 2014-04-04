@@ -1,6 +1,7 @@
 package com.walmartlabs.productgenome.rulegenerator.utils;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
@@ -22,9 +23,16 @@ public class ArffDataWriter {
 
 	public static String loadDataInArffFormat(FeatureDataset dataset) throws IOException
 	{
+		File parentDir = new File(Constants.TMP_FILE_PATH_PREFIX);
+		if(!parentDir.exists()) {
+			parentDir.mkdirs();
+		}
+		
 		int randSeed = getRandomNum(1, 10000);
 		String tmpFileLoc = Constants.TMP_FILE_PATH_PREFIX + dataset.getName() + "_" + randSeed + ".arff";
+		
 		BufferedWriter bw = new BufferedWriter(new FileWriter(tmpFileLoc));
+		System.out.println("Created temporary arff file ..");
 		
 		// 1) Write the relation name
 		StringBuilder datasetName = new StringBuilder();

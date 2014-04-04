@@ -145,6 +145,7 @@ public class EMMSWorkflowDriver {
 			arffFileLoc = ArffDataWriter.loadDataInArffFormat(featureDataset);
 		} catch (IOException e) {
 			LOG.severe("Failed to stage feature data in arff file .. " + e.getStackTrace());
+			e.printStackTrace();
 		}
 		LOG.info("Loaded the in-memory feature vectors into arff file : " + arffFileLoc);
 

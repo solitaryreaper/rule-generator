@@ -39,6 +39,11 @@ public class FeatureGenerationService {
 	 */
 	public static FeatureDataset generateFeatures(Dataset rawDataset, DatasetNormalizerMeta normalizerMeta)
 	{
+		File parentDir = new File(Constants.DATA_FILE_PATH_PREFIX);
+		if(!parentDir.exists()) {
+			parentDir.mkdirs();
+		}
+		
 		String mapFileLoc = Constants.DATA_FILE_PATH_PREFIX + "_map_" + rawDataset.getName() + ".txt";
 		File mapFile = new File(mapFileLoc);
 		boolean isMapFileToBeGenerated = true;

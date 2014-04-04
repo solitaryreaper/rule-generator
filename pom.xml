@@ -75,6 +75,7 @@
 
 	<build>
 
+		<!-- Include all dependent jars in the final jar -->
 		<plugins>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -96,33 +97,26 @@
 						<goals>
 							<goal>single</goal>
 						</goals>
+						
+	                <configuration>
+	                    <classifier>client</classifier>
+	                    <excludes>
+	                        <exclude>${basedir}/src/test/**</exclude>
+							<exclude>**/*.txt</exclude>
+							<exclude>**/*.csv</exclude>
+							<exclude>**/*.arff</exclude>		
+							<exclude>**/*.zip</exclude>		
+							<exclude>**/*.tar.gz</exclude>	
+	                    </excludes>
+	                    
+	                    <include>
+							<include>${basedir}/lib/**</include>	                    	
+	                    </include>
+	                </configuration>
+	                
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
-
-		<resources>
-			<resource>
-				<directory>src/my-resources</directory>
-				<includes>
-					<include>**/*.txt</include>
-					<include>**/*.rtf</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>*.txt</include>
-					<include>*.xml</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-			</resource>
-			<resource>
-				<directory>${basedir}/src/main/java</directory>
-			</resource>
-		</resources>
-
 	</build>
 </project>
