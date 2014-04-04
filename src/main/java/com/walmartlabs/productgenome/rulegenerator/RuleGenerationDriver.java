@@ -86,11 +86,11 @@ public class RuleGenerationDriver {
 		
 		//testAmazonGoogleProductsDataset(RuleLearner.RandomForest, arffFileLoc);
 		
-		//testDBLPACMDataset(RuleLearner.RandomForest, arffFileLoc);
+		testDBLPACMDataset(RuleLearner.RandomForest, arffFileLoc);
 		
 		//testWalmartBooksDataset(RuleLearner.RandomForest, arffFileLoc);
 		
-		testWalmartCNETDotcomDataset(RuleLearner.RandomForest, arffFileLoc);
+		//testWalmartCNETDotcomDataset(RuleLearner.RandomForest, arffFileLoc);
 	}
 
 	private static void testRestaurantDataset(RuleLearner learner, String arffFileLoc)

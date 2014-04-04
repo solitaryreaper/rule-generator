@@ -30,6 +30,7 @@ public class Constants {
 	public static final String DEFAULT_TOKENIZATION_DELIMITER = " ";
 	public static final String DEFAULT_SET_VALUE_ATTRIBIUTE_DELIMITER = ",";
 	public static final String DEFAULT_COLUMN_DELIMITER = "\\|#";
+	public static final String DEFAULT_ROW_DELIMITER = "\n";
 	
 	/**
 	 * Percentage of features in each random tree in the random forest as compared to the original

@@ -55,6 +55,12 @@ public class DatasetEvaluationSummary {
 			builder.append("\n");
 		}
 		
+		builder.append("\n<--------------- FILTERED RANKED RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
+		for(RuleEvaluationSummary ruleSummary : getRankedAndFilteredRules()) {
+			builder.append(ruleSummary.showRuleStats());
+			builder.append("\n");
+		}
+		
 		return builder.toString();
 	}
 	
@@ -74,6 +80,21 @@ public class DatasetEvaluationSummary {
 		this.truePositives = truePositives;
 	}
 
+	public int getTrueNegatives()
+	{
+		return getTotalInstances() - getTruePositives();
+	}
+	
+	public int getFalsePositives()
+	{
+		return getPredictedPositives() - getTruePositives();
+	}
+	
+	public int getFalseNegatives()
+	{
+		return getTotalInstances() - getPredictedPositives() - getTrueNegatives();
+	}
+	
 	public int getPredictedPositives() {
 		return predictedPositives;
 	}
@@ -96,6 +117,12 @@ public class DatasetEvaluationSummary {
 
 	public void setRuleSummary(List<RuleEvaluationSummary> ruleSummary) {
 		this.ruleSummary = ruleSummary;
+	}
+	
+	public int getTotalRules()
+	{
+		List<RuleEvaluationSummary> allRules = getRuleSummary();
+		return allRules != null ? allRules.size() : 0;
 	}
 	
 	public double getPrecision()
@@ -157,14 +184,6 @@ public class DatasetEvaluationSummary {
 			recommendedRules.add(rankedRule.getRuleSummary());
 		}
 		
-		StringBuilder rankedRuleStr = new StringBuilder();
-		rankedRuleStr.append("\n<--------------- RANKED RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
-		for(RuleEvaluationSummary ruleSummary : recommendedRules) {
-			rankedRuleStr.append(ruleSummary.showRuleStats());
-			rankedRuleStr.append("\n");
-		}
-		LOG.info(rankedRuleStr.toString());
-		
 		return recommendedRules;
 	}
 	
@@ -176,6 +195,12 @@ public class DatasetEvaluationSummary {
 		}
 		
 		return rankedRules;
+	}
+	
+	public int getTotalRankedFilteredRules()
+	{
+		List<RuleEvaluationSummary> rankedFilteredRules = getRankedAndFilteredRules();
+		return rankedFilteredRules != null ? rankedFilteredRules.size() : 0;
 	}
 	
 	private double getRuleScore(RuleEvaluationSummary ruleSummary)

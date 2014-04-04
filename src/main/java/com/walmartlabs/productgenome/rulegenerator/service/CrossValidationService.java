@@ -21,7 +21,7 @@ public class CrossValidationService {
 
 	/**
 	 * Runs N-fold cross-validation across the labeled dataset, collects rules for each run, tests on the
-	 * test dataset and then returns all unique rules and its statistics averaged across runs.
+	 * tune dataset and then returns all unique rules and its statistics averaged across runs.
 	 * @param learner
 	 * @param data
 	 * @return
@@ -50,10 +50,7 @@ public class CrossValidationService {
 		 * with the data set using these ranked rules to generate the final precision-recall
 		 * numbers. 
 		 */
-		DatasetEvaluationSummary overallSummary = getNFoldAvgEvalSummary(foldSummaryList);
-		List<Rule> finalRankedRules = overallSummary.getRankedRules();
-		
-		return RuleEvaluationService.evaluatePositiveRules(finalRankedRules, data);
+		return getNFoldAvgEvalSummary(foldSummaryList);
 	}
 	
 	/**
