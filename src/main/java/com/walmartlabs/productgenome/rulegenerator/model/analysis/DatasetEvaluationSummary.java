@@ -18,6 +18,9 @@ public class DatasetEvaluationSummary {
 	private int predictedPositives = 0;	// Total number of itempairs predicted as matched
 	private int correctPositivePredictions = 0;	// Total number of itempairs predicted as matched and are actually matched
 	
+	private double reqdRuleCoverage = Constants.RULE_COVERAGE_CUTOFF_PERCENT;
+	private double reqdRulePrecision = Constants.RULE_PRECISION_CUTOFF_PERCENT;
+	
 	private List<RuleEvaluationSummary> ruleSummary;
 	
 	public DatasetEvaluationSummary()
@@ -140,6 +143,22 @@ public class DatasetEvaluationSummary {
 		return 2*getPrecision()*getRecall()/(getPrecision() + getRecall());
 	}
 	
+	public double getReqdRuleCoverage() {
+		return reqdRuleCoverage;
+	}
+
+	public void setReqdRuleCoverage(double reqdRuleCoverage) {
+		this.reqdRuleCoverage = reqdRuleCoverage;
+	}
+
+	public double getReqdRulePrecision() {
+		return reqdRulePrecision;
+	}
+
+	public void setReqdRulePrecision(double reqdRulePrecision) {
+		this.reqdRulePrecision = reqdRulePrecision;
+	}
+
 	public List<Rule> getAllRules()
 	{
 		List<Rule> rules = Lists.newArrayList();
@@ -167,8 +186,10 @@ public class DatasetEvaluationSummary {
 	{
 		List<RankedRuleSummary> rankedRules = Lists.newArrayList();
 		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
-			// Filter all rules that don't meet precision cutoff
-			if(Double.compare(ruleSummary.getPrecision(), Constants.RULE_PRECISION_CUTOFF_PERCENT) < 0) {
+			// Filter all rules that don't meet precision or coverage cutoff
+			if((Double.compare(ruleSummary.getPrecision(), getReqdRulePrecision()) < 0) ||
+			   (Double.compare(ruleSummary.getCoverage(), getReqdRuleCoverage()) < 0))
+			{
 				continue;
 			}
 			

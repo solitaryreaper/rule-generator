@@ -32,7 +32,6 @@ public class ArffDataWriter {
 		String tmpFileLoc = Constants.TMP_FILE_PATH_PREFIX + dataset.getName() + "_" + randSeed + ".arff";
 		
 		BufferedWriter bw = new BufferedWriter(new FileWriter(tmpFileLoc));
-		System.out.println("Created temporary arff file ..");
 		
 		// 1) Write the relation name
 		StringBuilder datasetName = new StringBuilder();

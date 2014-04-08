@@ -33,16 +33,16 @@ public class CrossValidationService {
 			Random rand = new Random(Constants.WEKA_DATA_SEED);
 			Instances randData = new Instances(data);
 			randData.randomize(rand);
-			randData.stratify(Constants.NUM_CV_FOLDS);
-			Instances trainDataset = randData.trainCV(Constants.NUM_CV_FOLDS, foldId);
-			Instances tuneDataset = randData.testCV(Constants.NUM_CV_FOLDS, foldId);
+			randData.stratify(totalFolds);
+			Instances trainDataset = randData.trainCV(totalFolds, foldId);
+			Instances tuneDataset = randData.testCV(totalFolds, foldId);
 
 			List<Rule> rules = learner.learnRules(trainDataset);
 			DatasetEvaluationSummary foldEvalSummary = RuleEvaluationService.evaluatePositiveRules(rules, tuneDataset);
 			foldSummaryList.add(foldEvalSummary);
 		}
 		
-		LOG.info("Generating average evaluation summary across N-folds ..");
+		LOG.info("Generating average evaluation summary across " + totalFolds + "-folds ..");
 		
 		/**
 		 * Generate the average precision-recall metrics for all the positive rules, then filter

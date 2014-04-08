@@ -59,8 +59,7 @@ public class EMMSWorkflowDriver {
 		dblpAcmMeta.setGoldFile(Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-ACM/gold.csv");
 		
 		dblpAcmMeta.setAttributesToEvaluate("title,authors,venue,year");
-		dblpAcmMeta.setLearner("Random Forest");
-		
+
 		JobEvaluationSummary jobSummary = runEntityMatching(dblpAcmMeta);
 		LOG.info("TRAIN PHASE : " + jobSummary.getTrainPhaseSumary().toString());
 		LOG.info("TEST PHASE : " + jobSummary.getTestPhaseSummary().toString());
@@ -76,7 +75,6 @@ public class EMMSWorkflowDriver {
 		restaurantMeta.setGoldFile(Constants.DATA_FILE_PATH_PREFIX + "datasets/restaurant/gold_final.csv");
 		
 		restaurantMeta.setAttributesToEvaluate("name,addr,city,type");
-		restaurantMeta.setLearner("Random Forest");
 		
 		JobEvaluationSummary jobSummary = runEntityMatching(restaurantMeta);
 		LOG.info("TRAIN PHASE : " + jobSummary.getTrainPhaseSumary().toString());
@@ -106,7 +104,12 @@ public class EMMSWorkflowDriver {
 		String projectName = projectMeta.getName();
 		RuleLearner learner = projectMeta.getLearner();
 		
-		return generateMatchingRules(projectName, learner, srcFilePath, tgtFilePath, goldFilePath, normalizerMeta);
+		int numCVFolds = projectMeta.getCrossValidations();
+		double precisionFilter = projectMeta.getDesiredPrecision();
+		double coverageFilter = projectMeta.getDesiredCoverage();
+		
+		return generateMatchingRules(projectName, learner, srcFilePath, tgtFilePath, goldFilePath, 
+				normalizerMeta, numCVFolds, precisionFilter, coverageFilter);
 	}
 	
 	private BiMap<String, String> getSchemaMap(List<String> attributesToEvaluate)
@@ -119,8 +122,9 @@ public class EMMSWorkflowDriver {
 		return schemaMap;
 	}
 	
-	private JobEvaluationSummary generateMatchingRules(String projectName, RuleLearner learner, String srcFilePath, 
-			String tgtFilePath, String goldFilePath, DatasetNormalizerMeta normalizerMeta)
+	private JobEvaluationSummary generateMatchingRules(String projectName, RuleLearner learner, 
+			String srcFilePath, String tgtFilePath, String goldFilePath, 
+			DatasetNormalizerMeta normalizerMeta, int numCVFolds, double precisionFilter, double coverageFilter)
 	{
 		LOG.info("Testing " + projectName + " project ..");
 		
@@ -146,7 +150,8 @@ public class EMMSWorkflowDriver {
 		
 		timer.reset();
 		timer.start();
-		JobEvaluationSummary evalSummary = learnMatchingRules(arffFileLoc, learner);
+		JobEvaluationSummary evalSummary = learnMatchingRules(arffFileLoc, learner, numCVFolds, 
+				precisionFilter, coverageFilter);
 		timer.stop();
 		LOG.info("Time taken for generating matching rules : " + timer.toString());
 		
@@ -170,7 +175,8 @@ public class EMMSWorkflowDriver {
 		return arffFileLoc;
 	}	
 	
-	private JobEvaluationSummary learnMatchingRules(String arffFileLoc, RuleLearner ruleLearner)
+	private JobEvaluationSummary learnMatchingRules(String arffFileLoc, RuleLearner ruleLearner,
+			int numCVFolds, double precisionFilter, double coverageFilter)
 	{
 		// Step4 : Load the feature training data in weka format
 		Instances data = null;
@@ -186,15 +192,14 @@ public class EMMSWorkflowDriver {
 		Random rand = new Random(Constants.WEKA_DATA_SEED);
 		Instances randData = new Instances(data);
 		randData.randomize(rand);
-		randData.stratify(Constants.NUM_CV_FOLDS);
+		randData.stratify(numCVFolds);
 		
-		int randFold = 0 + (int)(Math.random() * ((Constants.NUM_CV_FOLDS - 1) + 1));
-		Instances trainDataset = randData.trainCV(Constants.NUM_CV_FOLDS, randFold);
-		Instances testDataset = randData.testCV(Constants.NUM_CV_FOLDS, randFold);
+		int randFold = 0 + (int)(Math.random() * ((numCVFolds - 1) + 1));
+		Instances trainDataset = randData.trainCV(numCVFolds, randFold);
+		Instances testDataset = randData.testCV(numCVFolds, randFold);
 		
 		LOG.info("Loaded the feature training data in WEKA format ..");
-		
-		int totalFolds = Constants.NUM_CV_FOLDS;
+		int totalFolds = numCVFolds;
 		Learner learner = null;
 		if(ruleLearner.equals(RuleLearner.J48)) {
 			learner = new DecisionTreeLearner();
@@ -209,6 +214,9 @@ public class EMMSWorkflowDriver {
 		LOG.info("\n\n10-fold CROSS-VALIDATION ..");
 		DatasetEvaluationSummary trainPhaseSummary = 
 			CrossValidationService.getRulesViaNFoldCrossValidation(learner, trainDataset, totalFolds);
+		trainPhaseSummary.setReqdRulePrecision(precisionFilter);
+		trainPhaseSummary.setReqdRuleCoverage(coverageFilter);
+
 		List<Rule> finalRankedRules = trainPhaseSummary.getRankedRules();
 		
 		LOG.info("\n\nFINAL RULE EVALUATION RESULTS ..");

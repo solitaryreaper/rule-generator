@@ -27,12 +27,11 @@ public class JobMetadata {
 	private String columnDelimiter = Constants.DEFAULT_COLUMN_DELIMITER;
 	private String setValueDelimiter = Constants.DEFAULT_SET_VALUE_ATTRIBIUTE_DELIMITER;
 	
-	private double desiredFScore;
-	private double desiredPrecision;
-	private double desiredRecall;
+	private double desiredPrecision = Constants.RULE_PRECISION_CUTOFF_PERCENT;
+	private double desiredCoverage = Constants.RULE_COVERAGE_CUTOFF_PERCENT;
 	
 	private RuleLearner learner = RuleLearner.RandomForest;
-	private int crossValidations = -1;
+	private int crossValidations = Constants.NUM_CV_FOLDS;
 	
 	public JobMetadata()
 	{
@@ -129,14 +128,6 @@ public class JobMetadata {
 		this.setValueDelimiter = setValueDelimiter;
 	}
 	
-	public double getDesiredFScore() {
-		return desiredFScore;
-	}
-	
-	public void setDesiredFScore(String desiredFScore) {
-		this.desiredFScore = Double.parseDouble(desiredFScore);
-	}
-	
 	public double getDesiredPrecision() {
 		return desiredPrecision;
 	}
@@ -145,12 +136,12 @@ public class JobMetadata {
 		this.desiredPrecision = Double.parseDouble(desiredPrecision);
 	}
 	
-	public double getDesiredRecall() {
-		return desiredRecall;
+	public double getDesiredCoverage() {
+		return desiredCoverage;
 	}
 	
-	public void setDesiredRecall(String desiredRecall) {
-		this.desiredRecall = Double.parseDouble(desiredRecall);
+	public void setDesiredCoverage(String desiredCoverage) {
+		this.desiredCoverage = Double.parseDouble(desiredCoverage);
 	}
 	
 	public RuleLearner getLearner() {
