@@ -75,6 +75,7 @@ public class RuleGenerationDriver {
 		//testRestaurantDataset(RuleLearner.J48, arffFileLoc);
 		//testRestaurantDataset(RuleLearner.PART, arffFileLoc);
 		//testRestaurantDataset(RuleLearner.RandomForest, arffFileLoc);
+		testRestaurantDataset2(RuleLearner.RandomForest, arffFileLoc);
 		
 		//testAbtBuyDataset(RuleLearner.J48, arffFileLoc);
 		//testAbtBuyDataset(RuleLearner.PART, arffFileLoc);
@@ -86,7 +87,7 @@ public class RuleGenerationDriver {
 		
 		//testAmazonGoogleProductsDataset(RuleLearner.RandomForest, arffFileLoc);
 		
-		testDBLPACMDataset(RuleLearner.RandomForest, arffFileLoc);
+		//testDBLPACMDataset(RuleLearner.RandomForest, arffFileLoc);
 		
 		//testWalmartBooksDataset(RuleLearner.RandomForest, arffFileLoc);
 		
@@ -110,6 +111,23 @@ public class RuleGenerationDriver {
 		LOG.info("Decision Tree Learning results on restaurant dataset :");
 		LOG.info(evalSummary.toString());
 		evalSummary.getRankedAndFilteredRules();
+	}
+	
+	private static void testRestaurantDataset2(RuleLearner learner, String arffFileLoc)
+	{
+		String srcFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/restaurant/zagats_final.csv";
+		String tgtFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/restaurant/fodors_final.csv";
+		String goldFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/restaurant/gold_final.csv";
+		
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		schemaMap.put("name", "name");
+		schemaMap.put("addr", "addr");
+		schemaMap.put("type", "type");
+		schemaMap.put("city", "city");
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
+		
+		testDataset("Restuarant", learner, arffFileLoc, srcFilePath, tgtFilePath, goldFilePath, normalizerMeta);
 	}
 	
 	private static void testAbtBuyDataset(RuleLearner learner, String arffFileLoc)

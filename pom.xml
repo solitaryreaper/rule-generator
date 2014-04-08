@@ -33,20 +33,21 @@
 			<version>3.5.0</version>
 		</dependency>
 
+		<!-- Customized weka library, installed in maven locally -->
 		<dependency>
 			<groupId>nz.ac.waikato.cms.weka</groupId>
 			<artifactId>weka-customized</artifactId>
 			<version>3.7.10</version>
 		</dependency>
 
-		<!-- Stringmetrics library, local jar because not in Maven -->
+		<!-- Stringmetrics library, installed in maven locally -->
 		<dependency>
 			<groupId>uk.ac.shef.wit.simmetrics</groupId>
 			<artifactId>simmetrics</artifactId>
 			<version>3.3.0</version>
 		</dependency>
 
-		<!-- Secondstring library, local jar because not in Maven -->
+		<!-- Secondstring library, installed in maven locally -->
 		<dependency>
 			<groupId>com.wcohen.ss</groupId>
 			<artifactId>secondstring</artifactId>

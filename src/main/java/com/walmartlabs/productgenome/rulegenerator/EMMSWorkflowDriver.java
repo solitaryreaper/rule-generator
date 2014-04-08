@@ -45,7 +45,8 @@ public class EMMSWorkflowDriver {
 	public static void main(String[] args)
 	{
 		EMMSWorkflowDriver driver = new EMMSWorkflowDriver();
-		driver.testDBLPACMDataset();
+		//driver.testDBLPACMDataset();
+		driver.testRestaurantDataset();
 	}
 	
 	private void testDBLPACMDataset()
@@ -61,6 +62,23 @@ public class EMMSWorkflowDriver {
 		dblpAcmMeta.setLearner("Random Forest");
 		
 		JobEvaluationSummary jobSummary = runEntityMatching(dblpAcmMeta);
+		LOG.info("TRAIN PHASE : " + jobSummary.getTrainPhaseSumary().toString());
+		LOG.info("TEST PHASE : " + jobSummary.getTestPhaseSummary().toString());
+	}
+	
+	private void testRestaurantDataset()
+	{
+		JobMetadata restaurantMeta = new JobMetadata();
+		restaurantMeta.setName("Restaurant");
+		restaurantMeta.setDescription("Entity matching rules for Restuarant dataset.");
+		restaurantMeta.setSourceFile(Constants.DATA_FILE_PATH_PREFIX + "datasets/restaurant/zagats_final.csv");
+		restaurantMeta.setTargetFile(Constants.DATA_FILE_PATH_PREFIX + "datasets/restaurant/fodors_final.csv");
+		restaurantMeta.setGoldFile(Constants.DATA_FILE_PATH_PREFIX + "datasets/restaurant/gold_final.csv");
+		
+		restaurantMeta.setAttributesToEvaluate("name,addr,city,type");
+		restaurantMeta.setLearner("Random Forest");
+		
+		JobEvaluationSummary jobSummary = runEntityMatching(restaurantMeta);
 		LOG.info("TRAIN PHASE : " + jobSummary.getTrainPhaseSumary().toString());
 		LOG.info("TEST PHASE : " + jobSummary.getTestPhaseSummary().toString());
 	}
@@ -186,7 +204,6 @@ public class EMMSWorkflowDriver {
 		}
 		else if(ruleLearner.equals(RuleLearner.RandomForest)) {
 			learner = new RandomForestLearner();
-			totalFolds = 1;
 		}
 		
 		LOG.info("\n\n10-fold CROSS-VALIDATION ..");

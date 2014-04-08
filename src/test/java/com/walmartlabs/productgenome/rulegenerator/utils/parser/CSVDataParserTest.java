@@ -35,7 +35,7 @@ public class CSVDataParserTest {
 		
 	}
 	
-	@Test
+	@Ignore
 	public void testParsingAbtBuyData()
 	{
 		File srcFile = new File(System.getProperty("user.dir") + "/src/main/resources/data/datasets/Abt-Buy/Abt.csv");
@@ -75,7 +75,29 @@ public class CSVDataParserTest {
 		assertNotNull(abtBuyData);
 		
 		List<ItemPair> itemPairs = abtBuyData.getItemPairs();
+		System.out.println("#Itempairs : " + itemPairs.size());
 		assertNotNull(itemPairs);
 	}
 	
+	@Test
+	public void testParsingRestaurantData()
+	{
+		File srcFile = new File(System.getProperty("user.dir") + "/src/main/resources/data/datasets/restaurant/zagats_final.csv");
+		File tgtFile = new File(System.getProperty("user.dir") + "/src/main/resources/data/datasets/restaurant/fodors_final.csv");
+		File goldFile = new File(System.getProperty("user.dir") + "/src/main/resources/data/datasets/restaurant/gold_final.csv");
+		
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		schemaMap.put("name", "name");
+		schemaMap.put("addr", "addr");
+		schemaMap.put("type", "type");
+		schemaMap.put("city", "city");
+		
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
+		
+		Dataset restaurantData = parser.parseData("Restaurant", srcFile, tgtFile, goldFile, normalizerMeta);
+		assertNotNull(restaurantData);
+		
+		List<ItemPair> itemPairs = restaurantData.getItemPairs();
+		assertNotNull(itemPairs);
+	}	
 }
