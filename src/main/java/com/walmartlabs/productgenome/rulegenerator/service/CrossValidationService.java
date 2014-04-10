@@ -14,6 +14,7 @@ import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.RuleEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
+import com.walmartlabs.productgenome.rulegenerator.utils.RuleUtils;
 
 public class CrossValidationService {
 
@@ -37,7 +38,7 @@ public class CrossValidationService {
 			Instances trainDataset = randData.trainCV(totalFolds, foldId);
 			Instances tuneDataset = randData.testCV(totalFolds, foldId);
 
-			List<Rule> rules = learner.learnRules(trainDataset);
+			List<Rule> rules = RuleUtils.compressRules(learner.learnRules(trainDataset));
 			DatasetEvaluationSummary foldEvalSummary = RuleEvaluationService.evaluatePositiveRules(rules, tuneDataset);
 			foldSummaryList.add(foldEvalSummary);
 		}

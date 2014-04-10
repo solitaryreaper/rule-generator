@@ -3,10 +3,13 @@ package com.walmartlabs.productgenome.rulegenerator.model.analysis;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
+import com.walmartlabs.productgenome.rulegenerator.model.rule.Clause;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 
 public class DatasetEvaluationSummary {
@@ -52,11 +55,11 @@ public class DatasetEvaluationSummary {
 		builder.append("Average Recall(%) : ").append(df.format(getRecall())).append("\n");
 		builder.append("Average F-Score(%) : ").append(df.format(getFScore())).append("\n");		
 		
-		builder.append("\n<--------------- RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
-		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
-			builder.append(ruleSummary.showRuleStats());
-			builder.append("\n");
-		}
+//		builder.append("\n<--------------- RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
+//		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
+//			builder.append(ruleSummary.showRuleStats());
+//			builder.append("\n");
+//		}
 		
 		builder.append("\n<--------------- FILTERED RANKED RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
 		for(RuleEvaluationSummary ruleSummary : getRankedAndFilteredRules()) {
@@ -224,6 +227,16 @@ public class DatasetEvaluationSummary {
 		return rankedFilteredRules != null ? rankedFilteredRules.size() : 0;
 	}
 	
+	/**
+	 * Ranking function of the rule.
+	 * 
+	 * Most important weightage is for the f-score. 
+	 * For same f-score, other important signals to consider are how many folds contained this rule,
+	 * number of different attributes in the rule.
+	 * 
+	 * @param ruleSummary
+	 * @return
+	 */
 	private double getRuleScore(RuleEvaluationSummary ruleSummary)
 	{
 		double score = 0.0;
@@ -233,8 +246,29 @@ public class DatasetEvaluationSummary {
 		
 		double fscore = ((1 + betaSquare)* precision*recall)/(betaSquare*precision + recall);
 		
+		// Greater the number of folds in which a rule occurs, more representative it is of the overall data.
 		score = fscore + ruleSummary.getFoldFrequency()/100;
+		
+		// More the number of unique attributes in a rule, the more tolerant is it against false positives.
+		Rule rule = ruleSummary.getRule();
+		score = score + getUniqueAttrsInRule(rule).size();
+		
+		// Greater the number of clauses in the rule, the more tolerant is it against false positives.
+		score = score + rule.getClauses().size()/20;
+				
 		return score;
+	}
+	
+	private Set<String> getUniqueAttrsInRule(Rule rule)
+	{
+		Set<String> uniqueAttrs = Sets.newHashSet();
+		for(Clause clause : rule.getClauses()) {
+			String feature = clause.getFeatureName();
+			String attrName = feature.substring(0, feature.indexOf("_"));
+			uniqueAttrs.add(attrName);
+		}
+		
+		return uniqueAttrs;
 	}
 	
 	public static class RankedRuleSummary implements Comparable<RankedRuleSummary>

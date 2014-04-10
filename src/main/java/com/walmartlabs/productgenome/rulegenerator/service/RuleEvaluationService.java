@@ -37,12 +37,13 @@ public class RuleEvaluationService {
 	 *
 	 */
 	private static class RuleStats {
-		private int positivePredictions;
-		private int actualPositives;
+		private int positivePredictions = 0;
+		private int actualPositives = 0;
 		
 		public RuleStats()
 		{
-			
+			positivePredictions = 0;
+			actualPositives = 0;
 		}
 		
 		public int getPositivePredictions() {
@@ -76,7 +77,6 @@ public class RuleEvaluationService {
 		int correctPositivePredictions = 0;
 		
 		Map<Rule, RuleStats> perRuleStatsMap = Maps.newHashMap();
-		
 		for(Instance instance : testData) {
 			MatchStatus actualLabel = WekaUtils.getInstanceLabel(instance);
 			boolean isTruePositive = actualLabel.equals(MatchStatus.MATCH);
@@ -136,6 +136,10 @@ public class RuleEvaluationService {
 			RuleStats stats = entry.getValue();
 			int positivePredictions = stats.getPositivePredictions();
 			int correctPredictions = stats.getActualPositives();
+			
+			if(correctPredictions > truePositives) {
+				System.out.println("How come ?");
+			}
 			
 			RuleEvaluationSummary ruleSummary = 
 				new RuleEvaluationSummary(rule, positivePredictions, correctPredictions, truePositives);

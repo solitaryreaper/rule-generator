@@ -25,13 +25,8 @@ public class TestClass {
 	
 	public static void main(String[] args) throws InterruptedException
 	{
-		String test = "00027242551923";
-		if(NumberUtils.isNumber(test)) {
-			System.out.println("Is number ..");
-		}
-		else {
-			System.out.println("Not a number ..");
-		}
+		String test = "addr_jaro_winkler";
+		System.out.println(test.substring(0, test.indexOf("_")));
 		
 	}
 	

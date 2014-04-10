@@ -29,6 +29,7 @@ import com.walmartlabs.productgenome.rulegenerator.service.CrossValidationServic
 import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationService;
 import com.walmartlabs.productgenome.rulegenerator.service.RuleEvaluationService;
 import com.walmartlabs.productgenome.rulegenerator.utils.ArffDataWriter;
+import com.walmartlabs.productgenome.rulegenerator.utils.RuleUtils;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
 
@@ -77,7 +78,7 @@ public class EMMSWorkflowDriver {
 		restaurantMeta.setAttributesToEvaluate("name,addr,city,type");
 		
 		JobEvaluationSummary jobSummary = runEntityMatching(restaurantMeta);
-		LOG.info("TRAIN PHASE : " + jobSummary.getTrainPhaseSumary().toString());
+		//LOG.info("TRAIN PHASE : " + jobSummary.getTrainPhaseSumary().toString());
 		LOG.info("TEST PHASE : " + jobSummary.getTestPhaseSummary().toString());
 	}
 	
@@ -89,10 +90,6 @@ public class EMMSWorkflowDriver {
 	 */
 	public JobEvaluationSummary runEntityMatching(JobMetadata projectMeta)
 	{
-		String srcFilePath = projectMeta.getSourceFile();
-		String tgtFilePath = projectMeta.getTargetFile();
-		String goldFilePath = projectMeta.getGoldFile();
-		
 		BiMap<String, String> schemaMap = getSchemaMap(projectMeta.getAttributesToEvaluate());
 		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
 		
@@ -100,16 +97,8 @@ public class EMMSWorkflowDriver {
 		if(!(setValuedAttributes == null || setValuedAttributes.isEmpty())) {
 			normalizerMeta.setSetValuedAttributes(setValuedAttributes);
 		}
-
-		String projectName = projectMeta.getName();
-		RuleLearner learner = projectMeta.getLearner();
 		
-		int numCVFolds = projectMeta.getCrossValidations();
-		double precisionFilter = projectMeta.getDesiredPrecision();
-		double coverageFilter = projectMeta.getDesiredCoverage();
-		
-		return generateMatchingRules(projectName, learner, srcFilePath, tgtFilePath, goldFilePath, 
-				normalizerMeta, numCVFolds, precisionFilter, coverageFilter);
+		return generateMatchingRules(normalizerMeta, projectMeta);
 	}
 	
 	private BiMap<String, String> getSchemaMap(List<String> attributesToEvaluate)
@@ -122,17 +111,16 @@ public class EMMSWorkflowDriver {
 		return schemaMap;
 	}
 	
-	private JobEvaluationSummary generateMatchingRules(String projectName, RuleLearner learner, 
-			String srcFilePath, String tgtFilePath, String goldFilePath, 
-			DatasetNormalizerMeta normalizerMeta, int numCVFolds, double precisionFilter, double coverageFilter)
+	private JobEvaluationSummary generateMatchingRules(DatasetNormalizerMeta normalizerMeta, JobMetadata projectMeta)
 	{
+		String projectName = projectMeta.getName();
 		LOG.info("Testing " + projectName + " project ..");
 		
 		StopWatch timer = new StopWatch();
 
-		File srcFile = new File(srcFilePath);
-		File tgtFile = new File(tgtFilePath);
-		File goldFile = new File(goldFilePath);
+		File srcFile = new File(projectMeta.getSourceFile());
+		File tgtFile = new File(projectMeta.getTargetFile());
+		File goldFile = new File(projectMeta.getGoldFile());
 		
 		timer.start();
 		DataParser parser = new CSVDataParser();
@@ -150,8 +138,7 @@ public class EMMSWorkflowDriver {
 		
 		timer.reset();
 		timer.start();
-		JobEvaluationSummary evalSummary = learnMatchingRules(arffFileLoc, learner, numCVFolds, 
-				precisionFilter, coverageFilter);
+		JobEvaluationSummary evalSummary = learnMatchingRules(arffFileLoc, projectMeta);
 		timer.stop();
 		LOG.info("Time taken for generating matching rules : " + timer.toString());
 		
@@ -175,10 +162,14 @@ public class EMMSWorkflowDriver {
 		return arffFileLoc;
 	}	
 	
-	private JobEvaluationSummary learnMatchingRules(String arffFileLoc, RuleLearner ruleLearner,
-			int numCVFolds, double precisionFilter, double coverageFilter)
+	private JobEvaluationSummary learnMatchingRules(String arffFileLoc, JobMetadata projectMeta)
 	{
-		// Step4 : Load the feature training data in weka format
+		int numCVFolds = projectMeta.getCrossValidations();
+		double precisionFilter = projectMeta.getDesiredPrecision();
+		double coverageFilter = projectMeta.getDesiredCoverage();
+		RuleLearner ruleLearner = projectMeta.getLearner();
+		int numReqdRules = projectMeta.getDesiredNumRules();
+		
 		Instances data = null;
 		try {
 			DataSource trainDataSource = new DataSource(arffFileLoc);			
@@ -217,8 +208,11 @@ public class EMMSWorkflowDriver {
 		trainPhaseSummary.setReqdRulePrecision(precisionFilter);
 		trainPhaseSummary.setReqdRuleCoverage(coverageFilter);
 
-		List<Rule> finalRankedRules = trainPhaseSummary.getRankedRules();
-		
+		/**
+		 * No need to retain all the rules. Only retain the top 2*num_required rules for further
+		 * testing.
+		 */
+		List<Rule> finalRankedRules = RuleUtils.compressRules(trainPhaseSummary.getRankedRules());
 		LOG.info("\n\nFINAL RULE EVALUATION RESULTS ..");
 		DatasetEvaluationSummary testPhaseSummary = 
 				RuleEvaluationService.evaluatePositiveRules(finalRankedRules, testDataset);

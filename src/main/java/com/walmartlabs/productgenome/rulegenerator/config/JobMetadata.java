@@ -29,6 +29,7 @@ public class JobMetadata {
 	
 	private double desiredPrecision = Constants.RULE_PRECISION_CUTOFF_PERCENT;
 	private double desiredCoverage = Constants.RULE_COVERAGE_CUTOFF_PERCENT;
+	private int desiredNumRules = Constants.NUM_RULES_REQUIRED;
 	
 	private RuleLearner learner = RuleLearner.RandomForest;
 	private int crossValidations = Constants.NUM_CV_FOLDS;
@@ -144,6 +145,14 @@ public class JobMetadata {
 		this.desiredCoverage = Double.parseDouble(desiredCoverage);
 	}
 	
+	public int getDesiredNumRules() {
+		return desiredNumRules;
+	}
+
+	public void setDesiredNumRules(int desiredNumRules) {
+		this.desiredNumRules = desiredNumRules;
+	}
+
 	public RuleLearner getLearner() {
 		return learner;
 	}

@@ -1,6 +1,7 @@
 package com.walmartlabs.productgenome.rulegenerator.model.rule;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.ComparisonChain;
 
 /**
  * Represents a model class for a clause.
@@ -11,7 +12,7 @@ import com.google.common.base.Objects;
  * @author excelsior
  *
  */
-public class Clause {
+public class Clause implements Comparable<Clause> {
 
 	/**
 	 * List of valid logical operators.
@@ -57,9 +58,17 @@ public class Clause {
 	
 	public Clause(String featureName, LogicalOperator logOp, double threshold) {
 		super();
-		this.featureName = featureName;
+		this.featureName = featureName.trim();
 		this.logOp = logOp;
 		this.threshold = threshold;
+	}
+	
+	public Clause(Clause clause)
+	{
+		super();
+		this.featureName = clause.getFeatureName();
+		this.logOp = clause.getLogOp();
+		this.threshold = clause.getThreshold();
 	}
 	
 	public int hashCode()
@@ -88,7 +97,7 @@ public class Clause {
 		return featureName;
 	}
 	public void setFeatureName(String featureName) {
-		this.featureName = featureName;
+		this.featureName = featureName.trim();
 	}
 	public LogicalOperator getLogOp() {
 		return logOp;
@@ -101,6 +110,14 @@ public class Clause {
 	}
 	public void setThreshold(double threshold) {
 		this.threshold = threshold;
+	}
+
+	public int compareTo(Clause that) {
+		return ComparisonChain.start()
+		        .compare(this.featureName, that.featureName)
+		        .compare(this.logOp, that.logOp)
+		        .compare(this.threshold, that.threshold)
+		        .result();		
 	}
 	
 }

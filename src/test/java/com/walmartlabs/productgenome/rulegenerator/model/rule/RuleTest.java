@@ -13,11 +13,17 @@ public class RuleTest {
 	@Test
 	public void testRuleEquality()
 	{
-		List<Clause> clausesA = Lists.newArrayList(new Clause("name_jaccard", LogicalOperator.EQUALS, 0.334));
-		List<Clause> clausesB = Lists.newArrayList(new Clause("name_jaccard", LogicalOperator.EQUALS, 0.333));
+		List<Clause> clausesA = Lists.newArrayList(
+				new Clause("name_addr", LogicalOperator.EQUALS, 0.337),
+				new Clause("name_jaro_winkler", LogicalOperator.EQUALS, 0.334)
+			);
+		List<Clause> clausesB = Lists.newArrayList(
+				new Clause("name_jaro_winkler", LogicalOperator.EQUALS, 0.334),
+				new Clause("name_addr", LogicalOperator.EQUALS, 0.337)
+			);
 		
-		Rule ruleA = new Rule("test", clausesA, MatchStatus.MATCH);
-		Rule ruleB = new Rule("test", clausesB, MatchStatus.MATCH);
+		Rule ruleA = new Rule(clausesA, MatchStatus.MATCH);
+		Rule ruleB = new Rule(clausesB, MatchStatus.MATCH);
 		
 		if(ruleA.equals(ruleB)) {
 			System.out.println("Equal ..");
@@ -25,7 +31,7 @@ public class RuleTest {
 		else {
 			System.out.println("Not equal ..");
 		}
-		
-		
+		System.out.println(ruleA.getName());
+		System.out.println(ruleB.getName());
 	}
 }
