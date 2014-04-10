@@ -11,6 +11,8 @@ import com.google.common.collect.Sets;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Clause;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
+import com.walmartlabs.productgenome.rulegenerator.model.rule.Clause.LogicalOperator;
+import com.walmartlabs.productgenome.rulegenerator.utils.RuleUtils;
 
 public class DatasetEvaluationSummary {
 	
@@ -55,14 +57,8 @@ public class DatasetEvaluationSummary {
 		builder.append("Average Recall(%) : ").append(df.format(getRecall())).append("\n");
 		builder.append("Average F-Score(%) : ").append(df.format(getFScore())).append("\n");		
 		
-//		builder.append("\n<--------------- RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
-//		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
-//			builder.append(ruleSummary.showRuleStats());
-//			builder.append("\n");
-//		}
-		
-		builder.append("\n<--------------- FILTERED RANKED RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
-		for(RuleEvaluationSummary ruleSummary : getRankedAndFilteredRules()) {
+		builder.append("\n<--------------- RANKED RULES {(Precision, Coverage, Fold Frequency : Rule Definition)} ------------------->\n");
+		for(RuleEvaluationSummary ruleSummary : getRankedRuleSummaries(getRuleSummary())) {
 			builder.append(ruleSummary.showRuleStats());
 			builder.append("\n");
 		}
@@ -127,8 +123,7 @@ public class DatasetEvaluationSummary {
 	
 	public int getTotalRules()
 	{
-		List<RuleEvaluationSummary> allRules = getRuleSummary();
-		return allRules != null ? allRules.size() : 0;
+		return getAllRules().size();
 	}
 	
 	public double getPrecision()
@@ -169,7 +164,7 @@ public class DatasetEvaluationSummary {
 			rules.add(ruleSummary.getRule());
 		}
 		
-		return rules;
+		return RuleUtils.compressRules(rules);
 	}
 	
 	/**
@@ -185,9 +180,24 @@ public class DatasetEvaluationSummary {
 	 * important factor for the rule.
 	 * @return
 	 */
-	public List<RuleEvaluationSummary> getRankedAndFilteredRules()
+	public List<RuleEvaluationSummary> getRankedAndFilteredRuleSummaries()
 	{
-		List<RankedRuleSummary> rankedRules = Lists.newArrayList();
+		return getRankedRuleSummaries(getFilteredRuleSummaries(getRuleSummary()));
+	}
+	
+	public List<Rule> getRankedAndFilteredRules()
+	{
+		List<Rule> rankedAndFilteredRules = Lists.newArrayList();
+		for(RuleEvaluationSummary ruleSummary : getRankedAndFilteredRuleSummaries()) {
+			rankedAndFilteredRules.add(ruleSummary.getRule());
+		}
+		
+		return RuleUtils.compressRules(rankedAndFilteredRules);		
+	}
+	
+	private List<RuleEvaluationSummary> getFilteredRuleSummaries(List<RuleEvaluationSummary> rules)
+	{
+		List<RuleEvaluationSummary> filteredRuleSummaries = Lists.newArrayList();
 		for(RuleEvaluationSummary ruleSummary : getRuleSummary()) {
 			// Filter all rules that don't meet precision or coverage cutoff
 			if((Double.compare(ruleSummary.getPrecision(), getReqdRulePrecision()) < 0) ||
@@ -196,6 +206,16 @@ public class DatasetEvaluationSummary {
 				continue;
 			}
 			
+			filteredRuleSummaries.add(ruleSummary);
+		}
+		
+		return filteredRuleSummaries;
+	}
+	
+	public List<RuleEvaluationSummary> getRankedRuleSummaries(List<RuleEvaluationSummary> ruleSummaries)
+	{
+		List<RankedRuleSummary> rankedRules = Lists.newArrayList();
+		for(RuleEvaluationSummary ruleSummary : ruleSummaries) {
 			double score = getRuleScore(ruleSummary);
 			rankedRules.add(new RankedRuleSummary(score, ruleSummary));
 		}
@@ -203,28 +223,27 @@ public class DatasetEvaluationSummary {
 		Collections.sort(rankedRules);
 		Collections.reverse(rankedRules);
 		
-		List<RuleEvaluationSummary> recommendedRules = Lists.newArrayList();
+		List<RuleEvaluationSummary> rankedRuleSummaries = Lists.newArrayList();
 		for(RankedRuleSummary rankedRule : rankedRules) {
-			recommendedRules.add(rankedRule.getRuleSummary());
+			rankedRuleSummaries.add(rankedRule.getRuleSummary());
 		}
 		
-		return recommendedRules;
+		return rankedRuleSummaries;		
 	}
 	
 	public List<Rule> getRankedRules()
 	{
 		List<Rule> rankedRules = Lists.newArrayList();
-		for(RuleEvaluationSummary ruleSummary : getRankedAndFilteredRules()) {
+		for(RuleEvaluationSummary ruleSummary : getRankedRuleSummaries(getRuleSummary())) {
 			rankedRules.add(ruleSummary.getRule());
 		}
 		
-		return rankedRules;
+		return RuleUtils.compressRules(rankedRules);
 	}
 	
 	public int getTotalRankedFilteredRules()
 	{
-		List<RuleEvaluationSummary> rankedFilteredRules = getRankedAndFilteredRules();
-		return rankedFilteredRules != null ? rankedFilteredRules.size() : 0;
+		return getRankedAndFilteredRules().size();
 	}
 	
 	/**
@@ -234,6 +253,7 @@ public class DatasetEvaluationSummary {
 	 * For same f-score, other important signals to consider are how many folds contained this rule,
 	 * number of different attributes in the rule.
 	 * 
+	 * TODO : Come up with a good linear equation with apt weights. This is important.
 	 * @param ruleSummary
 	 * @return
 	 */
@@ -247,16 +267,38 @@ public class DatasetEvaluationSummary {
 		double fscore = ((1 + betaSquare)* precision*recall)/(betaSquare*precision + recall);
 		
 		// Greater the number of folds in which a rule occurs, more representative it is of the overall data.
-		score = fscore + ruleSummary.getFoldFrequency()/100;
+		score = fscore + ruleSummary.getFoldFrequency();
 		
 		// More the number of unique attributes in a rule, the more tolerant is it against false positives.
 		Rule rule = ruleSummary.getRule();
 		score = score + getUniqueAttrsInRule(rule).size();
 		
 		// Greater the number of clauses in the rule, the more tolerant is it against false positives.
-		score = score + rule.getClauses().size()/20;
+		score = score + rule.getClauses().size();
+		
+		// Favor rules which have higher average clause score and devoid of LESS THAN operator in clauses.
+		// Higher average clause score protects against false positives.
+		score = score + getAverageClauseScoreInRule(ruleSummary.getRule());
 				
 		return score;
+	}
+	
+	private double getAverageClauseScoreInRule(Rule rule)
+	{
+		double totalScore = 0.0;
+		List<Clause> clauses = rule.getClauses();
+		for(Clause clause : rule.getClauses()) {
+			// Should discourage rules with LESS THAN operator in clauses
+			if(clause.getLogOp().equals(LogicalOperator.LESS_THAN) || clause.getLogOp().equals(LogicalOperator.LESS_THAN_EQUALS)) {
+				totalScore += -1* clause.getThreshold();
+			}
+			else {
+				totalScore += 1* clause.getThreshold();
+			}
+		}
+		
+		
+		return totalScore/clauses.size();
 	}
 	
 	private Set<String> getUniqueAttrsInRule(Rule rule)

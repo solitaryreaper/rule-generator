@@ -46,8 +46,8 @@ public class EMMSWorkflowDriver {
 	public static void main(String[] args)
 	{
 		EMMSWorkflowDriver driver = new EMMSWorkflowDriver();
-		//driver.testDBLPACMDataset();
-		driver.testRestaurantDataset();
+		driver.testDBLPACMDataset();
+		//driver.testRestaurantDataset();
 	}
 	
 	private void testDBLPACMDataset()
@@ -168,7 +168,6 @@ public class EMMSWorkflowDriver {
 		double precisionFilter = projectMeta.getDesiredPrecision();
 		double coverageFilter = projectMeta.getDesiredCoverage();
 		RuleLearner ruleLearner = projectMeta.getLearner();
-		int numReqdRules = projectMeta.getDesiredNumRules();
 		
 		Instances data = null;
 		try {
@@ -180,14 +179,29 @@ public class EMMSWorkflowDriver {
 		if (data.classIndex() == -1)
 			data.setClassIndex(data.numAttributes() - 1);
 		
+		// Split parent dataset into train and test dataset.
 		Random rand = new Random(Constants.WEKA_DATA_SEED);
 		Instances randData = new Instances(data);
 		randData.randomize(rand);
 		randData.stratify(numCVFolds);
 		
 		int randFold = 0 + (int)(Math.random() * ((numCVFolds - 1) + 1));
-		Instances trainDataset = randData.trainCV(numCVFolds, randFold);
+		Instances nonTestDataset = randData.trainCV(numCVFolds, randFold);
 		Instances testDataset = randData.testCV(numCVFolds, randFold);
+		
+		// Split train dataset into pure train and tune dataset.
+		Random rand2 = new Random(Constants.WEKA_DATA_SEED);
+		Instances randData2 = new Instances(nonTestDataset);
+		randData.randomize(rand2);
+		randData.stratify(numCVFolds);
+		
+		int randFold2 = 0 + (int)(Math.random() * ((numCVFolds - 1) + 1));
+		Instances trainDataset = randData2.trainCV(numCVFolds, randFold2);
+		Instances tuneDataset = randData2.testCV(numCVFolds, randFold2);
+		
+		LOG.info("Train : " + trainDataset.numInstances());
+		LOG.info("Tune : " + tuneDataset.numInstances());
+		LOG.info("Test : " + testDataset.numInstances());
 		
 		LOG.info("Loaded the feature training data in WEKA format ..");
 		int totalFolds = numCVFolds;
@@ -202,21 +216,24 @@ public class EMMSWorkflowDriver {
 			learner = new RandomForestLearner();
 		}
 		
-		LOG.info("\n\n10-fold CROSS-VALIDATION ..");
+		LOG.info("\n\nCross-Validation TRAINING phase ..");
 		DatasetEvaluationSummary trainPhaseSummary = 
 			CrossValidationService.getRulesViaNFoldCrossValidation(learner, trainDataset, totalFolds);
 		trainPhaseSummary.setReqdRulePrecision(precisionFilter);
 		trainPhaseSummary.setReqdRuleCoverage(coverageFilter);
-
-		/**
-		 * No need to retain all the rules. Only retain the top 2*num_required rules for further
-		 * testing.
-		 */
-		List<Rule> finalRankedRules = RuleUtils.compressRules(trainPhaseSummary.getRankedRules());
-		LOG.info("\n\nFINAL RULE EVALUATION RESULTS ..");
-		DatasetEvaluationSummary testPhaseSummary = 
-				RuleEvaluationService.evaluatePositiveRules(finalRankedRules, testDataset);
+		List<Rule> rankedAndFilteredRules = trainPhaseSummary.getRankedAndFilteredRules();
+		LOG.info("Rules after training phase : " + rankedAndFilteredRules.size());
 		
-		return new JobEvaluationSummary(trainPhaseSummary, testPhaseSummary);
+		LOG.info("\n\nTUNING phase results ..");
+		DatasetEvaluationSummary tunePhaseSummary = 
+			RuleEvaluationService.evaluatePositiveRules(rankedAndFilteredRules, tuneDataset);
+		rankedAndFilteredRules = tunePhaseSummary.getRankedAndFilteredRules();
+		LOG.info("Rules after tuning phase : " + rankedAndFilteredRules.size());
+		
+		LOG.info("\n\nTEST phase results ..");
+		DatasetEvaluationSummary testPhaseSummary = 
+				RuleEvaluationService.evaluatePositiveRules(rankedAndFilteredRules, testDataset);
+		
+		return new JobEvaluationSummary(trainPhaseSummary, tunePhaseSummary, testPhaseSummary);
 	}	
 }

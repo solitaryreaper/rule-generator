@@ -121,11 +121,11 @@ public class RuleEvaluationService {
 					++correctPositivePredictions;
 				}
 				else {
-					LOG.warning("False positive for instance : " + instance.toString() + " for rule : " + matchRule.toString());
+					LOG.fine("False positive for instance : " + instance.toString() + " for rule : " + matchRule.toString());
 				}
 			}
 			else if(!isMatch && isTruePositive) {
-				LOG.warning("False negative for instance : " + instance.toString());
+				LOG.fine("False negative for instance : " + instance.toString());
 			}
 		}
 		
@@ -136,11 +136,7 @@ public class RuleEvaluationService {
 			RuleStats stats = entry.getValue();
 			int positivePredictions = stats.getPositivePredictions();
 			int correctPredictions = stats.getActualPositives();
-			
-			if(correctPredictions > truePositives) {
-				System.out.println("How come ?");
-			}
-			
+
 			RuleEvaluationSummary ruleSummary = 
 				new RuleEvaluationSummary(rule, positivePredictions, correctPredictions, truePositives);
 			allRulesSummary.add(ruleSummary);

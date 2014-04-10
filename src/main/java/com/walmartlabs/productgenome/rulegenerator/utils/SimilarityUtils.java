@@ -86,7 +86,7 @@ public class SimilarityUtils {
 				else {
 					double diff = Math.abs(f1-f2);
 					double sum = f1 + f2;
-					res = 1/(diff/sum);					
+					res = diff/sum;					
 				}
 			}
 			catch(NumberFormatException nfe){

@@ -110,7 +110,7 @@ public class RuleGenerationDriver {
 		DatasetEvaluationSummary evalSummary = generateMatchingRules(arffFileLoc, learner);
 		LOG.info("Decision Tree Learning results on restaurant dataset :");
 		LOG.info(evalSummary.toString());
-		evalSummary.getRankedAndFilteredRules();
+		evalSummary.getRankedAndFilteredRuleSummaries();
 	}
 	
 	private static void testRestaurantDataset2(RuleLearner learner, String arffFileLoc)
@@ -293,7 +293,7 @@ public class RuleGenerationDriver {
 		
 		LOG.info("Decision Tree Learning results on " + datasetName + " dataset :");
 		LOG.info(evalSummary.toString());
-		evalSummary.getRankedAndFilteredRules();			
+		evalSummary.getRankedAndFilteredRuleSummaries();			
 	}
 	
 	/**
@@ -335,7 +335,7 @@ public class RuleGenerationDriver {
 		
 		LOG.info("Decision Tree Learning results on " + datasetName + " dataset :");
 		LOG.info(evalSummary.toString());
-		evalSummary.getRankedAndFilteredRules();			
+		evalSummary.getRankedAndFilteredRuleSummaries();			
 	}
 	
 	/**

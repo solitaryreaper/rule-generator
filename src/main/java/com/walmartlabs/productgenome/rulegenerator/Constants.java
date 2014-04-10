@@ -38,8 +38,8 @@ public class Constants {
 	 */
 	public static final int NUM_PERCENT_FEATURES = 50;
 	
-	public static final double RULE_PRECISION_CUTOFF_PERCENT = 95.0;
-	public static final double RULE_COVERAGE_CUTOFF_PERCENT = 10.0;
+	public static final double RULE_PRECISION_CUTOFF_PERCENT = 98.0;
+	public static final double RULE_COVERAGE_CUTOFF_PERCENT = 20.0;
 	public static final double BETA_F_SCORE = 0.5;
 	public static final int NUM_RULES_REQUIRED = 10;
 	
