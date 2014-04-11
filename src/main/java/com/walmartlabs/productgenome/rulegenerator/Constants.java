@@ -22,6 +22,10 @@ public class Constants {
 	public static final int WEKA_DATA_SEED = 99;
 	public static final int NUM_CV_FOLDS = 10;
 	
+	public static final String TRAIN_DATASET = "train";
+	public static final String TUNE_DATASET = "tune";
+	public static final String TEST_DATASET = "test";
+	
 	/**
 	 * Number of top N string metrics to retain for every attribute.
 	 */

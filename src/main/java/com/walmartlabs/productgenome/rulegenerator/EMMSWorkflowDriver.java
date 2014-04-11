@@ -3,7 +3,7 @@ package com.walmartlabs.productgenome.rulegenerator;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang3.time.StopWatch;
@@ -29,7 +29,7 @@ import com.walmartlabs.productgenome.rulegenerator.service.CrossValidationServic
 import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationService;
 import com.walmartlabs.productgenome.rulegenerator.service.RuleEvaluationService;
 import com.walmartlabs.productgenome.rulegenerator.utils.ArffDataWriter;
-import com.walmartlabs.productgenome.rulegenerator.utils.RuleUtils;
+import com.walmartlabs.productgenome.rulegenerator.utils.WekaUtils;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
 
@@ -179,25 +179,10 @@ public class EMMSWorkflowDriver {
 		if (data.classIndex() == -1)
 			data.setClassIndex(data.numAttributes() - 1);
 		
-		// Split parent dataset into train and test dataset.
-		Random rand = new Random(Constants.WEKA_DATA_SEED);
-		Instances randData = new Instances(data);
-		randData.randomize(rand);
-		randData.stratify(numCVFolds);
-		
-		int randFold = 0 + (int)(Math.random() * ((numCVFolds - 1) + 1));
-		Instances nonTestDataset = randData.trainCV(numCVFolds, randFold);
-		Instances testDataset = randData.testCV(numCVFolds, randFold);
-		
-		// Split train dataset into pure train and tune dataset.
-		Random rand2 = new Random(Constants.WEKA_DATA_SEED);
-		Instances randData2 = new Instances(nonTestDataset);
-		randData.randomize(rand2);
-		randData.stratify(numCVFolds);
-		
-		int randFold2 = 0 + (int)(Math.random() * ((numCVFolds - 1) + 1));
-		Instances trainDataset = randData2.trainCV(numCVFolds, randFold2);
-		Instances tuneDataset = randData2.testCV(numCVFolds, randFold2);
+		Map<String, Instances> splitDataset = WekaUtils.getSplitDataset(data, numCVFolds);
+		Instances trainDataset = splitDataset.get(Constants.TRAIN_DATASET);
+		Instances tuneDataset = splitDataset.get(Constants.TUNE_DATASET);
+		Instances testDataset = splitDataset.get(Constants.TEST_DATASET);
 		
 		LOG.info("Train : " + trainDataset.numInstances());
 		LOG.info("Tune : " + tuneDataset.numInstances());
@@ -218,7 +203,8 @@ public class EMMSWorkflowDriver {
 		
 		LOG.info("\n\nCross-Validation TRAINING phase ..");
 		DatasetEvaluationSummary trainPhaseSummary = 
-			CrossValidationService.getRulesViaNFoldCrossValidation(learner, trainDataset, totalFolds);
+			CrossValidationService.getRulesViaNFoldCrossValidation(learner, trainDataset, totalFolds, 
+					precisionFilter, coverageFilter);
 		trainPhaseSummary.setReqdRulePrecision(precisionFilter);
 		trainPhaseSummary.setReqdRuleCoverage(coverageFilter);
 		List<Rule> rankedAndFilteredRules = trainPhaseSummary.getRankedAndFilteredRules();

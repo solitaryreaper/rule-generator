@@ -2,7 +2,6 @@ package com.walmartlabs.productgenome.rulegenerator.service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import weka.core.Instances;
@@ -15,6 +14,7 @@ import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluat
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.RuleEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 import com.walmartlabs.productgenome.rulegenerator.utils.RuleUtils;
+import com.walmartlabs.productgenome.rulegenerator.utils.WekaUtils;
 
 public class CrossValidationService {
 
@@ -27,20 +27,31 @@ public class CrossValidationService {
 	 * @param data
 	 * @return
 	 */
-	public static DatasetEvaluationSummary getRulesViaNFoldCrossValidation(Learner learner, Instances data, int totalFolds)
+	public static DatasetEvaluationSummary getRulesViaNFoldCrossValidation(Learner learner, Instances data, int totalFolds, 
+			double precisionFilter, double coverageFilter)
 	{
 		List<DatasetEvaluationSummary> foldSummaryList = Lists.newArrayList();
 		for(int foldId=0; foldId < totalFolds; foldId++) {
-			Random rand = new Random(Constants.WEKA_DATA_SEED);
-			Instances randData = new Instances(data);
-			randData.randomize(rand);
-			randData.stratify(totalFolds);
-			Instances trainDataset = randData.trainCV(totalFolds, foldId);
-			Instances tuneDataset = randData.testCV(totalFolds, foldId);
-
+			Map<String, Instances> splitDataset = WekaUtils.getSplitDataset(data, totalFolds);
+			Instances trainDataset = splitDataset.get(Constants.TRAIN_DATASET);
+			Instances tuneDataset = splitDataset.get(Constants.TUNE_DATASET);
+			Instances testDataset = splitDataset.get(Constants.TEST_DATASET);
+			
+			// TRAIN : Get all the rules generated using the training fold
 			List<Rule> rules = RuleUtils.compressRules(learner.learnRules(trainDataset));
-			DatasetEvaluationSummary foldEvalSummary = RuleEvaluationService.evaluatePositiveRules(rules, tuneDataset);
-			foldSummaryList.add(foldEvalSummary);
+			
+			// TUNE : Filter out the rules using the precision and coverage desired metrics.
+			DatasetEvaluationSummary tunePhaseSummary = 
+				RuleEvaluationService.evaluatePositiveRules(rules, tuneDataset);
+			tunePhaseSummary.setReqdRulePrecision(precisionFilter);
+			tunePhaseSummary.setReqdRuleCoverage(coverageFilter);
+			rules = tunePhaseSummary.getRankedAndFilteredRules();
+			
+			// TEST : Evaluate the rules which satisfy the metrics filter criteria.
+			DatasetEvaluationSummary testPhaseSummary = 
+					RuleEvaluationService.evaluatePositiveRules(rules, testDataset);			
+			
+			foldSummaryList.add(testPhaseSummary);
 		}
 		
 		LOG.info("Generating average evaluation summary across " + totalFolds + "-folds ..");

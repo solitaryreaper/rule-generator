@@ -1,6 +1,5 @@
 package com.walmartlabs.productgenome.rulegenerator.utils;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +7,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Clause;
-import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Clause.LogicalOperator;
+import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 
 /**
  * A utility class for effective management and post-processing of entity matching rules.
