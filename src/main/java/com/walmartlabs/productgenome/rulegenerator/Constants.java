@@ -50,5 +50,10 @@ public class Constants {
 	public static final int NUM_RULES_REQUIRED = 10;
 	
 	public static final int SAMPLE_SIZE = 1000;
-
+	
+	
+	// Ruleset metadata parameters
+	public static final String TOTAL_ATTRIBUTES = "attributes";
+	public static final String MAX_NUM_CLAUSES = "clauses";
+	public static final String TOTAL_FOLDS = "folds";
 }

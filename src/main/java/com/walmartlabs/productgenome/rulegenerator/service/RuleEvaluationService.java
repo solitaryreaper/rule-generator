@@ -1,5 +1,6 @@
 package com.walmartlabs.productgenome.rulegenerator.service;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -10,6 +11,7 @@ import weka.core.Instances;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.DatasetEvaluationSummary;
 import com.walmartlabs.productgenome.rulegenerator.model.analysis.RuleEvaluationSummary;
@@ -142,8 +144,36 @@ public class RuleEvaluationService {
 			allRulesSummary.add(ruleSummary);
 		}
 		
+		Map<String, Integer> rulesetSummaryMeta = getRulesetSummaryMeta(testData, allRulesSummary);
 		return new DatasetEvaluationSummary(totalPairs, truePositives, predictedPositives, 
-				correctPositivePredictions, allRulesSummary);
+				correctPositivePredictions, allRulesSummary, rulesetSummaryMeta);
+	}
+	
+	/**
+	 * Returns summary meta information about the ruleset.
+	 */
+	private static Map<String, Integer> getRulesetSummaryMeta(Instances data, List<RuleEvaluationSummary> allRuleSummary)
+	{
+		Map<String, Integer> rulesetSummaryMeta = Maps.newHashMap();
+
+		int totalAttrs = data.numAttributes();
+		int maxNumClauses = Integer.MIN_VALUE;;
+		int maxNumFolds = Integer.MIN_VALUE;
+		
+		for(RuleEvaluationSummary ruleSummary : allRuleSummary) {
+			Rule rule = ruleSummary.getRule();
+			int numClauses = rule.getClauses().size();
+			int numFolds = ruleSummary.getTotalFolds();
+			
+			maxNumClauses = (numClauses > maxNumClauses) ? numClauses : maxNumClauses;
+			maxNumFolds = (numFolds > maxNumFolds) ? numFolds : maxNumFolds;
+		}
+		
+		rulesetSummaryMeta.put(Constants.TOTAL_ATTRIBUTES, totalAttrs);
+		rulesetSummaryMeta.put(Constants.TOTAL_FOLDS, maxNumFolds);
+		rulesetSummaryMeta.put(Constants.MAX_NUM_CLAUSES, maxNumClauses);
+		
+		return rulesetSummaryMeta;
 	}
 	
 	/**

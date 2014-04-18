@@ -3,6 +3,7 @@ package com.walmartlabs.productgenome.rulegenerator.model.analysis;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -27,20 +28,23 @@ public class DatasetEvaluationSummary {
 	private double reqdRulePrecision = Constants.RULE_PRECISION_CUTOFF_PERCENT;
 	
 	private List<RuleEvaluationSummary> ruleSummary;
+	private Map<String, Integer> rulesetSummaryMeta;
 	
 	public DatasetEvaluationSummary()
 	{
 		
 	}
 	
-	public DatasetEvaluationSummary(int totalInstances, int truePositives,
-			int predictedPositives, int correctPositivePredictions, List<RuleEvaluationSummary> ruleSummary) {
+	public DatasetEvaluationSummary(int totalInstances, int truePositives, int predictedPositives, 
+			int correctPositivePredictions, List<RuleEvaluationSummary> ruleSummary, Map<String, Integer> rulesetSummaryMeta) 
+	{
 		super();
 		this.totalInstances = totalInstances;
 		this.truePositives = truePositives;
 		this.predictedPositives = predictedPositives;
 		this.correctPositivePredictions = correctPositivePredictions;
 		this.ruleSummary = ruleSummary;
+		this.rulesetSummaryMeta = rulesetSummaryMeta;
 	}
 
 	public String toString()
@@ -121,6 +125,14 @@ public class DatasetEvaluationSummary {
 		this.ruleSummary = ruleSummary;
 	}
 	
+	public Map<String, Integer> getRulesetSummaryMeta() {
+		return rulesetSummaryMeta;
+	}
+
+	public void setRulesetSummaryMeta(Map<String, Integer> rulesetSummaryMeta) {
+		this.rulesetSummaryMeta = rulesetSummaryMeta;
+	}
+
 	public int getTotalRules()
 	{
 		return getAllRules().size();
@@ -253,7 +265,12 @@ public class DatasetEvaluationSummary {
 	 * For same f-score, other important signals to consider are how many folds contained this rule,
 	 * number of different attributes in the rule.
 	 * 
-	 * TODO : Come up with a good linear equation with apt weights. This is important.
+	 * TODO : Come up with a good linear equation with apt weights. This is important. As of now just normalized all the
+	 * results and assign the following weights on a scale of (1-5) based on my intuiton :
+	 * 
+	 *  5 - Most important - F-score, Any clauses with < or <= operator (heavily penalize it)
+	 *  4 - Important - Average clause score
+	 *  3 - Fold frequency, Unique attributes in clause, Number of clauses.
 	 * @param ruleSummary
 	 * @return
 	 */
@@ -266,19 +283,24 @@ public class DatasetEvaluationSummary {
 		
 		double fscore = ((1 + betaSquare)* precision*recall)/(betaSquare*precision + recall);
 		
+		score = score + 5*fscore/100;
+		
 		// Greater the number of folds in which a rule occurs, more representative it is of the overall data.
-		score = fscore + ruleSummary.getFoldFrequency();
+		score = fscore + 3*ruleSummary.getFoldFrequency()/(double)rulesetSummaryMeta.get(Constants.TOTAL_FOLDS);
 		
 		// More the number of unique attributes in a rule, the more tolerant is it against false positives.
 		Rule rule = ruleSummary.getRule();
-		score = score + getUniqueAttrsInRule(rule).size();
+		score = score + 3*getUniqueAttrsInRule(rule).size()/(double)rulesetSummaryMeta.get(Constants.TOTAL_ATTRIBUTES);
 		
 		// Greater the number of clauses in the rule, the more tolerant is it against false positives.
-		score = score + rule.getClauses().size();
+		score = score + 3*rule.getClauses().size()/(double)rulesetSummaryMeta.get(Constants.MAX_NUM_CLAUSES);
 		
 		// Favor rules which have higher average clause score and devoid of LESS THAN operator in clauses.
 		// Higher average clause score protects against false positives.
-		score = score + getAverageClauseScoreInRule(ruleSummary.getRule());
+		score = score + 4*getAverageClauseScoreInRule(ruleSummary.getRule());
+		
+		// Punish rules which have < or <= operator in their clauses
+		score = score + -5*getNumLessThanOpClauses(ruleSummary.getRule())/(double)rulesetSummaryMeta.get(Constants.MAX_NUM_CLAUSES);
 				
 		return score;
 	}
@@ -299,6 +321,18 @@ public class DatasetEvaluationSummary {
 		
 		
 		return totalScore/clauses.size();
+	}
+	
+	private double getNumLessThanOpClauses(Rule rule)
+	{
+		int numLessThanOpClauses = 0;
+		for(Clause clause : rule.getClauses()) {
+			LogicalOperator logOp = clause.getLogOp();
+			if(logOp.equals(LogicalOperator.LESS_THAN) || logOp.equals(LogicalOperator.LESS_THAN_EQUALS)) {
+				++numLessThanOpClauses;
+			}
+		}
+		return numLessThanOpClauses;
 	}
 	
 	private Set<String> getUniqueAttrsInRule(Rule rule)
