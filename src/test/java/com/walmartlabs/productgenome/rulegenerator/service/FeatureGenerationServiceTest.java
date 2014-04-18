@@ -18,7 +18,7 @@ import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureVector;
-import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.ItemDataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.RestaurantDataParser;
 
@@ -79,7 +79,7 @@ public class FeatureGenerationServiceTest {
 		
 		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
 		
-		DataParser parser = new CSVDataParser();
+		DataParser parser = new ItemDataParser();
 		Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, normalizerMeta);
 		LOG.info("Parsed CSV file data");
 		

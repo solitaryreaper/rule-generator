@@ -18,15 +18,15 @@ import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 
-public class CSVDataParserTest {
+public class ItemDataParserTest {
 
-	private static Logger LOG = Logger.getLogger(CSVDataParserTest.class.getName());
+	private static Logger LOG = Logger.getLogger(ItemDataParserTest.class.getName());
 	private static DataParser parser = null;
 	
 	@BeforeClass
 	public static void testSetup() 
 	{
-		parser = new CSVDataParser();
+		parser = new ItemDataParser();
 	}
 	
 	@AfterClass

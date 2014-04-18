@@ -14,17 +14,20 @@ import com.walmartlabs.productgenome.rulegenerator.model.RuleLearner;
  *
  */
 public class JobMetadata {
-	private String name;
+	private String jobName;
 	private String description;
+	
+	private String datasetName;
 	
 	private String sourceFile;
 	private String targetFile;
+	private String itemPairFile;
 	private String goldFile;
 	
 	private List<String> attributesToEvaluate;
 	private List<String> setValuedAttributes;
 	
-	private String columnDelimiter = Constants.DEFAULT_COLUMN_DELIMITER;
+	private String columnDelimiter = Constants.DEFAULT_ITEM_COLUMN_DELIMITER;
 	private String setValueDelimiter = Constants.DEFAULT_SET_VALUE_ATTRIBIUTE_DELIMITER;
 	
 	private double desiredPrecision = Constants.RULE_PRECISION_CUTOFF_PERCENT;
@@ -39,12 +42,12 @@ public class JobMetadata {
 		
 	}
 	
-	public String getName() {
-		return name;
+	public String getJobName() {
+		return jobName;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setJobName(String name) {
+		this.jobName = name;
 	}
 	
 	public String getDescription() {
@@ -59,6 +62,14 @@ public class JobMetadata {
 		this.description = description;
 	}
 	
+	public String getDatasetName() {
+		return datasetName;
+	}
+
+	public void setDatasetName(String datasetName) {
+		this.datasetName = datasetName;
+	}
+
 	public String getSourceFile() {
 		return sourceFile;
 	}
@@ -75,6 +86,14 @@ public class JobMetadata {
 		this.targetFile = targetFile;
 	}
 	
+	public String getItemPairFile() {
+		return itemPairFile;
+	}
+
+	public void setItemPairFile(String itemPairFile) {
+		this.itemPairFile = itemPairFile;
+	}
+
 	public String getGoldFile() {
 		return goldFile;
 	}
@@ -171,5 +190,9 @@ public class JobMetadata {
 	
 	public void setCrossValidations(int crossValidations) {
 		this.crossValidations = crossValidations;
+	}
+	
+	public boolean isDatasetInItemPairFormat() {
+		return itemPairFile == null ? false : true;
 	}
 }

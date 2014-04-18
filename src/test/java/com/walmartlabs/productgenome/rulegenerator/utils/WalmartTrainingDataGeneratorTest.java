@@ -17,7 +17,7 @@ import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Item;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
-import com.walmartlabs.productgenome.rulegenerator.utils.parser.WalmartDataParser;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.ItemPairDataParser;
 
 public class WalmartTrainingDataGeneratorTest {
 
@@ -41,7 +41,7 @@ public class WalmartTrainingDataGeneratorTest {
 		schemaMap.put("req_upc_14", "req_upc_14");
 		
 		File itemPairDataFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/CNET_DOTCOM_MATCHED_CLEANED.txt");
-		WalmartDataParser parser = new WalmartDataParser();
+		ItemPairDataParser parser = new ItemPairDataParser();
 		Dataset matchSet = parser.parseFile("CNET-Dotcom", itemPairDataFile, MatchStatus.MISMATCH, schemaMap);
 		
 		BufferedWriter bw = new BufferedWriter(new FileWriter("/tmp/cnet_dotcom_mismatch_synthetic.txt"));

@@ -12,7 +12,7 @@ import com.walmartlabs.productgenome.rulegenerator.Constants;
  */
 public class DatasetNormalizerMeta {
 
-	private String columnDelimiter = Constants.DEFAULT_COLUMN_DELIMITER;
+	private String columnDelimiter = Constants.DEFAULT_ITEMPAIR_COLUMN_DELIMITER;
 	private String setValueDelimiter = Constants.DEFAULT_SET_VALUE_ATTRIBIUTE_DELIMITER;
 	private String tokenDelimiter = Constants.DEFAULT_TOKENIZATION_DELIMITER;
 	

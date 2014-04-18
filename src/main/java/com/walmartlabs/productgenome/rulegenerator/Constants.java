@@ -33,7 +33,9 @@ public class Constants {
 	
 	public static final String DEFAULT_TOKENIZATION_DELIMITER = " ";
 	public static final String DEFAULT_SET_VALUE_ATTRIBIUTE_DELIMITER = ",";
-	public static final String DEFAULT_COLUMN_DELIMITER = "\\|#";
+	
+	public static final String DEFAULT_ITEM_COLUMN_DELIMITER = ",";
+	public static final String DEFAULT_ITEMPAIR_COLUMN_DELIMITER = "\\|#";
 	public static final String DEFAULT_ROW_DELIMITER = "\n";
 	
 	/**
@@ -48,4 +50,5 @@ public class Constants {
 	public static final int NUM_RULES_REQUIRED = 10;
 	
 	public static final int SAMPLE_SIZE = 1000;
+
 }

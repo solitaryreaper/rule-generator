@@ -24,13 +24,13 @@ import com.walmartlabs.productgenome.rulegenerator.model.data.Item;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 
-public class CSVDataParser implements DataParser {
+public class ItemDataParser implements DataParser {
 
-	private static Logger LOG = Logger.getLogger(CSVDataParser.class.getName());
+	private static Logger LOG = Logger.getLogger(ItemDataParser.class.getName());
 	
 	private static int ID_ATTR_INDEX = 0;
 	
-	public Dataset parseData(String datasetName, File matchFile, File mismatchFile, DatasetNormalizerMeta normalizerMeta) 
+	public Dataset parseData(String datasetName, File itemPairFile, File goldFile, DatasetNormalizerMeta normalizerMeta) 
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -64,7 +64,9 @@ public class CSVDataParser implements DataParser {
 				MatchStatus matchStatus = MatchStatus.MISMATCH;
 				
 				// Always add the golden pair to the final dataset to be evaluated ..
-				if(goldMap.containsEntry(srcItem.getId().trim(), tgtItem.getId().trim())) {
+				if((goldMap.containsEntry(srcItem.getId().trim(), tgtItem.getId().trim())) ||
+				   (goldMap.containsEntry(tgtItem.getId().trim(), srcItem.getId().trim()))) 
+				{
 					matchStatus = MatchStatus.MATCH;
 					++numMatchPairsAdded;
 					

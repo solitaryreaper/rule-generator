@@ -13,18 +13,20 @@ import org.junit.Test;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
+import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
+import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 
-public class WalmartDataParserTest {
-	private static Logger LOG = Logger.getLogger(WalmartDataParserTest.class.getName());
+public class ItemPairDataParserTest {
+	private static Logger LOG = Logger.getLogger(ItemPairDataParserTest.class.getName());
 	private static DataParser parser = null;
 	
 	@BeforeClass
 	public static void testSetup() 
 	{
-		parser = new WalmartDataParser();
+		parser = new ItemPairDataParser();
 	}
 	
 	@AfterClass
@@ -36,8 +38,8 @@ public class WalmartDataParserTest {
 	@Test
 	public void testParseCNETDotcomData()
 	{
-		File matchFile = new File(System.getProperty("user.dir") + "/src/main/resources/data/datasets/WALMART-DATA/CNET_WALMART_DOTCOM_MATCHED.txt");
-		File mismatchFile = new File(System.getProperty("user.dir") + "/src/main/resources/data/datasets/WALMART-DATA/CNET_WALMART_DOTCOM_MISMATCHED.txt");
+		File itemPairFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/CNET_DOTCOM_CLEANED.txt");
+		File goldFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/GOLD_FINAL.txt");
 		
 		BiMap<String, String> schemaMap = HashBiMap.create();
 		schemaMap.put("pd_title", "pd_title");
@@ -58,10 +60,19 @@ public class WalmartDataParserTest {
 		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap, setValuedAttrs);
 		
 		
-		Dataset cnetDotcomData = parser.parseData("CNET-Dotcom", matchFile, mismatchFile, normalizerMeta);
+		Dataset cnetDotcomData = parser.parseData("CNET-Dotcom", itemPairFile, goldFile, normalizerMeta);
 		assertNotNull(cnetDotcomData);
 		
 		List<ItemPair> itemPairs = cnetDotcomData.getItemPairs();
-		assertNotNull(itemPairs);		
+		assertNotNull(itemPairs);
+		
+		int matchedCount = 0;
+		for(ItemPair pair : itemPairs) {
+			if(pair.getMatchStatus().equals(MatchStatus.MATCH)) {
+				++matchedCount;
+			}
+		}
+		
+		System.out.println("Total matched : " + matchedCount);
 	}
 }

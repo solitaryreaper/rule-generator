@@ -30,8 +30,9 @@ import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationServ
 import com.walmartlabs.productgenome.rulegenerator.service.RuleEvaluationService;
 import com.walmartlabs.productgenome.rulegenerator.utils.ArffDataWriter;
 import com.walmartlabs.productgenome.rulegenerator.utils.WekaUtils;
-import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.ItemDataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.ItemPairDataParser;
 
 /**
  * Test the workflow of EMMS application.
@@ -46,14 +47,15 @@ public class EMMSWorkflowDriver {
 	public static void main(String[] args)
 	{
 		EMMSWorkflowDriver driver = new EMMSWorkflowDriver();
-		driver.testDBLPACMDataset();
+		//driver.testDBLPACMDataset();
 		//driver.testRestaurantDataset();
+		driver.testWalmartCNETDotcomDataset();
 	}
 	
 	private void testDBLPACMDataset()
 	{
 		JobMetadata dblpAcmMeta = new JobMetadata();
-		dblpAcmMeta.setName("DBLP-ACM");
+		dblpAcmMeta.setJobName("DBLP-ACM");
 		dblpAcmMeta.setDescription("Entity matching rules for DBLP-ACM dataset.");
 		dblpAcmMeta.setSourceFile(Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-ACM/DBLP_cleaned.csv");
 		dblpAcmMeta.setTargetFile(Constants.DATA_FILE_PATH_PREFIX + "datasets/DBLP-ACM/ACM_cleaned.csv");
@@ -69,7 +71,7 @@ public class EMMSWorkflowDriver {
 	private void testRestaurantDataset()
 	{
 		JobMetadata restaurantMeta = new JobMetadata();
-		restaurantMeta.setName("Restaurant");
+		restaurantMeta.setJobName("Restaurant");
 		restaurantMeta.setDescription("Entity matching rules for Restuarant dataset.");
 		restaurantMeta.setSourceFile(Constants.DATA_FILE_PATH_PREFIX + "datasets/restaurant/zagats_final.csv");
 		restaurantMeta.setTargetFile(Constants.DATA_FILE_PATH_PREFIX + "datasets/restaurant/fodors_final.csv");
@@ -79,6 +81,27 @@ public class EMMSWorkflowDriver {
 		
 		JobEvaluationSummary jobSummary = runEntityMatching(restaurantMeta);
 		//LOG.info("TRAIN PHASE : " + jobSummary.getTrainPhaseSumary().toString());
+		LOG.info("TEST PHASE : " + jobSummary.getTestPhaseSummary().toString());
+	}
+	
+	private void testWalmartCNETDotcomDataset()
+	{
+		JobMetadata cnetDotcomMeta = new JobMetadata();
+		cnetDotcomMeta.setJobName("CNET-DOTCOM");
+		cnetDotcomMeta.setDatasetName("CNET-DOCTOM");
+		cnetDotcomMeta.setDescription("Entity matching rules for CNET-DOTCOM dataset.");
+		
+		cnetDotcomMeta.setItemPairFile(Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/CNET_DOTCOM_CLEANED.txt");
+		cnetDotcomMeta.setGoldFile(Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/GOLD_FINAL.txt");
+		
+		cnetDotcomMeta.setAttributesToEvaluate("pd_title,req_brand_name,req_category,req_color,req_manufacturer,req_part_number,req_upc_10,req_upc_11,req_upc_12,req_upc_13,req_upc_14");
+		cnetDotcomMeta.setSetValuedAttributes("req_upc_10,req_upc_11,req_upc_12,req_upc_13,req_upc_14,req_category");
+		
+		cnetDotcomMeta.setColumnDelimiter(Constants.DEFAULT_ITEMPAIR_COLUMN_DELIMITER);
+		cnetDotcomMeta.setSetValueDelimiter(Constants.DEFAULT_SET_VALUE_ATTRIBIUTE_DELIMITER);
+		
+		JobEvaluationSummary jobSummary = runEntityMatching(cnetDotcomMeta);
+		LOG.info("TRAIN PHASE : " + jobSummary.getTrainPhaseSumary().toString());
 		LOG.info("TEST PHASE : " + jobSummary.getTestPhaseSummary().toString());
 	}
 	
@@ -113,21 +136,35 @@ public class EMMSWorkflowDriver {
 	
 	private JobEvaluationSummary generateMatchingRules(DatasetNormalizerMeta normalizerMeta, JobMetadata projectMeta)
 	{
-		String projectName = projectMeta.getName();
-		LOG.info("Testing " + projectName + " project ..");
+		String datasetName = projectMeta.getDatasetName();
+		LOG.info("Testing " + datasetName + " project ..");
 		
 		StopWatch timer = new StopWatch();
 
-		File srcFile = new File(projectMeta.getSourceFile());
-		File tgtFile = new File(projectMeta.getTargetFile());
 		File goldFile = new File(projectMeta.getGoldFile());
-		
-		timer.start();
-		DataParser parser = new CSVDataParser();
-		Dataset dataset = parser.parseData(projectName, srcFile, tgtFile, goldFile, normalizerMeta);
-		
-		timer.stop();
-		LOG.info("Time taken for parsing CSV input file : " + timer.toString());
+		Dataset dataset = null;
+		// Parse item format file data.
+		if(!projectMeta.isDatasetInItemPairFormat()) {
+			File srcFile = new File(projectMeta.getSourceFile());
+			File tgtFile = new File(projectMeta.getTargetFile());
+			
+			timer.start();
+			DataParser parser = new ItemDataParser();
+			dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, normalizerMeta);
+			
+			timer.stop();
+			LOG.info("Time taken for parsing item format input file : " + timer.toString());			
+		}
+		// Parse item pair format file data.
+		else {
+			File itemPairFile = new File(projectMeta.getItemPairFile());
+			timer.start();
+			
+			DataParser parser = new ItemPairDataParser();
+			dataset = parser.parseData(datasetName, itemPairFile, goldFile, normalizerMeta);
+			timer.stop();
+			LOG.info("Time taken for parsing item pair input file : " + timer.toString());			
+		}
 		
 		timer.reset();
 		timer.start();

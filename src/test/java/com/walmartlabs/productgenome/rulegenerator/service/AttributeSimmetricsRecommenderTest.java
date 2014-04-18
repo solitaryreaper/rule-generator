@@ -15,10 +15,10 @@ import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
-import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.ItemDataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.RestaurantDataParser;
-import com.walmartlabs.productgenome.rulegenerator.utils.parser.WalmartDataParser;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.ItemPairDataParser;
 
 public class AttributeSimmetricsRecommenderTest {
 
@@ -51,7 +51,7 @@ public class AttributeSimmetricsRecommenderTest {
 		File goldFile = new File(Constants.DATA_FILE_PATH_PREFIX + "datasets/Abt-Buy/abt_buy_perfectMapping.csv");
 		String datasetName = "Abt-Buy";
 		
-		DataParser parser = new CSVDataParser();
+		DataParser parser = new ItemDataParser();
 		Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, null);
 		LOG.info("Parsed CSV file data");
 		
@@ -65,7 +65,7 @@ public class AttributeSimmetricsRecommenderTest {
 	@Test
 	public void testGetSimmetricsWalmartDataset()
 	{
-		WalmartDataParser parser = new WalmartDataParser();
+		ItemPairDataParser parser = new ItemPairDataParser();
 		
 		String matchFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/CNET_WALMART_DOTCOM_MATCHED.txt";
 		String mismatchFilePath = Constants.DATA_FILE_PATH_PREFIX + "datasets/WALMART-DATA/CNET_WALMART_DOTCOM_MISMATCHED.txt";

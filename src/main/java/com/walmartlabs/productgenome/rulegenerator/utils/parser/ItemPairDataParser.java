@@ -9,10 +9,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import au.com.bytecode.opencsv.CSVReader;
+
 import com.google.common.base.Strings;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
@@ -21,13 +25,14 @@ import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 
 /**
- * Data parser for parsing walmart itempair data format
+ * Data parser for parsing walmart itempair data format.
+ * 
  * @author skprasad
  *
  */
-public class WalmartDataParser implements DataParser {
+public class ItemPairDataParser implements DataParser {
 
-	private static final Logger LOG = Logger.getLogger(WalmartDataParser.class.getName());
+	private static final Logger LOG = Logger.getLogger(ItemPairDataParser.class.getName());
 	
 	private static final String SOURCE_ITEM_ATTR = "source_item_attr";
 	private static final String TARGET_ITEM_ATTR = "target_item_attr";
@@ -41,19 +46,14 @@ public class WalmartDataParser implements DataParser {
 	public static final String PD_TITLE 					= "pd_title";
 	public static final String NULL_STRING					= "null";
 	
-	public Dataset parseData(String datasetName, File matchFile, File mismatchFile, DatasetNormalizerMeta normalizerMeta) {
+	public Dataset parseData(String datasetName, File itemPairDataFile, File goldFile, DatasetNormalizerMeta normalizerMeta) {
+		Multimap<String, String> goldMap = getGoldenDataMap(goldFile);
+		
 		BiMap<String, String> schemaMap = normalizerMeta.getSchemaMap();
-		Dataset matchSet = parseFile(datasetName, matchFile, MatchStatus.MATCH, schemaMap);
-		Dataset mismatchSet = parseFile(datasetName, mismatchFile, MatchStatus.MISMATCH, schemaMap);
-
-		List<ItemPair> allItemPairs = Lists.newArrayList();
-		allItemPairs.addAll(matchSet.getItemPairs());
-		allItemPairs.addAll(mismatchSet.getItemPairs());
+		Dataset itemPairDataset = parseFile(datasetName, itemPairDataFile, goldMap, schemaMap);
 		
-		List<String> attributes = matchSet.getAttributes();
-		
-		LOG.info("Found " + allItemPairs.size() + " itempairs for " + datasetName + " dataset.");
-		return new Dataset(datasetName, attributes, allItemPairs);		
+		LOG.info("Found " + itemPairDataset.getItemPairs().size() + " itempairs for " + datasetName + " dataset.");
+		return itemPairDataset;		
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class WalmartDataParser implements DataParser {
 	 * @param itemPairDataFile	A file object representing the file containg itempairs.
 	 * @return	List of itempair objects.
 	 */
-	public Dataset parseFile(String datasetName, File itemPairDataFile, MatchStatus matchStatus, BiMap<String, String> schemaMap)
+	private Dataset parseFile(String datasetName, File itemPairDataFile, Multimap<String, String> goldMap, BiMap<String, String> schemaMap)
 	{
 		String firstItemID = null;
 		Map<String, String> sourceItemAttributes = Maps.newHashMap();
@@ -97,6 +97,7 @@ public class WalmartDataParser implements DataParser {
 					Map<String, String> targetAttrsMap = Maps.newHashMap(targetItemAttributes);
 					secondItem = new Item(secondItemID, targetAttrsMap);
 					
+					MatchStatus matchStatus = getMatchStatus(firstItem, secondItem, goldMap);
 					ItemPair itemPair = new ItemPair(firstItem, secondItem, matchStatus);
 					itemPairs.add(itemPair);
 					
@@ -154,6 +155,7 @@ public class WalmartDataParser implements DataParser {
 				Map<String, String> targetAttrsMap = Maps.newHashMap(targetItemAttributes);
 				secondItem = new Item(secondItemID, targetAttrsMap);
 				
+				MatchStatus matchStatus = getMatchStatus(firstItem, secondItem, goldMap);
 				ItemPair itemPair = new ItemPair(firstItem, secondItem, matchStatus);
 				itemPairs.add(itemPair);		
  			}
@@ -163,6 +165,51 @@ public class WalmartDataParser implements DataParser {
 		} 
 		
 		return new Dataset(datasetName, Lists.newArrayList(attributes), itemPairs);
+	}
+	
+	/**
+	 * Fetch the golden data map. Golden data is the set of itempairs that do actually match.
+	 * @param goldFile
+	 * @return
+	 */
+	private Multimap<String, String> getGoldenDataMap(File goldFile)
+	{
+		Multimap<String, String> goldMap = ArrayListMultimap.create();
+		CSVReader reader = null;
+		try {
+ 			String[] currLineTokens;
+ 			reader = new CSVReader(new FileReader(goldFile));
+ 			boolean isHeaderRead = false;
+			while ((currLineTokens = reader.readNext()) != null) {
+				if(!isHeaderRead) {
+					isHeaderRead = true;
+					continue;
+				}
+				
+				goldMap.put(currLineTokens[0].trim(), currLineTokens[1].trim());
+			}
+			reader.close();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		return goldMap;
+	}
+	
+	private MatchStatus getMatchStatus(Item firstItem, Item secondItem, Multimap<String, String> goldMap)
+	{
+		String firstItemId = firstItem.getId().trim();
+		String secondItemId = secondItem.getId().trim();
+		
+		MatchStatus status = MatchStatus.MISMATCH;
+		if((goldMap.containsEntry(firstItemId, secondItemId)) ||
+		   (goldMap.containsEntry(secondItemId, firstItemId))) 
+		{
+			status = MatchStatus.MATCH;
+		}
+		
+		return status;
 	}
 	
 	/**

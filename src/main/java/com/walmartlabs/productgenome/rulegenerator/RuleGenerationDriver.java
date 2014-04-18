@@ -28,10 +28,10 @@ import com.walmartlabs.productgenome.rulegenerator.service.CrossValidationServic
 import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationService;
 import com.walmartlabs.productgenome.rulegenerator.service.RuleEvaluationService;
 import com.walmartlabs.productgenome.rulegenerator.utils.ArffDataWriter;
-import com.walmartlabs.productgenome.rulegenerator.utils.parser.CSVDataParser;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.ItemDataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.RestaurantDataParser;
-import com.walmartlabs.productgenome.rulegenerator.utils.parser.WalmartDataParser;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.ItemPairDataParser;
 
 /**
  * The main driver class for the auto-rule generation engine. It has the following functions :
@@ -272,7 +272,7 @@ public class RuleGenerationDriver {
 			File goldFile = new File(goldFilePath);
 			
 			timer.start();
-			DataParser parser = new CSVDataParser();
+			DataParser parser = new ItemDataParser();
 			Dataset dataset = parser.parseData(datasetName, srcFile, tgtFile, goldFile, normalizerMeta);
 			
 			timer.stop();
@@ -315,7 +315,7 @@ public class RuleGenerationDriver {
 			File mismatchFile = new File(mismatchFilePath);
 			
 			timer.start();
-			DataParser parser = new WalmartDataParser();
+			DataParser parser = new ItemPairDataParser();
 			Dataset dataset = parser.parseData(datasetName, matchFile, mismatchFile, normalizerMeta);
 			timer.stop();
 			LOG.info("Time taken for parsing Walmart dataset : " + timer.toString());
