@@ -14,24 +14,25 @@ import com.walmartlabs.productgenome.rulegenerator.utils.parser.RuleParser;
  * Learns a random forest using bagging and generates rules.
  * 
  * @author skprasad
- *
+ * 
  */
-public class RandomForestLearner implements Learner{
+public class RandomForestLearner implements Learner {
 
-	private static final Logger LOG = Logger.getLogger(RandomForestLearner.class.getName());
-	
-	public List<Rule> learnRules(Instances trainData) 
-	{
+	private static final Logger LOG = Logger
+			.getLogger(RandomForestLearner.class.getName());
+
+	public List<Rule> learnRules(Instances trainData) {
 		RandomForest randForest = new RandomForest();
 		randForest.setPrintTrees(true);
 		randForest.setNumTrees(Constants.NUM_CV_FOLDS);
-		
+
 		try {
 			randForest.buildClassifier(trainData);
 		} catch (Exception e) {
-			LOG.severe("Failed to generate random forest model. Reason : " + e.getStackTrace());
+			LOG.severe("Failed to generate random forest model. Reason : "
+					+ e.getStackTrace());
 		}
-		
+
 		LOG.fine("Random Forest rules : " + randForest.toString());
 		List<String> textRules = randForest.getRandomForestRules();
 		return RuleParser.parseRules(textRules);
