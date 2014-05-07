@@ -15,10 +15,18 @@
 		</dependency>
 
 		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>14.0.1</version>
+		</dependency>
+		
+		<!-- 
+		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>r05</version>
 		</dependency>
+		 -->
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>

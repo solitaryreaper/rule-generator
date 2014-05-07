@@ -99,5 +99,7 @@ public class ItemDataParserTest {
 		
 		List<ItemPair> itemPairs = restaurantData.getItemPairs();
 		assertNotNull(itemPairs);
+		
+		LOG.info("Found " + itemPairs.size() + " itempairs ..");
 	}	
 }

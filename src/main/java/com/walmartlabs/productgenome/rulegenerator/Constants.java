@@ -56,4 +56,6 @@ public class Constants {
 	public static final String TOTAL_ATTRIBUTES = "attributes";
 	public static final String MAX_NUM_CLAUSES = "clauses";
 	public static final String TOTAL_FOLDS = "folds";
+	
+	public static final String ITEMPAIR_ID_ATTRIBUTE = "itempair_id";
 }

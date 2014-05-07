@@ -2,47 +2,56 @@ package com.walmartlabs.productgenome.rulegenerator.utils;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
+import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Feature;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureVector;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
+import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationService;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
+import com.walmartlabs.productgenome.rulegenerator.utils.parser.RestaurantDataParser;
 
 
 public class ArffDataWriterTest {
 
 	private static Logger LOG = Logger.getLogger(ArffDataWriterTest.class.getName());
-	private static FeatureDataset dataset = null;
+	private static Dataset dataset = null;
+	private static FeatureDataset featureDataset = null;
 	
 	@BeforeClass
 	public static void testSetup() 
 	{
-		List<Feature> features = Lists.newArrayList();
-		features.add(new Feature("name", Simmetrics.JACCARD));
-		features.add(new Feature("age", Simmetrics.EXACT_MATCH_STRING));
+		String matchFilePath = System.getProperty("user.dir") + "/src/main/resources/data/restaurant/res_match.txt";
+		String mismatchFilePath = System.getProperty("user.dir") + "/src/main/resources/data/restaurant/res_mismatch.txt";
 		
-		List<FeatureVector> fVectors = Lists.newArrayList();
-		fVectors.add(new FeatureVector(Lists.newArrayList(0.95, 1.0), MatchStatus.MATCH));
-		fVectors.add(new FeatureVector(Lists.newArrayList(1.0, 0.0), MatchStatus.MISMATCH));
+		File matchFile = new File(matchFilePath);
+		File mismatchFile = new File(mismatchFilePath);
 		
-		String datasetName = "Test";
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		schemaMap.put("name", "name");
+		schemaMap.put("adddr", "addr");
+		schemaMap.put("city", "city");
+		schemaMap.put("type", "type");
 		
-		dataset = new FeatureDataset(datasetName, features, fVectors);
-	}
-	
-	@AfterClass
-	public static void testCleanup() 
-	{
+		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
 		
+		DataParser parser = new RestaurantDataParser();
+		dataset = parser.parseData("Restaurant", matchFile, mismatchFile, normalizerMeta);
+		
+		featureDataset = FeatureGenerationService.generateFeatures(dataset, normalizerMeta);
 	}
 	
 	@Test
@@ -51,7 +60,7 @@ public class ArffDataWriterTest {
 		LOG.info("Loading data in ARFF format ..");
 		String arffFileLoc = null;
 		try {
-			arffFileLoc = ArffDataWriter.loadDataInArffFormat(dataset);
+			arffFileLoc = ArffDataWriter.loadDataInArffFormat(featureDataset);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

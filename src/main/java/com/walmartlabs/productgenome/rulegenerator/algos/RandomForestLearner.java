@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import weka.classifiers.trees.RandomForest;
+import weka.core.Instance;
 import weka.core.Instances;
 
 import com.walmartlabs.productgenome.rulegenerator.Constants;
@@ -18,24 +19,47 @@ import com.walmartlabs.productgenome.rulegenerator.utils.parser.RuleParser;
  */
 public class RandomForestLearner implements Learner {
 
-	private static final Logger LOG = Logger
-			.getLogger(RandomForestLearner.class.getName());
+	private RandomForest randForest;
+	
+	private static final Logger LOG = Logger.getLogger(RandomForestLearner.class.getName());
+
+	public RandomForestLearner()
+	{
+		randForest = new RandomForest();
+		randForest.setPrintTrees(true);
+		randForest.setNumTrees(Constants.NUM_CV_FOLDS);		
+	}
+	
+	public RandomForest getRandForest() {
+		return randForest;
+	}
 
 	public List<Rule> learnRules(Instances trainData) {
-		RandomForest randForest = new RandomForest();
-		randForest.setPrintTrees(true);
-		randForest.setNumTrees(Constants.NUM_CV_FOLDS);
-
 		try {
 			randForest.buildClassifier(trainData);
 		} catch (Exception e) {
-			LOG.severe("Failed to generate random forest model. Reason : "
-					+ e.getStackTrace());
+			LOG.severe("Failed to generate random forest model. Reason : " + e.getStackTrace());
 		}
 
 		LOG.fine("Random Forest rules : " + randForest.toString());
-		List<String> textRules = randForest.getRandomForestRules();
-		return RuleParser.parseRules(textRules);
+		return RuleParser.parseRules(getRules());
+	}
+	
+	public List<String> getRules()
+	{
+		return randForest.getRandomForestRules();
+	}
+	
+	public double getVotingEntropyForInstance(Instance instance)
+	{
+		double entropy = 0.0;
+		try {
+			entropy = getRandForest().getVotingEntropyForInstance(instance);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return entropy;
 	}
 
 }

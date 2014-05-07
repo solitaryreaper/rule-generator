@@ -41,10 +41,17 @@ public class ArffDataWriter {
 		bw.newLine();
 		
 		// 2) Write the attributes
+		
+		// Hack : Identifier to co-relate itempair and the weka instance object.
+		String itemPairIdAttr = "@ATTRIBUTE " + Constants.ITEMPAIR_ID_ATTRIBUTE + " NUMERIC ";
+		bw.write(itemPairIdAttr);
+		bw.newLine();
+		
 		for(Feature f : dataset.getFeatures()) {
 			StringBuilder fStr = new StringBuilder();
 			fStr.append("@ATTRIBUTE ").append(f.getName()).append(" NUMERIC ");
-			bw.write(fStr.toString());bw.newLine();
+			bw.write(fStr.toString());
+			bw.newLine();
 		}
 		
 		// 3) Write the class attribute
@@ -58,7 +65,10 @@ public class ArffDataWriter {
 			if(Strings.isNullOrEmpty(v.getFeatureString().trim())) {
 				continue;
 			}
-			bw.write(v.getFeatureString());bw.newLine();
+			
+			bw.write(v.getId() + ",");
+			bw.write(v.getFeatureString());
+			bw.newLine();
 		}
 		
 		bw.close();

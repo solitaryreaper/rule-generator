@@ -7,15 +7,22 @@ import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 
 public class FeatureVector {
+	private Integer id;
 	private List<Double> featureValues;
 	private MatchStatus matchStatus;
 	
-	public FeatureVector(List<Double> featureValues, MatchStatus matchStatus) {
+	public FeatureVector(Integer id, List<Double> featureValues, MatchStatus matchStatus) {
 		super();
+		this.id = id;
 		this.featureValues = featureValues;
 		this.matchStatus = matchStatus;
 	}
 
+	public Integer getId()
+	{
+		return this.id;
+	}
+	
 	public List<Double> getFeatureValues() {
 		return featureValues;
 	}

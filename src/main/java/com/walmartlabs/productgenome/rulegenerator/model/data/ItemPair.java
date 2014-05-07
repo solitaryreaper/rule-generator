@@ -8,9 +8,11 @@ import com.google.common.base.Objects;
  *
  */
 public class ItemPair {
+	
 	public static enum MatchStatus {
 		MATCH("match"),
-		MISMATCH("mismatch");
+		MISMATCH("mismatch"),
+		UNKNOWN("unknown");
 		
 		private String label;
 		
@@ -35,7 +37,7 @@ public class ItemPair {
 	
 	private Item itemA;
 	private Item itemB;
-	private MatchStatus matchStatus;
+	private MatchStatus matchStatus = MatchStatus.UNKNOWN;
 
 	public ItemPair(Item itemA, Item itemB, MatchStatus matchStatus) {
 		super();
@@ -100,9 +102,10 @@ public class ItemPair {
 	/**
 	 * Hack to identify this itempair after it is converted into a feature vector
 	 */
-	public String getItempPairIdentifier()
+	public int getId()
 	{
-		return itemA.getId() + "#" + itemB.getId();
+		String id = itemA.getId() + "#" + itemB.getId();
+		return id.replace(" ", "").trim().hashCode();
 	}
 	
 }

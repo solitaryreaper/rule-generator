@@ -411,7 +411,8 @@ public class RuleGenerationDriver {
 		
 		LOG.info("\n\n10-fold CROSS-VALIDATION ..");
 		DatasetEvaluationSummary overallSummary = 
-			CrossValidationService.getRulesViaNFoldCrossValidation(learner, trainDataset, totalFolds);
+			CrossValidationService.getRulesViaNFoldCrossValidation(learner, trainDataset, totalFolds, 
+					Constants.RULE_PRECISION_CUTOFF_PERCENT, Constants.RULE_COVERAGE_CUTOFF_PERCENT);
 		List<Rule> finalRankedRules = overallSummary.getRankedRules();
 		
 		LOG.info("\n\nFINAL RULE EVALUATION RESULTS ..");

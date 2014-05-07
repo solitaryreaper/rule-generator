@@ -1,18 +1,27 @@
 package com.walmartlabs.productgenome.rulegenerator.utils;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
 
 import com.google.common.collect.Maps;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
+import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
+import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
+import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
+import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationService;
 
 public class WekaUtils {
 
+	private static Logger LOG = Logger.getLogger(WekaUtils.class.getSimpleName());
+	
 	/**
 	 * Returns the class label for this instance
 	 */
@@ -63,4 +72,47 @@ public class WekaUtils {
 		
 		return splitDataset;
 	}
+	
+	/**
+	 * Converts an itempair to the required weka instance format. 
+	 */
+	public static Instances getWekaInstances(Dataset dataset, DatasetNormalizerMeta normalizerMeta)
+	{
+		String arffFileLoc = stageDataInArffFormat(dataset, normalizerMeta);
+		return parseArffFile(arffFileLoc);
+	}
+	
+	private static String stageDataInArffFormat(Dataset dataset, DatasetNormalizerMeta normalizerMeta)
+	{
+		FeatureDataset featureDataset = FeatureGenerationService.generateFeatures(dataset, normalizerMeta);
+		LOG.info("Generated feature vectors for dataset : " + dataset.getName());
+		
+		String arffFileLoc = null;
+		try {
+			arffFileLoc = ArffDataWriter.loadDataInArffFormat(featureDataset);
+		} catch (IOException e) {
+			LOG.severe("Failed to stage feature data in arff file .. " + e.getStackTrace());
+			e.printStackTrace();
+		}
+		LOG.info("Loaded the in-memory feature vectors into arff file : " + arffFileLoc);
+
+		return arffFileLoc;
+	}
+	
+	private static Instances parseArffFile(String arffFileLoc)
+	{
+		Instances instances = null;
+		try {
+			DataSource dataSource = new DataSource(arffFileLoc);			
+			instances = dataSource.getDataSet();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (instances.classIndex() == -1)
+			instances.setClassIndex(instances.numAttributes() - 1);		
+		
+		return instances;
+	}
+	
 }

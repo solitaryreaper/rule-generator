@@ -1,8 +1,6 @@
 package com.walmartlabs.productgenome.rulegenerator.service;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -43,24 +41,11 @@ public class FeatureGenerationService {
 		if(!parentDir.exists()) {
 			parentDir.mkdirs();
 		}
-		
-		String mapFileLoc = Constants.DATA_FILE_PATH_PREFIX + "_map_" + rawDataset.getName() + ".txt";
-		File mapFile = new File(mapFileLoc);
-		boolean isMapFileToBeGenerated = true;
-		BufferedWriter bw = null;
-		
+
 		String name = null;
 		List<Feature> features = null;
 		List<FeatureVector> featureVectors = null;
 		try {
-			if(mapFile.exists()) {
-				isMapFileToBeGenerated = false;
-			}
-			else {
-				LOG.info("Generating new map file " + mapFileLoc);
-				bw = new BufferedWriter(new FileWriter(mapFileLoc));
-			}
-			
 			name = rawDataset.getName();
 			Map<String, List<Simmetrics>> attrSimmetrics = 
 					AttributeSimmetricsRecommender.getSimmetricRecommendations(rawDataset, normalizerMeta);
@@ -71,22 +56,11 @@ public class FeatureGenerationService {
 			for(ItemPair itemPair : itemPairs) {
 				FeatureVector fVector = getFeatureVector(itemPair, features);
 				featureVectors.add(fVector);
-				if(isMapFileToBeGenerated) {
-					bw.write(itemPair.getItempPairIdentifier() + " ==> " + fVector.getFeatureString());
-					bw.newLine();
-				}
-				
 			}
 
 			if(featureVectors.size() % 1000 == 0) {
 				LOG.info("Total feature vectors : " + featureVectors.size());
 			}
-			
-			if(isMapFileToBeGenerated) {
-				bw.close();
-				LOG.info("Map file " + mapFileLoc + " has been successfully generated ..");
-			}
-			
 		}
 		catch(Exception e) {
 			LOG.severe("Error while generating feature dataset. Reason : " + e.getStackTrace());
@@ -138,7 +112,7 @@ public class FeatureGenerationService {
 			featureValues.add(score);
 		}
 		
-		return new FeatureVector(featureValues, itemPair.getMatchStatus());
+		return new FeatureVector(itemPair.getId(), featureValues, itemPair.getMatchStatus());
 	}
 	
 }
