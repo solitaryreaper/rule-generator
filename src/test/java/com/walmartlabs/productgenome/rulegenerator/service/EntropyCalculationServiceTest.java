@@ -27,27 +27,18 @@ public class EntropyCalculationServiceTest {
 	public void testTopKEntropyPairs()
 	{
 		Dataset dataset = getDataset();
-		
-		BiMap<String, String> schemaMap = HashBiMap.create();
-		schemaMap.put("name", "name");
-		schemaMap.put("adddr", "addr");
-		schemaMap.put("city", "city");
-		schemaMap.put("type", "type");
-		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap);
-		
 		Learner learner = getLearner();
 		
-		List<ItemPair> topKEntropyPairs = 
-			EntropyCalculationService.getTopKInformativeItemPairs(learner, dataset, normalizerMeta, 20);
+		List<ItemPair> topKEntropyPairs = EntropyCalculationService.getTopKInformativeItemPairs(learner, dataset);
 		assertNotNull(topKEntropyPairs);
-		assertTrue(topKEntropyPairs.size() == 20);
+		assertTrue(topKEntropyPairs.size() > 0);
 	}
 	
 	private Learner getLearner()
 	{
 		Learner learner = new RandomForestLearner();
 		
-		String arffFileLoc = "/home/excelsior/workspace/rule-generator/src/main/resources/tmp/Restaurant_9288.arff";
+		String arffFileLoc = "/afs/cs.wisc.edu/u/s/k/skprasad/RA/rule-generator/src/main/resources/tmp/Restaurant_1238.arff";
 		Instances data = null;
 		try {
 			DataSource trainDataSource = new DataSource(arffFileLoc);			
@@ -72,6 +63,10 @@ public class EntropyCalculationServiceTest {
 		File mismatchFile = new File(mismatchFilePath);
 		
 		BiMap<String, String> schemaMap = HashBiMap.create();
+		schemaMap.put("name", "name");
+		schemaMap.put("addr", "addr");
+		schemaMap.put("city", "city");
+		schemaMap.put("type", "type");
 		DatasetNormalizerMeta normalizerMeta = new DatasetNormalizerMeta(schemaMap, null);
 		
 		DataParser parser = new RestaurantDataParser();

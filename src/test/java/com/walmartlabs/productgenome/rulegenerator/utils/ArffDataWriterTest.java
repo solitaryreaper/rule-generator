@@ -4,7 +4,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.junit.BeforeClass;
@@ -12,14 +11,9 @@ import org.junit.Test;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Lists;
-import com.walmartlabs.productgenome.rulegenerator.model.Simmetrics;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
 import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerMeta;
-import com.walmartlabs.productgenome.rulegenerator.model.data.Feature;
 import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureDataset;
-import com.walmartlabs.productgenome.rulegenerator.model.data.FeatureVector;
-import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
 import com.walmartlabs.productgenome.rulegenerator.service.FeatureGenerationService;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.DataParser;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.RestaurantDataParser;

@@ -1,6 +1,7 @@
 package com.walmartlabs.productgenome.rulegenerator.utils;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -10,6 +11,8 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
@@ -82,6 +85,11 @@ public class WekaUtils {
 		return parseArffFile(arffFileLoc);
 	}
 	
+	public static Instances getWekaInstances(Dataset dataset)
+	{
+		return getWekaInstances(dataset, getDefaultNormalizerMetadata(dataset.getAttributes()));
+	}
+	
 	private static String stageDataInArffFormat(Dataset dataset, DatasetNormalizerMeta normalizerMeta)
 	{
 		FeatureDataset featureDataset = FeatureGenerationService.generateFeatures(dataset, normalizerMeta);
@@ -114,5 +122,19 @@ public class WekaUtils {
 		
 		return instances;
 	}
+
+	public static DatasetNormalizerMeta getDefaultNormalizerMetadata(List<String> datasetAttributes)
+	{
+		return new DatasetNormalizerMeta(getDefaultSchemaMap(datasetAttributes));
+	}
 	
+	private static BiMap<String, String> getDefaultSchemaMap(List<String> attributes)
+	{
+		BiMap<String, String> schemaMap = HashBiMap.create();
+		for(String attribute : attributes) {
+			schemaMap.put(attribute, attribute);
+		}
+		
+		return schemaMap;
+	}
 }

@@ -58,4 +58,6 @@ public class Constants {
 	public static final String TOTAL_FOLDS = "folds";
 	
 	public static final String ITEMPAIR_ID_ATTRIBUTE = "itempair_id";
+	
+	public static final int NUM_ITEMPAIRS_PER_ITERATION = 10;	
 }

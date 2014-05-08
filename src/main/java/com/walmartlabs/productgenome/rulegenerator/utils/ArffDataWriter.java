@@ -56,7 +56,7 @@ public class ArffDataWriter {
 		
 		// 3) Write the class attribute
 		StringBuilder classes = new StringBuilder();
-		classes.append("@ATTRIBUTE").append(" class { match, mismatch }");
+		classes.append("@ATTRIBUTE").append(" class { match, mismatch, unknown }");
 		bw.write(classes.toString());bw.newLine();bw.newLine();
 
 		// 4) Write the actual data

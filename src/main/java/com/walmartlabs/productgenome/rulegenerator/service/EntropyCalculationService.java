@@ -10,6 +10,7 @@ import weka.core.Instances;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.algos.Learner;
 import com.walmartlabs.productgenome.rulegenerator.algos.RandomForestLearner;
 import com.walmartlabs.productgenome.rulegenerator.model.data.Dataset;
@@ -84,6 +85,12 @@ public class EntropyCalculationService {
 		}
 		
 		return topKInfoPairs;
+	}
+	
+	public static List<ItemPair> getTopKInformativeItemPairs(Learner learner, Dataset unlabelledDataset)
+	{
+		DatasetNormalizerMeta normalizerMeta = WekaUtils.getDefaultNormalizerMetadata(unlabelledDataset.getAttributes());
+		return getTopKInformativeItemPairs(learner, unlabelledDataset, normalizerMeta, Constants.NUM_ITEMPAIRS_PER_ITERATION);
 	}
 	
 	private static class InstanceEntropy implements Comparable<InstanceEntropy>
