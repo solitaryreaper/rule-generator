@@ -43,11 +43,15 @@ public class EntropyCalculationService {
 		PriorityQueue<InstanceEntropy> mostInfoItemPairs = 
 			new PriorityQueue<EntropyCalculationService.InstanceEntropy>(K);
 		
+		double maxEntropy = 0.0;
 		Instances data = WekaUtils.getWekaInstances(unlabelledDataset, normalizerMeta);
 		for(Instance instance : data) {
 			double entropy = 0.0;
 			try {
 				entropy = rf.getVotingEntropyForInstance(instance);
+				if(Double.compare(entropy, maxEntropy) > 0) {
+					maxEntropy = entropy;
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -76,7 +80,7 @@ public class EntropyCalculationService {
 			
 			// Get the first attribute value from weka instance which acts as the bridge to the
 			// original itempair.
-			topKInfoPairs.add(idToItemPairMap.get(instance.value(0)));
+			topKInfoPairs.add(idToItemPairMap.get((int)instance.value(0)));
 		}
 		
 		return topKInfoPairs;
