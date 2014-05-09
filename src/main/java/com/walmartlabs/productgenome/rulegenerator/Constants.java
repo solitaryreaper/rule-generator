@@ -59,5 +59,5 @@ public class Constants {
 	
 	public static final String ITEMPAIR_ID_ATTRIBUTE = "itempair_id";
 	
-	public static final int NUM_ITEMPAIRS_PER_ITERATION = 10;	
+	public static final int NUM_ITEMPAIRS_PER_ITERATION = 10;
 }

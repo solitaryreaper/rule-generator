@@ -23,6 +23,7 @@ import com.walmartlabs.productgenome.rulegenerator.model.data.DatasetNormalizerM
 import com.walmartlabs.productgenome.rulegenerator.model.data.Item;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair;
 import com.walmartlabs.productgenome.rulegenerator.model.data.ItemPair.MatchStatus;
+import com.walmartlabs.productgenome.rulegenerator.utils.DatasetUtils;
 
 public class ItemDataParser implements DataParser {
 
@@ -40,8 +41,9 @@ public class ItemDataParser implements DataParser {
 	{
 		BiMap<String, String> schemaMap = normalizerMeta.getSchemaMap();
 		
-		Multimap<String, String> goldMap = getGoldenDataMap(goldFile);
-		int goldPairs = goldMap.size();
+		Map<Integer, GoldItemPair> goldDataMap = getGoldDatasetMap(goldFile);
+		//Multimap<String, String> goldMap = getGoldenDataMap(goldFile);
+		int goldPairs = goldDataMap.size();
 		int totalMismatchPairsToRetain = 2*goldPairs < 3000 ? 3000 : 2*goldPairs;
 		
 		List<Item> sourceItems = getItems(sourceFile, schemaMap);
@@ -57,32 +59,47 @@ public class ItemDataParser implements DataParser {
 		boolean isBlockingReqd = preBlockingItemPairs > 10000 ? true : false;
 		
 		List<ItemPair> itemPairs = Lists.newArrayList();
-		int numMismatchPairsAdded = 0;
-		int numMatchPairsAdded = 0;
+		int numUnlabelledPairsAdded = 0;
+		int numLabelledPairsAdded = 0;
 		for(Item srcItem : sourceItems) {
 			for(Item tgtItem : targetItems) {
 				MatchStatus matchStatus = MatchStatus.MISMATCH;
 				
+				String srcItemId = srcItem.getId().trim();
+				String tgtItemId = tgtItem.getId().trim();
+				
+				Integer srcToTgtItemId = DatasetUtils.getItemPairId(srcItemId, tgtItemId);
+				Integer tgtToSrcItemId = DatasetUtils.getItemPairId(tgtItemId, srcItemId);
+				
 				// Always add the golden pair to the final dataset to be evaluated ..
-				if((goldMap.containsEntry(srcItem.getId().trim(), tgtItem.getId().trim())) ||
-				   (goldMap.containsEntry(tgtItem.getId().trim(), srcItem.getId().trim()))) 
+				if((goldDataMap.containsKey(srcToTgtItemId)))
 				{
-					matchStatus = MatchStatus.MATCH;
-					++numMatchPairsAdded;
+					GoldItemPair goldPair = goldDataMap.get(srcToTgtItemId);
+					matchStatus = goldPair.getMatchStatus();
+					++numLabelledPairsAdded;
 					
 					itemPairs.add(new ItemPair(srcItem, tgtItem, matchStatus));
 					++postBlockingItemPairs;
 					continue;
 				}
+				else if(goldDataMap.containsKey(tgtToSrcItemId)) {
+					GoldItemPair goldPair = goldDataMap.get(tgtToSrcItemId);
+					matchStatus = goldPair.getMatchStatus();
+					++numLabelledPairsAdded;
+					
+					itemPairs.add(new ItemPair(srcItem, tgtItem, matchStatus));
+					++postBlockingItemPairs;
+					continue;					
+				}
 				
 				// Only apply blocking to itempairs not present in golden file ..
 				if(isBlockingReqd && matchStatus.equals(MatchStatus.MISMATCH)) {
-					boolean retainForMatching = shouldRetainForMatching(numMismatchPairsAdded, totalMismatchPairsToRetain);
+					boolean retainForMatching = shouldRetainForMatching(numUnlabelledPairsAdded, totalMismatchPairsToRetain);
 					if(!retainForMatching) {
 						continue;
 					}
 					else {
-						++numMismatchPairsAdded;
+						++numUnlabelledPairsAdded;
 					}
 				}
 				
@@ -91,13 +108,14 @@ public class ItemDataParser implements DataParser {
 			}
 		}
 		
-		if(numMatchPairsAdded == 0) {
+		if(numLabelledPairsAdded == 0) {
 			LOG.severe("No itempairs could be added from the golden dataset. Please fix this issue first !!");
 			System.exit(1);
 		}
 
-		LOG.info("Match pairs added : " + numMatchPairsAdded + ", Mismatch pairs added : " + numMismatchPairsAdded);
+		LOG.info("Labelled pairs added : " + numLabelledPairsAdded + ", Unlabelled pairs added : " + numUnlabelledPairsAdded);
 		LOG.info("Stats : Before blocking : " + preBlockingItemPairs + ", After blocking : " + postBlockingItemPairs);
+		LOG.info("ItemPairs added : " + itemPairs.size());
 		return new Dataset(datasetName, attributes, itemPairs);
 	}
 	
@@ -154,6 +172,79 @@ public class ItemDataParser implements DataParser {
 		}
 		
 		return goldMap;
+	}
+	
+	private Map<Integer, GoldItemPair> getGoldDatasetMap(File goldFile)
+	{
+		List<GoldItemPair> goldItemPairs = Lists.newArrayList();
+		CSVReader reader = null;
+		try {
+ 			String[] currLineTokens;
+ 			reader = new CSVReader(new FileReader(goldFile));
+ 			boolean isHeaderRead = false;
+			while ((currLineTokens = reader.readNext()) != null) {
+				if(!isHeaderRead) {
+					isHeaderRead = true;
+					continue;
+				}
+				
+				String item1Id = currLineTokens[0].trim();
+				String item2Id = currLineTokens[1].trim();
+				String matchStatus = currLineTokens[2].trim();
+				if(matchStatus == null) {
+					matchStatus = "mismatch";
+				}
+				
+				goldItemPairs.add(new GoldItemPair(item1Id, item2Id, MatchStatus.getMatchStatus(matchStatus)));
+			}
+			reader.close();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		Map<Integer, GoldItemPair> goldDataMap = Maps.newHashMap();
+		for(GoldItemPair goldPair : goldItemPairs) {
+			String item1Id = goldPair.getItem1Id();
+			String item2Id = goldPair.getItem2Id();
+			Integer itemPairId = DatasetUtils.getItemPairId(item1Id, item2Id);
+			goldDataMap.put(itemPairId, goldPair);
+		}
+		
+		return goldDataMap;
+	}
+	
+	private static class GoldItemPair
+	{
+		private String item1Id;
+		private String item2Id;
+		private MatchStatus matchStatus;
+		
+		public GoldItemPair(String item1Id, String item2Id, MatchStatus matchStatus) {
+			super();
+			this.item1Id = item1Id;
+			this.item2Id = item2Id;
+			this.matchStatus = matchStatus;
+		}
+		
+		public GoldItemPair(String item1Id, String item2Id) {
+			super();
+			this.item1Id = item1Id;
+			this.item2Id = item2Id;
+			this.matchStatus = MatchStatus.MATCH;			
+		}
+
+		public String getItem1Id() {
+			return item1Id;
+		}
+
+		public String getItem2Id() {
+			return item2Id;
+		}
+
+		public MatchStatus getMatchStatus() {
+			return matchStatus;
+		}	
 	}
 	
 	/**
