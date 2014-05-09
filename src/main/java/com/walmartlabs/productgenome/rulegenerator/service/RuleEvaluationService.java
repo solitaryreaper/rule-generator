@@ -1,6 +1,5 @@
 package com.walmartlabs.productgenome.rulegenerator.service;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
