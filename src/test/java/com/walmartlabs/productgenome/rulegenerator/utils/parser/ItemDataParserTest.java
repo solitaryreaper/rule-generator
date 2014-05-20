@@ -84,7 +84,7 @@ public class ItemDataParserTest {
 	{
 		File srcFile = new File(System.getProperty("user.dir") + "/src/main/resources/data/datasets/restaurant/zagats_final.csv");
 		File tgtFile = new File(System.getProperty("user.dir") + "/src/main/resources/data/datasets/restaurant/fodors_final.csv");
-		File goldFile = new File(System.getProperty("user.dir") + "/src/main/resources/data/datasets/restaurant/gold_final.csv");
+		File goldFile = new File(System.getProperty("user.dir") + "/src/main/resources/data/datasets/restaurant/seed.csv");
 		
 		BiMap<String, String> schemaMap = HashBiMap.create();
 		schemaMap.put("name", "name");

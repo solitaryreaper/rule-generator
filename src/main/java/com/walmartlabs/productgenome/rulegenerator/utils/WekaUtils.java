@@ -90,7 +90,7 @@ public class WekaUtils {
 		return getWekaInstances(dataset, getDefaultNormalizerMetadata(dataset.getAttributes()));
 	}
 	
-	private static String stageDataInArffFormat(Dataset dataset, DatasetNormalizerMeta normalizerMeta)
+	public static String stageDataInArffFormat(Dataset dataset, DatasetNormalizerMeta normalizerMeta)
 	{
 		FeatureDataset featureDataset = FeatureGenerationService.generateFeatures(dataset, normalizerMeta);
 		LOG.info("Generated feature vectors for dataset : " + dataset.getName());
@@ -105,6 +105,11 @@ public class WekaUtils {
 		LOG.info("Loaded the in-memory feature vectors into arff file : " + arffFileLoc);
 
 		return arffFileLoc;
+	}
+	
+	public static String stageDataInArffFormat(Dataset dataset)
+	{
+		return stageDataInArffFormat(dataset, getDefaultNormalizerMetadata(dataset.getAttributes()));
 	}
 	
 	private static Instances parseArffFile(String arffFileLoc)
@@ -128,7 +133,7 @@ public class WekaUtils {
 		return new DatasetNormalizerMeta(getDefaultSchemaMap(datasetAttributes));
 	}
 	
-	private static BiMap<String, String> getDefaultSchemaMap(List<String> attributes)
+	public static BiMap<String, String> getDefaultSchemaMap(List<String> attributes)
 	{
 		BiMap<String, String> schemaMap = HashBiMap.create();
 		for(String attribute : attributes) {

@@ -7,6 +7,7 @@ import weka.classifiers.trees.RandomForest;
 import weka.core.Instance;
 import weka.core.Instances;
 
+import com.google.common.collect.Lists;
 import com.walmartlabs.productgenome.rulegenerator.Constants;
 import com.walmartlabs.productgenome.rulegenerator.model.rule.Rule;
 import com.walmartlabs.productgenome.rulegenerator.utils.parser.RuleParser;
@@ -42,12 +43,29 @@ public class RandomForestLearner implements Learner {
 		}
 
 		LOG.fine("Random Forest rules : " + randForest.toString());
-		return RuleParser.parseRules(getRules());
+		return getRules();
 	}
 	
-	public List<String> getRules()
+	private List<String> getTextRules()
 	{
 		return randForest.getRandomForestRules();
+	}
+	
+	public List<Rule> getRules()
+	{
+		return RuleParser.parseRules(getTextRules());
+	}
+	
+	public List<Rule> getMatchingRules()
+	{
+		List<Rule> matchRules = Lists.newArrayList();
+		for(Rule rule : getRules()) {
+			if(rule.isMatchingRule()) {
+				matchRules.add(rule);
+			}
+		}
+		
+		return matchRules;
 	}
 	
 	public double getVotingEntropyForInstance(Instance instance)
