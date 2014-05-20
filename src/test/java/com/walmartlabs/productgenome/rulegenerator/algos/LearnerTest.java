@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
@@ -48,10 +49,15 @@ public class LearnerTest {
 	@Test
 	public void testRandomForest()
 	{
-		LOG.info("Testing random forests learning algorithm ..");
-		learner = new RandomForestLearner();
-		List<Rule> rules = learner.learnRules(data);
-		assertNotNull(rules);		
+//		LOG.info("Testing random forests learning algorithm ..");
+//		learner = new RandomForestLearner();
+//		List<Rule> rules = learner.learnRules(data);
+//		assertNotNull(rules);
+		
+		for(Instance instance : data) {
+			int a = 0;
+			System.out.println("Hello world ..");
+		}
 	}
 	
 	private static Instances getDataset()

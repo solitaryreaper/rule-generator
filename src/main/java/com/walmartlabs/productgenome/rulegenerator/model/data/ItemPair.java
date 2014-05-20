@@ -39,6 +39,8 @@ public class ItemPair {
 	private Item itemB;
 	private MatchStatus matchStatus = MatchStatus.UNKNOWN;
 
+
+	
 	public ItemPair(Item itemA, Item itemB, MatchStatus matchStatus) {
 		super();
 		this.itemA = itemA;
@@ -46,6 +48,14 @@ public class ItemPair {
 		this.matchStatus = matchStatus;
 	}
 
+	public ItemPair(Item itemA, Item itemB)
+	{
+		this(itemA, itemB, MatchStatus.UNKNOWN);
+		this.itemA = itemA;
+		this.itemB = itemB;
+		this.matchStatus = MatchStatus.UNKNOWN;
+	}
+	
 	public boolean equals(Object obj)
 	{
 	    if (obj == null) return false;
