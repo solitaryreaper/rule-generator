@@ -44,7 +44,7 @@ public class ItemDataParser implements DataParser {
 		Map<Integer, GoldItemPair> goldDataMap = getGoldDatasetMap(goldFile);
 		//Multimap<String, String> goldMap = getGoldenDataMap(goldFile);
 		int goldPairs = goldDataMap.size();
-		int totalMismatchPairsToRetain = 2*goldPairs < 3000 ? 3000 : 2*goldPairs;
+		int totalMismatchPairsToRetain = 2*goldPairs < 50 ? 50 : 2*goldPairs;
 		
 		List<Item> sourceItems = getItems(sourceFile, schemaMap);
 		List<Item> targetItems = getItems(targetFile, schemaMap);
