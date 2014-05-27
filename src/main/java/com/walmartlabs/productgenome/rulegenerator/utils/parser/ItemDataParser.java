@@ -42,15 +42,16 @@ public class ItemDataParser implements DataParser {
 		BiMap<String, String> schemaMap = normalizerMeta.getSchemaMap();
 		
 		Map<Integer, GoldItemPair> goldDataMap = getGoldDatasetMap(goldFile);
-		//Multimap<String, String> goldMap = getGoldenDataMap(goldFile);
 		int goldPairs = goldDataMap.size();
-		int totalMismatchPairsToRetain = 2*goldPairs < 50 ? 50 : 2*goldPairs;
 		
 		List<Item> sourceItems = getItems(sourceFile, schemaMap);
 		List<Item> targetItems = getItems(targetFile, schemaMap);
 		
 		int preBlockingItemPairs = sourceItems.size() * targetItems.size();
-		int postBlockingItemPairs = 0;
+		
+		// Retain only 10% of itempairs after blocking ..
+		int postBlockingItemPairs = goldPairs + preBlockingItemPairs/10;
+		int totalMismatchPairsToRetain = postBlockingItemPairs;
 
 		List<String> attributes = Lists.newArrayList(schemaMap.keySet());
 		LOG.info("Common attributes : " + attributes.toString());

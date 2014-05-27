@@ -50,7 +50,7 @@ public class Constants {
 	public static final int NUM_RULES_REQUIRED = 10;
 	
 	public static final int SAMPLE_SIZE = 1000;
-	
+	public static final int MAX_PAIRS_PER_TUPLE = 5;
 	
 	// Ruleset metadata parameters
 	public static final String TOTAL_ATTRIBUTES = "attributes";
